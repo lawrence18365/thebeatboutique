@@ -23,7 +23,7 @@
     
     /* Spacing */
     --section-padding: clamp(60px, 10vh, 120px);
-    --container-width: 1280px;
+    --container-width: 1800px; /* Increased for large screens */
     
     /* Effects */
     --glass-bg: rgba(255, 255, 255, 0.03);
@@ -152,12 +152,16 @@ img {
 /* Desktop: Hidden initially, fades in */
 @media (min-width: 769px) {
     .navbar {
-        transform: translateY(-100%);
-        background-color: var(--primary-navy); /* Solid by default when visible */
-        box-shadow: var(--box-shadow);
+        transform: translateY(0); /* Default visible */
+        background-color: transparent;
+        transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
     }
-    .navbar.navbar-visible {
-        transform: translateY(0);
+    .navbar.navbar-hidden {
+        transform: translateY(-100%);
+    }
+    .navbar.navbar-scrolled {
+        background-color: var(--primary-navy);
+        box-shadow: var(--box-shadow);
     }
 }
 

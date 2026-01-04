@@ -31,37 +31,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Simple Navbar Background Change on Scroll and Visibility Toggle
     const navbar = document.querySelector('.navbar');
+    let lastScrollY = window.scrollY;
     
     // Function to check scroll position
     const handleScroll = () => {
-        const isDesktop = window.innerWidth > 768;
-        const scrollY = window.scrollY;
-
-        if (isDesktop) {
-            // Desktop Logic: Hide until scroll past hero (approx 80vh)
-            if (scrollY > window.innerHeight * 0.8) {
-                navbar.classList.add('navbar-visible');
-                navbar.style.backgroundColor = "rgba(10, 25, 47, 0.98)";
-                navbar.style.boxShadow = "0 2px 20px rgba(0,0,0,0.3)";
-            } else {
-                navbar.classList.remove('navbar-visible');
-                navbar.style.backgroundColor = "transparent";
-                navbar.style.boxShadow = "none";
-            }
+        const currentScrollY = window.scrollY;
+        
+        // Background Logic: Solid when scrolled, transparent at top
+        if (currentScrollY > 50) {
+            navbar.classList.add('navbar-scrolled');
         } else {
-            // Mobile Logic: Always visible, but transparent at top
-            navbar.classList.add('navbar-visible'); // Ensure it's there
-            
-            if (scrollY > 50) {
-                // Scrolled down: Solid Background
-                navbar.style.backgroundColor = "rgba(10, 25, 47, 0.98)";
-                navbar.style.boxShadow = "0 2px 20px rgba(0,0,0,0.3)";
-            } else {
-                // At top: Transparent
-                navbar.style.backgroundColor = "transparent";
-                navbar.style.boxShadow = "none";
-            }
+            navbar.classList.remove('navbar-scrolled');
         }
+
+        // Hide/Show Logic
+        if (currentScrollY > lastScrollY && currentScrollY > 100) {
+            // Scrolling DOWN & past top
+            navbar.classList.add('navbar-hidden');
+        } else {
+            // Scrolling UP or at top
+            navbar.classList.remove('navbar-hidden');
+        }
+
+        lastScrollY = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll);
