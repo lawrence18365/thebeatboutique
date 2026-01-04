@@ -714,6 +714,24 @@ img {
     opacity: 0.8;
 }
 
+.footer-map-container {
+    max-width: 900px;
+    margin: 0 auto;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 4px;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.footer-map-container iframe {
+    filter: grayscale(100%) invert(92%) contrast(83%) hue-rotate(180deg);
+    transition: filter 0.5s ease;
+}
+
+.footer-map-container:hover iframe {
+    filter: none;
+}
+
 .association-badge {
     width: 120px;
     margin: 20px auto;
