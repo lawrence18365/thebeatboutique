@@ -1,0 +1,413 @@
+[
+  {
+    "slug": "dublin",
+    "name": "Dublin",
+    "hero_image": "../assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp",
+    "meta_description": "Looking for the best wedding band in Dublin? The Beat Boutique are Dublin's premier high-energy band. No travel fees. 5-star reviews.",
+    "intro_text": "As a Dublin-based band, this is our home turf. From the city center chic of The Shelbourne to the coastal charm of Portmarnock, we perform at over 50 Dublin weddings every year.",
+    "travel_fee": "No Travel Fee",
+    "wedding_culture": "Dublin weddings range from intimate city-center celebrations to grand estate affairs. Peak season runs May through September, with Saturday weddings averaging 120-150 guests. Dublin couples often prefer a mix of classic and contemporary music, and many opt for our DJ afters package to keep the party going until the early hours.",
+    "venues": [
+      {"name": "The Shelbourne Hotel", "slug": null, "description": "Iconic St. Stephen's Green location with the elegant Great Room for receptions up to 200 guests."},
+      {"name": "Clontarf Castle", "slug": null, "description": "Historic castle combining medieval charm with modern facilities, perfect for 150+ guests."},
+      {"name": "Luttrellstown Castle", "slug": "luttrellstown-castle", "description": "Ultra-exclusive 600-acre estate made famous by the Beckham wedding. Pure fairytale."},
+      {"name": "Portmarnock Hotel", "slug": null, "description": "Coastal elegance with stunning sea views, ideal for relaxed celebrations."}
+    ],
+    "testimonials": [
+      {"text": "We saw them at a showcase in Dublin city and knew immediately. They had the dancefloor in The Shelbourne bouncing all night!", "author": "Sarah & Mark, Dublin City"},
+      {"text": "The Beat Boutique were the highlight of our Clontarf Castle wedding. Every guest commented on how amazing they were!", "author": "Emma & James, Clontarf"},
+      {"text": "From the first dance to the last song, the energy was incredible. Best decision we made for our Dublin wedding.", "author": "Aoife & David, Portmarnock"}
+    ],
+    "nearby_counties": ["wicklow", "kildare", "meath", "louth"],
+    "faqs": [
+      {"question": "Is there a travel fee for Dublin weddings?", "answer": "No! As a Dublin-based band, we don't charge travel fees for weddings in Dublin city or county."},
+      {"question": "Which Dublin venues do you perform at most?", "answer": "We're regulars at The Shelbourne, Clontarf Castle, Luttrellstown Castle, and Portmarnock Hotel, among many others."},
+      {"question": "How far in advance should Dublin couples book?", "answer": "Dublin is our busiest market. We recommend booking 12-18 months ahead for peak season dates."}
+    ]
+  },
+  {
+    "slug": "wicklow",
+    "name": "Wicklow",
+    "hero_image": "https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Top rated Wedding Band available for Wicklow weddings. We perform regularly at Powerscourt, Tinakilly, and Rathsallagh. Check availability now.",
+    "intro_text": "Wicklow offers some of the most stunning backdrops in Ireland. We love the acoustics in the big country houses here. Whether it's the grandeur of Powerscourt or the intimacy of Tinakilly, we know exactly how to fill the room.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Known as the Garden County, Wicklow weddings often embrace the natural beauty with outdoor ceremonies and country house receptions. Weddings here tend to be slightly larger, averaging 130-160 guests, with couples seeking an elegant yet relaxed atmosphere that matches the mountainous backdrop.",
+    "venues": [
+      {"name": "Powerscourt Hotel", "slug": null, "description": "Five-star luxury at the foot of the Sugar Loaf mountain with the stunning Sugar Loaf Lounge."},
+      {"name": "Tinakilly House", "slug": null, "description": "Victorian mansion with gorgeous gardens and an intimate ballroom for up to 140 guests."},
+      {"name": "Rathsallagh House", "slug": null, "description": "Country house charm with award-winning food and a relaxed, welcoming atmosphere."},
+      {"name": "Druids Glen", "slug": null, "description": "Golf resort venue offering flexible spaces and beautiful woodland surroundings."}
+    ],
+    "testimonials": [
+      {"text": "Getting married in Wicklow, we wanted a band that matched the elegant vibe but could still party. The Beat Boutique were perfection.", "author": "Jennifer & Paul, Tinakilly House"},
+      {"text": "The acoustics in Powerscourt can be tricky but these guys handled it perfectly. Dance floor was packed all night.", "author": "Laura & John, Powerscourt"}
+    ],
+    "nearby_counties": ["dublin", "kildare", "wexford", "kilkenny"],
+    "faqs": [
+      {"question": "Do you know the Wicklow venues well?", "answer": "Absolutely! We perform at Powerscourt, Tinakilly, Rathsallagh, and Druids Glen regularly and know each venue's acoustic requirements."},
+      {"question": "What's the travel fee for Wicklow?", "answer": "A standard travel fee applies for Wicklow weddings, which we'll confirm when you get in touch."}
+    ]
+  },
+  {
+    "slug": "meath",
+    "name": "Meath",
+    "hero_image": "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop",
+    "meta_description": "High energy Wedding Band serving Co. Meath. Experts at Tankardstown, Boyne Hill, and Clonabreany. Book the best entertainment for your big day.",
+    "intro_text": "Meath is arguably the wedding capital of Ireland right now. We find ourselves in Tankardstown or Clonabreany almost every other weekend. We know the load-in routes, the staff, and the sound limiters intimately.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Meath has become Ireland's most popular wedding destination thanks to its concentration of stunning manor houses and country estates. Weddings typically run 140-180 guests with a focus on fine dining and dancing. The county's rich heritage adds a sense of occasion that couples love.",
+    "venues": [
+      {"name": "Tankardstown House", "slug": "tankardstown-house", "description": "Award-winning Georgian estate with The Orangery - one of Ireland's best wedding venues."},
+      {"name": "Clonabreany House", "slug": null, "description": "Romantic country house with fairy-lit courtyard and barn, perfect for 180+ guests."},
+      {"name": "Boyne Hill House", "slug": null, "description": "Elegant manor overlooking the Boyne Valley with exclusive-use packages."},
+      {"name": "Ballymagarvey Village", "slug": null, "description": "Boutique venue with converted stone barn and outstanding catering."}
+    ],
+    "testimonials": [
+      {"text": "The best decision we made for our Ballymagarvey wedding. They read the crowd perfectly and the energy was insane!", "author": "Ciara & Tom, Ballymagarvey"},
+      {"text": "Having the Beat Boutique at Tankardstown was magical. They knew the venue inside out and the set was perfect.", "author": "Rachel & Sean, Tankardstown"},
+      {"text": "From ceremony music to late night DJ, they handled everything flawlessly at Clonabreany.", "author": "Niamh & Peter, Clonabreany"}
+    ],
+    "nearby_counties": ["dublin", "louth", "westmeath", "kildare"],
+    "faqs": [
+      {"question": "How often do you perform in Meath?", "answer": "Meath is one of our busiest counties - we perform here almost every weekend during peak season."},
+      {"question": "Do you know about Meath venue sound limiters?", "answer": "Yes! We're very familiar with sound limits at Tankardstown, Clonabreany, and other Meath venues and work within them seamlessly."}
+    ]
+  },
+  {
+    "slug": "kildare",
+    "name": "Kildare",
+    "hero_image": "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Kildare - The Beat Boutique perform at Carton House, Killashee, and K Club. Premium live music for your Kildare wedding.",
+    "intro_text": "Kildare offers some of Ireland's most prestigious country estates and is just a short journey from Dublin. From the grandeur of Carton House to the elegance of Killashee, we bring high-energy entertainment to this beautiful county.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Kildare weddings combine country elegance with Dublin accessibility. Popular with couples who want a rural feel without traveling too far from the city. Weddings typically feature 130-160 guests and often include outdoor ceremony options in the beautiful estate grounds.",
+    "venues": [
+      {"name": "Carton House", "slug": null, "description": "Historic Palladian mansion with two championship golf courses and multiple reception spaces."},
+      {"name": "Killashee Hotel", "slug": null, "description": "Victorian mansion with elegant ballroom and beautiful grounds near Naas."},
+      {"name": "The K Club", "slug": null, "description": "Luxury resort on the River Liffey, famous for hosting the Ryder Cup."},
+      {"name": "Clongowes Wood", "slug": null, "description": "Historic school venue offering exclusive summer wedding packages."}
+    ],
+    "testimonials": [
+      {"text": "The Beat Boutique made our Carton House wedding absolutely unforgettable. Pure class!", "author": "Michelle & Brian, Carton House"},
+      {"text": "5 months later our guests are still raving about them. The dance floor was full from the 1st dance right to the end.", "author": "Sarah & Dave, Killashee"}
+    ],
+    "nearby_counties": ["dublin", "wicklow", "meath", "westmeath"],
+    "faqs": [
+      {"question": "What's the travel situation for Kildare?", "answer": "Kildare is very accessible from our Dublin base. A standard travel fee applies but we handle all logistics."},
+      {"question": "Which Kildare venues do you recommend?", "answer": "Carton House and Killashee are absolutely stunning. We also love The K Club for its riverside setting."}
+    ]
+  },
+  {
+    "slug": "louth",
+    "name": "Louth",
+    "hero_image": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Louth - The Beat Boutique perform at Bellingham Castle, Ballymascanlon, and more. Book Ireland's premier wedding band.",
+    "intro_text": "Ireland's smallest county packs a punch with stunning venues like Bellingham Castle and Ballymascanlon. Located close to Dublin, Louth weddings offer excellent value and beautiful settings.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Louth weddings often blend Irish and Northern Irish traditions, with many cross-border couples choosing this central location. The county offers excellent value compared to Dublin venues while maintaining high standards. Typical weddings run 120-150 guests.",
+    "venues": [
+      {"name": "Bellingham Castle", "slug": null, "description": "12th-century castle offering exclusive use and romantic medieval atmosphere."},
+      {"name": "Ballymascanlon House", "slug": null, "description": "Victorian mansion with beautiful gardens and excellent wedding coordination."},
+      {"name": "Four Seasons Carlingford", "slug": null, "description": "Waterfront venue with stunning Carlingford Lough views."},
+      {"name": "D Hotel", "slug": null, "description": "Modern Drogheda hotel with flexible event spaces."}
+    ],
+    "testimonials": [
+      {"text": "Bellingham Castle was magical and The Beat Boutique matched the atmosphere perfectly.", "author": "Claire & Mark, Bellingham Castle"},
+      {"text": "We traveled from Belfast for our Carlingford wedding and couldn't have been happier with the band.", "author": "Emma & Ryan, Carlingford"}
+    ],
+    "nearby_counties": ["dublin", "meath", "monaghan", "armagh"],
+    "faqs": [
+      {"question": "Do you travel to Louth often?", "answer": "Yes! Louth is very accessible from Dublin and we perform at Bellingham Castle and Ballymascanlon regularly."},
+      {"question": "Is there parking for the band at Louth venues?", "answer": "Yes, all the major Louth venues have excellent parking and load-in access for bands."}
+    ]
+  },
+  {
+    "slug": "westmeath",
+    "name": "Westmeath",
+    "hero_image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Westmeath - Live music for weddings at Lough Ree, Glasson, and Mullingar. Check The Beat Boutique availability.",
+    "intro_text": "The Lakeland County offers spectacular waterside venues and excellent value. We love performing at venues overlooking Lough Ree and in the characterful town of Mullingar.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Westmeath weddings often embrace the county's lakeland setting, with many venues offering waterfront receptions. Couples appreciate the central location and value compared to Dublin, with weddings typically running 120-150 guests in a relaxed atmosphere.",
+    "venues": [
+      {"name": "Glasson Lakehouse", "slug": null, "description": "Stunning Lough Ree views with contemporary design and excellent food."},
+      {"name": "Wineport Lodge", "slug": null, "description": "Intimate lakeside venue perfect for weddings up to 100 guests."},
+      {"name": "Mullingar Park Hotel", "slug": null, "description": "Central Westmeath location with modern facilities and flexible spaces."},
+      {"name": "Bloomfield House", "slug": null, "description": "Historic house with beautiful gardens and period features."}
+    ],
+    "testimonials": [
+      {"text": "The sunset over Lough Ree was incredible, and the band matched the magic perfectly.", "author": "Sinead & Colm, Glasson Lakehouse"},
+      {"text": "Intimate, personal, and absolutely brilliant. Best wedding band we've ever seen!", "author": "Louise & Patrick, Wineport Lodge"}
+    ],
+    "nearby_counties": ["meath", "dublin", "galway", "tipperary"],
+    "faqs": [
+      {"question": "What's the travel time to Westmeath?", "answer": "About 1-1.5 hours from Dublin. We include travel and allow plenty of time for sound check."},
+      {"question": "Are lakeside venues acoustically challenging?", "answer": "Each venue is different, but we've performed at Glasson and Wineport many times and know their acoustics well."}
+    ]
+  },
+  {
+    "slug": "wexford",
+    "name": "Wexford",
+    "hero_image": "https://images.unsplash.com/photo-1464820453369-31d2c0b651af?q=80&w=2080&auto=format&fit=crop",
+    "meta_description": "Wedding Band Wexford - The Beat Boutique bring high-energy live music to weddings across the Sunny South East.",
+    "intro_text": "The Sunny South East offers gorgeous coastal venues and country estates. From Marlfield House to Wells House, Wexford weddings have a distinctly relaxed, joyful atmosphere that we love.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Wexford weddings embrace the county's sunny disposition with many couples opting for outdoor ceremonies and relaxed receptions. The mix of coastal and country venues suits different styles, with wedding sizes typically ranging from 100-150 guests.",
+    "venues": [
+      {"name": "Marlfield House", "slug": null, "description": "Regency-era mansion with award-winning gardens and exceptional dining."},
+      {"name": "Wells House", "slug": null, "description": "Victorian Gothic house with quirky charm and beautiful woodland walks."},
+      {"name": "Ashdown Park", "slug": null, "description": "Contemporary hotel with flexible spaces near Gorey."},
+      {"name": "Whitford House", "slug": null, "description": "Boutique venue near the coast with intimate atmosphere."}
+    ],
+    "testimonials": [
+      {"text": "We booked The Beat Boutique and Jazz trio for our wedding at Marlfield House... we were sooo happy with our choice!", "author": "Katherine & James, Marlfield House"},
+      {"text": "The sunny south east matched with the sunniest band! Absolutely incredible energy.", "author": "Roisin & Mike, Wells House"}
+    ],
+    "nearby_counties": ["wicklow", "kilkenny", "waterford", "carlow"],
+    "faqs": [
+      {"question": "Do you travel to Wexford regularly?", "answer": "Yes! We perform in Wexford throughout the wedding season and know venues like Marlfield House and Wells House well."},
+      {"question": "What about accommodation for the band?", "answer": "For Wexford weddings, we sometimes arrange accommodation nearby rather than traveling back to Dublin late at night."}
+    ]
+  },
+  {
+    "slug": "kilkenny",
+    "name": "Kilkenny",
+    "hero_image": "https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Kilkenny - Premium live music for weddings at Langton House, Mount Juliet, and more. Book The Beat Boutique.",
+    "intro_text": "The medieval city of Kilkenny offers rich history and stunning venues. From the luxury of Mount Juliet to the charm of Langton House, we bring energy and elegance to Kilkenny weddings.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Kilkenny weddings often incorporate the county's rich medieval heritage, with couples drawn to historic venues and the vibrant city atmosphere. Guest numbers typically range from 120-160, with many couples extending celebrations to explore the city's famous pubs and restaurants.",
+    "venues": [
+      {"name": "Mount Juliet", "slug": null, "description": "Five-star estate with championship golf and the stunning Lady Helen Restaurant."},
+      {"name": "Langton House", "slug": null, "description": "City-center venue with multiple spaces and award-winning hospitality."},
+      {"name": "Lyrath Estate", "slug": null, "description": "Luxury hotel and spa with beautiful grounds just outside the city."},
+      {"name": "Butler House", "slug": null, "description": "Georgian townhouse with intimate garden setting in the city center."}
+    ],
+    "testimonials": [
+      {"text": "Mount Juliet was the dream venue and The Beat Boutique made the party unforgettable.", "author": "Orla & Stephen, Mount Juliet"},
+      {"text": "The medieval vibes of Kilkenny with a band that rocks - perfect combination!", "author": "Amy & Conor, Langton House"}
+    ],
+    "nearby_counties": ["wexford", "waterford", "tipperary", "carlow"],
+    "faqs": [
+      {"question": "How accessible is Kilkenny?", "answer": "About 1.5-2 hours from Dublin via motorway. We arrive early for sound check and are well prepared."},
+      {"question": "Do you know Mount Juliet?", "answer": "We've performed at Mount Juliet multiple times and know exactly how to work with their beautiful but acoustically unique spaces."}
+    ]
+  },
+  {
+    "slug": "waterford",
+    "name": "Waterford",
+    "hero_image": "https://images.unsplash.com/photo-1583939003579-730e3918a45a?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Waterford - The Beat Boutique perform at Waterford Castle, Faithlegg House, and throughout the Déise.",
+    "intro_text": "Ireland's oldest city offers historic venues and coastal charm. From the island setting of Waterford Castle to the elegance of Faithlegg House, we bring the party to the Déise.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Waterford weddings often combine city heritage with coastal beauty. The county's excellent venues offer great value compared to Dublin, with weddings typically running 100-140 guests in an atmosphere that's both elegant and unpretentious.",
+    "venues": [
+      {"name": "Waterford Castle", "slug": null, "description": "Island castle reached by ferry, offering exclusive fairy-tale weddings."},
+      {"name": "Faithlegg House", "slug": null, "description": "Georgian mansion with golf course and stunning Suir estuary views."},
+      {"name": "Dunmore House", "slug": null, "description": "Beachfront venue in the charming fishing village of Dunmore East."},
+      {"name": "Tower Hotel", "slug": null, "description": "City-center riverside hotel with modern facilities."}
+    ],
+    "testimonials": [
+      {"text": "Awesome wedding band - they joined us at Waterford Castle and had a great mix of music and style.", "author": "Paul & Lisa, Waterford Castle"},
+      {"text": "Taking the ferry to the castle was magical, and the band made it even more special.", "author": "Karen & David, Waterford Castle"}
+    ],
+    "nearby_counties": ["kilkenny", "wexford", "cork", "tipperary"],
+    "faqs": [
+      {"question": "How do you get equipment to Waterford Castle?", "answer": "We've done it many times! The castle ferry accommodates our equipment and we coordinate timing with the venue."},
+      {"question": "What's the travel time to Waterford?", "answer": "About 2-2.5 hours from Dublin. We factor this into our scheduling and arrive with plenty of time."}
+    ]
+  },
+  {
+    "slug": "cork",
+    "name": "Cork",
+    "hero_image": "https://images.unsplash.com/photo-1533939015789-0b8a0f29ea2a?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Cork - The Beat Boutique perform at venues across the Rebel County. Premium live music for Cork weddings.",
+    "intro_text": "The Rebel County offers everything from city sophistication to coastal romance. We love Cork's vibrant wedding scene and the warm welcome we always receive in venues from Hayfield Manor to Inchydoney.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Cork weddings are known for their warmth and craic. The county's size means venues range from city-center hotels to remote coastal retreats. Couples often have strong musical tastes and appreciate our versatile repertoire. Weddings typically run 130-170 guests.",
+    "venues": [
+      {"name": "Hayfield Manor", "slug": null, "description": "Five-star luxury in the heart of Cork city with impeccable service."},
+      {"name": "Inchydoney Island Lodge", "slug": null, "description": "Beachfront venue with stunning Atlantic views in Clonakilty."},
+      {"name": "Ballymaloe House", "slug": null, "description": "Famous country house with legendary food in Shanagarry."},
+      {"name": "Castlemartyr Resort", "slug": null, "description": "800-year-old castle with modern luxury near Midleton."}
+    ],
+    "testimonials": [
+      {"text": "You were so easy to communicate with and everything worked out perfectly. We all had an absolute ball!", "author": "Aisling & Ronan, Cork"},
+      {"text": "The Cork crowd knows how to party and The Beat Boutique kept everyone dancing all night.", "author": "Maeve & Ciaran, Inchydoney"}
+    ],
+    "nearby_counties": ["kerry", "waterford", "tipperary", "limerick"],
+    "faqs": [
+      {"question": "How often do you perform in Cork?", "answer": "Cork is one of our favorite destinations! We perform there regularly and usually stay overnight."},
+      {"question": "Do you charge extra for accommodation?", "answer": "For Cork and Kerry weddings, accommodation is usually required and we include this in our quote."}
+    ]
+  },
+  {
+    "slug": "kerry",
+    "name": "Kerry",
+    "hero_image": "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Kerry - The Beat Boutique bring high-energy live music to the Kingdom. Killarney, Kenmare, and the Wild Atlantic Way.",
+    "intro_text": "The Kingdom offers some of Ireland's most dramatic wedding backdrops. From the lakes of Killarney to the charm of Kenmare, Kerry weddings are truly special - and we love bringing the party to this stunning corner of Ireland.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Kerry weddings embrace the Wild Atlantic Way spirit with many couples choosing outdoor elements and scenic venues. The county attracts destination weddings from overseas and offers incredible photography opportunities. Weddings range from intimate 80-guest affairs to larger 150+ celebrations.",
+    "venues": [
+      {"name": "Muckross Park Hotel", "slug": null, "description": "Five-star Killarney hotel overlooking Muckross Abbey and the Lakes of Killarney."},
+      {"name": "The Europe Hotel", "slug": null, "description": "Lakeside luxury with spectacular views of the McGillycuddy Reeks."},
+      {"name": "Sheen Falls Lodge", "slug": null, "description": "Kenmare's five-star retreat with waterfalls and salmon fishing."},
+      {"name": "Ballyseede Castle", "slug": null, "description": "15th-century castle near Tralee with authentic medieval atmosphere."}
+    ],
+    "testimonials": [
+      {"text": "Killarney was magical and the band added so much to our special day. Everyone is still talking about them!", "author": "Sophie & Daniel, Muckross Park"},
+      {"text": "Worth every penny to have them travel to Kerry. Best band we've ever seen at a wedding!", "author": "Fiona & Liam, Sheen Falls"}
+    ],
+    "nearby_counties": ["cork", "limerick", "clare"],
+    "faqs": [
+      {"question": "Do you travel to Kerry?", "answer": "Absolutely! Kerry is one of our favorite counties. We usually stay overnight and arrive the day before."},
+      {"question": "What about equipment for Kerry venues?", "answer": "We bring everything we need and are experienced with Kerry venues' power requirements and access."}
+    ]
+  },
+  {
+    "slug": "limerick",
+    "name": "Limerick",
+    "hero_image": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Limerick - The Beat Boutique perform at Adare Manor, Dromoland Castle, and venues across Limerick.",
+    "intro_text": "Home to Adare Manor, Limerick offers some of Ireland's most exclusive wedding venues. We're honored to perform regularly in this beautiful county where centuries of history meet modern luxury.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Limerick weddings often feature stunning manor houses and castles. Adare village alone draws couples from around the world. Weddings here tend toward the elegant end of the spectrum, with guest numbers ranging from 100-180 and a focus on sophisticated entertainment.",
+    "venues": [
+      {"name": "Adare Manor", "slug": "adare-manor", "description": "Ireland's iconic castle hotel, restored to five-star perfection with world-class facilities."},
+      {"name": "Dunraven Arms", "slug": null, "description": "Charming village-center hotel in the heart of Adare with excellent food."},
+      {"name": "Castletroy Park", "slug": null, "description": "Modern luxury hotel with flexible spaces near Limerick city."},
+      {"name": "The Savoy", "slug": null, "description": "City-center elegance with rooftop views of the Shannon."}
+    ],
+    "testimonials": [
+      {"text": "Adare Manor was always the dream, and The Beat Boutique made the party absolutely perfect.", "author": "Grace & Patrick, Adare Manor"},
+      {"text": "Professional, talented, and so much fun. They made our Limerick wedding unforgettable.", "author": "Sinead & Michael, Dunraven Arms"}
+    ],
+    "nearby_counties": ["clare", "kerry", "tipperary", "cork"],
+    "faqs": [
+      {"question": "Have you performed at Adare Manor?", "answer": "Yes! We've performed at Adare Manor multiple times and know this incredible venue intimately."},
+      {"question": "What's the journey time from Dublin?", "answer": "About 2-2.5 hours via motorway. We arrive early and are well-prepared for every Limerick wedding."}
+    ]
+  },
+  {
+    "slug": "tipperary",
+    "name": "Tipperary",
+    "hero_image": "https://images.unsplash.com/photo-1509316785289-025f5b846b35?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Tipperary - The Beat Boutique bring high-energy live music to the Premier County. Book now for your Tipperary wedding.",
+    "intro_text": "The Premier County offers beautiful countryside venues and excellent value. From the historic Rock of Cashel to country house estates, Tipperary weddings combine rural charm with genuine Irish hospitality.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Tipperary weddings embrace the county's agricultural heritage with many farm and country house venues. Couples appreciate the value compared to more expensive counties while still enjoying high-quality venues. Weddings typically run 110-140 guests with a warm, community feel.",
+    "venues": [
+      {"name": "Cashel Palace", "slug": null, "description": "Newly restored Palladian mansion in the shadow of the Rock of Cashel."},
+      {"name": "Hotel & Spa Minella", "slug": null, "description": "Riverside luxury in Clonmel with beautiful grounds."},
+      {"name": "Dundrum House", "slug": null, "description": "Georgian mansion with golf course near the Galtee Mountains."},
+      {"name": "Ballykisteen Hotel", "slug": null, "description": "Country hotel with golf and flexible wedding spaces."}
+    ],
+    "testimonials": [
+      {"text": "The Rock of Cashel as our backdrop and The Beat Boutique on stage - pure magic!", "author": "Mary & John, Cashel Palace"},
+      {"text": "Tipperary knows how to party and this band delivered big time!", "author": "Aoife & Brian, Minella"}
+    ],
+    "nearby_counties": ["limerick", "kilkenny", "cork", "waterford"],
+    "faqs": [
+      {"question": "How far is Tipperary from Dublin?", "answer": "About 1.5-2 hours depending on the venue. We're very familiar with traveling to Tipperary."},
+      {"question": "Do you know Tipperary venues?", "answer": "Yes! We perform at Cashel Palace, Minella, and other Tipperary venues regularly."}
+    ]
+  },
+  {
+    "slug": "clare",
+    "name": "Clare",
+    "hero_image": "https://images.unsplash.com/photo-1565799330323-0e90a153c026?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Clare - The Beat Boutique perform at Dromoland Castle, Falls Hotel, and venues across County Clare.",
+    "intro_text": "Clare offers the fairytale majesty of Dromoland Castle, the Wild Atlantic Way, and the unique charm of the Burren. We love performing in this diverse and beautiful county.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Clare weddings range from castle grandeur at Dromoland to relaxed coastal celebrations. The county attracts many destination weddings and offers incredible natural backdrops. Weddings typically run 120-160 guests with couples appreciating both traditional and contemporary options.",
+    "venues": [
+      {"name": "Dromoland Castle", "slug": "dromoland-castle", "description": "Ireland's most famous castle hotel, offering unparalleled luxury and service."},
+      {"name": "Falls Hotel", "slug": null, "description": "Ennistymon hotel set beside a spectacular waterfall."},
+      {"name": "Gregans Castle", "slug": null, "description": "Boutique luxury in the heart of the Burren with mountain views."},
+      {"name": "Old Ground Hotel", "slug": null, "description": "Historic Ennis hotel with modern facilities and excellent craic."}
+    ],
+    "testimonials": [
+      {"text": "The band and dj were absolutely amazing, everyone is talking about how great they were and the dance floor never emptied!", "author": "Sarah & Mark, Clare"},
+      {"text": "Dromoland was incredible and The Beat Boutique matched the grandeur perfectly.", "author": "Jennifer & Patrick, Dromoland Castle"}
+    ],
+    "nearby_counties": ["galway", "limerick", "tipperary"],
+    "faqs": [
+      {"question": "Have you performed at Dromoland Castle?", "answer": "Yes! We've performed at Dromoland many times and created a dedicated venue guide for it."},
+      {"question": "What about Burren venues?", "answer": "We love the Burren! Gregans Castle and other Burren venues offer unique settings and we're experienced with their requirements."}
+    ]
+  },
+  {
+    "slug": "galway",
+    "name": "Galway",
+    "hero_image": "https://images.unsplash.com/photo-1526399892286-4c9c0e5dde40?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Galway - The Beat Boutique bring the party to the City of Tribes. Book Ireland's premier wedding band for your Galway wedding.",
+    "intro_text": "The City of Tribes offers everything from bohemian city weddings to wild Atlantic romance. Galway's legendary love of music and craic makes it one of our favorite places to perform.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Galway weddings are known for their music and craic. The county's strong traditional music culture means couples often have excellent musical taste. From city hotels to Connemara castles, venues range widely in style. Weddings typically run 120-160 guests with dancing a high priority.",
+    "venues": [
+      {"name": "Glenlo Abbey", "slug": null, "description": "Five-star abbey hotel with private estate and Pullman restaurant."},
+      {"name": "Galway Bay Hotel", "slug": null, "description": "Salthill seafront venue with stunning Galway Bay views."},
+      {"name": "Ballynahinch Castle", "slug": null, "description": "Remote Connemara castle for exclusive, luxurious weddings."},
+      {"name": "House Hotel", "slug": null, "description": "Boutique city-center style with excellent food."}
+    ],
+    "testimonials": [
+      {"text": "The band was brilliant, as was the DJ service! We had a fantastic night and would recommend them to anyone!", "author": "Moninne & Sean, Galway"},
+      {"text": "Galway knows good music and The Beat Boutique delivered. Amazing!", "author": "Claire & Cathal, Glenlo Abbey"}
+    ],
+    "nearby_counties": ["mayo", "clare", "roscommon", "limerick"],
+    "faqs": [
+      {"question": "How far is Galway from Dublin?", "answer": "About 2.5 hours via motorway. We usually arrive the day before for Galway and Connemara weddings."},
+      {"question": "Do you perform at Connemara venues?", "answer": "Yes! We love Connemara and regularly perform at Ballynahinch Castle and other remote venues."}
+    ]
+  },
+  {
+    "slug": "mayo",
+    "name": "Mayo",
+    "hero_image": "https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Mayo - The Beat Boutique perform at Ashford Castle and venues across County Mayo. Ireland's premier wedding entertainment.",
+    "intro_text": "Home to Ashford Castle, Ireland's most iconic wedding venue, Mayo offers wild Atlantic beauty and genuine Irish hospitality. We're proud to perform regularly in this spectacular county.",
+    "travel_fee": "Standard Travel Fee",
+    "wedding_culture": "Mayo weddings often embrace the county's wild Atlantic location with dramatic backdrops and remote luxury venues. Ashford Castle draws couples from around the world, while local venues offer authentic Mayo hospitality. Weddings typically run 100-150 guests.",
+    "venues": [
+      {"name": "Ashford Castle", "slug": "ashford-castle", "description": "Ireland's most famous castle, dating to 1228 and offering unparalleled luxury."},
+      {"name": "The Lodge at Ashford", "slug": null, "description": "Five-star lakeside lodge adjacent to Ashford Castle."},
+      {"name": "Mount Falcon Estate", "slug": null, "description": "100-acre private estate near Ballina with country house charm."},
+      {"name": "Ice House Hotel", "slug": null, "description": "Contemporary riverside hotel in Ballina with spa and restaurant."}
+    ],
+    "testimonials": [
+      {"text": "We had our wedding at Ashford Castle and The Beat Boutique were the perfect match. Pure class from start to finish.", "author": "Aoife & James, Ashford Castle"},
+      {"text": "The wild Mayo landscape and this incredible band - absolutely unforgettable!", "author": "Emma & Sean, Mount Falcon"}
+    ],
+    "nearby_counties": ["galway", "sligo", "roscommon"],
+    "faqs": [
+      {"question": "Have you performed at Ashford Castle?", "answer": "Yes! We've performed at Ashford Castle many times and created a dedicated venue guide for this iconic location."},
+      {"question": "What about accommodation for Mayo weddings?", "answer": "For Mayo weddings we typically stay overnight, either at the venue or nearby. This is included in our quote."}
+    ]
+  },
+  {
+    "slug": "donegal",
+    "name": "Donegal",
+    "hero_image": "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070&auto=format&fit=crop",
+    "meta_description": "Wedding Band Donegal - The Beat Boutique travel to the Wild North West. Premium live music for Donegal weddings.",
+    "intro_text": "The Wild North West offers some of Ireland's most dramatic wedding locations. From Harvey's Point to the stunning Donegal coastline, we love bringing the party to this beautiful, remote corner of Ireland.",
+    "travel_fee": "Extended Travel Fee",
+    "wedding_culture": "Donegal weddings are known for their warmth, community spirit, and marathon dancing sessions! The county's remote location means couples often host weekend-long celebrations. Weddings typically run 120-180 guests with plenty of extended family and friends joining the celebration.",
+    "venues": [
+      {"name": "Harvey's Point", "slug": null, "description": "Ireland's most romantic hotel, beautifully situated on Lough Eske."},
+      {"name": "Solis Lough Eske Castle", "slug": null, "description": "Five-star castle hotel with Tudor-style architecture and spa."},
+      {"name": "The Mill Park Hotel", "slug": null, "description": "Excellent Donegal Town hotel with flexible wedding spaces."},
+      {"name": "Arnolds Hotel", "slug": null, "description": "Dunfanaghy hotel with stunning views of Horn Head."}
+    ],
+    "testimonials": [
+      {"text": "They traveled all the way to Donegal and delivered an absolutely incredible night. Worth every penny!", "author": "Ciara & Padraig, Harvey's Point"},
+      {"text": "Donegal weddings go on forever and these lads kept the energy up all night long!", "author": "Siobhan & Conor, Lough Eske"}
+    ],
+    "nearby_counties": ["sligo", "leitrim", "derry"],
+    "faqs": [
+      {"question": "Do you travel to Donegal?", "answer": "Yes! We love Donegal. Due to the distance, we stay overnight and there's an extended travel fee, but it's well worth it."},
+      {"question": "How long is the journey to Donegal?", "answer": "About 3.5-4 hours from Dublin. We allow plenty of time and usually arrive the day before."}
+    ]
+  }
+]

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanks for Enquiring | The Beat Boutique</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Google Analytics - Track Conversion -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+
+        // Track conversion
+        gtag('event', 'conversion', {
+            'send_to': 'G-XXXXXXXXXX/enquiry_submitted'
+        });
+        gtag('event', 'generate_lead', {
+            'event_category': 'engagement',
+            'event_label': 'enquiry_form'
+        });
+    </script>
+
+    <style>
+        .thank-you-hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--primary-navy);
+            padding: 40px 20px;
+        }
+
+        .thank-you-card {
+            background: white;
+            max-width: 600px;
+            padding: 60px 50px;
+            border-radius: 4px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .checkmark {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent-gold), #e6c547);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 40px;
+        }
+
+        .next-steps {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 4px;
+            margin: 30px 0;
+            text-align: left;
+        }
+
+        .next-steps h4 {
+            margin: 0 0 15px;
+            color: var(--primary-navy);
+        }
+
+        .next-steps ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .next-steps li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        .showcase-promo {
+            background: var(--primary-teal);
+            color: white;
+            padding: 25px;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+
+        .showcase-promo h4 {
+            color: var(--accent-gold);
+            margin: 0 0 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="thank-you-hero">
+        <div class="thank-you-card">
+            <div class="checkmark">&#10003;</div>
+
+            <h1 style="color: var(--primary-navy); font-family: var(--font-serif); margin-bottom: 15px;">You're on the List!</h1>
+
+            <p style="color: #555; font-size: 1.1rem; margin-bottom: 0;">We've received your enquiry and one of the band will personally get back to you within 24 hours (usually much faster).</p>
+
+            <div class="next-steps">
+                <h4>What happens next?</h4>
+                <ul>
+                    <li><strong>Within 24 hours:</strong> We'll check availability for your date and send you a personalised quote</li>
+                    <li><strong>No pressure:</strong> We'll answer any questions you have - no hard sell, just honest chat</li>
+                    <li><strong>See us live:</strong> We'll invite you to our next showcase so you can see us perform before committing</li>
+                </ul>
+            </div>
+
+            <div class="showcase-promo">
+                <h4>Can't wait to see us?</h4>
+                <p style="margin: 0 0 15px; font-size: 0.95rem;">Our next live showcase is <strong>Sunday 1st February 2026</strong> at Bell Bar, Dublin 15. Come see what we're all about - no obligation.</p>
+                <a href="showcase.html" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">View Showcase Details</a>
+            </div>
+
+            <div style="margin-top: 30px;">
+                <p style="color: #999; font-size: 0.9rem; margin-bottom: 15px;">While you wait, check out some recent performances:</p>
+                <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://www.instagram.com/thebeatboutiqueweddingband/" target="_blank" style="color: var(--primary-teal); text-decoration: none; font-weight: 500;">Instagram</a>
+                    <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" style="color: var(--primary-teal); text-decoration: none; font-weight: 500;">Facebook</a>
+                    <a href="https://www.youtube.com/watch?v=DJ7IwlkTTfo" target="_blank" style="color: var(--primary-teal); text-decoration: none; font-weight: 500;">YouTube</a>
+                </div>
+            </div>
+
+            <a href="index.html" style="display: inline-block; margin-top: 30px; color: var(--primary-navy); text-decoration: underline; font-size: 0.9rem;">Return to Homepage</a>
+        </div>
+    </div>
+
+</body>
+</html>

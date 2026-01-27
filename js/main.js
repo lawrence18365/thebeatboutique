@@ -144,27 +144,146 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Contact Form Handling
-    const contactForm = document.querySelector('.contact-form');
-    if (contactForm) {
+    // Contact Form Handling - Enhanced for Formspree
+    const contactForms = document.querySelectorAll('.contact-form');
+    contactForms.forEach(contactForm => {
+        // Only add loading state, let Formspree handle submission
         contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const btn = contactForm.querySelector('button');
-            const originalText = btn.innerText;
-            
-            btn.innerText = 'Sending...';
-            btn.disabled = true;
+            const btn = contactForm.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.innerHTML = '<span>Sending...</span>';
+                btn.disabled = true;
+            }
 
-            // Simulate network request
+            // Track form submission in analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submit', {
+                    'event_category': 'engagement',
+                    'event_label': contactForm.id || 'contact_form'
+                });
+            }
+        });
+    });
+
+    // Showcase/Guestlist Form - Enhanced with local storage for abandoned form recovery
+    const guestlistForms = document.querySelectorAll('form[data-form-type="guestlist"]');
+    guestlistForms.forEach(form => {
+        form.addEventListener('submit', (e) => {
+            const btn = form.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.innerHTML = 'Adding to Guestlist...';
+                btn.disabled = true;
+            }
+        });
+    });
+
+    // Cookie Banner Logic
+    const cookieBanner = document.getElementById('cookie-banner');
+    const acceptCookiesBtn = document.getElementById('accept-cookies');
+    const declineCookiesBtn = document.getElementById('decline-cookies');
+
+    if (cookieBanner && acceptCookiesBtn && declineCookiesBtn) {
+        // Check if user has already made a choice
+        const cookieChoice = localStorage.getItem('cookieConsent');
+
+        if (!cookieChoice) {
+            // Show banner after a short delay
             setTimeout(() => {
-                alert('Thank you! Your inquiry has been received. We will be in touch shortly.');
-                contactForm.reset();
-                btn.innerText = 'Sent!';
-                setTimeout(() => {
-                    btn.innerText = originalText;
-                    btn.disabled = false;
-                }, 2000);
-            }, 1500);
+                cookieBanner.classList.add('visible');
+            }, 2000);
+        }
+
+        acceptCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'accepted');
+            cookieBanner.classList.remove('visible');
+            // Here you would trigger analytics scripts if you had them
+        });
+
+        declineCookiesBtn.addEventListener('click', () => {
+            localStorage.setItem('cookieConsent', 'declined');
+            cookieBanner.classList.remove('visible');
         });
     }
+
+    // Social Proof Notification System
+    const socialProofData = [
+        { names: "Sarah & Mark", location: "Dublin", initials: "SM", time: "2 hours ago" },
+        { names: "Emma & James", location: "Meath", initials: "EJ", time: "5 hours ago" },
+        { names: "Aoife & Conor", location: "Cork", initials: "AC", time: "Yesterday" },
+        { names: "Laura & David", location: "Galway", initials: "LD", time: "Yesterday" },
+        { names: "Ciara & Sean", location: "Kerry", initials: "CS", time: "2 days ago" },
+        { names: "Niamh & Patrick", location: "Clare", initials: "NP", time: "3 days ago" },
+        { names: "Rachel & Tom", location: "Kildare", initials: "RT", time: "4 days ago" },
+        { names: "Jennifer & Michael", location: "Wicklow", initials: "JM", time: "This week" }
+    ];
+
+    const socialProofPopup = document.getElementById('social-proof-popup');
+    if (socialProofPopup) {
+        let proofIndex = 0;
+        let hasShownFirst = false;
+
+        const showSocialProof = () => {
+            // Don't show if user is actively filling out form
+            const activeElement = document.activeElement;
+            if (activeElement && activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            const proof = socialProofData[proofIndex];
+            document.getElementById('proof-initials').textContent = proof.initials;
+            document.getElementById('proof-text').innerHTML = `<strong>${proof.names}</strong> just booked for their ${proof.location} wedding`;
+            document.getElementById('proof-time').textContent = proof.time;
+
+            socialProofPopup.style.display = 'block';
+            socialProofPopup.style.animation = 'slideInLeft 0.4s ease-out';
+
+            // Hide after 5 seconds
+            setTimeout(() => {
+                socialProofPopup.style.animation = 'slideOutLeft 0.3s ease-in';
+                setTimeout(() => {
+                    socialProofPopup.style.display = 'none';
+                }, 300);
+            }, 5000);
+
+            proofIndex = (proofIndex + 1) % socialProofData.length;
+        };
+
+        // Show first notification after 8 seconds
+        setTimeout(() => {
+            showSocialProof();
+            hasShownFirst = true;
+        }, 8000);
+
+        // Show subsequent notifications every 45 seconds
+        setInterval(() => {
+            if (hasShownFirst) {
+                showSocialProof();
+            }
+        }, 45000);
+    }
+
+    // Mobile Sticky CTA
+    const mobileCTA = document.getElementById('mobile-sticky-cta');
+    if (mobileCTA && window.innerWidth <= 768) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 600) {
+                mobileCTA.style.display = 'block';
+            } else {
+                mobileCTA.style.display = 'none';
+            }
+        });
+    }
+
+    // Exit Intent Detection (Desktop)
+    let exitIntentShown = false;
+    document.addEventListener('mouseout', (e) => {
+        if (!exitIntentShown && e.clientY < 10 && window.innerWidth > 768) {
+            // User is moving mouse to close tab/navigate away
+            // Could show exit popup here - for now just track
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'exit_intent_detected');
+            }
+            exitIntentShown = true;
+        }
+    });
 });

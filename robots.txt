@@ -1,0 +1,9 @@
+# robots.txt for thebeatboutique.ie
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://thebeatboutique.ie/sitemap.xml
+
+# Crawl-delay (optional, be nice to servers)
+Crawl-delay: 1
