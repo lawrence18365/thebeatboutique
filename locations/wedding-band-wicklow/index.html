@@ -1,6 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\/[\/]*[^\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            document.write('<base href="' + base + '">');
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Band Wicklow | The Beat Boutique</title>
@@ -20,9 +35,9 @@
     <meta property="twitter:title" content="Wedding Band Wicklow | The Beat Boutique">
     <meta property="twitter:description" content="Top rated Wedding Band available for Wicklow weddings. We perform regularly at Powerscourt, Tinakilly, and Rathsallagh. Check availability now.">
     <meta property="twitter:image" content="https://images.unsplash.com/photo-1469334031218-e382a71b716b?q=80&w=2070&auto=format&fit=crop">
-    <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
@@ -114,8 +129,8 @@
 
                 <nav class="navbar">
         <div class="container nav-container">
-            <a href="/" class="logo">
-                <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
+            <a href="./" class="logo">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -123,15 +138,15 @@
                 <span class="bar"></span>
             </div>
             <ul class="nav-menu">
-                <li><a href="/about" class="nav-link">About</a></li>
-                <li><a href="/why-us" class="nav-link">Why Us</a></li>
-                <li><a href="/showcase" class="nav-link">Showcase</a></li>
-                <li><a href="/pricing-guide" class="nav-link">Pricing</a></li>
-                        <li><a href="/corporate-events">Corporate Events</a></li>
-                        <li><a href="/party-band">Party / Birthday Events</a></li>
-                        <li><a href="/christmas-parties">Christmas Parties</a></li>
-                <li><a href="/venues" class="nav-link">Venues</a></li>
-                <li><a href="/wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
+                <li><a href="about" class="nav-link">About</a></li>
+                <li><a href="why-us" class="nav-link">Why Us</a></li>
+                <li><a href="showcase" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                        <li><a href="corporate-events">Corporate Events</a></li>
+                        <li><a href="party-band">Party / Birthday Events</a></li>
+                        <li><a href="christmas-parties">Christmas Parties</a></li>
+                <li><a href="venues" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
             </ul>
         </div>
     </nav>
@@ -140,10 +155,10 @@
         <div class="container location-hero-content">
             <span class="location-eyebrow">Wicklow Wedding Band</span>
             <h1>Wedding Band Wicklow</h1>
-            <p class="location-lead">Wicklow offers some of the most stunning backdrops in Ireland. We love the acoustics in the big country houses here. Whether it's the grandeur of Powerscourt or the intimacy of Tinakilly, we know exactly how to fill the room. If you're comparing bands, our <a href="/pricing-guide">Pricing Guide</a> is a good starting point.</p>
+            <p class="location-lead">Wicklow offers some of the most stunning backdrops in Ireland. We love the acoustics in the big country houses here. Whether it's the grandeur of Powerscourt or the intimacy of Tinakilly, we know exactly how to fill the room. If you're comparing bands, our <a href="pricing-guide">Pricing Guide</a> is a good starting point.</p>
             <div class="location-hero-cta">
-                <a href="/#contact" class="btn btn-primary">Check Availability</a>
-                <a href="/showcase" class="btn">See Us Live</a>
+                <a href="./#contact" class="btn btn-primary">Check Availability</a>
+                <a href="showcase" class="btn">See Us Live</a>
             </div>
             <div class="location-hero-stats">
                 <div><span>Standard Travel Fee</span> in Wicklow</div>
@@ -156,10 +171,10 @@
 
     <div class="location-quicklinks">
         <div class="container">
-            <a href="/wedding-band-ireland">Wedding Band Ireland</a>
-            <a href="/pricing-guide">Pricing Guide</a>
-            <a href="/showcase">Live Showcase</a>
-            <a href="/venues">Venues</a>
+            <a href="wedding-band-ireland">Wedding Band Ireland</a>
+            <a href="pricing-guide">Pricing Guide</a>
+            <a href="showcase">Live Showcase</a>
+            <a href="venues">Venues</a>
         </div>
     </div>
 
@@ -242,7 +257,7 @@
             </div>
             <div>
                 <h2 class="section-title">Pricing & packages</h2>
-                <p>For clear pricing, packages, and what's included, visit our <a href="/pricing-guide">Pricing Guide</a>.
+                <p>For clear pricing, packages, and what's included, visit our <a href="pricing-guide">Pricing Guide</a>.
                     We also offer wedding band availability Wicklow options where available.</p>
             </div>
         </div>
@@ -324,10 +339,10 @@
                 <p>Planning a wedding in a neighboring county? Check out our other location guides.</p>
             </div>
             <div class="location-pill-grid">
-                <a href="/locations/wedding-band-dublin" class="location-pill">Dublin</a>
-                <a href="/locations/wedding-band-kildare" class="location-pill">Kildare</a>
-                <a href="/locations/wedding-band-wexford" class="location-pill">Wexford</a>
-                <a href="/locations/wedding-band-kilkenny" class="location-pill">Kilkenny</a>
+                <a href="locations/wedding-band-dublin" class="location-pill">Dublin</a>
+                <a href="locations/wedding-band-kildare" class="location-pill">Kildare</a>
+                <a href="locations/wedding-band-wexford" class="location-pill">Wexford</a>
+                <a href="locations/wedding-band-kilkenny" class="location-pill">Kilkenny</a>
             </div>
         </div>
     </section>
@@ -340,17 +355,17 @@
                 <p>Three short guides couples read before they book.</p>
             </div>
             <div class="location-venue-grid">
-                <a class="location-venue-card is-linked" href="/pricing-guide">
+                <a class="location-venue-card is-linked" href="pricing-guide">
                     <h3>Pricing Guide</h3>
                     <p>Transparent ranges, what affects price, and what's included.</p>
                     <span>Read the Pricing Guide</span>
                 </a>
-                <a class="location-venue-card is-linked" href="/guides/how-to-choose-wedding-band">
+                <a class="location-venue-card is-linked" href="guides/how-to-choose-wedding-band">
                     <h3>How to Choose a Band</h3>
                     <p>A practical checklist for comparing bands, packages, and reviews.</p>
                     <span>Read the Guide</span>
                 </a>
-                <a class="location-venue-card is-linked" href="/venues">
+                <a class="location-venue-card is-linked" href="venues">
                     <h3>Venues We Play</h3>
                     <p>Venue guides, sound notes, and room-flow tips.</p>
                     <span>Explore Venues</span>
@@ -384,7 +399,7 @@
                 <h2>Ready to book for Wicklow?</h2>
                 <p>Check our availability for your date and let's start planning your perfect wedding entertainment.</p>
             </div>
-            <a href="/#contact" class="btn btn-primary">Check Availability for Wicklow</a>
+            <a href="./#contact" class="btn btn-primary">Check Availability for Wicklow</a>
         </div>
     </section>
 <footer class="footer">
@@ -392,8 +407,8 @@
             <div class="footer-grid">
                 <!-- Column 1: Brand -->
                 <div class="footer-col footer-brand">
-                    <a href="/" class="footer-logo-link">
-                        <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
+                    <a href="./" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
                             class="footer-logo-lg">
                     </a>
                     <p class="footer-tagline">Ireland's premier high energy wedding band.</p>
@@ -419,29 +434,29 @@
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
-                        <li><a href="/showcase">Live Showcase</a></li>
-                        <li><a href="/why-us">Why Choose Us</a></li>
-                        <li><a href="/venues">Our Venues</a></li>
-                        <li><a href="/pricing-guide">Pricing Guide 2026</a></li>
-                        <li><a href="/#experience">The Experience</a></li>
-                        <li><a href="/#reviews">Love Notes</a></li>
-                        <li><a href="/#contact">Contact Us</a></li>
+                        <li><a href="showcase">Live Showcase</a></li>
+                        <li><a href="why-us">Why Choose Us</a></li>
+                        <li><a href="venues">Our Venues</a></li>
+                        <li><a href="pricing-guide">Pricing Guide 2026</a></li>
+                        <li><a href="./#experience">The Experience</a></li>
+                        <li><a href="./#reviews">Love Notes</a></li>
+                        <li><a href="./#contact">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4 class="footer-heading">Locations</h4>
                     <ul class="footer-nav">
-                        <li><a href="/wedding-band-ireland">Wedding Band Ireland</a></li>
-                        <li><a href="/locations/wedding-band-dublin">Dublin</a></li>
-                        <li><a href="/locations/wedding-band-cork">Cork</a></li>
-                        <li><a href="/locations/wedding-band-galway">Galway</a></li>
-                        <li><a href="/locations/wedding-band-kerry">Kerry</a></li>
-                        <li><a href="/locations/wedding-band-kildare">Kildare</a></li>
-                        <li><a href="/locations/wedding-band-wicklow">Wicklow</a></li>
-                        <li><a href="/locations/wedding-band-meath">Meath</a></li>
-                        <li><a href="/locations/wedding-band-clare">Clare</a></li>
-                        <li><a href="/locations/wedding-band-limerick">Limerick</a></li>
+                        <li><a href="wedding-band-ireland">Wedding Band Ireland</a></li>
+                        <li><a href="locations/wedding-band-dublin">Dublin</a></li>
+                        <li><a href="locations/wedding-band-cork">Cork</a></li>
+                        <li><a href="locations/wedding-band-galway">Galway</a></li>
+                        <li><a href="locations/wedding-band-kerry">Kerry</a></li>
+                        <li><a href="locations/wedding-band-kildare">Kildare</a></li>
+                        <li><a href="locations/wedding-band-wicklow">Wicklow</a></li>
+                        <li><a href="locations/wedding-band-meath">Meath</a></li>
+                        <li><a href="locations/wedding-band-clare">Clare</a></li>
+                        <li><a href="locations/wedding-band-limerick">Limerick</a></li>
                     </ul>
                 </div>
 
@@ -464,13 +479,13 @@
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="/privacy">Privacy Policy</a>
-                    <a href="/terms">Terms of Service</a>
+                    <a href="privacy">Privacy Policy</a>
+                    <a href="terms">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

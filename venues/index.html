@@ -2,6 +2,21 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\/[\/]*[^\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            document.write('<base href="' + base + '">');
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Top Wedding Venues Ireland | The Beat Boutique Partners</title>
@@ -26,11 +41,11 @@
     <meta property="twitter:image"
         content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
-    <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
@@ -143,8 +158,8 @@
 
                 <nav class="navbar">
         <div class="container nav-container">
-            <a href="/" class="logo">
-                <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
+            <a href="./" class="logo">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -152,15 +167,15 @@
                 <span class="bar"></span>
             </div>
             <ul class="nav-menu">
-                <li><a href="/about" class="nav-link">About</a></li>
-                <li><a href="/why-us" class="nav-link">Why Us</a></li>
-                <li><a href="/showcase" class="nav-link">Showcase</a></li>
-                <li><a href="/pricing-guide" class="nav-link">Pricing</a></li>
-                        <li><a href="/corporate-events">Corporate Events</a></li>
-                        <li><a href="/party-band">Party / Birthday Events</a></li>
-                        <li><a href="/christmas-parties">Christmas Parties</a></li>
-                <li><a href="/venues" class="nav-link">Venues</a></li>
-                <li><a href="/wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
+                <li><a href="about" class="nav-link">About</a></li>
+                <li><a href="why-us" class="nav-link">Why Us</a></li>
+                <li><a href="showcase" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                        <li><a href="corporate-events">Corporate Events</a></li>
+                        <li><a href="party-band">Party / Birthday Events</a></li>
+                        <li><a href="christmas-parties">Christmas Parties</a></li>
+                <li><a href="venues" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
             </ul>
         </div>
     </nav>
@@ -177,7 +192,7 @@
         <div class="venue-grid-display">
 
             <!-- Venue 1: Adare Manor -->
-            <a href="/venues/adare-manor" class="venue-card">
+            <a href="venues/adare-manor" class="venue-card">
                 <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
                     alt="Adare Manor Wedding">
                 <div class="venue-overlay">
@@ -187,7 +202,7 @@
             </a>
 
             <!-- Venue 2: Ashford Castle -->
-            <a href="/venues/ashford-castle" class="venue-card">
+            <a href="venues/ashford-castle" class="venue-card">
                 <img loading="lazy" src="https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?q=80&w=2070&auto=format&fit=crop"
                     alt="Ashford Castle Wedding">
                 <div class="venue-overlay">
@@ -197,7 +212,7 @@
             </a>
 
             <!-- Venue 3: Dromoland Castle -->
-            <a href="/venues/dromoland-castle" class="venue-card">
+            <a href="venues/dromoland-castle" class="venue-card">
                 <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
                     alt="Dromoland Castle Wedding">
                 <div class="venue-overlay">
@@ -207,7 +222,7 @@
             </a>
 
             <!-- Venue 4: Luttrellstown Castle -->
-            <a href="/venues/luttrellstown-castle" class="venue-card">
+            <a href="venues/luttrellstown-castle" class="venue-card">
                 <img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
                     alt="Luttrellstown Castle Wedding">
                 <div class="venue-overlay">
@@ -217,7 +232,7 @@
             </a>
 
             <!-- Venue 5: Tankardstown House -->
-            <a href="/venues/tankardstown-house" class="venue-card">
+            <a href="venues/tankardstown-house" class="venue-card">
                 <img loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
                     alt="Tankardstown House Wedding">
                 <div class="venue-overlay">
@@ -237,15 +252,15 @@
                 <p>Explore pricing, see us live, or browse venues we play every week.</p>
             </div>
             <div class="internal-links-grid">
-                <a href="/pricing-guide" class="internal-link-card">
+                <a href="pricing-guide" class="internal-link-card">
                     <h3>Pricing Guide</h3>
                     <span>Transparent ranges & what's included</span>
                 </a>
-                <a href="/showcase" class="internal-link-card">
+                <a href="showcase" class="internal-link-card">
                     <h3>Live Showcase</h3>
                     <span>See the band before you book</span>
                 </a>
-                <a href="/venues" class="internal-link-card">
+                <a href="venues" class="internal-link-card">
                     <h3>Venues We Play</h3>
                     <span>Venue tips and room-flow notes</span>
                 </a>
@@ -258,8 +273,8 @@
             <div class="footer-grid">
                 <!-- Column 1: Brand -->
                 <div class="footer-col footer-brand">
-                    <a href="/" class="footer-logo-link">
-                        <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
+                    <a href="./" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
                             class="footer-logo-lg">
                     </a>
                     <p class="footer-tagline">Ireland's premier high energy wedding band.</p>
@@ -285,29 +300,29 @@
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
-                        <li><a href="/showcase">Live Showcase</a></li>
-                        <li><a href="/why-us">Why Choose Us</a></li>
-                        <li><a href="/venues">Our Venues</a></li>
-                        <li><a href="/pricing-guide">Pricing Guide 2026</a></li>
-                        <li><a href="/#experience">The Experience</a></li>
-                        <li><a href="/#reviews">Love Notes</a></li>
-                        <li><a href="/#contact">Contact Us</a></li>
+                        <li><a href="showcase">Live Showcase</a></li>
+                        <li><a href="why-us">Why Choose Us</a></li>
+                        <li><a href="venues">Our Venues</a></li>
+                        <li><a href="pricing-guide">Pricing Guide 2026</a></li>
+                        <li><a href="./#experience">The Experience</a></li>
+                        <li><a href="./#reviews">Love Notes</a></li>
+                        <li><a href="./#contact">Contact Us</a></li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
                     <h4 class="footer-heading">Locations</h4>
                     <ul class="footer-nav">
-                        <li><a href="/wedding-band-ireland">Wedding Band Ireland</a></li>
-                        <li><a href="/locations/wedding-band-dublin">Dublin</a></li>
-                        <li><a href="/locations/wedding-band-cork">Cork</a></li>
-                        <li><a href="/locations/wedding-band-galway">Galway</a></li>
-                        <li><a href="/locations/wedding-band-kerry">Kerry</a></li>
-                        <li><a href="/locations/wedding-band-kildare">Kildare</a></li>
-                        <li><a href="/locations/wedding-band-wicklow">Wicklow</a></li>
-                        <li><a href="/locations/wedding-band-meath">Meath</a></li>
-                        <li><a href="/locations/wedding-band-clare">Clare</a></li>
-                        <li><a href="/locations/wedding-band-limerick">Limerick</a></li>
+                        <li><a href="wedding-band-ireland">Wedding Band Ireland</a></li>
+                        <li><a href="locations/wedding-band-dublin">Dublin</a></li>
+                        <li><a href="locations/wedding-band-cork">Cork</a></li>
+                        <li><a href="locations/wedding-band-galway">Galway</a></li>
+                        <li><a href="locations/wedding-band-kerry">Kerry</a></li>
+                        <li><a href="locations/wedding-band-kildare">Kildare</a></li>
+                        <li><a href="locations/wedding-band-wicklow">Wicklow</a></li>
+                        <li><a href="locations/wedding-band-meath">Meath</a></li>
+                        <li><a href="locations/wedding-band-clare">Clare</a></li>
+                        <li><a href="locations/wedding-band-limerick">Limerick</a></li>
                     </ul>
                 </div>
 
@@ -330,14 +345,14 @@
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="/privacy">Privacy Policy</a>
-                    <a href="/terms">Terms of Service</a>
+                    <a href="privacy">Privacy Policy</a>
+                    <a href="terms">Terms of Service</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>

@@ -17,8 +17,7 @@ const countyNames = {
 const normalizeAssetPath = (url) => {
     if (!url) return '';
     if (url.startsWith('http')) return url;
-    const cleaned = url.replace(/^(\.\/|\.\.\/)+/, '').replace(/^\/+/, '');
-    return `/${cleaned}`;
+    return url.replace(/^(\.\/|\.\.\/)+/, '').replace(/^\/+/, '');
 };
 
 const resolveOgImage = (url) => {
@@ -33,7 +32,7 @@ const resolveOgImage = (url) => {
 const generateVenuePills = (venues) => {
     return venues.map(venue => {
         if (venue.slug) {
-            return `<a href="/venues/${venue.slug}" class="venue-pill venue-pill-link">${venue.name}</a>`;
+            return `<a href="venues/${venue.slug}" class="venue-pill venue-pill-link">${venue.name}</a>`;
         }
         return `<div class="venue-pill">${venue.name}</div>`;
     }).join('');
@@ -43,7 +42,7 @@ const generateVenuePills = (venues) => {
 const generateVenueDescriptions = (venues) => {
     return venues.map(venue => {
         const link = venue.slug 
-            ? `<a href="/venues/${venue.slug}" style="color: var(--accent-gold);">Read our ${venue.name} guide →</a>`
+            ? `<a href="venues/${venue.slug}" style="color: var(--accent-gold);">Read our ${venue.name} guide →</a>`
             : '';
         return `
             <div style="margin-bottom: 1.5rem;">
@@ -69,7 +68,7 @@ const generateNearbyCounties = (nearbyCounties) => {
     const validSlugs = counties.map(c => c.slug);
     return nearbyCounties
         .filter(slug => validSlugs.includes(slug))
-        .map(slug => `<a href="/locations/wedding-band-${slug}" class="nearby-county-link">${countyNames[slug] || slug}</a>`)
+        .map(slug => `<a href="locations/wedding-band-${slug}" class="nearby-county-link">${countyNames[slug] || slug}</a>`)
         .join('');
 };
 
@@ -119,6 +118,20 @@ const generateTemplate = (county) => {
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\\/[\\/]*[^\\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            document.write('<base href="' + base + '">');
+        })();
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Band ${county.name} | The Beat Boutique</title>
@@ -138,10 +151,10 @@ const generateTemplate = (county) => {
     <meta property="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="twitter:description" content="${county.meta_description}">
     <meta property="twitter:image" content="${ogImage}">
-    <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/the_beat_boutique_logo.webp">
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
@@ -302,15 +315,15 @@ const generateTemplate = (county) => {
 
     <nav class="navbar" style="background: var(--primary-navy); transform: translateY(0);">
         <div class="container nav-container">
-            <a href="/" class="logo">
-                <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
+            <a href="./" class="logo">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
             <ul class="nav-menu">
-                <li><a href="/" class="nav-link">Home</a></li>
-                <li><a href="/wedding-band-ireland" class="nav-link">Ireland</a></li>
-                <li><a href="/venues" class="nav-link">Venues</a></li>
-                <li><a href="/pricing-guide" class="nav-link">Pricing</a></li>
-                <li><a href="/#contact" class="nav-cta btn-primary">Enquire Now</a></li>
+                <li><a href="./" class="nav-link">Home</a></li>
+                <li><a href="wedding-band-ireland" class="nav-link">Ireland</a></li>
+                <li><a href="venues" class="nav-link">Venues</a></li>
+                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                <li><a href="./#contact" class="nav-cta btn-primary">Enquire Now</a></li>
             </ul>
         </div>
     </nav>
@@ -407,7 +420,7 @@ const generateTemplate = (county) => {
         <div class="container text-center">
             <h2 class="section-title" style="color: var(--text-cream);">Ready to Book for ${county.name}?</h2>
             <p style="color: var(--text-cream); opacity: 0.9; max-width: 600px; margin: 0 auto 30px;">Check our availability for your date and let's start planning your perfect wedding entertainment.</p>
-            <a href="/#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Check Availability for ${county.name}</a>
+            <a href="./#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Check Availability for ${county.name}</a>
         </div>
     </section>
 

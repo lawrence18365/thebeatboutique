@@ -2,6 +2,21 @@
 <html lang="en">
 
 <head>
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\/[\/]*[^\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            document.write('<base href="' + base + '">');
+        })();
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Beat Boutique | Wedding Band Ireland + Live Showcase</title>
@@ -27,8 +42,8 @@
         content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/the_beat_boutique_logo.webp">
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <meta name="theme-color" content="#0a192f">
 
     <!-- Structured Data (Schema.org) -->
@@ -229,7 +244,7 @@
     }
     </script>
 
-    <script defer src="/js/analytics.js"></script>
+    <script defer src="js/analytics.js"></script>
     <script>
         // Track scroll depth
         let maxScroll = 0;
@@ -270,7 +285,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
@@ -278,8 +293,8 @@
     <!-- Navigation -->
                 <nav class="navbar">
         <div class="container nav-container">
-            <a href="/" class="logo">
-                <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
+            <a href="./" class="logo">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -287,15 +302,15 @@
                 <span class="bar"></span>
             </div>
             <ul class="nav-menu">
-                <li><a href="/about" class="nav-link">About</a></li>
-                <li><a href="/why-us" class="nav-link">Why Us</a></li>
-                <li><a href="/showcase" class="nav-link">Showcase</a></li>
-                <li><a href="/pricing-guide" class="nav-link">Pricing</a></li>
-                        <li><a href="/corporate-events">Corporate Events</a></li>
-                        <li><a href="/party-band">Party / Birthday Events</a></li>
-                        <li><a href="/christmas-parties">Christmas Parties</a></li>
-                <li><a href="/venues" class="nav-link">Venues</a></li>
-                <li><a href="/wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
+                <li><a href="about" class="nav-link">About</a></li>
+                <li><a href="why-us" class="nav-link">Why Us</a></li>
+                <li><a href="showcase" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                        <li><a href="corporate-events">Corporate Events</a></li>
+                        <li><a href="party-band">Party / Birthday Events</a></li>
+                        <li><a href="christmas-parties">Christmas Parties</a></li>
+                <li><a href="venues" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
             </ul>
         </div>
     </nav>
@@ -304,9 +319,9 @@
     <header class="hero-wrapper">
         <video autoplay muted loop playsinline preload="metadata" class="hero-video"
             poster="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
-            <source src="/assets/Beat_Boutique_Showreel.mp4" type="video/mp4">
+            <source src="assets/Beat_Boutique_Showreel.mp4" type="video/mp4">
             <!-- Fallback for older browsers -->
-            <img src="/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp" alt="The Beat Boutique Dublin">
+            <img src="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp" alt="The Beat Boutique Dublin">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -315,7 +330,7 @@
                 Nationwide bookings, 180+ five-star reviews, and the same four musicians every night.</p>
 
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
-                <a href="/showcase" class="btn btn-primary hero-cta"
+                <a href="showcase" class="btn btn-primary hero-cta"
                     style="color: #fff; border-color: #fff; padding: 16px 32px;">Reserve Live Showcase</a>
             </div>
 
@@ -334,7 +349,7 @@
                 <p style="opacity: 0.85; max-width: 650px; margin: 0 auto 1.5rem;">Join us live for a one-hour showcase.
                     No obligation — just a chance to feel the energy before you book.</p>
                 <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
-                    <a href="/showcase" class="btn btn-primary" style="color: #fff; border-color: #fff;">Join
+                    <a href="showcase" class="btn btn-primary" style="color: #fff; border-color: #fff;">Join
                         Guestlist</a>
                 </div>
             </div>
@@ -354,7 +369,7 @@
                 <details class="faq-item" open>
                     <summary>How much does a wedding band cost in Ireland?</summary>
                     <p>Most professional 4-5 piece bands in Ireland fall between €2,400 and €3,200 depending on date,
-                        travel, and add-ons. See our <a href="/pricing-guide">Pricing Guide</a>.</p>
+                        travel, and add-ons. See our <a href="pricing-guide">Pricing Guide</a>.</p>
                 </details>
                 <details class="faq-item">
                     <summary>Can we see you live before booking?</summary>
@@ -383,7 +398,7 @@
                         wedding reception into an unforgettable concert.</p>
                 </div>
                 <div class="about-img-container">
-                    <img src="/assets/images/the-beat-boutique-wedding-band-dublin.webp"
+                    <img src="assets/images/the-beat-boutique-wedding-band-dublin.webp"
                         alt="The Beat Boutique Band Members" class="about-img">
                 </div>
             </div>
@@ -766,7 +781,7 @@
                     </div>
 
                     <div style="margin-top: 2rem;">
-                        <img src="/assets/images/wedding-band-association-member-badge.webp"
+                        <img src="assets/images/wedding-band-association-member-badge.webp"
                             alt="Wedding Band Association Member" class="association-badge" style="margin: 0;">
                     </div>
                 </div>
@@ -868,7 +883,7 @@
                     </div>
                     <h3>Wedding Band Prices Ireland</h3>
                     <p>Transparent ranges, what affects price, and what you actually get.</p>
-                    <a href="/pricing-guide" class="start-here-link">Read the Pricing Guide</a>
+                    <a href="pricing-guide" class="start-here-link">Read the Pricing Guide</a>
                 </article>
 
                 <article class="start-here-card">
@@ -878,7 +893,7 @@
                     </div>
                     <h3>How to Choose a Band</h3>
                     <p>A practical checklist for comparing bands, packages, and reviews.</p>
-                    <a href="/guides/how-to-choose-wedding-band" class="start-here-link">Read the Guide</a>
+                    <a href="guides/how-to-choose-wedding-band" class="start-here-link">Read the Guide</a>
                 </article>
 
                 <article class="start-here-card">
@@ -888,7 +903,7 @@
                     </div>
                     <h3>Top Venues We Play</h3>
                     <p>See our venue guides and get tips on acoustics and room flow.</p>
-                    <a href="/venues" class="start-here-link">Explore Venues</a>
+                    <a href="venues" class="start-here-link">Explore Venues</a>
                 </article>
             </div>
         </div>
@@ -902,15 +917,15 @@
                 <p>Explore pricing, see us live, or browse venues we play every week.</p>
             </div>
             <div class="internal-links-grid">
-                <a href="/pricing-guide" class="internal-link-card">
+                <a href="pricing-guide" class="internal-link-card">
                     <h3>Pricing Guide</h3>
                     <span>Transparent ranges & what's included</span>
                 </a>
-                <a href="/showcase" class="internal-link-card">
+                <a href="showcase" class="internal-link-card">
                     <h3>Live Showcase</h3>
                     <span>See the band before you book</span>
                 </a>
-                <a href="/venues" class="internal-link-card">
+                <a href="venues" class="internal-link-card">
                     <h3>Venues We Play</h3>
                     <span>Venue tips and room-flow notes</span>
                 </a>
@@ -923,8 +938,8 @@
             <div class="footer-grid">
                 <!-- Column 1: Brand -->
                 <div class="footer-col footer-brand">
-                    <a href="/" class="footer-logo-link">
-                        <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
+                    <a href="./" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
                             class="footer-logo-lg">
                     </a>
                     <p class="footer-tagline">Ireland's premier high energy wedding band.</p>
@@ -950,10 +965,10 @@
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
-                        <li><a href="/showcase">Live Showcase</a></li>
-                        <li><a href="/why-us">Why Choose Us</a></li>
-                        <li><a href="/venues">Our Venues</a></li>
-                        <li><a href="/pricing-guide">Pricing Guide 2026</a></li>
+                        <li><a href="showcase">Live Showcase</a></li>
+                        <li><a href="why-us">Why Choose Us</a></li>
+                        <li><a href="venues">Our Venues</a></li>
+                        <li><a href="pricing-guide">Pricing Guide 2026</a></li>
                         <li><a href="#experience">The Experience</a></li>
                         <li><a href="#reviews">Love Notes</a></li>
                         <li><a href="#contact">Contact Us</a></li>
@@ -963,16 +978,16 @@
                 <div class="footer-col">
                     <h4 class="footer-heading">Locations</h4>
                     <ul class="footer-nav">
-                        <li><a href="/wedding-band-ireland">Wedding Band Ireland</a></li>
-                        <li><a href="/locations/wedding-band-dublin">Dublin</a></li>
-                        <li><a href="/locations/wedding-band-cork">Cork</a></li>
-                        <li><a href="/locations/wedding-band-galway">Galway</a></li>
-                        <li><a href="/locations/wedding-band-kerry">Kerry</a></li>
-                        <li><a href="/locations/wedding-band-kildare">Kildare</a></li>
-                        <li><a href="/locations/wedding-band-wicklow">Wicklow</a></li>
-                        <li><a href="/locations/wedding-band-meath">Meath</a></li>
-                        <li><a href="/locations/wedding-band-clare">Clare</a></li>
-                        <li><a href="/locations/wedding-band-limerick">Limerick</a></li>
+                        <li><a href="wedding-band-ireland">Wedding Band Ireland</a></li>
+                        <li><a href="locations/wedding-band-dublin">Dublin</a></li>
+                        <li><a href="locations/wedding-band-cork">Cork</a></li>
+                        <li><a href="locations/wedding-band-galway">Galway</a></li>
+                        <li><a href="locations/wedding-band-kerry">Kerry</a></li>
+                        <li><a href="locations/wedding-band-kildare">Kildare</a></li>
+                        <li><a href="locations/wedding-band-wicklow">Wicklow</a></li>
+                        <li><a href="locations/wedding-band-meath">Meath</a></li>
+                        <li><a href="locations/wedding-band-clare">Clare</a></li>
+                        <li><a href="locations/wedding-band-limerick">Limerick</a></li>
                     </ul>
                 </div>
 
@@ -995,8 +1010,8 @@
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="/privacy">Privacy Policy</a>
-                    <a href="/terms">Terms of Service</a>
+                    <a href="privacy">Privacy Policy</a>
+                    <a href="terms">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -1050,7 +1065,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 
 </html>
