@@ -14,6 +14,21 @@ const countyNames = {
     armagh: 'Armagh', carlow: 'Carlow', leitrim: 'Leitrim', derry: 'Derry'
 };
 
+const normalizeAssetPath = (url) => {
+    if (!url) return '';
+    if (url.startsWith('http')) return url;
+    const cleaned = url.replace(/^(\.\/|\.\.\/)+/, '').replace(/^\/+/, '');
+    return `/${cleaned}`;
+};
+
+const resolveOgImage = (url) => {
+    if (!url) {
+        return 'https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp';
+    }
+    if (url.startsWith('http')) return url;
+    return `https://thebeatboutique.ie${normalizeAssetPath(url)}`;
+};
+
 // Generate venue pills - now with optional links
 const generateVenuePills = (venues) => {
     return venues.map(venue => {
@@ -96,6 +111,10 @@ const generateTemplate = (county) => {
     const hasNearbyCounties = county.nearby_counties && county.nearby_counties.length > 0;
     const hasFAQs = county.faqs && county.faqs.length > 0;
     const hasMultipleTestimonials = county.testimonials && county.testimonials.length > 1;
+    const heroImage = normalizeAssetPath(
+        county.hero_image || '/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp'
+    );
+    const ogImage = resolveOgImage(county.hero_image);
     
     return `<!DOCTYPE html>
 <html lang="en">
@@ -111,14 +130,14 @@ const generateTemplate = (county) => {
     <meta property="og:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
     <meta property="og:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="og:description" content="${county.meta_description}">
-    <meta property="og:image" content="${county.hero_image.startsWith('http') ? county.hero_image : 'https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp'}">
+    <meta property="og:image" content="${ogImage}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
     <meta property="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="twitter:description" content="${county.meta_description}">
-    <meta property="twitter:image" content="${county.hero_image.startsWith('http') ? county.hero_image : 'https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp'}">
+    <meta property="twitter:image" content="${ogImage}">
     <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -186,7 +205,7 @@ const generateTemplate = (county) => {
     
     <style>
         .county-hero {
-            background: linear-gradient(rgba(10,25,47,0.7), rgba(10,25,47,0.8)), url('${county.hero_image}');
+            background: linear-gradient(rgba(10,25,47,0.7), rgba(10,25,47,0.8)), url('${heroImage}');
             background-size: cover;
             background-position: center;
             padding: 180px 0 100px;
