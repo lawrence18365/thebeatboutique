@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\/[\/]*[^\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            document.write('<base href="' + base + '">');
+        })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinakilly House Wedding Band | The Beat Boutique</title>
+    <meta name="description" content="Planning a wedding at Tinakilly House? The Beat Boutique has played 16+ weddings here. Read our venue guide with acoustics tips and insider advice.">
+    <link rel="canonical" href="https://thebeatboutique.ie/venues/tinakilly-house">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://thebeatboutique.ie/venues/tinakilly-house">
+    <meta property="og:title" content="Tinakilly House Wedding Band | The Beat Boutique">
+    <meta property="og:description" content="Expert tips for wedding music at Tinakilly House. Acoustics guide, setlist ideas, and real wedding reviews.">
+    <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
+
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "headline": "Tinakilly House Wedding Band Guide",
+          "description": "Expert tips for wedding music at Tinakilly House from The Beat Boutique.",
+          "author": { "@type": "Organization", "name": "The Beat Boutique" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "The Beat Boutique",
+            "logo": { "@type": "ImageObject", "url": "https://thebeatboutique.ie/assets/images/the_beat_boutique_logo.webp" }
+          },
+          "datePublished": "2025-01-01",
+          "dateModified": "2026-02-01"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thebeatboutique.ie/" },
+            { "@type": "ListItem", "position": 2, "name": "Venues", "item": "https://thebeatboutique.ie/venues" },
+            { "@type": "ListItem", "position": 3, "name": "Tinakilly House", "item": "https://thebeatboutique.ie/venues/tinakilly-house" }
+          ]
+        },
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "author": { "@type": "Person", "name": "Kate & Patrick" },
+          "reviewBody": "Tinakilly was beautiful and intimate. The band matched the venue perfectly - elegant but fun."
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        .venue-hero {
+            background: linear-gradient(rgba(10,25,47,0.7), rgba(10,25,47,0.85)),
+                        url('assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+        }
+
+        .venue-content { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
+
+        .venue-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: center;
+            margin: 30px 0;
+            padding: 30px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 4px;
+        }
+
+        .venue-meta-item {
+            text-align: center;
+        }
+
+        .venue-meta-label {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .venue-meta-value {
+            font-size: 1.1rem;
+            color: var(--accent-gold);
+        }
+
+        .venue-section {
+            margin: 50px 0;
+        }
+
+        .venue-section h2 {
+            color: var(--primary-navy);
+            margin-bottom: 20px;
+            font-family: var(--font-serif);
+        }
+
+        .venue-section p {
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .insider-tip {
+            background: linear-gradient(135deg, #f8f4e8, #fff);
+            border-left: 4px solid var(--accent-gold);
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .insider-tip h4 {
+            color: var(--primary-navy);
+            margin: 0 0 10px;
+        }
+
+        .venue-review {
+            background: var(--primary-teal);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin: 50px 0;
+            border-radius: 4px;
+        }
+
+        .venue-review blockquote {
+            font-family: var(--font-serif);
+            font-size: 1.3rem;
+            font-style: italic;
+            margin: 0 0 20px;
+            line-height: 1.6;
+        }
+
+        .breadcrumb {
+            padding: 20px;
+            font-size: 0.9rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb a { color: var(--primary-teal); }
+
+        @media (max-width: 600px) {
+            .venue-meta { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="./" class="logo">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
+            </a>
+            <ul class="nav-menu">
+                <li><a href="about" class="nav-link">About</a></li>
+                <li><a href="why-us" class="nav-link">Why Us</a></li>
+                <li><a href="showcase" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                <li><a href="venues" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="venue-hero">
+        <div class="container">
+            <p style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Venue Guide</p>
+            <h1 class="hero-title">Tinakilly House</h1>
+            <p class="hero-subtitle">Rathnew, County Wicklow</p>
+
+            <div class="venue-meta">
+                <div class="venue-meta-item">
+                    <span class="venue-meta-label">Capacity</span>
+                    <span class="venue-meta-value">180 guests</span>
+                </div>
+                <div class="venue-meta-item">
+                    <span class="venue-meta-label">Main Room</span>
+                    <span class="venue-meta-value">The Brunel Suite</span>
+                </div>
+                <div class="venue-meta-item">
+                    <span class="venue-meta-label">Weddings Played</span>
+                    <span class="venue-meta-value">16+</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <a href="./">Home</a> / <a href="venues">Venues</a> / Tinakilly House
+    </div>
+
+    <article class="venue-content">
+
+        <div class="venue-section">
+            <h2>About Tinakilly House</h2>
+            <p>Victorian Italianate mansion with sea views. With capacity for 180 guests, Tinakilly House is sea-view ceremonies and victorian elegance. close to dublin but feels like an escape.</p>
+        </div>
+
+        <div class="venue-section">
+            <h2>Acoustics & Sound</h2>
+            <p>Elegant room with good natural acoustics. The wooden floors are great for dancing.</p>
+        </div>
+
+        <div class="venue-section">
+            <h2>Band Setup</h2>
+            <p>Helpful venue staff. Load-in through side entrance keeps the front of house pristine.</p>
+        </div>
+
+        <div class="insider-tip">
+            <h4>Insider Tip</h4>
+            <p>The sea views at sunset are stunning for photos. Time your ceremony to catch the light.</p>
+        </div>
+
+        <div class="venue-review">
+            <div style="color: var(--accent-gold); margin-bottom: 15px;">★★★★★</div>
+            <blockquote>"Tinakilly was beautiful and intimate. The band matched the venue perfectly - elegant but fun."</blockquote>
+            <p style="opacity: 0.8;">— Kate & Patrick</p>
+        </div>
+
+        <div class="venue-section">
+            <h2>Planning Your Tinakilly House Wedding?</h2>
+            <p>We've played 16+ weddings at Tinakilly House and know the venue inside out. From setup logistics to the perfect setlist for the space, we handle everything so you can enjoy your day.</p>
+            <p>Check our availability for your date, or come see us live at our Dublin showcase first.</p>
+        </div>
+
+        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 40px 0;">
+            <a href="./#contact" class="btn btn-primary">Check Availability</a>
+            <a href="showcase" class="btn btn-secondary" style="border-color: var(--primary-navy); color: var(--primary-navy);">See Us Live</a>
+        </div>
+
+        <div class="venue-section">
+            <h2>Related Guides</h2>
+            <ul style="line-height: 2;">
+                <li><a href="guides/first-dance-songs">First Dance Songs Ireland</a> — Top 50 wedding songs</li>
+                <li><a href="guides/how-to-choose-wedding-band">How to Choose a Wedding Band</a> — Complete guide</li>
+                <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a> — 20 essential questions</li>
+                <li><a href="song-list">Our Song List</a> — 200+ songs we perform</li>
+                <li><a href="locations/wedding-band-wicklow">Wedding Band Wicklow</a> — More Wicklow weddings</li>
+            </ul>
+        </div>
+
+        <div class="venue-section">
+            <h2>More Venue Guides</h2>
+            <p>Explore our other venue guides for tips and insider knowledge:</p>
+            <ul style="line-height: 2;">
+                <li><a href="venues/adare-manor">Adare Manor</a></li>
+                <li><a href="venues/ashford-castle">Ashford Castle</a></li>
+                <li><a href="venues/cliff-at-lyons">Cliff at Lyons</a></li>
+                <li><a href="venues/mount-juliet">Mount Juliet Estate</a></li>
+                <li><a href="venues">View All 15+ Venues →</a></li>
+            </ul>
+        </div>
+
+    </article>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="./" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="footer-logo-lg">
+                    </a>
+                    <p class="footer-tagline">Ireland's premier wedding band.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Explore</h4>
+                    <ul class="footer-nav">
+                        <li><a href="showcase">Live Showcase</a></li>
+                        <li><a href="song-list">Song List</a></li>
+                        <li><a href="venues">Venues</a></li>
+                        <li><a href="pricing-guide">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Guides</h4>
+                    <ul class="footer-nav">
+                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a></li>
+                        <li><a href="tel:+353872310001">+353 87 231 0001</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy">Privacy</a>
+                    <a href="terms">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

@@ -415,6 +415,32 @@ const generateTemplate = (county) => {
     </section>
     ` : ''}
 
+    <!-- Wedding Guides Section -->
+    <section style="padding: 60px 0; background: #f9f9f9;">
+        <div class="container" style="max-width: 900px;">
+            <h2 class="section-title text-center">Wedding Planning Guides</h2>
+            <p class="text-center" style="opacity: 0.8; margin-bottom: 30px;">Helpful resources for planning your wedding music.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <a href="guides/first-dance-songs" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">First Dance Songs</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Top 50 songs for Irish weddings</p>
+                </a>
+                <a href="guides/how-to-choose-wedding-band" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">How to Choose a Band</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Complete decision guide</p>
+                </a>
+                <a href="guides/wedding-band-vs-dj" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Band vs DJ</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Honest comparison</p>
+                </a>
+                <a href="song-list" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Our Song List</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">200+ songs we perform</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- CTA Section -->
     <section style="padding: 80px 0; background: var(--primary-teal);">
         <div class="container text-center">
@@ -425,8 +451,47 @@ const generateTemplate = (county) => {
     </section>
 
     <footer class="footer">
-        <div class="container text-center">
-            <p style="opacity: 0.5;">&copy; 2026 The Beat Boutique.</p>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-brand">
+                    <a href="./" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="footer-logo-lg">
+                    </a>
+                    <p class="footer-tagline">Ireland's premier wedding band.</p>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Explore</h4>
+                    <ul class="footer-nav">
+                        <li><a href="showcase">Live Showcase</a></li>
+                        <li><a href="song-list">Song List</a></li>
+                        <li><a href="venues">Venues</a></li>
+                        <li><a href="pricing-guide">Pricing</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Guides</h4>
+                    <ul class="footer-nav">
+                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4 class="footer-heading">Contact</h4>
+                    <ul class="footer-contact">
+                        <li><a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a></li>
+                        <li><a href="tel:+353872310001">+353 87 231 0001</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy">Privacy</a>
+                    <a href="terms">Terms</a>
+                </div>
+            </div>
         </div>
     </footer>
 

@@ -15,11 +15,10 @@
             document.write('<base href="' + base + '">');
         })();
     </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Band Kilkenny | The Beat Boutique</title>
-    <meta name="description" content="Wedding band kilkenny booking with The Beat Boutique. Check availability, pricing, and packages for Kilkenny weddings.">
+    <meta name="description" content="Wedding Band Kilkenny - Premium live music for weddings at Langton House, Mount Juliet, and more. Book The Beat Boutique.">
     <link rel="canonical" href="https://thebeatboutique.ie/locations/wedding-band-kilkenny">
     
     <!-- Open Graph -->
@@ -36,6 +35,7 @@
     <meta property="twitter:description" content="Wedding Band Kilkenny - Premium live music for weddings at Langton House, Mount Juliet, and more. Book The Beat Boutique.">
     <meta property="twitter:image" content="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop">
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
@@ -52,7 +52,7 @@
           "provider": {
             "@type": "MusicGroup",
             "name": "The Beat Boutique",
-            "url": "https://thebeatboutique.ie/"
+            "url": "https://thebeatboutique.ie"
           },
           "areaServed": {
             "@type": "AdministrativeArea",
@@ -84,7 +84,7 @@
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://thebeatboutique.ie/"
+              "item": "https://thebeatboutique.ie"
             },
             {
               "@type": "ListItem",
@@ -124,367 +124,319 @@
       ]
     }
     </script>
+    
+    <style>
+        .county-hero {
+            background: linear-gradient(rgba(10,25,47,0.7), rgba(10,25,47,0.8)), url('https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            padding: 180px 0 100px;
+            text-align: center;
+            color: var(--text-cream);
+        }
+        
+        .venue-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .venue-pill {
+            background: white;
+            padding: 18px;
+            text-align: center;
+            border-bottom: 3px solid var(--accent-gold);
+            color: var(--primary-navy);
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .venue-pill-link {
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .venue-pill-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .review-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .review-card {
+            background: var(--primary-teal);
+            padding: 30px;
+            color: white;
+            border-radius: 4px;
+        }
+
+        .nearby-counties {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .nearby-county-link {
+            background: white;
+            padding: 12px 24px;
+            color: var(--primary-navy);
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .nearby-county-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .faq-section {
+            background: #f9f9f9;
+            padding: 60px 0;
+        }
+
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .faq-item {
+            background: white;
+            padding: 25px;
+            border-radius: 4px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+    </style>
 </head>
 <body>
 
-                <nav class="navbar">
+    <nav class="navbar" style="background: var(--primary-navy); transform: translateY(0);">
         <div class="container nav-container">
             <a href="./" class="logo">
                 <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
             <ul class="nav-menu">
-                <li><a href="about" class="nav-link">About</a></li>
-                <li><a href="why-us" class="nav-link">Why Us</a></li>
-                <li><a href="showcase" class="nav-link">Showcase</a></li>
-                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
-                        <li><a href="corporate-events">Corporate Events</a></li>
-                        <li><a href="party-band">Party / Birthday Events</a></li>
-                        <li><a href="christmas-parties">Christmas Parties</a></li>
+                <li><a href="./" class="nav-link">Home</a></li>
+                <li><a href="wedding-band-ireland" class="nav-link">Ireland</a></li>
                 <li><a href="venues" class="nav-link">Venues</a></li>
-                <li><a href="wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
+                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                <li><a href="./#contact" class="nav-cta btn-primary">Enquire Now</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="location-hero photo-2 location-hero-kilkenny">
-        <div class="container location-hero-content">
-            <span class="location-eyebrow">Kilkenny Wedding Band</span>
-            <h1>Wedding Band Kilkenny</h1>
-            <p class="location-lead">The medieval city of Kilkenny offers rich history and stunning venues. From the luxury of Mount Juliet to the charm of Langton House, we bring energy and elegance to Kilkenny weddings. If you're comparing bands, our <a href="pricing-guide">Pricing Guide</a> is a good starting point.</p>
-            <div class="location-hero-cta">
-                <a href="./#contact" class="btn btn-primary">Check Availability</a>
-                <a href="showcase" class="btn">See Us Live</a>
-            </div>
-            <div class="location-hero-stats">
-                <div><span>Standard Travel Fee</span> in Kilkenny</div>
-                <div><span>Regular Dates in Kilkenny</span></div>
-                <div><span>180+ Reviews</span> across Ireland</div>
-            </div>
+    <header class="county-hero">
+        <div class="container">
+            <h1 class="hero-title">Wedding Band Kilkenny</h1>
+            <p class="hero-subtitle" style="max-width: 700px; margin: 0 auto;">The medieval city of Kilkenny offers rich history and stunning venues. From the luxury of Mount Juliet to the charm of Langton House, we bring energy and elegance to Kilkenny weddings.</p>
         </div>
     </header>
 
-
-    <div class="location-quicklinks">
+    <section style="padding: 80px 0;">
         <div class="container">
-            <a href="wedding-band-ireland">Wedding Band Ireland</a>
-            <a href="pricing-guide">Pricing Guide</a>
-            <a href="showcase">Live Showcase</a>
-            <a href="venues">Venues</a>
-        </div>
-    </div>
+            <div style="max-width: 900px; margin: 0 auto;">
+                
+                <!-- Why Choose Us Section -->
+                <h2 class="section-title text-center">Why Choose Us for Your Kilkenny Wedding</h2>
+                <p class="text-center" style="opacity: 0.8; margin-bottom: 2rem;">
+                    Planning a wedding in Kilkenny? We work here regularly. 
+                    <strong>Standard Travel Fee</strong> applies for this area, and we handle all logistics so you can focus on your big day.
+                </p>
+                <ul style="max-width: 700px; margin: 0 auto 2rem; line-height: 2;">
+                    <li><strong>Same Four Musicians:</strong> No agency, no substitutes - the band you see is the band you get</li>
+                    <li><strong>Local Knowledge:</strong> We know Kilkenny venues, their requirements, and their staff</li>
+                    <li><strong>Full Coordination:</strong> We liaise directly with venue coordinators and wedding planners</li>
+                </ul>
 
-    <section class="location-section">
-        <div class="container">
-            <div class="location-intro">
-                <h2 class="section-title">Why Kilkenny couples choose us</h2>
-                <p>Planning a wedding in Kilkenny? We work here regularly, handle the logistics with your venue, and keep
-                    your night moving seamlessly.</p>
+                <!-- Wedding Culture Section -->
+                
+                <div style="background: #f9f9f9; padding: 30px; border-radius: 4px; margin: 40px 0;">
+                    <h3 style="margin: 0 0 1rem; color: var(--primary-navy);">Wedding Culture in Kilkenny</h3>
+                    <p style="margin: 0; opacity: 0.8; line-height: 1.8;">Kilkenny weddings often incorporate the county's rich medieval heritage, with couples drawn to historic venues and the vibrant city atmosphere. Guest numbers typically range from 120-160, with many couples extending celebrations to explore the city's famous pubs and restaurants.</p>
+                </div>
+                
+
+                <!-- Venues Section -->
+                <h3 class="text-center" style="margin-top: 3rem;">Top Wedding Venues in Kilkenny</h3>
+                <p class="text-center" style="opacity: 0.8;">Venues we know and love - click any with a guide available for detailed tips.</p>
+                
+                <div class="venue-list">
+                    <div class="venue-pill">Mount Juliet</div><div class="venue-pill">Langton House</div><div class="venue-pill">Lyrath Estate</div><div class="venue-pill">Butler House</div>
+                </div>
+
+                
+                <div style="margin-top: 40px;">
+                    <h4 style="margin: 0 0 1.5rem; color: var(--primary-navy);">Venue Highlights</h4>
+                    
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Mount Juliet</h4>
+                <p style="margin: 0; opacity: 0.8; font-size: 0.95rem;">Five-star estate with championship golf and the stunning Lady Helen Restaurant. </p>
             </div>
-            <div class="location-grid-3">
-                <div class="location-card">
-                    <h3>Same Four Musicians</h3>
-                    <p>No agency roster or substitutes. The band you see is the band you get.</p>
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Langton House</h4>
+                <p style="margin: 0; opacity: 0.8; font-size: 0.95rem;">City-center venue with multiple spaces and award-winning hospitality. </p>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Lyrath Estate</h4>
+                <p style="margin: 0; opacity: 0.8; font-size: 0.95rem;">Luxury hotel and spa with beautiful grounds just outside the city. </p>
+            </div>
+            <div style="margin-bottom: 1.5rem;">
+                <h4 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Butler House</h4>
+                <p style="margin: 0; opacity: 0.8; font-size: 0.95rem;">Georgian townhouse with intimate garden setting in the city center. </p>
+            </div>
                 </div>
-                <div class="location-card">
-                    <h3>Local Knowledge</h3>
-                    <p>We know Kilkenny venues, their requirements, and their staff.</p>
-                </div>
-                <div class="location-card">
-                    <h3>Full Coordination</h3>
-                    <p>We liaise directly with coordinators and wedding planners.</p>
-                </div>
+                
+
             </div>
         </div>
     </section>
 
-    <section class="location-section location-landmarks">
-        <div class="container">
-            <div class="location-intro">
-                <h2 class="section-title">Local landmarks in Kilkenny</h2>
-                <p>Useful reference points for planning and suppliers — with Eircodes for quick lookups.</p>
-            </div>
-            <div class="location-venue-grid">
-                <div class="location-venue-card">
-                    <h3>St Canice’s Cathedral</h3>
-                    <p>Eircode: R95 V63H</p>
-                </div>
-                <div class="location-venue-card">
-                    <h3>Rothe House & Garden</h3>
-                    <p>Eircode: R95 P89C</p>
-                </div>
-                <div class="location-venue-card">
-                    <h3>Kilkenny County Council (County Hall)</h3>
-                    <p>Eircode: R95 A39T</p>
-                </div>
-            </div>
+    <!-- Testimonials Section -->
+    <section style="padding: 60px 0; background: var(--primary-navy);">
+        <div class="container" style="max-width: 1000px;">
+            <h2 class="section-title text-center" style="color: var(--text-cream);">Kilkenny Wedding Reviews</h2>
+            <p class="text-center" style="opacity: 0.8; color: var(--text-cream);">What couples from Kilkenny are saying about The Beat Boutique.</p>
+            
+            <div class="review-cards">
+                
+        <div class="review-card">
+            <div style="color: var(--accent-gold); margin-bottom: 8px;">★★★★★</div>
+            <p style="font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; margin-bottom: 12px;">"Mount Juliet was the dream venue and The Beat Boutique made the party unforgettable."</p>
+            <p style="opacity: 0.7; margin: 0;">— Orla & Stephen, Mount Juliet</p>
         </div>
-    </section>
-
-    <section class="location-section location-section-alt">
-        <div class="container location-split">
-            <div>
-                <h2 class="section-title">Wedding culture in Kilkenny</h2>
-                <p>Kilkenny weddings often incorporate the county's rich medieval heritage, with couples drawn to historic venues and the vibrant city atmosphere. Guest numbers typically range from 120-160, with many couples extending celebrations to explore the city's famous pubs and restaurants.</p>
-            </div>
-            <div class="location-panel">
-                <div>
-                    <h4>Typical Guest Count</h4>
-                    <p>Varies by venue</p>
-                </div>
-                <div>
-                    <h4>Peak Season</h4>
-                    <p>May to September</p>
-                </div>
-                <div>
-                    <h4>Popular Add‑On</h4>
-                    <p>DJ afters to close the night</p>
-                </div>
-            </div>
+        <div class="review-card">
+            <div style="color: var(--accent-gold); margin-bottom: 8px;">★★★★★</div>
+            <p style="font-family: var(--font-serif); font-size: 1.1rem; font-style: italic; margin-bottom: 12px;">"The medieval vibes of Kilkenny with a band that rocks - perfect combination!"</p>
+            <p style="opacity: 0.7; margin: 0;">— Amy & Conor, Langton House</p>
         </div>
-    </section>
-
-    <section class="location-section location-avail">
-        <div class="container location-split">
-            <div>
-                <h2 class="section-title">Availability in Kilkenny</h2>
-                <p>Looking to wedding band Kilkenny booking? We book a limited number of dates each month and recommend checking availability early.
-                    Use the form to confirm your date and we’ll reply quickly.</p>
-            </div>
-            <div>
-                <h2 class="section-title">Pricing & packages</h2>
-                <p>For clear pricing, packages, and what's included, visit our <a href="pricing-guide">Pricing Guide</a>.
-                    We also offer wedding band availability Kilkenny options where available.</p>
-            </div>
-        </div>
-    </section>
-
-        <div class="container">
-            <div class="location-intro">
-                <h2 class="section-title">Top wedding venues in Kilkenny</h2>
-                <p>Venues we know and love — click any with a guide available for detailed tips.</p>
-            </div>
-            <div class="location-venue-grid">
-                <div class="location-venue-card">
-                    <h3>Mount Juliet</h3>
-                    <p>Five-star estate with championship golf and the stunning Lady Helen Restaurant.</p>
-                </div>
-                <div class="location-venue-card">
-                    <h3>Langton House</h3>
-                    <p>City-center venue with multiple spaces and award-winning hospitality.</p>
-                </div>
-                <div class="location-venue-card">
-                    <h3>Lyrath Estate</h3>
-                    <p>Luxury hotel and spa with beautiful grounds just outside the city.</p>
-                </div>
-                <div class="location-venue-card">
-                    <h3>Butler House</h3>
-                    <p>Georgian townhouse with intimate garden setting in the city center.</p>
-                </div>
-            </div>
-
-            <div class="location-highlight">
-                <h3>Venue highlights</h3>
-                <div class="location-highlight-grid">
-                    <div>
-                        <h4>Mount Juliet</h4>
-                        <p>Five-star estate with championship golf and the stunning Lady Helen Restaurant.</p>
-                    </div>
-                    <div>
-                        <h4>Langton House</h4>
-                        <p>City-center venue with multiple spaces and award-winning hospitality.</p>
-                    </div>
-                    <div>
-                        <h4>Lyrath Estate</h4>
-                        <p>Luxury hotel and spa with beautiful grounds just outside the city.</p>
-                    </div>
-                    <div>
-                        <h4>Butler House</h4>
-                        <p>Georgian townhouse with intimate garden setting in the city center.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="location-section location-reviews">
-        <div class="container">
-            <div class="location-intro light">
-                <h2 class="section-title">Kilkenny wedding reviews</h2>
-                <p>What couples from Kilkenny are saying about The Beat Boutique.</p>
-            </div>
-            <div class="location-review-grid">
-                <article class="location-review-card">
-                    <div class="location-stars">★★★★★</div>
-                    <p>"Mount Juliet was the dream venue and The Beat Boutique made the party unforgettable."</p>
-                    <span>— Orla & Stephen</span>
-                </article>
-                <article class="location-review-card">
-                    <div class="location-stars">★★★★★</div>
-                    <p>"The medieval vibes of Kilkenny with a band that rocks - perfect combination!"</p>
-                    <span>— Amy & Conor</span>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="location-section">
-        <div class="container">
-            <div class="location-intro">
-                <h2 class="section-title">Explore nearby counties</h2>
-                <p>Planning a wedding in a neighboring county? Check out our other location guides.</p>
-            </div>
-            <div class="location-pill-grid">
-                <a href="locations/wedding-band-wexford" class="location-pill">Wexford</a>
-                <a href="locations/wedding-band-waterford" class="location-pill">Waterford</a>
-                <a href="locations/wedding-band-tipperary" class="location-pill">Tipperary</a>
             </div>
         </div>
     </section>
 
     
-    <section class="location-section location-resources">
-        <div class="container">
-            <div class="location-intro">
-                <h2 class="section-title">Plan your Kilkenny wedding</h2>
-                <p>Three short guides couples read before they book.</p>
-            </div>
-            <div class="location-venue-grid">
-                <a class="location-venue-card is-linked" href="pricing-guide">
-                    <h3>Pricing Guide</h3>
-                    <p>Transparent ranges, what affects price, and what's included.</p>
-                    <span>Read the Pricing Guide</span>
-                </a>
-                <a class="location-venue-card is-linked" href="guides/how-to-choose-wedding-band">
-                    <h3>How to Choose a Band</h3>
-                    <p>A practical checklist for comparing bands, packages, and reviews.</p>
-                    <span>Read the Guide</span>
-                </a>
-                <a class="location-venue-card is-linked" href="venues">
-                    <h3>Venues We Play</h3>
-                    <p>Venue guides, sound notes, and room-flow tips.</p>
-                    <span>Explore Venues</span>
-                </a>
+    <!-- Nearby Counties Section -->
+    <section style="padding: 60px 0;">
+        <div class="container" style="max-width: 900px;">
+            <h2 class="section-title text-center">Explore Nearby Counties</h2>
+            <p class="text-center" style="opacity: 0.8;">Planning a wedding in a neighboring county? Check out our other location guides.</p>
+            <div class="nearby-counties">
+                <a href="locations/wedding-band-wexford" class="nearby-county-link">Wexford</a><a href="locations/wedding-band-waterford" class="nearby-county-link">Waterford</a><a href="locations/wedding-band-tipperary" class="nearby-county-link">Tipperary</a>
             </div>
         </div>
     </section>
+    
 
+    
+    <!-- FAQ Section -->
     <section class="faq-section">
-        <div class="container">
-            <div class="faq-header">
-                <h2 class="section-title">Kilkenny wedding band FAQ</h2>
-                <p class="faq-subtitle">Quick answers to the questions Kilkenny couples ask most.</p>
+        <div class="container" style="max-width: 900px;">
+            <h2 class="section-title text-center">Kilkenny Wedding Band FAQ</h2>
+            <div class="faq-grid">
+                
+        <div class="faq-item">
+            <h4 style="margin: 0 0 0.5rem; color: var(--primary-navy);">How accessible is Kilkenny?</h4>
+            <p style="margin: 0; opacity: 0.8;">About 1.5-2 hours from Dublin via motorway. We arrive early for sound check and are well prepared.</p>
+        </div>
+        <div class="faq-item">
+            <h4 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Do you know Mount Juliet?</h4>
+            <p style="margin: 0; opacity: 0.8;">We've performed at Mount Juliet multiple times and know exactly how to work with their beautiful but acoustically unique spaces.</p>
+        </div>
             </div>
-            <div class="faq-accordion">
-                <details class="faq-item" open>
-                    <summary>How accessible is Kilkenny?</summary>
-                    <p>About 1.5-2 hours from Dublin via motorway. We arrive early for sound check and are well prepared.</p>
-                </details>
-                <details class="faq-item">
-                    <summary>Do you know Mount Juliet?</summary>
-                    <p>We've performed at Mount Juliet multiple times and know exactly how to work with their beautiful but acoustically unique spaces.</p>
-                </details>
+        </div>
+    </section>
+    
+
+    <!-- Wedding Guides Section -->
+    <section style="padding: 60px 0; background: #f9f9f9;">
+        <div class="container" style="max-width: 900px;">
+            <h2 class="section-title text-center">Wedding Planning Guides</h2>
+            <p class="text-center" style="opacity: 0.8; margin-bottom: 30px;">Helpful resources for planning your wedding music.</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                <a href="guides/first-dance-songs" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">First Dance Songs</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Top 50 songs for Irish weddings</p>
+                </a>
+                <a href="guides/how-to-choose-wedding-band" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">How to Choose a Band</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Complete decision guide</p>
+                </a>
+                <a href="guides/wedding-band-vs-dj" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Band vs DJ</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Honest comparison</p>
+                </a>
+                <a href="song-list" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Our Song List</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">200+ songs we perform</p>
+                </a>
             </div>
         </div>
     </section>
 
-    <section class="location-section location-cta">
-        <div class="container">
-            <div>
-                <h2>Ready to book for Kilkenny?</h2>
-                <p>Check our availability for your date and let's start planning your perfect wedding entertainment.</p>
-            </div>
-            <a href="./#contact" class="btn btn-primary">Check Availability for Kilkenny</a>
+    <!-- CTA Section -->
+    <section style="padding: 80px 0; background: var(--primary-teal);">
+        <div class="container text-center">
+            <h2 class="section-title" style="color: var(--text-cream);">Ready to Book for Kilkenny?</h2>
+            <p style="color: var(--text-cream); opacity: 0.9; max-width: 600px; margin: 0 auto 30px;">Check our availability for your date and let's start planning your perfect wedding entertainment.</p>
+            <a href="./#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Check Availability for Kilkenny</a>
         </div>
     </section>
-<footer class="footer">
+
+    <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <!-- Column 1: Brand -->
                 <div class="footer-col footer-brand">
                     <a href="./" class="footer-logo-link">
-                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
-                            class="footer-logo-lg">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="footer-logo-lg">
                     </a>
-                    <p class="footer-tagline">Ireland's premier high energy wedding band.</p>
-                    <div class="social-links">
-                        <a href="https://www.instagram.com/thebeatboutiqueweddingband/?hl=en" target="_blank"
-                            aria-label="Instagram" class="social-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                            </svg>
-                        </a>
-                        <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" aria-label="Facebook"
-                            class="social-icon">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path
-                                    d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-                            </svg>
-                        </a>
-                    </div>
+                    <p class="footer-tagline">Ireland's premier wedding band.</p>
                 </div>
-
-                <!-- Column 2: Navigation -->
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
                         <li><a href="showcase">Live Showcase</a></li>
-                        <li><a href="why-us">Why Choose Us</a></li>
-                        <li><a href="venues">Our Venues</a></li>
-                        <li><a href="pricing-guide">Pricing Guide 2026</a></li>
-                        <li><a href="./#experience">The Experience</a></li>
-                        <li><a href="./#reviews">Love Notes</a></li>
-                        <li><a href="./#contact">Contact Us</a></li>
+                        <li><a href="song-list">Song List</a></li>
+                        <li><a href="venues">Venues</a></li>
+                        <li><a href="pricing-guide">Pricing</a></li>
                     </ul>
                 </div>
-
                 <div class="footer-col">
-                    <h4 class="footer-heading">Locations</h4>
+                    <h4 class="footer-heading">Guides</h4>
                     <ul class="footer-nav">
-                        <li><a href="wedding-band-ireland">Wedding Band Ireland</a></li>
-                        <li><a href="locations/wedding-band-dublin">Dublin</a></li>
-                        <li><a href="locations/wedding-band-cork">Cork</a></li>
-                        <li><a href="locations/wedding-band-galway">Galway</a></li>
-                        <li><a href="locations/wedding-band-kerry">Kerry</a></li>
-                        <li><a href="locations/wedding-band-kildare">Kildare</a></li>
-                        <li><a href="locations/wedding-band-wicklow">Wicklow</a></li>
-                        <li><a href="locations/wedding-band-meath">Meath</a></li>
-                        <li><a href="locations/wedding-band-clare">Clare</a></li>
-                        <li><a href="locations/wedding-band-limerick">Limerick</a></li>
+                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
                     </ul>
                 </div>
-
-                <!-- Column 3: Contact -->
                 <div class="footer-col">
-                    <h4 class="footer-heading">Get in Touch</h4>
+                    <h4 class="footer-heading">Contact</h4>
                     <ul class="footer-contact">
-                        <li>
-                            <span class="contact-label">Email</span>
-                            <a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a>
-                        </li>
-                        <li>
-                            <span class="contact-label">Phone</span>
-                            <a href="tel:+353872310001">+353 87 231 0001</a>
-                        </li>
+                        <li><a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a></li>
+                        <li><a href="tel:+353872310001">+353 87 231 0001</a></li>
                     </ul>
                 </div>
             </div>
-
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="privacy">Privacy Policy</a>
-                    <a href="terms">Terms of Service</a>
+                    <a href="privacy">Privacy</a>
+                    <a href="terms">Terms</a>
                 </div>
             </div>
         </div>
     </footer>
 
-    <script src="js/main.js"></script>
 </body>
 </html>

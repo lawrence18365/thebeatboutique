@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\/[\/]*[^\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            document.write('<base href="' + base + '">');
+        })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wedding Band Song List Ireland | The Beat Boutique Repertoire</title>
+    <meta name="description"
+        content="Browse our wedding band song list. 200+ songs across pop, rock, soul, and Irish classics. First dance songs, party anthems, and ceremony music for Irish weddings.">
+    <link rel="canonical" href="https://thebeatboutique.ie/song-list">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thebeatboutique.ie/song-list">
+    <meta property="og:title" content="Wedding Band Song List | The Beat Boutique">
+    <meta property="og:description"
+        content="200+ songs for your wedding. First dance classics, floor-fillers, and Irish favourites.">
+    <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Wedding Band Song List | The Beat Boutique">
+    <meta property="twitter:description"
+        content="200+ songs for your wedding. First dance classics, floor-fillers, and Irish favourites.">
+    <meta property="twitter:image"
+        content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
+
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
+    <meta name="theme-color" content="#0a192f">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "The Beat Boutique Wedding Song List",
+        "description": "Complete repertoire of songs performed by The Beat Boutique wedding band",
+        "numberOfItems": 200,
+        "itemListElement": [
+            {"@type": "MusicRecording", "name": "Crazy Little Thing Called Love", "byArtist": "Queen"},
+            {"@type": "MusicRecording", "name": "Don't Stop Me Now", "byArtist": "Queen"},
+            {"@type": "MusicRecording", "name": "Mr. Brightside", "byArtist": "The Killers"},
+            {"@type": "MusicRecording", "name": "Sweet Home Alabama", "byArtist": "Lynyrd Skynyrd"},
+            {"@type": "MusicRecording", "name": "Galway Girl", "byArtist": "Steve Earle"}
+        ]
+    }
+    </script>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .song-hero {
+            background: linear-gradient(rgba(10, 25, 47, 0.85), rgba(10, 25, 47, 0.9)),
+                url('assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp');
+            background-size: cover;
+            background-position: center;
+            padding: 160px 0 80px;
+            text-align: center;
+        }
+
+        .song-categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: 1px solid var(--accent-gold);
+            color: var(--accent-gold);
+            padding: 10px 20px;
+            cursor: pointer;
+            font-family: var(--font-primary);
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: var(--accent-gold);
+            color: var(--primary-navy);
+        }
+
+        .song-section {
+            margin-bottom: 50px;
+        }
+
+        .song-section h3 {
+            color: var(--accent-gold);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .song-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 8px;
+        }
+
+        .song-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .song-item:hover {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .song-title {
+            font-weight: 500;
+        }
+
+        .song-artist {
+            opacity: 0.6;
+            font-size: 0.9rem;
+        }
+
+        .first-dance-highlight {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15), rgba(212, 175, 55, 0.05));
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .request-note {
+            background: var(--primary-teal);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="./" class="logo">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="about" class="nav-link">About</a></li>
+                <li><a href="why-us" class="nav-link">Why Us</a></li>
+                <li><a href="showcase" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                <li><a href="venues" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="song-hero">
+        <div class="container">
+            <h1 class="hero-title">Our <span class="text-gold text-serif">Song List</span></h1>
+            <p class="hero-subtitle" style="max-width: 600px; margin: 0 auto;">
+                200+ songs spanning six decades. From first dance classics to floor-filling anthems,
+                we tailor every setlist to your taste.
+            </p>
+        </div>
+    </header>
+
+    <!-- First Dance Highlight -->
+    <section style="padding: 60px 0; background: var(--primary-navy);">
+        <div class="container">
+            <div class="first-dance-highlight">
+                <h2 style="margin-bottom: 15px;">First Dance Songs</h2>
+                <p style="opacity: 0.8; margin-bottom: 20px;">Looking for the perfect first dance? Here are the most requested songs we perform:</p>
+                <div class="song-grid" style="max-width: 800px; margin: 0 auto;">
+                    <div class="song-item"><span class="song-title">At Last</span><span class="song-artist">Etta James</span></div>
+                    <div class="song-item"><span class="song-title">Thinking Out Loud</span><span class="song-artist">Ed Sheeran</span></div>
+                    <div class="song-item"><span class="song-title">Perfect</span><span class="song-artist">Ed Sheeran</span></div>
+                    <div class="song-item"><span class="song-title">All of Me</span><span class="song-artist">John Legend</span></div>
+                    <div class="song-item"><span class="song-title">A Thousand Years</span><span class="song-artist">Christina Perri</span></div>
+                    <div class="song-item"><span class="song-title">Can't Help Falling in Love</span><span class="song-artist">Elvis Presley</span></div>
+                    <div class="song-item"><span class="song-title">Crazy Love</span><span class="song-artist">Van Morrison</span></div>
+                    <div class="song-item"><span class="song-title">Make You Feel My Love</span><span class="song-artist">Adele</span></div>
+                </div>
+                <p style="margin-top: 25px;"><a href="guides/first-dance-songs" style="color: var(--accent-gold);">Read our First Dance Song Guide →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Song List -->
+    <section style="padding: 80px 0; background: var(--primary-navy);">
+        <div class="container" style="max-width: 1100px;">
+
+            <!-- Party Anthems -->
+            <div class="song-section">
+                <h3>Party Anthems & Floor Fillers</h3>
+                <div class="song-grid">
+                    <div class="song-item"><span class="song-title">Mr. Brightside</span><span class="song-artist">The Killers</span></div>
+                    <div class="song-item"><span class="song-title">Don't Stop Me Now</span><span class="song-artist">Queen</span></div>
+                    <div class="song-item"><span class="song-title">Livin' on a Prayer</span><span class="song-artist">Bon Jovi</span></div>
+                    <div class="song-item"><span class="song-title">Sweet Caroline</span><span class="song-artist">Neil Diamond</span></div>
+                    <div class="song-item"><span class="song-title">500 Miles</span><span class="song-artist">The Proclaimers</span></div>
+                    <div class="song-item"><span class="song-title">Shut Up and Dance</span><span class="song-artist">Walk the Moon</span></div>
+                    <div class="song-item"><span class="song-title">Dancing Queen</span><span class="song-artist">ABBA</span></div>
+                    <div class="song-item"><span class="song-title">Come On Eileen</span><span class="song-artist">Dexys Midnight Runners</span></div>
+                    <div class="song-item"><span class="song-title">Build Me Up Buttercup</span><span class="song-artist">The Foundations</span></div>
+                    <div class="song-item"><span class="song-title">Valerie</span><span class="song-artist">Amy Winehouse</span></div>
+                    <div class="song-item"><span class="song-title">Uptown Funk</span><span class="song-artist">Bruno Mars</span></div>
+                    <div class="song-item"><span class="song-title">September</span><span class="song-artist">Earth, Wind & Fire</span></div>
+                </div>
+            </div>
+
+            <!-- Rock Classics -->
+            <div class="song-section">
+                <h3>Rock Classics</h3>
+                <div class="song-grid">
+                    <div class="song-item"><span class="song-title">Sweet Home Alabama</span><span class="song-artist">Lynyrd Skynyrd</span></div>
+                    <div class="song-item"><span class="song-title">Summer of '69</span><span class="song-artist">Bryan Adams</span></div>
+                    <div class="song-item"><span class="song-title">Teenage Dirtbag</span><span class="song-artist">Wheatus</span></div>
+                    <div class="song-item"><span class="song-title">Wonderwall</span><span class="song-artist">Oasis</span></div>
+                    <div class="song-item"><span class="song-title">Don't Look Back in Anger</span><span class="song-artist">Oasis</span></div>
+                    <div class="song-item"><span class="song-title">Crazy Little Thing Called Love</span><span class="song-artist">Queen</span></div>
+                    <div class="song-item"><span class="song-title">Whole Lotta Love</span><span class="song-artist">Led Zeppelin</span></div>
+                    <div class="song-item"><span class="song-title">Highway to Hell</span><span class="song-artist">AC/DC</span></div>
+                    <div class="song-item"><span class="song-title">You Shook Me All Night Long</span><span class="song-artist">AC/DC</span></div>
+                    <div class="song-item"><span class="song-title">Rocks</span><span class="song-artist">Primal Scream</span></div>
+                    <div class="song-item"><span class="song-title">Dakota</span><span class="song-artist">Stereophonics</span></div>
+                    <div class="song-item"><span class="song-title">Sex on Fire</span><span class="song-artist">Kings of Leon</span></div>
+                </div>
+            </div>
+
+            <!-- Soul & Motown -->
+            <div class="song-section">
+                <h3>Soul & Motown</h3>
+                <div class="song-grid">
+                    <div class="song-item"><span class="song-title">Superstition</span><span class="song-artist">Stevie Wonder</span></div>
+                    <div class="song-item"><span class="song-title">Signed Sealed Delivered</span><span class="song-artist">Stevie Wonder</span></div>
+                    <div class="song-item"><span class="song-title">Ain't No Mountain High Enough</span><span class="song-artist">Marvin Gaye</span></div>
+                    <div class="song-item"><span class="song-title">I Heard It Through the Grapevine</span><span class="song-artist">Marvin Gaye</span></div>
+                    <div class="song-item"><span class="song-title">Respect</span><span class="song-artist">Aretha Franklin</span></div>
+                    <div class="song-item"><span class="song-title">Soul Man</span><span class="song-artist">Sam & Dave</span></div>
+                    <div class="song-item"><span class="song-title">Mustang Sally</span><span class="song-artist">Wilson Pickett</span></div>
+                    <div class="song-item"><span class="song-title">I Got You (I Feel Good)</span><span class="song-artist">James Brown</span></div>
+                    <div class="song-item"><span class="song-title">Shake a Tail Feather</span><span class="song-artist">Ray Charles</span></div>
+                    <div class="song-item"><span class="song-title">Lovely Day</span><span class="song-artist">Bill Withers</span></div>
+                    <div class="song-item"><span class="song-title">Lean on Me</span><span class="song-artist">Bill Withers</span></div>
+                    <div class="song-item"><span class="song-title">Stand By Me</span><span class="song-artist">Ben E. King</span></div>
+                </div>
+            </div>
+
+            <!-- Irish Favourites -->
+            <div class="song-section">
+                <h3>Irish Favourites</h3>
+                <div class="song-grid">
+                    <div class="song-item"><span class="song-title">Galway Girl</span><span class="song-artist">Steve Earle</span></div>
+                    <div class="song-item"><span class="song-title">Dirty Old Town</span><span class="song-artist">The Pogues</span></div>
+                    <div class="song-item"><span class="song-title">Fairytale of New York</span><span class="song-artist">The Pogues</span></div>
+                    <div class="song-item"><span class="song-title">Brown Eyed Girl</span><span class="song-artist">Van Morrison</span></div>
+                    <div class="song-item"><span class="song-title">Crazy Love</span><span class="song-artist">Van Morrison</span></div>
+                    <div class="song-item"><span class="song-title">Dreams</span><span class="song-artist">The Cranberries</span></div>
+                    <div class="song-item"><span class="song-title">Linger</span><span class="song-artist">The Cranberries</span></div>
+                    <div class="song-item"><span class="song-title">Zombie</span><span class="song-artist">The Cranberries</span></div>
+                    <div class="song-item"><span class="song-title">I Useta Lover</span><span class="song-artist">The Saw Doctors</span></div>
+                    <div class="song-item"><span class="song-title">N17</span><span class="song-artist">The Saw Doctors</span></div>
+                    <div class="song-item"><span class="song-title">Raglan Road</span><span class="song-artist">Luke Kelly</span></div>
+                    <div class="song-item"><span class="song-title">The Auld Triangle</span><span class="song-artist">The Dubliners</span></div>
+                </div>
+            </div>
+
+            <!-- Modern Pop & Current Hits -->
+            <div class="song-section">
+                <h3>Modern Pop & Current Hits</h3>
+                <div class="song-grid">
+                    <div class="song-item"><span class="song-title">Blinding Lights</span><span class="song-artist">The Weeknd</span></div>
+                    <div class="song-item"><span class="song-title">Dance Monkey</span><span class="song-artist">Tones and I</span></div>
+                    <div class="song-item"><span class="song-title">Watermelon Sugar</span><span class="song-artist">Harry Styles</span></div>
+                    <div class="song-item"><span class="song-title">Flowers</span><span class="song-artist">Miley Cyrus</span></div>
+                    <div class="song-item"><span class="song-title">As It Was</span><span class="song-artist">Harry Styles</span></div>
+                    <div class="song-item"><span class="song-title">Levitating</span><span class="song-artist">Dua Lipa</span></div>
+                    <div class="song-item"><span class="song-title">Don't Start Now</span><span class="song-artist">Dua Lipa</span></div>
+                    <div class="song-item"><span class="song-title">Shape of You</span><span class="song-artist">Ed Sheeran</span></div>
+                    <div class="song-item"><span class="song-title">Happy</span><span class="song-artist">Pharrell Williams</span></div>
+                    <div class="song-item"><span class="song-title">Can't Stop the Feeling</span><span class="song-artist">Justin Timberlake</span></div>
+                    <div class="song-item"><span class="song-title">24K Magic</span><span class="song-artist">Bruno Mars</span></div>
+                    <div class="song-item"><span class="song-title">Treasure</span><span class="song-artist">Bruno Mars</span></div>
+                </div>
+            </div>
+
+            <!-- 80s & 90s -->
+            <div class="song-section">
+                <h3>80s & 90s Classics</h3>
+                <div class="song-grid">
+                    <div class="song-item"><span class="song-title">Take On Me</span><span class="song-artist">A-ha</span></div>
+                    <div class="song-item"><span class="song-title">Everybody Wants to Rule the World</span><span class="song-artist">Tears for Fears</span></div>
+                    <div class="song-item"><span class="song-title">Girls Just Want to Have Fun</span><span class="song-artist">Cyndi Lauper</span></div>
+                    <div class="song-item"><span class="song-title">Hungry Like the Wolf</span><span class="song-artist">Duran Duran</span></div>
+                    <div class="song-item"><span class="song-title">Wake Me Up Before You Go-Go</span><span class="song-artist">Wham!</span></div>
+                    <div class="song-item"><span class="song-title">Faith</span><span class="song-artist">George Michael</span></div>
+                    <div class="song-item"><span class="song-title">I'm Still Standing</span><span class="song-artist">Elton John</span></div>
+                    <div class="song-item"><span class="song-title">Crocodile Rock</span><span class="song-artist">Elton John</span></div>
+                    <div class="song-item"><span class="song-title">Bittersweet Symphony</span><span class="song-artist">The Verve</span></div>
+                    <div class="song-item"><span class="song-title">Wannabe</span><span class="song-artist">Spice Girls</span></div>
+                    <div class="song-item"><span class="song-title">Mmmbop</span><span class="song-artist">Hanson</span></div>
+                    <div class="song-item"><span class="song-title">Sandstorm</span><span class="song-artist">Darude</span></div>
+                </div>
+            </div>
+
+            <!-- Request Note -->
+            <div class="request-note">
+                <h3 style="margin-bottom: 15px;">Don't See Your Song?</h3>
+                <p style="max-width: 600px; margin: 0 auto 20px; opacity: 0.9;">
+                    This is just a sample of our repertoire. We learn new songs regularly and love taking requests.
+                    If there's a special song for your first dance or a family favourite, let us know.
+                </p>
+                <a href="./#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Request a Song</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section style="padding: 80px 0; background: var(--primary-teal);">
+        <div class="container text-center">
+            <h2 class="section-title" style="color: var(--text-cream);">Hear Us Live</h2>
+            <p style="color: var(--text-cream); opacity: 0.9; max-width: 600px; margin: 0 auto 30px;">
+                The best way to know if we're right for your wedding is to see us perform.
+                Join us at our next Dublin showcase.
+            </p>
+            <a href="showcase" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Reserve Showcase Spot</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+        <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-col footer-brand">
+                    <a href="./" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="footer-logo-lg">
+                    </a>
+                    <p class="footer-tagline">Ireland's premier wedding band.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/thebeatboutiqueweddingband/" target="_blank" aria-label="Instagram" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" aria-label="Facebook" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Explore -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Explore</h4>
+                    <ul class="footer-nav">
+                        <li><a href="showcase">Live Showcase</a></li>
+                        <li><a href="song-list">Song List</a></li>
+                        <li><a href="venues">Venues We Play</a></li>
+                        <li><a href="pricing-guide">Pricing Guide</a></li>
+                        <li><a href="about">About the Band</a></li>
+                        <li><a href="why-us">Why Choose Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Guides -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Wedding Guides</h4>
+                    <ul class="footer-nav">
+                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
+                        <li><a href="wedding-band-ireland">Locations</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Get in Touch</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a>
+                        </li>
+                        <li>
+                            <span class="contact-label">Phone</span>
+                            <a href="tel:+353872310001">+353 87 231 0001</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy">Privacy Policy</a>
+                    <a href="terms">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>
