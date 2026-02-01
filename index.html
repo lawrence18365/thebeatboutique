@@ -4,25 +4,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Beat Boutique | Ireland's Premier Wedding Band</title>
+    <title>The Beat Boutique | Wedding Band Ireland + Live Showcase</title>
     <meta name="description"
-        content="The Beat Boutique - four best friends bringing high-energy live music to weddings across Ireland. See us live, read 180+ reviews.">
+        content="Ireland's boutique wedding band. See us live at our Dublin showcase. Nationwide bookings, 180+ five-star reviews.">
     <link rel="canonical" href="https://thebeatboutique.ie/">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thebeatboutique.ie/">
-    <meta property="og:title" content="The Beat Boutique | Ireland's Premier Wedding Band">
+    <meta property="og:title" content="The Beat Boutique | Wedding Band Ireland + Live Showcase">
     <meta property="og:description"
-        content="The Beat Boutique - four best friends bringing high-energy live music to weddings across Ireland. See us live, read 180+ reviews.">
+        content="Ireland's boutique wedding band. See us live in Dublin. Nationwide bookings, 180+ five-star reviews.">
     <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://thebeatboutique.ie/">
-    <meta property="twitter:title" content="The Beat Boutique | Ireland's Premier Wedding Band">
+    <meta property="twitter:title" content="The Beat Boutique | Wedding Band Ireland + Live Showcase">
     <meta property="twitter:description"
-        content="The Beat Boutique - four best friends bringing high-energy live music to weddings across Ireland. See us live, read 180+ reviews.">
+        content="Ireland's boutique wedding band. See us live in Dublin. Nationwide bookings, 180+ five-star reviews.">
     <meta property="twitter:image"
         content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
@@ -150,7 +150,7 @@
           "name": "The Beat Boutique Live Showcase",
           "description": "See Ireland's premier wedding band perform live. Free entry, meet the band, and experience the energy before you book.",
           "startDate": "2026-02-01T19:00:00+00:00",
-          "endDate": "2026-02-01T21:00:00+00:00",
+          "endDate": "2026-02-01T20:00:00+00:00",
           "eventStatus": "https://schema.org/EventScheduled",
           "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
           "location": {
@@ -188,18 +188,18 @@
             },
             {
               "@type": "Question",
-              "name": "Do you travel nationwide?",
+              "name": "Can we see you live before booking?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. We perform across Ireland every week and handle all logistics with venues and planners."
+                "text": "Yes. We run live showcases in Dublin so you can experience the band before booking."
               }
             },
             {
               "@type": "Question",
-              "name": "Do you offer a DJ after the band?",
+              "name": "Do you travel nationwide?",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "We offer a seamless DJ afters option to keep the dancefloor full once the live set finishes."
+                "text": "Yes. We perform across Ireland every week and handle all logistics with venues and planners."
               }
             }
           ]
@@ -229,14 +229,8 @@
     }
     </script>
 
-    <!-- Google Analytics 4 -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script defer src="js/analytics.js"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
-        gtag('js', new Date());
-        gtag('config', 'G-XXXXXXXXXX');
-
         // Track scroll depth
         let maxScroll = 0;
         window.addEventListener('scroll', function () {
@@ -244,7 +238,9 @@
             if (scrollPercent > maxScroll) {
                 maxScroll = scrollPercent;
                 if ([25, 50, 75, 90].includes(scrollPercent)) {
-                    gtag('event', 'scroll_depth', { 'percent': scrollPercent });
+                    if (typeof window.trackEvent === 'function') {
+                        window.trackEvent('scroll_depth', { 'percent': scrollPercent });
+                    }
                 }
             }
         });
@@ -252,16 +248,16 @@
         // Track video views
         document.addEventListener('DOMContentLoaded', function () {
             const videoIframe = document.querySelector('iframe[src*="youtube"]');
-            if (videoIframe) {
-                gtag('event', 'video_present', { 'video_type': 'youtube_embed' });
+            if (videoIframe && typeof window.trackEvent === 'function') {
+                window.trackEvent('video_present', { 'video_type': 'youtube_embed' });
             }
         });
 
         // Track CTA clicks
         document.addEventListener('click', function (e) {
             const target = e.target.closest('a.btn, button.btn');
-            if (target) {
-                gtag('event', 'cta_click', {
+            if (target && typeof window.trackEvent === 'function') {
+                window.trackEvent('cta_click', {
                     'cta_text': target.innerText,
                     'cta_location': target.closest('section')?.id || 'unknown'
                 });
@@ -280,9 +276,9 @@
 <body>
 
     <!-- Navigation -->
-    <nav class="navbar">
+                <nav class="navbar">
         <div class="container nav-container">
-            <a href="#" class="logo">
+            <a href="index.html" class="logo">
                 <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
             <div class="menu-toggle" id="mobile-menu">
@@ -291,13 +287,12 @@
                 <span class="bar"></span>
             </div>
             <ul class="nav-menu">
-                <li><a href="wedding-band-ireland.html" class="nav-link">Ireland</a></li>
-                <li><a href="#showcase" class="nav-link">Live</a></li>
-                <li><a href="#about" class="nav-link">The Band</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="why-us.html" class="nav-link">Why Us</a></li>
+                <li><a href="showcase.html" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide.html" class="nav-link">Pricing</a></li>
                 <li><a href="venues/index.html" class="nav-link">Venues</a></li>
-                <li><a href="#experience" class="nav-link">Experience</a></li>
-                <li><a href="#reviews" class="nav-link">Love Notes</a></li>
-                <li><a href="#contact" class="nav-cta btn-primary">Enquire Now</a></li>
+                <li><a href="wedding-band-ireland.html" class="nav-cta btn-primary">Ireland</a></li>
             </ul>
         </div>
     </nav>
@@ -311,43 +306,16 @@
             <img src="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp" alt="The Beat Boutique Dublin">
         </video>
         <div class="hero-overlay"></div>
-
         <div class="hero-content">
-            <div class="trust-badges"
-                style="display: flex; gap: 20px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
-                <div class="trust-badge"
-                    style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 30px; backdrop-filter: blur(10px);">
-                    <span style="color: #ffd700;">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-                    <span style="font-size: 0.85rem; opacity: 0.9;">180+ Five-Star Reviews</span>
-                </div>
-                <div class="trust-badge"
-                    style="display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 30px; backdrop-filter: blur(10px);">
-                    <span style="font-size: 0.85rem; opacity: 0.9;">500+ Weddings Performed</span>
-                </div>
-            </div>
-
-            <h1 class="hero-title">Not Your Average<br><span class="text-gold text-serif">Wedding Band</span></h1>
-            <p class="hero-subtitle">Premium wedding band Ireland-wide. High-energy, boutique live music for modern
-                couples.</p>
+            <h1 class="hero-title">Ireland's Boutique<br><span class="text-gold text-serif">Wedding Band</span></h1>
+            <p class="hero-subtitle">Only a handful of weekend dates still available and 2027 filling up fast.
+                Nationwide bookings, 180+ five-star reviews, and the same four musicians every night.</p>
 
             <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
-                <a href="#contact" class="btn btn-primary"
-                    style="color: #fff; border-color: #fff; padding: 16px 32px;">Check Availability</a>
-                <a href="showcase.html" class="btn"
-                    style="color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.4); padding: 16px 32px;">See
-                    Us Live</a>
+                <a href="showcase.html" class="btn btn-primary hero-cta"
+                    style="color: #fff; border-color: #fff; padding: 16px 32px;">Reserve Live Showcase</a>
             </div>
 
-            <div class="urgency-strip"
-                style="margin-top: 30px; padding: 12px 20px; background: rgba(212,175,55,0.15); border: 1px solid rgba(212,175,55,0.3); border-radius: 4px; display: inline-block;">
-                <span style="color: var(--accent-gold); font-size: 0.9rem;"><strong>2026 Peak Season:</strong> Only 40%
-                    of Saturday dates still available</span>
-            </div>
-        </div>
-
-        <div class="scroll-indicator" onclick="document.getElementById('showcase').scrollIntoView()">
-            <span>Explore</span>
-            <div class="arrow-down"></div>
         </div>
     </header>
 
@@ -359,43 +327,40 @@
                 <h2 class="event-date">Sunday 1st February 2026</h2>
                 <div style="width: 40px; height: 1px; background: #fff; margin: 20px auto; opacity: 0.3;"></div>
                 <h3 style="margin-bottom: 0.5rem;">Bell Bar & Restaurant</h3>
-                <p style="opacity: 0.8; margin-bottom: 1.5rem;">Blanchardstown, Dublin 15 • 7pm to 9pm</p>
+                <p style="opacity: 0.8; margin-bottom: 1.5rem;">Blanchardstown, Dublin 15 • 7pm to 8pm</p>
+                <p style="opacity: 0.85; max-width: 650px; margin: 0 auto 1.5rem;">Join us live for a one-hour showcase.
+                    No obligation — just a chance to feel the energy before you book.</p>
                 <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
                     <a href="showcase.html" class="btn btn-primary" style="color: #fff; border-color: #fff;">Join
                         Guestlist</a>
-                    <a href="showcase.html" class="btn"
-                        style="color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.3);">Watch Online</a>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Start Here Section -->
     <!-- FAQ Section -->
-    <section id="faq" class="experience-section">
+    <section id="faq" class="experience-section faq-section">
         <div class="container experience-content fade-up">
-            <div class="text-center">
+            <div class="faq-header">
                 <h2 class="section-title">Wedding Band Ireland FAQ</h2>
-                <p style="max-width: 700px; margin: 0 auto; opacity: 0.9;">Straight answers to the questions Irish
-                    couples ask most.</p>
+                <p class="faq-subtitle">Straight answers to the questions Irish couples ask most.</p>
             </div>
 
-            <div class="features-grid" style="margin-top: 40px;">
-                <div class="feature-card">
-                    <h3 style="margin: 0 0 0.75rem; color: var(--accent-gold);">How much does a wedding band cost in
-                        Ireland?</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">Most professional 4-5 piece bands in Ireland fall
-                        between €2,400 and €3,200 depending on date, travel, and add-ons.</p>
-                </div>
-                <div class="feature-card">
-                    <h3 style="margin: 0 0 0.75rem; color: var(--accent-gold);">Do you travel nationwide?</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">Yes. We perform across Ireland every week and handle all
-                        logistics with venues and planners.</p>
-                </div>
-                <div class="feature-card">
-                    <h3 style="margin: 0 0 0.75rem; color: var(--accent-gold);">Do you offer a DJ after the band?</h3>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">We offer a seamless DJ afters option to keep the
-                        dancefloor full once the live set finishes.</p>
-                </div>
+            <div class="faq-accordion">
+                <details class="faq-item" open>
+                    <summary>How much does a wedding band cost in Ireland?</summary>
+                    <p>Most professional 4-5 piece bands in Ireland fall between €2,400 and €3,200 depending on date,
+                        travel, and add-ons. See our <a href="pricing-guide.html">Pricing Guide</a>.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can we see you live before booking?</summary>
+                    <p>Yes — we run live showcases in Dublin so you can see us before booking.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Do you travel nationwide?</summary>
+                    <p>Yes. We perform across Ireland every week and handle all logistics with venues and planners.</p>
+                </details>
             </div>
         </div>
     </section>
@@ -429,7 +394,7 @@
             <div class="text-center">
                 <h2 class="section-title">The Experience</h2>
                 <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">Versatility is our signature. Whether it's an
-                    intimate gathering of 10 or a ballroom of 250, we read the room and steer the energy.</p>
+                    intimate gathering of 10 or a ballroom of 250 or more, we read the room and steer the energy.</p>
             </div>
 
             <div class="features-grid">
@@ -809,16 +774,12 @@
                         <input type="hidden" name="_subject" value="New Wedding Enquiry from Website">
                         <input type="hidden" name="_next" value="https://thebeatboutique.ie/thank-you.html">
                         <input type="hidden" name="form_source" value="Homepage Contact Form">
+                        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true"
+                            style="position: absolute; left: -9999px;">
 
                         <div class="form-header">
-                            <h3 style="margin-bottom: 0.5rem; color: var(--primary-navy);">Inquire Now</h3>
-                            <p style="font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.7;">Tell us about your day.
-                                We'll handle the soundtrack.</p>
-                            <div class="urgency-badge"
-                                style="background: #fff3cd; border: 1px solid #ffc107; padding: 10px 15px; border-radius: 4px; margin-bottom: 1.5rem;">
-                                <span style="color: #856404; font-size: 0.85rem;"><strong>2026 dates filling
-                                        fast</strong> - We're already 60% booked for peak season</span>
-                            </div>
+                            <h3 style="margin-bottom: 0.5rem; color: var(--primary-navy);">Enquire Now</h3>
+                            <p style="font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.7;">2027 dates filling up fast.</p>
                         </div>
 
                         <div class="form-row">
@@ -847,9 +808,9 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="venue">Venue (if known)</label>
+                            <label for="venue">Location *</label>
                             <input type="text" id="venue" name="venue" class="form-input"
-                                placeholder="e.g. Adare Manor, Ashford Castle">
+                                placeholder="e.g. Adare Manor, Dublin" required>
                         </div>
 
                         <div class="form-group">
@@ -860,6 +821,8 @@
                                 <option value="instagram">Instagram</option>
                                 <option value="facebook">Facebook</option>
                                 <option value="weddingsonline">WeddingsOnline</option>
+                                <option value="wba">WBA</option>
+                                <option value="one-fab-day">One Fab Day</option>
                                 <option value="venue">Venue Recommendation</option>
                                 <option value="friend">Friend/Family Recommendation</option>
                                 <option value="saw-live">Saw us at a wedding/event</option>
@@ -885,12 +848,79 @@
     </section>
 
     <!-- Footer -->
+    <section id="start-here" class="experience-section start-here-section">
+        <div class="container start-here-content fade-up">
+            <div class="start-here-header">
+                <span class="start-here-eyebrow">Start Here</span>
+                <h2 class="section-title start-here-title">Newly engaged?</h2>
+                <p class="start-here-subtitle">Three pillar pages with the answers Irish couples look for most — and a
+                    clear path to the showcase.</p>
+            </div>
+
+            <div class="start-here-grid">
+                <article class="start-here-card">
+                    <div class="start-here-card-top">
+                        <span class="start-here-index">01</span>
+                        <span class="start-here-tag">Pricing</span>
+                    </div>
+                    <h3>Wedding Band Prices Ireland</h3>
+                    <p>Transparent ranges, what affects price, and what you actually get.</p>
+                    <a href="pricing-guide.html" class="start-here-link">Read the Pricing Guide</a>
+                </article>
+
+                <article class="start-here-card">
+                    <div class="start-here-card-top">
+                        <span class="start-here-index">02</span>
+                        <span class="start-here-tag">Checklist</span>
+                    </div>
+                    <h3>How to Choose a Band</h3>
+                    <p>A practical checklist for comparing bands, packages, and reviews.</p>
+                    <a href="guides/how-to-choose-wedding-band.html" class="start-here-link">Read the Guide</a>
+                </article>
+
+                <article class="start-here-card">
+                    <div class="start-here-card-top">
+                        <span class="start-here-index">03</span>
+                        <span class="start-here-tag">Venues</span>
+                    </div>
+                    <h3>Top Venues We Play</h3>
+                    <p>See our venue guides and get tips on acoustics and room flow.</p>
+                    <a href="venues/index.html" class="start-here-link">Explore Venues</a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+        
+    <section class="internal-links">
+        <div class="container">
+            <div class="internal-links-header">
+                <h2 class="section-title">Continue planning</h2>
+                <p>Explore pricing, see us live, or browse venues we play every week.</p>
+            </div>
+            <div class="internal-links-grid">
+                <a href="pricing-guide.html" class="internal-link-card">
+                    <h3>Pricing Guide</h3>
+                    <span>Transparent ranges & what's included</span>
+                </a>
+                <a href="showcase.html" class="internal-link-card">
+                    <h3>Live Showcase</h3>
+                    <span>See the band before you book</span>
+                </a>
+                <a href="venues/index.html" class="internal-link-card">
+                    <h3>Venues We Play</h3>
+                    <span>Venue tips and room-flow notes</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <!-- Column 1: Brand -->
                 <div class="footer-col footer-brand">
-                    <a href="#" class="footer-logo-link">
+                    <a href="index.html" class="footer-logo-link">
                         <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
                             class="footer-logo-lg">
                     </a>

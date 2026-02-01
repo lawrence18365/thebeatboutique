@@ -106,318 +106,497 @@
 
     <style>
         .ireland-hero {
-            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.85)), url('assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp');
+            background: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.85)),
+                url('assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp');
             background-size: cover;
-            background-position: center;
-            padding: 180px 0 100px;
+            background-position: center bottom;
+            background-repeat: no-repeat;
+            background-color: var(--primary-navy);
+            padding: 200px 0 120px;
             text-align: center;
-            color: var(--text-cream);
         }
 
-        .trust-grid {
+        .county-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 15px;
+        }
+
+        .county-link {
+            display: block;
+            background: rgba(10, 25, 47, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px 15px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-cream);
+            transition: all 0.3s ease;
+        }
+
+        .county-link:hover {
+            border-color: var(--accent-gold);
+            background: rgba(10, 25, 47, 0.6);
+        }
+
+        .county-link h3 {
+            font-family: var(--font-serif);
+            font-size: 1.1rem;
+            margin: 0 0 5px;
+        }
+
+        .county-link:hover h3 {
+            color: var(--accent-gold);
+        }
+
+        .county-link span {
+            font-size: 0.75rem;
+            opacity: 0.6;
+        }
+
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            margin-top: 30px;
         }
 
-        .trust-card {
-            background: white;
-            padding: 24px;
-            border-bottom: 3px solid var(--accent-gold);
-            color: var(--primary-navy);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        .venue-link {
+            display: block;
+            background: rgba(10, 25, 47, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: var(--text-cream);
+            transition: all 0.3s ease;
         }
 
-        .cta-row {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-top: 30px;
+        .venue-link:hover {
+            border-color: var(--accent-gold);
+        }
+
+        .venue-link h3 {
+            font-family: var(--font-serif);
+            font-size: 1rem;
+            color: var(--accent-gold);
+            margin: 0 0 5px;
+        }
+
+        .venue-link span {
+            font-size: 0.8rem;
+            opacity: 0.7;
         }
     </style>
 </head>
 
 <body>
 
-    <nav class="navbar" style="background: var(--primary-navy); transform: translateY(0);">
+                <nav class="navbar">
         <div class="container nav-container">
             <a href="index.html" class="logo">
                 <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
             <ul class="nav-menu">
-                <li><a href="index.html" class="nav-link">Home</a></li>
-                <li><a href="venues/index.html" class="nav-link">Venues</a></li>
-                <li><a href="pricing-guide.html" class="nav-link">Pricing</a></li>
+                <li><a href="about.html" class="nav-link">About</a></li>
+                <li><a href="why-us.html" class="nav-link">Why Us</a></li>
                 <li><a href="showcase.html" class="nav-link">Showcase</a></li>
-                <li><a href="index.html#contact" class="nav-cta btn-primary">Enquire Now</a></li>
+                <li><a href="pricing-guide.html" class="nav-link">Pricing</a></li>
+                <li><a href="venues/index.html" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland.html" class="nav-cta btn-primary">Ireland</a></li>
             </ul>
         </div>
     </nav>
 
     <header class="ireland-hero">
         <div class="container">
-            <h1 class="hero-title">Wedding Band Ireland</h1>
-            <p class="hero-subtitle" style="max-width: 760px; margin: 0 auto;">Premium live music for modern Irish
-                weddings. We perform nationwide with the same four core members and deliver a full, concert-style
-                dancefloor experience.</p>
-            <div class="cta-row">
-                <a href="index.html#contact" class="btn btn-primary" style="color: #fff; border-color: #fff;">Check
-                    Availability</a>
-                <a href="pricing-guide.html" class="btn"
-                    style="color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.3);">View Pricing
-                    Guide</a>
+            <h1 class="hero-title">Wedding Band <span class="text-gold text-serif">Ireland</span></h1>
+            <p class="hero-subtitle" style="max-width: 700px; margin: 0 auto;">
+                The same four musicians at every wedding. Concert-quality sound. A packed dancefloor from first song to final encore. We travel nationwide.
+            </p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                <a href="index.html#contact" class="btn btn-primary" style="color: #fff; border-color: #fff;">Check Availability</a>
+                <a href="pricing-guide.html" class="btn" style="color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.3);">View Pricing</a>
             </div>
         </div>
     </header>
 
-    <section style="padding: 80px 0;">
-        <div class="container" style="max-width: 900px;">
-            <h2 class="section-title text-center">Why Couples Book The Beat Boutique</h2>
-            <p class="text-center" style="opacity: 0.8; margin-bottom: 2rem;">Across Ireland, couples tell us the same
-                three things matter most: chemistry, crowd-reading, and trust. We built our band around those
-                priorities.</p>
-
-            <div class="trust-grid">
-                <div class="trust-card">
-                    <h3 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Fixed Line-Up</h3>
-                    <p style="margin: 0; opacity: 0.8;">The four musicians you see are the four musicians you get on the
-                        night.</p>
-                </div>
-                <div class="trust-card">
-                    <h3 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Nationwide Experience</h3>
-                    <p style="margin: 0; opacity: 0.8;">From Dublin ballrooms to west-coast manor houses, we know Irish
-                        venues and logistics.</p>
-                </div>
-                <div class="trust-card">
-                    <h3 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Premium Production</h3>
-                    <p style="margin: 0; opacity: 0.8;">Pro audio, lighting, and timing so your dancefloor feels like a
-                        show.</p>
-                </div>
-                <div class="trust-card">
-                    <h3 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Trusted Reviews</h3>
-                    <p style="margin: 0; opacity: 0.8;">180+ reviews across Google and WeddingsOnline.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section style="padding: 60px 0; background: #f4f4f4;">
-        <div class="container" style="max-width: 1100px;">
-            <h2 class="section-title text-center">Explore All 17 Counties</h2>
-            <p class="text-center" style="opacity: 0.8; margin-bottom: 2rem;">We perform at weddings across Ireland
-                every weekend. Select your county for local venue tips, travel information, and real reviews from
-                couples in your area.</p>
-
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 15px; margin-top: 30px;">
-                <a href="locations/wedding-band-dublin.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Dublin</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">No travel fee</p>
-                </a>
-                <a href="locations/wedding-band-wicklow.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Wicklow</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Garden County</p>
-                </a>
-                <a href="locations/wedding-band-meath.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Meath</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Manor houses</p>
-                </a>
-                <a href="locations/wedding-band-kildare.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Kildare</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Country estates</p>
-                </a>
-                <a href="locations/wedding-band-louth.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Louth</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Wee county</p>
-                </a>
-                <a href="locations/wedding-band-westmeath.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Westmeath</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Lakeland venues</p>
-                </a>
-                <a href="locations/wedding-band-wexford.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Wexford</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Sunny South East</p>
-                </a>
-                <a href="locations/wedding-band-kilkenny.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Kilkenny</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Medieval city</p>
-                </a>
-                <a href="locations/wedding-band-waterford.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Waterford</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Coastal charm</p>
-                </a>
-                <a href="locations/wedding-band-cork.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Cork</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Rebel county</p>
-                </a>
-                <a href="locations/wedding-band-kerry.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Kerry</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Wild Atlantic</p>
-                </a>
-                <a href="locations/wedding-band-limerick.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Limerick</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Adare Manor</p>
-                </a>
-                <a href="locations/wedding-band-tipperary.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Tipperary</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Golden Vale</p>
-                </a>
-                <a href="locations/wedding-band-clare.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Clare</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Dromoland Castle</p>
-                </a>
-                <a href="locations/wedding-band-galway.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Galway</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">City of Tribes</p>
-                </a>
-                <a href="locations/wedding-band-mayo.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Mayo</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Ashford Castle</p>
-                </a>
-                <a href="locations/wedding-band-donegal.html" class="trust-card"
-                    style="text-decoration: none; text-align: center; transition: transform 0.2s;">
-                    <h3 style="margin: 0; color: var(--primary-navy);">Donegal</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Wild North West</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section style="padding: 80px 0;">
-        <div class="container" style="max-width: 1000px;">
-            <h2 class="section-title text-center">What Couples Say</h2>
-            <p class="text-center" style="opacity: 0.8; margin-bottom: 2rem;">With 180+ five-star reviews, here's what
-                recent couples from across Ireland had to say.</p>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px;">
-                <div style="background: var(--primary-teal); padding: 30px; border-radius: 4px; color: white;">
-                    <div style="color: var(--accent-gold); margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 15px;">"Awesome wedding band - they joined us at
-                        Waterford Castle and had a great mix of music and style. They even took a special request of an
-                        Australian song."</p>
-                    <p style="opacity: 0.7; margin: 0;">— Paul, Waterford</p>
-                </div>
-                <div style="background: var(--primary-teal); padding: 30px; border-radius: 4px; color: white;">
-                    <div style="color: var(--accent-gold); margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 15px;">"5 months later our guests are still raving
-                        about them. The dance floor was full from the 1st dance right to the end of the night."</p>
-                    <p style="opacity: 0.7; margin: 0;">— Sarah, Kildare</p>
-                </div>
-                <div style="background: var(--primary-teal); padding: 30px; border-radius: 4px; color: white;">
-                    <div style="color: var(--accent-gold); margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 15px;">"The set was just brilliant, the dance floor was
-                        never empty and everyone was raving about you afterwards. No doubt we will be seeing you again."
-                    </p>
-                    <p style="opacity: 0.7; margin: 0;">— Ciara, Meath</p>
-                </div>
-                <div style="background: var(--primary-teal); padding: 30px; border-radius: 4px; color: white;">
-                    <div style="color: var(--accent-gold); margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 15px;">"The band was brilliant, as was the DJ service!
-                        We had a fantastic night and would recommend them to anyone!"</p>
-                    <p style="opacity: 0.7; margin: 0;">— Moninne, Galway</p>
-                </div>
-                <div style="background: var(--primary-teal); padding: 30px; border-radius: 4px; color: white;">
-                    <div style="color: var(--accent-gold); margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 15px;">"You were so easy to communicate with and
-                        everything worked out perfectly on the day! We all had an absolute ball so please pass on our
-                        thanks."</p>
-                    <p style="opacity: 0.7; margin: 0;">— Aisling, Cork</p>
-                </div>
-                <div style="background: var(--primary-teal); padding: 30px; border-radius: 4px; color: white;">
-                    <div style="color: var(--accent-gold); margin-bottom: 10px;">★★★★★</div>
-                    <p style="font-style: italic; margin-bottom: 15px;">"The band and dj were absolutely amazing,
-                        everyone is talking about how great the band was and the dance floor never emptied all night
-                        long."</p>
-                    <p style="opacity: 0.7; margin: 0;">— Sarah, Clare</p>
-                </div>
-            </div>
-
-            <div class="text-center" style="margin-top: 30px;">
-                <a href="https://share.google/m63ZwXXpMS5BvUBxm" target="_blank"
-                    style="color: var(--primary-navy); text-decoration: underline;">See all Google Reviews →</a>
-            </div>
-        </div>
-    </section>
-
-    <section style="padding: 80px 0; background: #f4f4f4;">
-        <div class="container" style="max-width: 1000px;">
-            <h2 class="section-title text-center">Explore Our Venue Guides</h2>
-            <p class="text-center" style="opacity: 0.8; margin-bottom: 2rem;">We've created detailed guides for
-                Ireland's most prestigious wedding venues, with acoustics tips, sample setlists, and real wedding
-                testimonials.</p>
-
-            <div
-                style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin-bottom: 30px;">
-                <a href="venues/ashford-castle.html" class="trust-card"
-                    style="text-decoration: none; text-align: center;">
-                    <h3 style="margin: 0; color: var(--accent-gold);">Ashford Castle</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Mayo</p>
-                </a>
-                <a href="venues/adare-manor.html" class="trust-card" style="text-decoration: none; text-align: center;">
-                    <h3 style="margin: 0; color: var(--accent-gold);">Adare Manor</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Limerick</p>
-                </a>
-                <a href="venues/dromoland-castle.html" class="trust-card"
-                    style="text-decoration: none; text-align: center;">
-                    <h3 style="margin: 0; color: var(--accent-gold);">Dromoland Castle</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Clare</p>
-                </a>
-                <a href="venues/luttrellstown-castle.html" class="trust-card"
-                    style="text-decoration: none; text-align: center;">
-                    <h3 style="margin: 0; color: var(--accent-gold);">Luttrellstown Castle</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Dublin</p>
-                </a>
-                <a href="venues/tankardstown-house.html" class="trust-card"
-                    style="text-decoration: none; text-align: center;">
-                    <h3 style="margin: 0; color: var(--accent-gold);">Tankardstown House</h3>
-                    <p style="margin: 0.5rem 0 0; font-size: 0.85rem; opacity: 0.7;">Meath</p>
-                </a>
-            </div>
-
+    <!-- Why Us -->
+    <section class="experience-section">
+        <div class="container experience-content fade-up">
             <div class="text-center">
-                <a href="venues/index.html" class="btn btn-submit"
-                    style="display: inline-block; width: auto; background: var(--primary-navy); color: var(--accent-gold);">View
-                    All Venue Guides</a>
+                <h2 class="section-title">Why Couples Book Us</h2>
+                <p style="max-width: 650px; margin: 0 auto; opacity: 0.9;">Across Ireland, couples tell us the same three things matter most: chemistry, crowd-reading, and trust.</p>
+            </div>
+
+            <div class="features-grid" style="margin-top: 40px;">
+                <div class="feature-card">
+                    <div class="feature-number">01</div>
+                    <h3 style="margin: 1rem 0; color: var(--accent-gold);">Fixed Line-Up</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">The four musicians you see are the four you get. No dep players, no surprises.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">02</div>
+                    <h3 style="margin: 1rem 0; color: var(--accent-gold);">Nationwide Experience</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">From Dublin ballrooms to west-coast manor houses, we know Irish venues and logistics.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-number">03</div>
+                    <h3 style="margin: 1rem 0; color: var(--accent-gold);">180+ Five-Star Reviews</h3>
+                    <p style="font-size: 0.9rem; opacity: 0.8;">Trusted by couples across Google and WeddingsOnline with consistent praise for energy and professionalism.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <section style="padding: 80px 0;">
-        <div class="container" style="max-width: 900px;">
-            <h2 class="section-title text-center">Ready to See Us Live?</h2>
-            <p class="text-center" style="opacity: 0.8;">Join the next showcase in Dublin or watch the full virtual set
-                online.</p>
-            <div class="text-center" style="margin-top: 20px;">
-                <a href="showcase.html" class="btn btn-primary" style="color: #fff; border-color: #fff;">Showcase
-                    Details</a>
+    <section class="experience-section">
+        <div class="container">
+            <div class="text-center">
+                <h2 class="section-title">Planning resources</h2>
+                <p style="max-width: 620px; margin: 0 auto; opacity: 0.9;">Short guides to help you compare bands, understand pricing, and pick the right venue.</p>
+            </div>
+            <div class="venue-grid" style="margin-top: 30px;">
+                <a href="pricing-guide.html" class="venue-link">
+                    <h3>Pricing Guide</h3>
+                    <span>Ranges, add-ons, and what's included</span>
+                </a>
+                <a href="guides/how-to-choose-wedding-band.html" class="venue-link">
+                    <h3>How to Choose a Band</h3>
+                    <span>A checklist couples use before booking</span>
+                </a>
+                <a href="venues/index.html" class="venue-link">
+                    <h3>Venues We Play</h3>
+                    <span>Sound notes and room-flow tips</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Counties -->
+    <section style="padding: var(--section-padding) 0; background: var(--primary-teal);">
+        <div class="container fade-up">
+            <div class="text-center" style="margin-bottom: 40px;">
+                <h2 class="section-title">Explore by County</h2>
+                <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">We perform at weddings across Ireland every weekend. Select your county for local venue tips and travel information.</p>
+            </div>
+
+            <div class="county-grid">
+                <a href="locations/wedding-band-dublin.html" class="county-link">
+                    <h3>Dublin</h3>
+                    <span>No travel fee</span>
+                </a>
+                <a href="locations/wedding-band-wicklow.html" class="county-link">
+                    <h3>Wicklow</h3>
+                    <span>Garden County</span>
+                </a>
+                <a href="locations/wedding-band-meath.html" class="county-link">
+                    <h3>Meath</h3>
+                    <span>Manor houses</span>
+                </a>
+                <a href="locations/wedding-band-kildare.html" class="county-link">
+                    <h3>Kildare</h3>
+                    <span>Country estates</span>
+                </a>
+                <a href="locations/wedding-band-louth.html" class="county-link">
+                    <h3>Louth</h3>
+                    <span>Wee county</span>
+                </a>
+                <a href="locations/wedding-band-westmeath.html" class="county-link">
+                    <h3>Westmeath</h3>
+                    <span>Lakeland venues</span>
+                </a>
+                <a href="locations/wedding-band-wexford.html" class="county-link">
+                    <h3>Wexford</h3>
+                    <span>Sunny South East</span>
+                </a>
+                <a href="locations/wedding-band-kilkenny.html" class="county-link">
+                    <h3>Kilkenny</h3>
+                    <span>Medieval city</span>
+                </a>
+                <a href="locations/wedding-band-waterford.html" class="county-link">
+                    <h3>Waterford</h3>
+                    <span>Coastal charm</span>
+                </a>
+                <a href="locations/wedding-band-cork.html" class="county-link">
+                    <h3>Cork</h3>
+                    <span>Rebel county</span>
+                </a>
+                <a href="locations/wedding-band-kerry.html" class="county-link">
+                    <h3>Kerry</h3>
+                    <span>Wild Atlantic</span>
+                </a>
+                <a href="locations/wedding-band-limerick.html" class="county-link">
+                    <h3>Limerick</h3>
+                    <span>Adare Manor</span>
+                </a>
+                <a href="locations/wedding-band-tipperary.html" class="county-link">
+                    <h3>Tipperary</h3>
+                    <span>Golden Vale</span>
+                </a>
+                <a href="locations/wedding-band-clare.html" class="county-link">
+                    <h3>Clare</h3>
+                    <span>Dromoland Castle</span>
+                </a>
+                <a href="locations/wedding-band-galway.html" class="county-link">
+                    <h3>Galway</h3>
+                    <span>City of Tribes</span>
+                </a>
+                <a href="locations/wedding-band-mayo.html" class="county-link">
+                    <h3>Mayo</h3>
+                    <span>Ashford Castle</span>
+                </a>
+                <a href="locations/wedding-band-donegal.html" class="county-link">
+                    <h3>Donegal</h3>
+                    <span>Wild North West</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section class="reviews-section fade-up">
+        <div class="container" style="position: relative;">
+            <h2 class="section-title text-center">What Couples Say</h2>
+
+            <button class="review-nav-btn review-nav-prev" aria-label="Previous review">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M10 12l-4-4 4-4v8z" />
+                </svg>
+            </button>
+            <button class="review-nav-btn review-nav-next" aria-label="Next review">
+                <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor">
+                    <path d="M6 4l4 4-4 4V4z" />
+                </svg>
+            </button>
+
+            <div class="review-carousel">
+                <div class="review-container">
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img loading="lazy" src="https://i.postimg.cc/Qxk5GyLn/imgbin-google-logo-google-adwords-g-suite-google-account-png-removebg-preview.webp" alt="Google logo" class="google-logo-placeholder">
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <p class="review-content">"Awesome wedding band - they joined us at Waterford Castle and had a great mix of music and style. They even took a special request of an Australian song."</p>
+                        <span class="review-author">— Paul, Waterford</span>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img loading="lazy" src="https://i.postimg.cc/Qxk5GyLn/imgbin-google-logo-google-adwords-g-suite-google-account-png-removebg-preview.webp" alt="Google logo" class="google-logo-placeholder">
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <p class="review-content">"5 months later our guests are still raving about them. The dance floor was full from the 1st dance right to the end of the night."</p>
+                        <span class="review-author">— Sarah, Kildare</span>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img loading="lazy" src="https://i.postimg.cc/Qxk5GyLn/imgbin-google-logo-google-adwords-g-suite-google-account-png-removebg-preview.webp" alt="Google logo" class="google-logo-placeholder">
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <p class="review-content">"The set was just brilliant, the dance floor was never empty and everyone was raving about you afterwards. No doubt we will be seeing you again."</p>
+                        <span class="review-author">— Ciara, Meath</span>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img loading="lazy" src="https://i.postimg.cc/Qxk5GyLn/imgbin-google-logo-google-adwords-g-suite-google-account-png-removebg-preview.webp" alt="Google logo" class="google-logo-placeholder">
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <p class="review-content">"The band was brilliant, as was the DJ service! We had a fantastic night and would recommend them to anyone!"</p>
+                        <span class="review-author">— Moninne, Galway</span>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img loading="lazy" src="https://i.postimg.cc/Qxk5GyLn/imgbin-google-logo-google-adwords-g-suite-google-account-png-removebg-preview.webp" alt="Google logo" class="google-logo-placeholder">
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <p class="review-content">"You were so easy to communicate with and everything worked out perfectly on the day! We all had an absolute ball so please pass on our thanks."</p>
+                        <span class="review-author">— Aisling, Cork</span>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <img loading="lazy" src="https://i.postimg.cc/Qxk5GyLn/imgbin-google-logo-google-adwords-g-suite-google-account-png-removebg-preview.webp" alt="Google logo" class="google-logo-placeholder">
+                            <div class="review-rating">★★★★★</div>
+                        </div>
+                        <p class="review-content">"The band and dj were absolutely amazing, everyone is talking about how great the band was and the dance floor never emptied all night long."</p>
+                        <span class="review-author">— Sarah, Clare</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="https://share.google/m63ZwXXpMS5BvUBxm" target="_blank" class="review-link">See All Google Reviews</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venue Guides -->
+    <section class="experience-section">
+        <div class="container experience-content fade-up">
+            <div class="text-center" style="margin-bottom: 40px;">
+                <h2 class="section-title">Featured Venue Guides</h2>
+                <p style="max-width: 600px; margin: 0 auto; opacity: 0.9;">Detailed guides for Ireland's most prestigious wedding venues, with acoustics tips and real testimonials.</p>
+            </div>
+
+            <div class="venue-grid">
+                <a href="venues/ashford-castle.html" class="venue-link">
+                    <h3>Ashford Castle</h3>
+                    <span>Mayo</span>
+                </a>
+                <a href="venues/adare-manor.html" class="venue-link">
+                    <h3>Adare Manor</h3>
+                    <span>Limerick</span>
+                </a>
+                <a href="venues/dromoland-castle.html" class="venue-link">
+                    <h3>Dromoland Castle</h3>
+                    <span>Clare</span>
+                </a>
+                <a href="venues/luttrellstown-castle.html" class="venue-link">
+                    <h3>Luttrellstown Castle</h3>
+                    <span>Dublin</span>
+                </a>
+                <a href="venues/tankardstown-house.html" class="venue-link">
+                    <h3>Tankardstown House</h3>
+                    <span>Meath</span>
+                </a>
+            </div>
+
+            <div class="text-center" style="margin-top: 40px;">
+                <a href="venues/index.html" class="btn btn-primary">View All Venue Guides</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="showcase-section">
+        <div class="container">
+            <div class="event-card" style="max-width: 700px;">
+                <span class="event-label text-gold">See Us Live</span>
+                <h2 style="font-size: 2rem; margin: 1rem 0;">Ready to Experience the Energy?</h2>
+                <p style="opacity: 0.85; margin-bottom: 1.5rem;">Join our next showcase in Dublin. No obligation — just a chance to see what you'll get on your wedding day.</p>
+                <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
+                    <a href="showcase.html" class="btn btn-primary" style="color: #fff; border-color: #fff;">Showcase Details</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+        
+    <section class="internal-links">
+        <div class="container">
+            <div class="internal-links-header">
+                <h2 class="section-title">Continue planning</h2>
+                <p>Explore pricing, see us live, or browse venues we play every week.</p>
+            </div>
+            <div class="internal-links-grid">
+                <a href="pricing-guide.html" class="internal-link-card">
+                    <h3>Pricing Guide</h3>
+                    <span>Transparent ranges & what's included</span>
+                </a>
+                <a href="showcase.html" class="internal-link-card">
+                    <h3>Live Showcase</h3>
+                    <span>See the band before you book</span>
+                </a>
+                <a href="venues/index.html" class="internal-link-card">
+                    <h3>Venues We Play</h3>
+                    <span>Venue tips and room-flow notes</span>
+                </a>
             </div>
         </div>
     </section>
 
     <footer class="footer">
-        <div class="container text-center">
-            <p style="opacity: 0.5;">&copy; 2026 The Beat Boutique.</p>
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-col footer-brand">
+                    <a href="index.html" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
+                            class="footer-logo-lg">
+                    </a>
+                    <p class="footer-tagline">Ireland's premier high energy wedding band.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/thebeatboutiqueweddingband/?hl=en" target="_blank"
+                            aria-label="Instagram" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" aria-label="Facebook"
+                            class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Navigation -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Explore</h4>
+                    <ul class="footer-nav">
+                        <li><a href="showcase.html">Live Showcase</a></li>
+                        <li><a href="why-us.html">Why Choose Us</a></li>
+                        <li><a href="venues/index.html">Our Venues</a></li>
+                        <li><a href="pricing-guide.html">Pricing Guide 2026</a></li>
+                        <li><a href="index.html#experience">The Experience</a></li>
+                        <li><a href="index.html#reviews">Love Notes</a></li>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4 class="footer-heading">Locations</h4>
+                    <ul class="footer-nav">
+                        <li><a href="wedding-band-ireland.html">Wedding Band Ireland</a></li>
+                        <li><a href="locations/wedding-band-dublin.html">Dublin</a></li>
+                        <li><a href="locations/wedding-band-cork.html">Cork</a></li>
+                        <li><a href="locations/wedding-band-galway.html">Galway</a></li>
+                        <li><a href="locations/wedding-band-kerry.html">Kerry</a></li>
+                        <li><a href="locations/wedding-band-kildare.html">Kildare</a></li>
+                        <li><a href="locations/wedding-band-wicklow.html">Wicklow</a></li>
+                        <li><a href="locations/wedding-band-meath.html">Meath</a></li>
+                        <li><a href="locations/wedding-band-clare.html">Clare</a></li>
+                        <li><a href="locations/wedding-band-limerick.html">Limerick</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Get in Touch</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a>
+                        </li>
+                        <li>
+                            <span class="contact-label">Phone</span>
+                            <a href="tel:+353872310001">+353 87 231 0001</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
         </div>
     </footer>
 
+    <script src="js/main.js"></script>
 </body>
 
 </html>
