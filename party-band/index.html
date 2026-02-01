@@ -4,144 +4,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Wedding Venues Ireland | The Beat Boutique Partners</title>
+    <title>Party Band Ireland | The Beat Boutique</title>
     <meta name="description"
-        content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
-    <link rel="canonical" href="https://thebeatboutique.ie/venues">
+        content="Party band Ireland for birthdays, anniversaries, and private events. Dance-floor favourites, tight sets, and MC support.">
+    <link rel="canonical" href="https://thebeatboutique.ie/party-band">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thebeatboutique.ie/venues">
-    <meta property="og:title" content="Top Wedding Venues Ireland | The Beat Boutique Partners">
+    <meta property="og:url" content="https://thebeatboutique.ie/party-band">
+    <meta property="og:title" content="Party Band Ireland | The Beat Boutique">
     <meta property="og:description"
-        content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
+        content="Party band Ireland for birthdays, anniversaries, and private events. Dance-floor favourites, tight sets, and MC support.">
     <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thebeatboutique.ie/venues">
-    <meta property="twitter:title" content="Top Wedding Venues Ireland | The Beat Boutique Partners">
+    <meta property="twitter:url" content="https://thebeatboutique.ie/party-band">
+    <meta property="twitter:title" content="Party Band Ireland | The Beat Boutique">
     <meta property="twitter:description"
-        content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
-    <meta property="twitter:image"
-        content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
+        content="Party band Ireland for birthdays, anniversaries, and private events. Dance-floor favourites, tight sets, and MC support.">
+    <meta property="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
     <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/the_beat_boutique_logo.webp">
+    <meta name="theme-color" content="#0a192f">
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 
-    <!-- Structured Data (Schema.org) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "ItemList",
-          "name": "Top Wedding Venues in Ireland",
-          "description": "Wedding venues where The Beat Boutique regularly performs as the preferred entertainment provider.",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "item": {
-                "@type": "Place",
-                "name": "Adare Manor",
-                "url": "https://thebeatboutique.ie/venues/adare-manor"
-              }
-            }
-          ]
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "name": "Home",
-              "item": "https://thebeatboutique.ie/"
-            },
-            {
-              "@type": "ListItem",
-              "position": 2,
-              "name": "Venues",
-              "item": "https://thebeatboutique.ie/venues"
-            }
-          ]
-        }
-      ]
-    }
-    </script>
-
     <style>
-        .page-header {
-            padding: 160px 0 80px;
+        .service-hero {
             background-color: var(--primary-navy);
+            padding: 180px 0 80px;
             text-align: center;
         }
 
-        .venue-grid-display {
+        .service-content {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .service-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 40px 0 100px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
         }
 
-        .venue-card {
-            position: relative;
-            border-radius: 4px;
-            overflow: hidden;
-            aspect-ratio: 4/3;
-            transition: transform 0.3s ease;
-            box-shadow: var(--box-shadow);
+        .service-card {
+            background: white;
+            padding: 24px;
+            border-left: 4px solid var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
         }
 
-        .venue-card:hover {
-            transform: translateY(-10px);
+        .service-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 0.75rem;
         }
 
-        .venue-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .service-card p {
+            color: #555;
+            margin: 0;
         }
 
-        .venue-card:hover img {
-            transform: scale(1.1);
+        .service-cta {
+            background: var(--primary-navy);
+            color: var(--text-cream);
+            padding: 70px 0;
+            text-align: center;
         }
 
-        .venue-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, rgba(10, 25, 47, 0.9));
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
-            color: white;
-        }
-
-        .venue-name {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
-            color: var(--accent-gold);
-        }
-
-        .venue-loc {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .service-cta p {
+            opacity: 0.9;
+            max-width: 640px;
+            margin: 0 auto 30px;
         }
     </style>
 </head>
 
 <body>
 
-                <nav class="navbar">
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="container nav-container">
             <a href="/" class="logo">
                 <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
@@ -156,80 +103,89 @@
                 <li><a href="/why-us" class="nav-link">Why Us</a></li>
                 <li><a href="/showcase" class="nav-link">Showcase</a></li>
                 <li><a href="/pricing-guide" class="nav-link">Pricing</a></li>
-                        <li><a href="/corporate-events">Corporate Events</a></li>
-                        <li><a href="/party-band">Party / Birthday Events</a></li>
-                        <li><a href="/christmas-parties">Christmas Parties</a></li>
                 <li><a href="/venues" class="nav-link">Venues</a></li>
                 <li><a href="/wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
             </ul>
         </div>
     </nav>
 
-    <header class="page-header">
+    <header class="service-hero">
         <div class="container">
-            <h1 class="section-title">Venues We Love</h1>
-            <p style="max-width: 600px; margin: 0 auto; opacity: 0.8;">We have performed at hundreds of Ireland's most
-                prestigious locations. Here are specific guides for some of our favorites.</p>
+            <h1 class="hero-title" style="font-size: 3.2rem;">Party Band Ireland</h1>
+            <p class="hero-subtitle" style="max-width: 720px; margin: 0 auto; font-size: 1.1rem;">Birthdays,
+                anniversaries, and private parties with a packed dancefloor from the first song to the last.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
+                <a href="/#contact" class="btn btn-primary"
+                    style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold); padding: 14px 28px;">Check
+                    Availability</a>
+                <a href="/showcase" class="btn"
+                    style="color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.4); padding: 14px 28px;">See
+                    Us Live</a>
+            </div>
         </div>
     </header>
 
-    <section class="container">
-        <div class="venue-grid-display">
+    <section class="service-content">
+        <div class="container" style="max-width: 900px;">
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">Looking for a <strong>party band in Ireland</strong> that
+                guarantees a full dancefloor? We deliver the energy, the polish, and the planning support to make your
+                birthday, anniversary, or private event feel like a headline show.</p>
 
-            <!-- Venue 1: Adare Manor -->
-            <a href="/venues/adare-manor" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
-                    alt="Adare Manor Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Adare Manor</h3>
-                    <span class="venue-loc">Limerick</span>
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem;">Perfect For</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Milestone Birthdays</h3>
+                    <p>Build the night around your favourite songs and big sing‑along moments.</p>
                 </div>
-            </a>
-
-            <!-- Venue 2: Ashford Castle -->
-            <a href="/venues/ashford-castle" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?q=80&w=2070&auto=format&fit=crop"
-                    alt="Ashford Castle Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Ashford Castle</h3>
-                    <span class="venue-loc">Mayo</span>
+                <div class="service-card">
+                    <h3>Anniversary Parties</h3>
+                    <p>Mix romantic classics with modern party tracks for all ages.</p>
                 </div>
-            </a>
-
-            <!-- Venue 3: Dromoland Castle -->
-            <a href="/venues/dromoland-castle" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Dromoland Castle Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Dromoland Castle</h3>
-                    <span class="venue-loc">Clare</span>
+                <div class="service-card">
+                    <h3>Private Celebrations</h3>
+                    <p>From country houses to city venues, we adapt the sound to your room.</p>
                 </div>
-            </a>
+            </div>
 
-            <!-- Venue 4: Luttrellstown Castle -->
-            <a href="/venues/luttrellstown-castle" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
-                    alt="Luttrellstown Castle Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Luttrellstown Castle</h3>
-                    <span class="venue-loc">Dublin</span>
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem; margin-top: 3rem;">What Makes
+                Us Different</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>Curated Setlists</h3>
+                    <p>We read the room and keep the momentum moving all night.</p>
                 </div>
-            </a>
-
-            <!-- Venue 5: Tankardstown House -->
-            <a href="/venues/tankardstown-house" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
-                    alt="Tankardstown House Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Tankardstown House</h3>
-                    <span class="venue-loc">Meath</span>
+                <div class="service-card">
+                    <h3>Professional MC Support</h3>
+                    <p>We help with announcements and key moments without over‑talking.</p>
                 </div>
-            </a>
+                <div class="service-card">
+                    <h3>Optional DJ Add‑On</h3>
+                    <p>Extend the night seamlessly with a DJ finish if you want it.</p>
+                </div>
+            </div>
 
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem; margin-top: 3rem;">Let’s Plan
+                Your Party</h2>
+            <p>Tell us your date, venue, and the kind of vibe you want. We will recommend the right set structure and
+                confirm availability quickly. If you love what you hear, we’ll lock in the details and handle the rest.</p>
         </div>
     </section>
 
-        
+    <section class="service-cta">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--text-cream);">Book Your Party Band</h2>
+            <p>Share your event details and we will build a tailored quote with the best‑fit lineup for your night.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="/#contact" class="btn btn-primary"
+                    style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold); padding: 16px 32px;">Enquire
+                    Now</a>
+                <a href="tel:+353872310001" class="btn"
+                    style="color: white; border: 1px solid rgba(255,255,255,0.3); padding: 16px 32px;">Call: 087 231
+                    0001</a>
+            </div>
+        </div>
+    </section>
+
     <section class="internal-links">
         <div class="container">
             <div class="internal-links-header">
@@ -256,7 +212,6 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <!-- Column 1: Brand -->
                 <div class="footer-col footer-brand">
                     <a href="/" class="footer-logo-link">
                         <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
@@ -281,7 +236,6 @@
                     </div>
                 </div>
 
-                <!-- Column 2: Navigation -->
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
@@ -289,9 +243,9 @@
                         <li><a href="/why-us">Why Choose Us</a></li>
                         <li><a href="/venues">Our Venues</a></li>
                         <li><a href="/pricing-guide">Pricing Guide 2026</a></li>
-                        <li><a href="/#experience">The Experience</a></li>
-                        <li><a href="/#reviews">Love Notes</a></li>
-                        <li><a href="/#contact">Contact Us</a></li>
+                        <li><a href="/corporate-events">Corporate Events</a></li>
+                        <li><a href="/party-band">Party / Birthday Events</a></li>
+                        <li><a href="/christmas-parties">Christmas Parties</a></li>
                     </ul>
                 </div>
 
@@ -311,7 +265,6 @@
                     </ul>
                 </div>
 
-                <!-- Column 3: Contact -->
                 <div class="footer-col">
                     <h4 class="footer-heading">Get in Touch</h4>
                     <ul class="footer-contact">

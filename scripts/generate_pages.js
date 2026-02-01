@@ -18,7 +18,7 @@ const countyNames = {
 const generateVenuePills = (venues) => {
     return venues.map(venue => {
         if (venue.slug) {
-            return `<a href="../venues/${venue.slug}.html" class="venue-pill venue-pill-link">${venue.name}</a>`;
+            return `<a href="/venues/${venue.slug}" class="venue-pill venue-pill-link">${venue.name}</a>`;
         }
         return `<div class="venue-pill">${venue.name}</div>`;
     }).join('');
@@ -28,7 +28,7 @@ const generateVenuePills = (venues) => {
 const generateVenueDescriptions = (venues) => {
     return venues.map(venue => {
         const link = venue.slug 
-            ? `<a href="../venues/${venue.slug}.html" style="color: var(--accent-gold);">Read our ${venue.name} guide →</a>`
+            ? `<a href="/venues/${venue.slug}" style="color: var(--accent-gold);">Read our ${venue.name} guide →</a>`
             : '';
         return `
             <div style="margin-bottom: 1.5rem;">
@@ -54,7 +54,7 @@ const generateNearbyCounties = (nearbyCounties) => {
     const validSlugs = counties.map(c => c.slug);
     return nearbyCounties
         .filter(slug => validSlugs.includes(slug))
-        .map(slug => `<a href="wedding-band-${slug}.html" class="nearby-county-link">${countyNames[slug] || slug}</a>`)
+        .map(slug => `<a href="/locations/wedding-band-${slug}" class="nearby-county-link">${countyNames[slug] || slug}</a>`)
         .join('');
 };
 
@@ -104,24 +104,25 @@ const generateTemplate = (county) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Band ${county.name} | The Beat Boutique</title>
     <meta name="description" content="${county.meta_description}">
-    <link rel="canonical" href="https://thebeatboutique.ie/locations/wedding-band-${county.slug}.html">
+    <link rel="canonical" href="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}.html">
+    <meta property="og:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
     <meta property="og:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="og:description" content="${county.meta_description}">
     <meta property="og:image" content="${county.hero_image.startsWith('http') ? county.hero_image : 'https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp'}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}.html">
+    <meta property="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
     <meta property="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="twitter:description" content="${county.meta_description}">
     <meta property="twitter:image" content="${county.hero_image.startsWith('http') ? county.hero_image : 'https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp'}">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/images/favicon.png">
+    <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="/css/style.css">
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
@@ -163,13 +164,13 @@ const generateTemplate = (county) => {
               "@type": "ListItem",
               "position": 2,
               "name": "Wedding Band Ireland",
-              "item": "https://thebeatboutique.ie/wedding-band-ireland.html"
+              "item": "https://thebeatboutique.ie/wedding-band-ireland"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Wedding Band ${county.name}",
-              "item": "https://thebeatboutique.ie/locations/wedding-band-${county.slug}.html"
+              "item": "https://thebeatboutique.ie/locations/wedding-band-${county.slug}"
             }
           ]
         }${hasFAQs ? `,
@@ -282,15 +283,15 @@ const generateTemplate = (county) => {
 
     <nav class="navbar" style="background: var(--primary-navy); transform: translateY(0);">
         <div class="container nav-container">
-            <a href="../index.html" class="logo">
-                <img src="../assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
+            <a href="/" class="logo">
+                <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
             <ul class="nav-menu">
-                <li><a href="../index.html" class="nav-link">Home</a></li>
-                <li><a href="../wedding-band-ireland.html" class="nav-link">Ireland</a></li>
-                <li><a href="../venues/index.html" class="nav-link">Venues</a></li>
-                <li><a href="../pricing-guide.html" class="nav-link">Pricing</a></li>
-                <li><a href="../index.html#contact" class="nav-cta btn-primary">Enquire Now</a></li>
+                <li><a href="/" class="nav-link">Home</a></li>
+                <li><a href="/wedding-band-ireland" class="nav-link">Ireland</a></li>
+                <li><a href="/venues" class="nav-link">Venues</a></li>
+                <li><a href="/pricing-guide" class="nav-link">Pricing</a></li>
+                <li><a href="/#contact" class="nav-cta btn-primary">Enquire Now</a></li>
             </ul>
         </div>
     </nav>
@@ -387,7 +388,7 @@ const generateTemplate = (county) => {
         <div class="container text-center">
             <h2 class="section-title" style="color: var(--text-cream);">Ready to Book for ${county.name}?</h2>
             <p style="color: var(--text-cream); opacity: 0.9; max-width: 600px; margin: 0 auto 30px;">Check our availability for your date and let's start planning your perfect wedding entertainment.</p>
-            <a href="../index.html#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Check Availability for ${county.name}</a>
+            <a href="/#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Check Availability for ${county.name}</a>
         </div>
     </section>
 
@@ -404,11 +405,13 @@ const generateTemplate = (county) => {
 // Generate Pages
 counties.forEach(county => {
     const html = generateTemplate(county);
-    const fileName = `wedding-band-${county.slug}.html`;
-    const filePath = path.join(__dirname, '../locations', fileName);
-    
+    const folderName = `wedding-band-${county.slug}`;
+    const outputDir = path.join(__dirname, '../locations', folderName);
+    const filePath = path.join(outputDir, 'index.html');
+
+    fs.mkdirSync(outputDir, { recursive: true });
     fs.writeFileSync(filePath, html);
-    console.log(`Generated: ${fileName}`);
+    console.log(`Generated: ${folderName}/index.html`);
 });
 
 console.log(`\\nSuccessfully generated ${counties.length} location pages!`);

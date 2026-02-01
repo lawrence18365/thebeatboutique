@@ -3,49 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>You're On The Guestlist | The Beat Boutique</title>
+    <meta name="description" content="Your live showcase RSVP is confirmed. Find event details and add the date to your calendar.">
     <meta name="robots" content="noindex, nofollow">
-    <title>Page Not Found | The Beat Boutique</title>
+    <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
+
+    <script defer src="/js/analytics.js"></script>
+
     <style>
-        .error-section {
-            height: 100vh;
+        .confirmation-hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            background: linear-gradient(135deg, var(--primary-navy), var(--primary-teal));
+            padding: 40px 20px;
+        }
+
+        .confirmation-card {
+            background: white;
+            max-width: 550px;
+            padding: 50px 40px;
+            border-radius: 8px;
             text-align: center;
-            background: var(--primary-navy);
-            color: var(--text-cream);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
         }
-        .error-content {
-            position: relative;
-            z-index: 2;
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #28a745, #20c997);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 40px;
+            color: white;
         }
-        .error-code {
-            font-family: var(--font-serif);
-            font-size: clamp(6rem, 15vw, 12rem);
-            color: var(--accent-gold);
-            line-height: 1;
-            opacity: 0.2;
-            margin-bottom: -2rem;
+
+        .event-details {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 25px 0;
+            text-align: left;
         }
-        .error-title {
-            font-size: var(--h2-size);
-            margin-bottom: 1.5rem;
+
+        .event-details h4 {
+            margin: 0 0 15px;
+            color: var(--primary-navy);
+            text-align: center;
         }
-        .error-text {
-            max-width: 500px;
-            margin: 0 auto 2.5rem;
-            opacity: 0.8;
-            font-size: 1.1rem;
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .detail-value {
+            color: var(--primary-navy);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .add-to-calendar {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .calendar-btn {
+            padding: 10px 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-decoration: none;
+            color: var(--primary-navy);
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+
+        .calendar-btn:hover {
+            background: #f9f9f9;
+            border-color: var(--accent-gold);
         }
     </style>
 </head>
 <body>
 
-                <nav class="navbar">
+            <nav class="navbar">
         <div class="container nav-container">
             <a href="/" class="logo">
                 <img src="/assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
@@ -69,14 +130,73 @@
         </div>
     </nav>
 
-    <section class="error-section">
-        <div class="error-content container">
-            <div class="error-code">404</div>
-            <h1 class="error-title">Off The Setlist</h1>
-            <p class="error-text">Looks like this page skipped a beat. The page you are looking for doesn't exist or has been moved.</p>
-            <a href="/" class="btn btn-primary">Back to Stage</a>
+    <div class="confirmation-hero">
+        <div class="confirmation-card">
+            <div class="success-icon">&#10003;</div>
+
+            <h1 style="color: var(--primary-navy); font-family: var(--font-serif); margin-bottom: 15px; font-size: 2rem;">You're On The Guestlist!</h1>
+
+            <p style="color: #555; font-size: 1rem; margin-bottom: 0;">We've saved your spot. You'll receive a confirmation email shortly with all the details.</p>
+
+            <div class="event-details">
+                <h4>Event Details</h4>
+                <div class="detail-row">
+                    <span class="detail-label">Date</span>
+                    <span class="detail-value">Sunday 1st February 2026</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Time</span>
+                    <span class="detail-value">7:00 PM - 8:00 PM (Doors 6:30 PM)</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Venue</span>
+                    <span class="detail-value">Bell Bar & Restaurant</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Location</span>
+                    <span class="detail-value">Blanchardstown, Dublin 15</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Parking</span>
+                    <span class="detail-value">Free parking available</span>
+                </div>
+            </div>
+
+            <div class="add-to-calendar">
+                <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Beat+Boutique+Live+Showcase&dates=20260201T190000/20260201T200000&details=See+Ireland's+premier+wedding+band+live.+Free+entry.&location=Bell+Bar,+Blanchardstown,+Dublin+15" target="_blank" class="calendar-btn">
+                    Add to Google Calendar
+                </a>
+                <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260201T190000%0ADTEND:20260201T200000%0ASUMMARY:Beat+Boutique+Live+Showcase%0ALOCATION:Bell+Bar,+Blanchardstown,+Dublin+15%0AEND:VEVENT%0AEND:VCALENDAR" download="showcase.ics" class="calendar-btn">
+                    Download .ics
+                </a>
+            </div>
+
+            <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 4px; margin-top: 25px;">
+                <p style="color: #856404; margin: 0; font-size: 0.9rem;"><strong>Pro tip:</strong> Popular dates book up before the showcase. If you already know your wedding date, <a href="/#contact" style="color: #856404; text-decoration: underline;">secure it now</a> with a fully refundable deposit.</p>
+            </div>
+
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
+                <p style="color: #999; font-size: 0.85rem; margin-bottom: 15px;">Follow us for behind-the-scenes content:</p>
+                <div style="display: flex; gap: 15px; justify-content: center;">
+                    <a href="https://www.instagram.com/thebeatboutiqueweddingband/" target="_blank" style="color: var(--primary-teal); text-decoration: none; font-weight: 500;">Instagram</a>
+                    <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" style="color: var(--primary-teal); text-decoration: none; font-weight: 500;">Facebook</a>
+                </div>
+            </div>
+
+            <a href="/" style="display: inline-block; margin-top: 25px; color: var(--primary-navy); text-decoration: underline; font-size: 0.9rem;">Return to Homepage</a>
         </div>
-    </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('showcase_rsvp', {
+                    'event_category': 'conversion',
+                    'event_label': 'live_showcase'
+                });
+            }
+        });
+    </script>
 
     <footer class="footer">
         <div class="container">

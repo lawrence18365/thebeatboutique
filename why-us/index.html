@@ -1,35 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top Wedding Venues Ireland | The Beat Boutique Partners</title>
-    <meta name="description"
-        content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
-    <link rel="canonical" href="https://thebeatboutique.ie/venues">
-
+    <title>Boutique vs Agency Bands | Why Choose The Beat Boutique</title>
+    <meta name="description" content="Don't roll the dice on your wedding entertainment. Understand the difference between booking a 'Boutique' band vs a large Agency roster.">
+    <link rel="canonical" href="https://thebeatboutique.ie/why-us">
+    
     <!-- Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thebeatboutique.ie/venues">
-    <meta property="og:title" content="Top Wedding Venues Ireland | The Beat Boutique Partners">
-    <meta property="og:description"
-        content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://thebeatboutique.ie/why-us">
+    <meta property="og:title" content="The 'Boutique' Difference | The Beat Boutique">
+    <meta property="og:description" content="The guys in the video are the guys at your wedding. No rotating musicians, no surprises. Just a tight, high-energy unit.">
     <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thebeatboutique.ie/venues">
-    <meta property="twitter:title" content="Top Wedding Venues Ireland | The Beat Boutique Partners">
-    <meta property="twitter:description"
-        content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
-    <meta property="twitter:image"
-        content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
-
+    <meta property="twitter:url" content="https://thebeatboutique.ie/why-us">
+    <meta property="twitter:title" content="The 'Boutique' Difference | The Beat Boutique">
+    <meta property="twitter:description" content="The guys in the video are the guys at your wedding. No rotating musicians, no surprises. Just a tight, high-energy unit.">
+    <meta property="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
     <link rel="icon" type="image/webp" sizes="32x32" href="/assets/images/the_beat_boutique_logo.webp">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/style.css">
 
     <!-- Structured Data (Schema.org) -->
@@ -38,20 +30,28 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@type": "ItemList",
-          "name": "Top Wedding Venues in Ireland",
-          "description": "Wedding venues where The Beat Boutique regularly performs as the preferred entertainment provider.",
-          "itemListElement": [
-            {
-              "@type": "ListItem",
-              "position": 1,
-              "item": {
-                "@type": "Place",
-                "name": "Adare Manor",
-                "url": "https://thebeatboutique.ie/venues/adare-manor"
-              }
+          "@type": "Article",
+          "headline": "Boutique vs Agency Bands - Why Choose The Beat Boutique",
+          "description": "Understand the difference between booking a boutique band vs a large agency roster. The guys in the video are the guys at your wedding.",
+          "author": {
+            "@type": "Organization",
+            "name": "The Beat Boutique"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "The Beat Boutique",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://thebeatboutique.ie/assets/images/the_beat_boutique_logo.webp"
             }
-          ]
+          },
+          "datePublished": "2025-01-01",
+          "dateModified": "2026-01-26",
+          "image": "https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://thebeatboutique.ie/why-us"
+          }
         },
         {
           "@type": "BreadcrumbList",
@@ -65,8 +65,8 @@
             {
               "@type": "ListItem",
               "position": 2,
-              "name": "Venues",
-              "item": "https://thebeatboutique.ie/venues"
+              "name": "Why Choose Us",
+              "item": "https://thebeatboutique.ie/why-us"
             }
           ]
         }
@@ -75,70 +75,89 @@
     </script>
 
     <style>
-        .page-header {
-            padding: 160px 0 80px;
+        .comparison-hero {
             background-color: var(--primary-navy);
+            padding: 180px 0 100px;
             text-align: center;
         }
 
-        .venue-grid-display {
+        .comparison-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 30px;
-            padding: 40px 0 100px;
-        }
-
-        .venue-card {
-            position: relative;
+            grid-template-columns: 1fr 1fr;
+            gap: 0; /* Seamless look */
+            margin: 60px 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
             border-radius: 4px;
             overflow: hidden;
-            aspect-ratio: 4/3;
-            transition: transform 0.3s ease;
-            box-shadow: var(--box-shadow);
         }
 
-        .venue-card:hover {
-            transform: translateY(-10px);
+        .comp-col {
+            padding: 60px 40px;
         }
 
-        .venue-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .comp-col-agency {
+            background: #f4f4f4;
+            color: #555;
+            position: relative;
         }
 
-        .venue-card:hover img {
-            transform: scale(1.1);
-        }
-
-        .venue-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, rgba(10, 25, 47, 0.9));
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
+        .comp-col-boutique {
+            background: var(--primary-teal);
             color: white;
+            position: relative;
+            transform: scaleY(1.05); /* Pop out effect */
+            box-shadow: 0 0 30px rgba(0,0,0,0.2);
+            z-index: 2;
         }
 
-        .venue-name {
-            font-family: var(--font-serif);
-            font-size: 1.5rem;
-            margin-bottom: 0.5rem;
+        .comp-list {
+            list-style: none;
+            margin-top: 30px;
+        }
+
+        .comp-list li {
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .comp-col-boutique .comp-list li {
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .check-icon { color: var(--accent-gold); font-weight: bold; font-size: 1.2rem; }
+        .x-icon { color: #999; font-weight: bold; font-size: 1.2rem; }
+
+        .guarantee-box {
+            background: white;
+            border: 2px solid var(--primary-navy);
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .guarantee-badge {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary-navy);
             color: var(--accent-gold);
+            padding: 10px 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
         }
 
-        .venue-loc {
-            font-size: 0.9rem;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        @media (max-width: 900px) {
+            .comparison-grid { grid-template-columns: 1fr; }
+            .comp-col-boutique { transform: none; }
         }
     </style>
 </head>
-
 <body>
 
                 <nav class="navbar">
@@ -165,66 +184,57 @@
         </div>
     </nav>
 
-    <header class="page-header">
+    <header class="comparison-hero">
         <div class="container">
-            <h1 class="section-title">Venues We Love</h1>
-            <p style="max-width: 600px; margin: 0 auto; opacity: 0.8;">We have performed at hundreds of Ireland's most
-                prestigious locations. Here are specific guides for some of our favorites.</p>
+            <span class="text-gold" style="letter-spacing: 3px; text-transform: uppercase; font-size: 0.9rem;">The Honest Truth</span>
+            <h1 class="hero-title" style="font-size: 3rem;">Who is actually<br>playing at your wedding?</h1>
+            <p class="hero-subtitle" style="max-width: 700px; margin: 0 auto; font-size: 1.1rem;">Before you book, understand the difference between an "Agency Roster" and a "Boutique Band".</p>
         </div>
     </header>
 
-    <section class="container">
-        <div class="venue-grid-display">
-
-            <!-- Venue 1: Adare Manor -->
-            <a href="/venues/adare-manor" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
-                    alt="Adare Manor Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Adare Manor</h3>
-                    <span class="venue-loc">Limerick</span>
+    <section style="padding: 60px 0 100px;">
+        <div class="container" style="max-width: 1000px;">
+            
+            <div class="comparison-grid">
+                
+                <!-- The Agency Side -->
+                <div class="comp-col comp-col-agency">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">The Big Agency</h3>
+                    <p style="font-size: 0.9rem; line-height: 1.6;">Agencies manage 10-20 bands. If the guitarist is sick (or gets a better gig), they swap him out from a pool of session musicians.</p>
+                    
+                    <ul class="comp-list">
+                        <li><span class="x-icon">?</span> <strong>Rotating Lineup:</strong> Musicians may meet for the first time at your wedding.</li>
+                        <li><span class="x-icon">?</span> <strong>Generic Setlists:</strong> Songs are standard "safe" picks everyone knows.</li>
+                        <li><span class="x-icon">?</span> <strong>Hidden Fees:</strong> Often charge extra for travel or DJ service.</li>
+                        <li><span class="x-icon">?</span> <strong>Agent Communication:</strong> You talk to a sales rep, not the band leader.</li>
+                    </ul>
                 </div>
-            </a>
 
-            <!-- Venue 2: Ashford Castle -->
-            <a href="/venues/ashford-castle" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?q=80&w=2070&auto=format&fit=crop"
-                    alt="Ashford Castle Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Ashford Castle</h3>
-                    <span class="venue-loc">Mayo</span>
+                <!-- The Boutique Side -->
+                <div class="comp-col comp-col-boutique">
+                    <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">The Beat Boutique</h3>
+                    <p style="font-size: 0.9rem; line-height: 1.6; opacity: 0.9;">We are four best friends who have played together for 10 years. We have a "Telepathic Chemistry" that only comes from 500+ gigs together.</p>
+                    
+                    <ul class="comp-list">
+                        <li><span class="check-icon">✓</span> <strong>Fixed Lineup:</strong> Pete, Steve, Carl & Ben. The guys in the video are the guys you get.</li>
+                        <li><span class="check-icon">✓</span> <strong>Chemistry:</strong> Tight endings, improvised moments, genuine energy.</li>
+                        <li><span class="check-icon">✓</span> <strong>Direct Contact:</strong> You have our personal WhatsApp. No middleman.</li>
+                        <li><span class="check-icon">✓</span> <strong>"No Cheese" Promise:</strong> We read the room, not a script.</li>
+                    </ul>
                 </div>
-            </a>
 
-            <!-- Venue 3: Dromoland Castle -->
-            <a href="/venues/dromoland-castle" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Dromoland Castle Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Dromoland Castle</h3>
-                    <span class="venue-loc">Clare</span>
-                </div>
-            </a>
+            </div>
 
-            <!-- Venue 4: Luttrellstown Castle -->
-            <a href="/venues/luttrellstown-castle" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
-                    alt="Luttrellstown Castle Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Luttrellstown Castle</h3>
-                    <span class="venue-loc">Dublin</span>
-                </div>
-            </a>
-
-            <!-- Venue 5: Tankardstown House -->
-            <a href="/venues/tankardstown-house" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
-                    alt="Tankardstown House Wedding">
-                <div class="venue-overlay">
-                    <h3 class="venue-name">Tankardstown House</h3>
-                    <span class="venue-loc">Meath</span>
-                </div>
-            </a>
+            <!-- The Guarantee -->
+            <div class="guarantee-box">
+                <div class="guarantee-badge">The "No Cheesy Music" Guarantee</div>
+                <h3 style="margin-top: 10px;">We respect your vibe.</h3>
+                <p style="max-width: 600px; margin: 20px auto; color: #555;">
+                    Terrified of the Macarena? So are we. <br>
+                    We guarantee a setlist that feels like a <strong>cool Friday night concert</strong>, not a children's birthday party. We mix high-energy Indie, Pop, and Soul to keep the floor packed without the cringe.
+                </p>
+                <a href="/#contact" class="btn btn-submit" style="display: inline-block; width: auto; background: var(--primary-navy); color: var(--accent-gold);">Secure Your Date</a>
+            </div>
 
         </div>
     </section>
@@ -339,5 +349,4 @@
 
     <script src="/js/main.js"></script>
 </body>
-
 </html>

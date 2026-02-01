@@ -23,10 +23,8 @@ Here's what happens next:
    answer any questions. Would [Day] at [Time] work? Or suggest a time that suits you.
 
 2. **See us live** - Our next showcase is [Date] at [Venue] - totally free,
-   no obligation. Come see what we're about.
-
-3. **Or watch now** - Here's our virtual showcase if you can't make it in person:
-   https://thebeatboutique.ie/virtual-showcase.html
+   no obligation. Come see what we're about. Full details:
+   https://thebeatboutique.ie/showcase
 
 Our pricing starts from €[X] depending on the package. I'll send full details
 after our call so I can tailor it to what you need.
@@ -49,8 +47,8 @@ Hi [Name]!
 Thanks for getting in touch - just wanted to quickly confirm [Date] IS available!
 
 I'm just heading into a gig but will send you a proper reply tomorrow with all
-the details. In the meantime, feel free to check out our virtual showcase:
-https://thebeatboutique.ie/virtual-showcase.html
+the details. In the meantime, feel free to check out our showcase details:
+https://thebeatboutique.ie/showcase
 
 Talk soon!
 

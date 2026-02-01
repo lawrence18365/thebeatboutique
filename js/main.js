@@ -136,14 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Add Video Play Functionality (Placeholder)
-    const playBtn = document.querySelector('.play-button');
-    if (playBtn) {
-        playBtn.addEventListener('click', () => {
-            alert('This would trigger the video modal or play the embedded video.');
-        });
-    }
-
     // Contact Form Handling - Enhanced for Formspree
     const contactForms = document.querySelectorAll('.contact-form');
     contactForms.forEach(contactForm => {
@@ -156,8 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // Track form submission in analytics
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'form_submit', {
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('form_submit', {
                     'event_category': 'engagement',
                     'event_label': contactForm.id || 'contact_form'
                 });
@@ -176,34 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
-
-    // Cookie Banner Logic
-    const cookieBanner = document.getElementById('cookie-banner');
-    const acceptCookiesBtn = document.getElementById('accept-cookies');
-    const declineCookiesBtn = document.getElementById('decline-cookies');
-
-    if (cookieBanner && acceptCookiesBtn && declineCookiesBtn) {
-        // Check if user has already made a choice
-        const cookieChoice = localStorage.getItem('cookieConsent');
-
-        if (!cookieChoice) {
-            // Show banner after a short delay
-            setTimeout(() => {
-                cookieBanner.classList.add('visible');
-            }, 2000);
-        }
-
-        acceptCookiesBtn.addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'accepted');
-            cookieBanner.classList.remove('visible');
-            // Here you would trigger analytics scripts if you had them
-        });
-
-        declineCookiesBtn.addEventListener('click', () => {
-            localStorage.setItem('cookieConsent', 'declined');
-            cookieBanner.classList.remove('visible');
-        });
-    }
 
     // Social Proof Notification System
     const socialProofData = [
@@ -280,8 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!exitIntentShown && e.clientY < 10 && window.innerWidth > 768) {
             // User is moving mouse to close tab/navigate away
             // Could show exit popup here - for now just track
-            if (typeof gtag !== 'undefined') {
-                gtag('event', 'exit_intent_detected');
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('exit_intent_detected');
             }
             exitIntentShown = true;
         }
