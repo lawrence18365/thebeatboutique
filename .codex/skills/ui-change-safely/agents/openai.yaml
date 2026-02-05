@@ -1,4 +1,0 @@
-interface:
-  display_name: "UI Change Safely"
-  short_description: "Safely edit HTML/CSS/JS pages"
-  default_prompt: "Make a UI/content change while preserving structure and generated content workflow."

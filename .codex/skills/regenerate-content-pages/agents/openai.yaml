@@ -1,4 +1,0 @@
-interface:
-  display_name: "Regenerate Content Pages"
-  short_description: "Regenerate data-driven pages and sitemaps"
-  default_prompt: "Regenerate locations, venues, footers, and sitemaps after data changes."

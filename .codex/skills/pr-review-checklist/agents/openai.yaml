@@ -1,4 +1,0 @@
-interface:
-  display_name: "PR Review Checklist"
-  short_description: "Review PRs against site checklist"
-  default_prompt: "Review the PR using the repo checklist and flag regressions or missing steps."
