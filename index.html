@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/">
     <script>
         (function() {
             var base = '/';
@@ -13,11 +14,15 @@
             } else if (location.hostname.endsWith('github.io')) {
                 base = '/thebeatboutique/';
             }
-            document.write('<base href="' + base + '">');
+            var baseEl = document.querySelector('base');
+            if (baseEl) {
+                baseEl.setAttribute('href', base);
+            }
         })();
     </script>
 
     <meta charset="UTF-8">
+    <meta name="ga-measurement-id" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Beat Boutique | Wedding Band Ireland + Live Showcase</title>
     <meta name="description"
@@ -40,6 +45,11 @@
         content="Ireland's boutique wedding band. See us live in Dublin. Nationwide bookings, 180+ five-star reviews.">
     <meta property="twitter:image"
         content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://thebeatboutique.ie/">
+    <meta name="twitter:title" content="The Beat Boutique | Wedding Band Ireland + Live Showcase">
+    <meta name="twitter:description" content="Ireland's boutique wedding band. See us live in Dublin. Nationwide bookings, 180+ five-star reviews.">
+    <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
     <!-- Favicon -->
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
@@ -160,36 +170,6 @@
           ]
         },
         {
-          "@type": "Event",
-          "@id": "https://thebeatboutique.ie/#showcase-feb-2026",
-          "name": "The Beat Boutique Live Showcase",
-          "description": "See Ireland's premier wedding band perform live. Free entry, meet the band, and experience the energy before you book.",
-          "startDate": "2026-02-01T19:00:00+00:00",
-          "endDate": "2026-02-01T20:00:00+00:00",
-          "eventStatus": "https://schema.org/EventScheduled",
-          "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-          "location": {
-            "@type": "Place",
-            "name": "Bell Bar & Restaurant",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Blanchardstown",
-              "addressRegion": "Dublin 15",
-              "addressCountry": "IE"
-            }
-          },
-          "organizer": { "@id": "https://thebeatboutique.ie/#organization" },
-          "performer": { "@id": "https://thebeatboutique.ie/#organization" },
-          "image": "https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp",
-          "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "EUR",
-            "availability": "https://schema.org/InStock",
-            "url": "https://thebeatboutique.ie/showcase"
-          }
-        },
-        {
           "@type": "FAQPage",
           "@id": "https://thebeatboutique.ie/#faq",
           "mainEntity": [
@@ -239,6 +219,35 @@
           "uploadDate": "2024-01-01",
           "contentUrl": "https://www.youtube.com/watch?v=DJ7IwlkTTfo",
           "embedUrl": "https://www.youtube-nocookie.com/embed/DJ7IwlkTTfo"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How much does a wedding band cost in Ireland?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Most professional 4-5 piece bands in Ireland fall between €2,400 and €3,200 depending on date, travel, and add-ons. See our Pricing Guide."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we see you live before booking?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes — we run live showcases in Dublin so you can see us before booking."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do you travel nationwide?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. We perform across Ireland every week and handle all logistics with venues and planners."
+              }
+            }
+          ]
         }
       ]
     }
@@ -339,10 +348,10 @@
         <div class="container">
             <div class="event-card">
                 <span class="event-label text-gold">Next Live Showcase</span>
-                <h2 class="event-date">Sunday 1st February 2026</h2>
+                <h2 class="event-date">Next date announced soon</h2>
                 <div style="width: 40px; height: 1px; background: #fff; margin: 20px auto; opacity: 0.3;"></div>
-                <h3 style="margin-bottom: 0.5rem;">Bell Bar & Restaurant</h3>
-                <p style="opacity: 0.8; margin-bottom: 1.5rem;">Blanchardstown, Dublin 15 • 7pm to 8pm</p>
+                <h3 style="margin-bottom: 0.5rem;">Dublin Showcase Venue</h3>
+                <p style="opacity: 0.8; margin-bottom: 1.5rem;">Dublin • Evening showcase (details emailed to guestlist)</p>
                 <p style="opacity: 0.85; max-width: 650px; margin: 0 auto 1.5rem;">Join us live for a one-hour showcase.
                     No obligation — just a chance to feel the energy before you book.</p>
                 <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;">
@@ -386,8 +395,6 @@
             <div class="about-grid">
                 <div class="about-content">
                     <h2 class="section-title">The FAB Four</h2>
-                    <p style="margin-bottom: 1.5rem; font-size: 1.1rem; color: var(--accent-gold);">Pete • Steve • Carl
-                        • Ben</p>
                     <p style="margin-bottom: 1rem; opacity: 0.8;">The Beat Boutique isn't a rotating roster of session
                         musicians. We are four best friends who have crafted a unique sound over years of performing
                         together.</p>
@@ -745,10 +752,10 @@
             </div>
 
             <div class="text-center" style="margin-top: 40px;">
-                <a href="https://share.google/m63ZwXXpMS5BvUBxm" target="_blank" class="review-link">See All Google
+                <a href="https://share.google/m63ZwXXpMS5BvUBxm" target="_blank" rel="noopener noreferrer" class="review-link">See All Google
                     Reviews</a>
                 <div style="margin-top: 1rem;">
-                    <a href="https://www.weddingsonline.ie/suppliers/the-beat-boutique" target="_blank"
+                    <a href="https://www.weddingsonline.ie/suppliers/the-beat-boutique" target="_blank" rel="noopener noreferrer"
                         class="review-link">Over 180 reviews on WeddingsOnline</a>
                 </div>
             </div>
@@ -922,10 +929,6 @@
                     <h3>First Dance Songs</h3>
                     <span>Top 50 songs for Irish weddings</span>
                 </a>
-                <a href="guides/wedding-band-vs-dj" class="internal-link-card">
-                    <h3>Band vs DJ</h3>
-                    <span>Honest comparison to help you decide</span>
-                </a>
                 <a href="guides/questions-to-ask-wedding-band" class="internal-link-card">
                     <h3>Questions to Ask</h3>
                     <span>20 questions before you book</span>
@@ -953,14 +956,14 @@
                     </a>
                     <p class="footer-tagline">Ireland's premier high energy wedding band.</p>
                     <div class="social-links">
-                        <a href="https://www.instagram.com/thebeatboutiqueweddingband/?hl=en" target="_blank"
+                        <a href="https://www.instagram.com/thebeatboutiqueweddingband/?hl=en" target="_blank" rel="noopener noreferrer"
                             aria-label="Instagram" class="social-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path
                                     d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                             </svg>
                         </a>
-                        <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" aria-label="Facebook"
+                        <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
                             class="social-icon">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <path

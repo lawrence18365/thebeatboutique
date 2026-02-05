@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/">
     <script>
         (function() {
             var base = '/';
@@ -12,7 +13,10 @@
             } else if (location.hostname.endsWith('github.io')) {
                 base = '/thebeatboutique/';
             }
-            document.write('<base href="' + base + '">');
+            var baseEl = document.querySelector('base');
+            if (baseEl) {
+                baseEl.setAttribute('href', base);
+            }
         })();
     </script>
     <meta charset="UTF-8">
@@ -34,6 +38,11 @@
     <meta property="twitter:title" content="Wedding Band Dublin | The Beat Boutique">
     <meta property="twitter:description" content="Looking for the best wedding band in Dublin? The Beat Boutique are Dublin's premier high-energy band. No travel fees. 5-star reviews.">
     <meta property="twitter:image" content="https://thebeatboutique.ieassets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-dublin">
+    <meta name="twitter:title" content="Wedding Band Dublin | The Beat Boutique">
+    <meta name="twitter:description" content="Looking for the best wedding band in Dublin? The Beat Boutique are Dublin's premier high-energy band. No travel fees. 5-star reviews.">
+    <meta name="twitter:image" content="https://thebeatboutique.ieassets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -276,7 +285,7 @@
 
                 <!-- Wedding Culture Section -->
                 
-                <div style="background: #f9f9f9; padding: 30px; border-radius: 4px; margin: 40px 0;">
+                <div class="theme-light" style="background: #f9f9f9; padding: 30px; border-radius: 4px; margin: 40px 0;">
                     <h3 style="margin: 0 0 1rem; color: var(--primary-navy);">Wedding Culture in Dublin</h3>
                     <p style="margin: 0; opacity: 0.8; line-height: 1.8;">Dublin weddings range from intimate city-center celebrations to grand estate affairs. Peak season runs May through September, with Saturday weddings averaging 120-150 guests. Dublin couples often prefer a mix of classic and contemporary music, and many opt for our DJ afters package to keep the party going until the early hours.</p>
                 </div>
@@ -359,7 +368,7 @@
 
     
     <!-- FAQ Section -->
-    <section class="faq-section">
+    <section class="faq-section theme-light">
         <div class="container" style="max-width: 900px;">
             <h2 class="section-title text-center">Dublin Wedding Band FAQ</h2>
             <div class="faq-grid">
@@ -382,7 +391,7 @@
     
 
     <!-- Wedding Guides Section -->
-    <section style="padding: 60px 0; background: #f9f9f9;">
+    <section class="theme-light" style="padding: 60px 0; background: #f9f9f9;">
         <div class="container" style="max-width: 900px;">
             <h2 class="section-title text-center">Wedding Planning Guides</h2>
             <p class="text-center" style="opacity: 0.8; margin-bottom: 30px;">Helpful resources for planning your wedding music.</p>

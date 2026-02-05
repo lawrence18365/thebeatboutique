@@ -1,6 +1,9 @@
 (function () {
-    const GA_MEASUREMENT_ID = 'G-XXXXXXXXXX';
-    const hasValidId = GA_MEASUREMENT_ID && GA_MEASUREMENT_ID !== 'G-XXXXXXXXXX';
+    const metaMeasurementId = document.querySelector('meta[name="ga-measurement-id"]');
+    const metaIdValue = metaMeasurementId ? metaMeasurementId.content.trim() : '';
+    const windowIdValue = typeof window.GA_MEASUREMENT_ID === 'string' ? window.GA_MEASUREMENT_ID.trim() : '';
+    const GA_MEASUREMENT_ID = metaIdValue || windowIdValue;
+    const hasValidId = Boolean(GA_MEASUREMENT_ID);
     const consentKey = 'cookieConsent';
     const queuedEvents = [];
 

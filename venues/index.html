@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <base href="/">
     <script>
         (function() {
             var base = '/';
@@ -13,7 +14,10 @@
             } else if (location.hostname.endsWith('github.io')) {
                 base = '/thebeatboutique/';
             }
-            document.write('<base href="' + base + '">');
+            var baseEl = document.querySelector('base');
+            if (baseEl) {
+                baseEl.setAttribute('href', base);
+            }
         })();
     </script>
 
@@ -40,6 +44,11 @@
         content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
     <meta property="twitter:image"
         content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://thebeatboutique.ie/venues">
+    <meta name="twitter:title" content="Top Wedding Venues Ireland | The Beat Boutique Partners">
+    <meta name="twitter:description" content="We are the preferred wedding band for Ireland's most exclusive venues, including Adare Manor, Luttrellstown Castle, and Tankardstown House.">
+    <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_casual_photo.webp">
 
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link
@@ -184,6 +193,56 @@
                 prestigious locations. Here are specific guides for some of our favorites.</p>
         </div>
     </header>
+
+    <section id="contact" class="quick-availability-section fade-up">
+        <div class="container">
+            <div class="quick-availability-card">
+                <div class="quick-availability-content">
+                    <span class="quick-eyebrow">Check Availability</span>
+                    <h2>Is Your Date Free?</h2>
+                    <p>Tell us your date and venue and we’ll confirm within 24 hours.</p>
+                    <ul class="quick-trust">
+                        <li>Same four musicians, every night</li>
+                        <li>180+ five-star reviews</li>
+                        <li>Nationwide Ireland bookings</li>
+                    </ul>
+                </div>
+                <form class="contact-form quick-availability-form" id="quick-availability-form" action="https://formspree.io/f/xpwzgkvq" method="POST">
+                    <input type="hidden" name="_subject" value="New Wedding Enquiry from Website">
+                    <input type="hidden" name="_next" value="https://thebeatboutique.ie/thank-you">
+                    <input type="hidden" name="form_source" value="Quick Availability Form">
+                    <input type="hidden" name="page_url" class="page-url-field" value="">
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px;">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="qa-names">Your Names *</label>
+                            <input type="text" id="qa-names" name="names" class="form-input" placeholder="e.g. Sarah & Tom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qa-email">Email *</label>
+                            <input type="email" id="qa-email" name="email" class="form-input" placeholder="hello@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="qa-date">Wedding Date *</label>
+                            <input type="date" id="qa-date" name="wedding_date" class="form-input" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qa-venue">Venue / County *</label>
+                            <input type="text" id="qa-venue" name="venue" class="form-input" placeholder="e.g. Adare Manor, Limerick" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit"><span>Check Availability</span></button>
+                    <p class="quick-availability-note">We reply within 24 hours (usually faster).</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
 
     <section class="container">
         <div class="venue-grid-display">

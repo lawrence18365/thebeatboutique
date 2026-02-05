@@ -118,6 +118,7 @@ const generateTemplate = (county) => {
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
+    <base href="/">
     <script>
         (function() {
             var base = '/';
@@ -129,7 +130,10 @@ const generateTemplate = (county) => {
             } else if (location.hostname.endsWith('github.io')) {
                 base = '/thebeatboutique/';
             }
-            document.write('<base href="' + base + '">');
+            var baseEl = document.querySelector('base');
+            if (baseEl) {
+                baseEl.setAttribute('href', base);
+            }
         })();
     </script>
     <meta charset="UTF-8">
@@ -151,6 +155,11 @@ const generateTemplate = (county) => {
     <meta property="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="twitter:description" content="${county.meta_description}">
     <meta property="twitter:image" content="${ogImage}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
+    <meta name="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
+    <meta name="twitter:description" content="${county.meta_description}">
+    <meta name="twitter:image" content="${ogImage}">
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -353,7 +362,7 @@ const generateTemplate = (county) => {
 
                 <!-- Wedding Culture Section -->
                 ${county.wedding_culture ? `
-                <div style="background: #f9f9f9; padding: 30px; border-radius: 4px; margin: 40px 0;">
+                <div class="theme-light" style="background: #f9f9f9; padding: 30px; border-radius: 4px; margin: 40px 0;">
                     <h3 style="margin: 0 0 1rem; color: var(--primary-navy);">Wedding Culture in ${county.name}</h3>
                     <p style="margin: 0; opacity: 0.8; line-height: 1.8;">${county.wedding_culture}</p>
                 </div>
@@ -405,7 +414,7 @@ const generateTemplate = (county) => {
 
     ${hasFAQs ? `
     <!-- FAQ Section -->
-    <section class="faq-section">
+    <section class="faq-section theme-light">
         <div class="container" style="max-width: 900px;">
             <h2 class="section-title text-center">${county.name} Wedding Band FAQ</h2>
             <div class="faq-grid">
@@ -416,7 +425,7 @@ const generateTemplate = (county) => {
     ` : ''}
 
     <!-- Wedding Guides Section -->
-    <section style="padding: 60px 0; background: #f9f9f9;">
+    <section class="theme-light" style="padding: 60px 0; background: #f9f9f9;">
         <div class="container" style="max-width: 900px;">
             <h2 class="section-title text-center">Wedding Planning Guides</h2>
             <p class="text-center" style="opacity: 0.8; margin-bottom: 30px;">Helpful resources for planning your wedding music.</p>

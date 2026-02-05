@@ -157,6 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Capture page URL for form attribution
+    document.querySelectorAll('.page-url-field').forEach(field => {
+        field.value = window.location.href;
+    });
+
     // Showcase/Guestlist Form - Enhanced with local storage for abandoned form recovery
     const guestlistForms = document.querySelectorAll('form[data-form-type="guestlist"]');
     guestlistForms.forEach(form => {
