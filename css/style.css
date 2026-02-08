@@ -259,7 +259,7 @@ img {
 }
 
 .logo-img {
-    height: 60px; /* Slightly larger for impact */
+    height: 90px; /* Larger logo for more impact */
     width: auto;
     border-radius: 4px;
     transition: transform 0.3s ease;
