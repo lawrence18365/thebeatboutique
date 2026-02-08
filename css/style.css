@@ -521,7 +521,7 @@ img {
 .parallax-bg {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-image: linear-gradient(rgba(0,61,77,0.9), rgba(0,61,77,0.9)), url('../assets/images/the_beat_boutique_casual_photo.webp');
+    background-image: linear-gradient(rgba(0,61,77,0.9), rgba(0,61,77,0.9)), url('../assets/images/the-beat-boutique-wedding-band-dublin.webp');
     background-size: cover;
     background-attachment: fixed;
     z-index: 0;
@@ -647,7 +647,7 @@ img {
 }
 
 .location-hero.photo-2 {
-    background-image: linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.85)), url('../assets/images/the_beat_boutique_casual_photo.webp');
+    background-image: linear-gradient(rgba(10, 25, 47, 0.75), rgba(10, 25, 47, 0.85)), url('../assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp');
 }
 
 .location-hero.photo-3 {
