@@ -188,8 +188,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const socialProofPopup = document.getElementById('social-proof-popup');
     if (socialProofPopup) {
-        let proofIndex = 0;
-        let hasShownFirst = false;
+        // Only show once per session
+        const hasShownPopup = sessionStorage.getItem('socialProofShown');
+        if (hasShownPopup) {
+            return;
+        }
 
         const showSocialProof = () => {
             // Don't show if user is actively filling out form
@@ -198,7 +201,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const proof = socialProofData[proofIndex];
+            // Mark as shown
+            sessionStorage.setItem('socialProofShown', 'true');
+
+            const proof = socialProofData[Math.floor(Math.random() * socialProofData.length)];
             document.getElementById('proof-initials').textContent = proof.initials;
             document.getElementById('proof-text').innerHTML = `<strong>${proof.names}</strong> just booked for their ${proof.location} wedding`;
             document.getElementById('proof-time').textContent = proof.time;
@@ -213,22 +219,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     socialProofPopup.style.display = 'none';
                 }, 300);
             }, 5000);
-
-            proofIndex = (proofIndex + 1) % socialProofData.length;
         };
 
-        // Show first notification after 8 seconds
+        // Show notification once after 8 seconds
         setTimeout(() => {
             showSocialProof();
-            hasShownFirst = true;
         }, 8000);
-
-        // Show subsequent notifications every 45 seconds
-        setInterval(() => {
-            if (hasShownFirst) {
-                showSocialProof();
-            }
-        }, 45000);
     }
 
     // Mobile Sticky CTA
