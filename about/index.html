@@ -382,7 +382,12 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="qa-date">Wedding Date *</label>
-                            <input type="date" id="qa-date" name="wedding_date" class="form-input" required>
+                            <input type="text" id="qa-date" name="wedding_date" class="form-input" 
+                                placeholder="e.g. 9 May 2026" 
+                                pattern="(0?[1-9]|[12][0-9]|3[01])[\/\-\s](0?[1-9]|1[012])[\/\-\s]\d{4}|\d{1,2}\s+[A-Za-z]+\s+\d{4}"
+                                title="Enter date as: 9 May 2026, 09/05/2026, or 09-05-2026"
+                                required>
+                            <small style="color: #666; font-size: 0.75rem; display: block; margin-top: 4px;">DD/MM/YYYY or 9 May 2026</small>
                         </div>
                         <div class="form-group">
                             <label for="qa-venue">Venue / County *</label>
