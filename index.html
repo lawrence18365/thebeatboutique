@@ -326,11 +326,15 @@
 
     <!-- Hero Section (Video) -->
     <header class="hero-wrapper">
-        <video autoplay muted loop playsinline preload="metadata" class="hero-video"
-            poster="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
-            <source src="assets/Beat_Boutique_Showreel.mp4" type="video/mp4">
+        <video width="1920" height="1080"
+            autoplay muted loop playsinline preload="metadata"
+            class="hero-video"
+            poster="assets/images/hero_poster_optimized.webp"
+            fetchpriority="high"
+            aria-label="The Beat Boutique performing live">
+            <source src="assets/Beat_Boutique_Showreel_balanced.mp4" type="video/mp4">
             <!-- Fallback for older browsers -->
-            <img src="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp" alt="The Beat Boutique Dublin">
+            <img src="assets/images/hero_poster_optimized.webp" alt="The Beat Boutique Dublin" width="1920" height="1080">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
