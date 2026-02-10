@@ -3,8 +3,15 @@ const path = require('path');
 
 // Read venue data
 const venues = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/venues.json'), 'utf8'));
+const counties = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/counties.json'), 'utf8'));
+const validCountySlugs = new Set(counties.map((county) => county.slug));
 
 const generateVenuePage = (venue) => {
+    const countySlug = venue.county.toLowerCase();
+    const countyGuideItem = validCountySlugs.has(countySlug)
+        ? `<li><a href="locations/wedding-band-${countySlug}">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>`
+        : `<li>Wedding Band ${venue.county} — More ${venue.county} weddings</li>`;
+
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -285,7 +292,7 @@ const generateVenuePage = (venue) => {
                 <li><a href="guides/how-to-choose-wedding-band">How to Choose a Wedding Band</a> — Complete guide</li>
                 <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a> — 20 essential questions</li>
                 <li><a href="song-list">Our Song List</a> — 200+ songs we perform</li>
-                <li><a href="locations/wedding-band-${venue.county.toLowerCase()}">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>
+                ${countyGuideItem}
             </ul>
         </div>
 

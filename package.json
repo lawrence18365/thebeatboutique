@@ -1,4 +1,7 @@
 {
+  "scripts": {
+    "audit:links": "node scripts/audit-links.js"
+  },
   "devDependencies": {
     "image-size": "^2.0.2"
   }
