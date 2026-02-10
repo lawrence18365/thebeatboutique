@@ -344,19 +344,6 @@ img {
     left: 0;
 }
 
-/* Mobile: Show poster image only, hide video for performance */
-@media (max-width: 768px) {
-    .hero-wrapper {
-        background-image: url('../assets/images/hero_poster_optimized.webp');
-        background-size: cover;
-        background-position: center;
-    }
-
-    .hero-video {
-        display: none;
-    }
-}
-
 .hero-overlay {
     position: absolute;
     inset: 0;

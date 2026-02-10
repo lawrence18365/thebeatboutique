@@ -272,24 +272,8 @@
             }
         });
 
-        // Conditionally load hero video on desktop only (performance optimization)
+        // Track video views
         document.addEventListener('DOMContentLoaded', function () {
-            const heroVideo = document.querySelector('.hero-video');
-            const isDesktop = window.innerWidth > 768;
-
-            if (heroVideo && isDesktop) {
-                const videoSrc = heroVideo.getAttribute('data-src');
-                if (videoSrc) {
-                    const source = document.createElement('source');
-                    source.src = videoSrc;
-                    source.type = 'video/mp4';
-                    heroVideo.appendChild(source);
-                    heroVideo.load();
-                    heroVideo.play().catch(() => {}); // Autoplay with error handling
-                }
-            }
-
-            // Track video views
             const videoIframe = document.querySelector('iframe[src*="youtube"]');
             if (videoIframe && typeof window.trackEvent === 'function') {
                 window.trackEvent('video_present', { 'video_type': 'youtube_embed' });
@@ -341,15 +325,13 @@
     </nav>
 
     <!-- Hero Section (Video) -->
-    <header class="hero-wrapper" style="background-image: url('assets/images/hero_poster_optimized.webp'); background-size: cover; background-position: center;">
+    <header class="hero-wrapper">
         <video width="1920" height="1080"
-            muted loop playsinline preload="none"
+            autoplay muted loop playsinline preload="metadata"
             class="hero-video"
-            poster="assets/images/hero_poster_optimized.webp"
-            fetchpriority="high"
-            aria-label="The Beat Boutique performing live"
-            data-src="assets/Beat_Boutique_Showreel_balanced.mp4">
-            <!-- Video source loaded conditionally via JavaScript on desktop only -->
+            poster="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
+            <source src="assets/Beat_Boutique_Showreel_balanced.mp4" type="video/mp4">
+            <img src="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp" alt="The Beat Boutique Dublin" width="1920" height="1080">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
