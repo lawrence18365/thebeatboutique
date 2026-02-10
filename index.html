@@ -55,7 +55,8 @@
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <meta name="theme-color" content="#0a192f">
-    <link rel="preload" as="image" href="assets/images/hero_poster_optimized_960.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/hero_poster_optimized_960.webp" media="(min-width: 769px)" fetchpriority="high">
+    <link rel="preload" as="image" href="assets/images/hero_poster_mobile_640.webp" media="(max-width: 768px)" fetchpriority="high">
     <link rel="stylesheet" href="css/style.css">
     <script>
         (function () {
@@ -357,7 +358,9 @@
         <video width="1920" height="1080"
             autoplay muted loop playsinline preload="none"
             class="hero-video"
-            poster="assets/images/hero_poster_optimized_960.webp">
+            poster="assets/images/hero_poster_optimized_960.webp"
+            data-poster-mobile="assets/images/hero_poster_mobile_640.webp"
+            data-poster-mobile-hd="assets/images/hero_poster_mobile_896.webp">
             <source data-src="assets/Beat_Boutique_Showreel_balanced.mp4" type="video/mp4">
             <img src="assets/images/hero_poster_optimized_960.webp" alt="The Beat Boutique Dublin" width="960" height="540">
         </video>
