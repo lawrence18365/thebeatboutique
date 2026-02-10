@@ -74,7 +74,17 @@
             return;
         }
 
+        const setBannerVisibility = (isVisible) => {
+            banner.classList.toggle('visible', isVisible);
+            document.body.classList.toggle('cookie-banner-open', isVisible);
+            window.dispatchEvent(new CustomEvent('cookie-banner-visibility', {
+                detail: { visible: isVisible }
+            }));
+        };
+
         const existingChoice = localStorage.getItem(consentKey);
+        setBannerVisibility(false);
+
         if (!existingChoice) {
             let shown = false;
             const showBanner = () => {
@@ -82,7 +92,7 @@
                     return;
                 }
                 shown = true;
-                banner.classList.add('visible');
+                setBannerVisibility(true);
                 window.removeEventListener('scroll', showOnFirstInteraction, { passive: true });
                 window.removeEventListener('pointerdown', showOnFirstInteraction);
                 window.removeEventListener('keydown', showOnFirstInteraction);
@@ -104,13 +114,13 @@
 
         acceptBtn.addEventListener('click', () => {
             localStorage.setItem(consentKey, 'accepted');
-            banner.classList.remove('visible');
+            setBannerVisibility(false);
             loadAnalytics();
         });
 
         declineBtn.addEventListener('click', () => {
             localStorage.setItem(consentKey, 'declined');
-            banner.classList.remove('visible');
+            setBannerVisibility(false);
         });
     }
 

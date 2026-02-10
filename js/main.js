@@ -1,13 +1,46 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     // Mobile Navigation Toggle
+    const navbar = document.querySelector('.navbar');
     const mobileMenuBtn = document.getElementById('mobile-menu');
     const navMenu = document.querySelector('.nav-menu');
+    const setMobileMenuState = (isOpen) => {
+        if (!mobileMenuBtn || !navMenu) return;
+        navMenu.classList.toggle('active', isOpen);
+        mobileMenuBtn.classList.toggle('active', isOpen);
+        mobileMenuBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        mobileMenuBtn.setAttribute('aria-label', isOpen ? 'Close navigation menu' : 'Open navigation menu');
+        document.body.classList.toggle('menu-open', isOpen);
 
-    if (mobileMenuBtn) {
+        if (navbar) {
+            navbar.classList.toggle('navbar-menu-open', isOpen);
+            if (isOpen) {
+                navbar.classList.remove('navbar-hidden');
+            }
+        }
+    };
+
+    if (mobileMenuBtn && navMenu) {
+        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+        mobileMenuBtn.setAttribute('aria-label', 'Open navigation menu');
         mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            mobileMenuBtn.classList.toggle('active');
+            setMobileMenuState(!navMenu.classList.contains('active'));
+        });
+
+        document.addEventListener('click', (event) => {
+            if (!navMenu.classList.contains('active')) return;
+
+            const clickedToggle = mobileMenuBtn.contains(event.target);
+            const clickedMenu = navMenu.contains(event.target);
+            if (!clickedToggle && !clickedMenu) {
+                setMobileMenuState(false);
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                setMobileMenuState(false);
+            }
         });
     }
 
@@ -15,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            navMenu.classList.remove('active'); // Close menu on click
+            setMobileMenuState(false); // Close menu on click
 
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
@@ -30,30 +63,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Simple Navbar Background Change on Scroll and Visibility Toggle
-    const navbar = document.querySelector('.navbar');
     let lastScrollY = window.scrollY;
     
     // Function to check scroll position
     const handleScroll = () => {
+        if (!navbar) return;
+
         const currentScrollY = window.scrollY;
+        const scrollDelta = currentScrollY - lastScrollY;
+        const deltaMagnitude = Math.abs(scrollDelta);
+        const mobileMenuOpen = Boolean(navMenu && navMenu.classList.contains('active'));
         
         // Background Logic: Solid when scrolled, transparent at top
-        if (currentScrollY > 50) {
+        if (currentScrollY > 30) {
             navbar.classList.add('navbar-scrolled');
         } else {
             navbar.classList.remove('navbar-scrolled');
         }
 
-        // Hide/Show Logic
-        if (currentScrollY > lastScrollY && currentScrollY > 100) {
-            // Scrolling DOWN & past top
-            navbar.classList.add('navbar-hidden');
-        } else {
-            // Scrolling UP or at top
+        if (mobileMenuOpen) {
             navbar.classList.remove('navbar-hidden');
+        } else if (deltaMagnitude > 3) {
+            // Hide once the user commits to scrolling down.
+            if (scrollDelta > 0 && currentScrollY > 110) {
+                navbar.classList.add('navbar-hidden');
+            }
+
+            // Show on upward movement or near the top.
+            if (scrollDelta < 0 || currentScrollY <= 70) {
+                navbar.classList.remove('navbar-hidden');
+            }
         }
 
-        lastScrollY = currentScrollY;
+        lastScrollY = Math.max(currentScrollY, 0);
     };
 
     let scrollTicking = false;
@@ -66,8 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    window.addEventListener('scroll', requestScrollCheck, { passive: true });
-    window.addEventListener('resize', requestScrollCheck);
+    if (navbar) {
+        window.addEventListener('scroll', requestScrollCheck, { passive: true });
+        window.addEventListener('resize', requestScrollCheck);
+    }
     
     // Initial check
     handleScroll();
@@ -300,56 +344,69 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
 
     const socialProofPopup = document.getElementById('social-proof-popup');
-    if (socialProofPopup) {
+    if (socialProofPopup && window.innerWidth > 768) {
         // Only show once per session
         const hasShownPopup = sessionStorage.getItem('socialProofShown');
-        if (hasShownPopup) {
-            return;
-        }
+        if (!hasShownPopup) {
+            const showSocialProof = () => {
+                // Don't show if user is actively filling out form
+                const activeElement = document.activeElement;
+                if (activeElement && (activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA')) {
+                    return;
+                }
 
-        const showSocialProof = () => {
-            // Don't show if user is actively filling out form
-            const activeElement = document.activeElement;
-            if (activeElement && activeElement.tagName === 'INPUT' || activeElement.tagName === 'TEXTAREA') {
-                return;
-            }
+                // Mark as shown
+                sessionStorage.setItem('socialProofShown', 'true');
 
-            // Mark as shown
-            sessionStorage.setItem('socialProofShown', 'true');
+                const proof = socialProofData[Math.floor(Math.random() * socialProofData.length)];
+                document.getElementById('proof-initials').textContent = proof.initials;
+                document.getElementById('proof-text').innerHTML = `<strong>${proof.names}</strong> just booked for their ${proof.location} wedding`;
+                document.getElementById('proof-time').textContent = proof.time;
 
-            const proof = socialProofData[Math.floor(Math.random() * socialProofData.length)];
-            document.getElementById('proof-initials').textContent = proof.initials;
-            document.getElementById('proof-text').innerHTML = `<strong>${proof.names}</strong> just booked for their ${proof.location} wedding`;
-            document.getElementById('proof-time').textContent = proof.time;
+                socialProofPopup.style.display = 'block';
+                socialProofPopup.style.animation = 'slideInLeft 0.4s ease-out';
 
-            socialProofPopup.style.display = 'block';
-            socialProofPopup.style.animation = 'slideInLeft 0.4s ease-out';
-
-            // Hide after 5 seconds
-            setTimeout(() => {
-                socialProofPopup.style.animation = 'slideOutLeft 0.3s ease-in';
+                // Hide after 5 seconds
                 setTimeout(() => {
-                    socialProofPopup.style.display = 'none';
-                }, 300);
-            }, 5000);
-        };
+                    socialProofPopup.style.animation = 'slideOutLeft 0.3s ease-in';
+                    setTimeout(() => {
+                        socialProofPopup.style.display = 'none';
+                    }, 300);
+                }, 5000);
+            };
 
-        // Show notification once after 8 seconds
-        setTimeout(() => {
-            showSocialProof();
-        }, 8000);
+            // Show notification once after 8 seconds
+            setTimeout(() => {
+                showSocialProof();
+            }, 8000);
+        }
     }
 
     // Mobile Sticky CTA
     const mobileCTA = document.getElementById('mobile-sticky-cta');
-    if (mobileCTA && window.innerWidth <= 768) {
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 600) {
-                mobileCTA.style.display = 'block';
-            } else {
-                mobileCTA.style.display = 'none';
+    if (mobileCTA) {
+        const mobileQuery = window.matchMedia('(max-width: 768px)');
+
+        const updateMobileCTAVisibility = () => {
+            if (!mobileQuery.matches) {
+                mobileCTA.classList.remove('is-visible');
+                mobileCTA.setAttribute('aria-hidden', 'true');
+                return;
             }
-        });
+
+            const cookieBanner = document.getElementById('cookie-banner');
+            const isCookieVisible = Boolean(cookieBanner && cookieBanner.classList.contains('visible'));
+            const scrolledEnough = window.scrollY > 720;
+            const shouldShow = scrolledEnough && !isCookieVisible;
+
+            mobileCTA.classList.toggle('is-visible', shouldShow);
+            mobileCTA.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
+        };
+
+        window.addEventListener('scroll', updateMobileCTAVisibility, { passive: true });
+        window.addEventListener('resize', updateMobileCTAVisibility);
+        window.addEventListener('cookie-banner-visibility', updateMobileCTAVisibility);
+        updateMobileCTAVisibility();
     }
 
     // Exit Intent Detection (Desktop)
