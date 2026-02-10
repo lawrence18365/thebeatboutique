@@ -272,8 +272,24 @@
             }
         });
 
-        // Track video views
+        // Conditionally load hero video on desktop only (performance optimization)
         document.addEventListener('DOMContentLoaded', function () {
+            const heroVideo = document.querySelector('.hero-video');
+            const isDesktop = window.innerWidth > 768;
+
+            if (heroVideo && isDesktop) {
+                const videoSrc = heroVideo.getAttribute('data-src');
+                if (videoSrc) {
+                    const source = document.createElement('source');
+                    source.src = videoSrc;
+                    source.type = 'video/mp4';
+                    heroVideo.appendChild(source);
+                    heroVideo.load();
+                    heroVideo.play().catch(() => {}); // Autoplay with error handling
+                }
+            }
+
+            // Track video views
             const videoIframe = document.querySelector('iframe[src*="youtube"]');
             if (videoIframe && typeof window.trackEvent === 'function') {
                 window.trackEvent('video_present', { 'video_type': 'youtube_embed' });
@@ -325,16 +341,15 @@
     </nav>
 
     <!-- Hero Section (Video) -->
-    <header class="hero-wrapper">
+    <header class="hero-wrapper" style="background-image: url('assets/images/hero_poster_optimized.webp'); background-size: cover; background-position: center;">
         <video width="1920" height="1080"
-            autoplay muted loop playsinline preload="metadata"
+            muted loop playsinline preload="none"
             class="hero-video"
             poster="assets/images/hero_poster_optimized.webp"
             fetchpriority="high"
-            aria-label="The Beat Boutique performing live">
-            <source src="assets/Beat_Boutique_Showreel_balanced.mp4" type="video/mp4">
-            <!-- Fallback for older browsers -->
-            <img src="assets/images/hero_poster_optimized.webp" alt="The Beat Boutique Dublin" width="1920" height="1080">
+            aria-label="The Beat Boutique performing live"
+            data-src="assets/Beat_Boutique_Showreel_balanced.mp4">
+            <!-- Video source loaded conditionally via JavaScript on desktop only -->
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
