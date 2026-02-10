@@ -76,9 +76,26 @@
 
         const existingChoice = localStorage.getItem(consentKey);
         if (!existingChoice) {
-            setTimeout(() => {
+            let shown = false;
+            const showBanner = () => {
+                if (shown) {
+                    return;
+                }
+                shown = true;
                 banner.classList.add('visible');
-            }, 2000);
+                window.removeEventListener('scroll', showOnFirstInteraction, { passive: true });
+                window.removeEventListener('pointerdown', showOnFirstInteraction);
+                window.removeEventListener('keydown', showOnFirstInteraction);
+            };
+            const showOnFirstInteraction = () => {
+                window.requestAnimationFrame(showBanner);
+            };
+
+            // Show on first interaction, with a delayed fallback for passive visitors.
+            window.addEventListener('scroll', showOnFirstInteraction, { passive: true, once: true });
+            window.addEventListener('pointerdown', showOnFirstInteraction, { once: true });
+            window.addEventListener('keydown', showOnFirstInteraction, { once: true });
+            setTimeout(showBanner, 12000);
         }
 
         if (existingChoice === 'accepted') {
