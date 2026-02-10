@@ -62,6 +62,42 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial check
     handleScroll();
 
+    // Delay hero video loading on mobile/slow connections to improve LCP.
+    const heroVideo = document.querySelector('.hero-video');
+    const heroVideoSource = heroVideo ? heroVideo.querySelector('source[data-src]') : null;
+    if (heroVideo && heroVideoSource) {
+        const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+        const isMobileViewport = window.matchMedia('(max-width: 768px)').matches;
+        const hasDataSaver = Boolean(connection && connection.saveData);
+        const effectiveType = connection && connection.effectiveType ? connection.effectiveType : '';
+        const isSlowConnection = Boolean(
+            connection && (
+                (typeof connection.downlink === 'number' && connection.downlink < 3) ||
+                /(slow-2g|2g|3g)/.test(effectiveType)
+            )
+        );
+
+        if (!isMobileViewport && !hasDataSaver && !isSlowConnection) {
+            const hydrateHeroVideo = () => {
+                if (heroVideoSource.getAttribute('src')) return;
+
+                heroVideoSource.setAttribute('src', heroVideoSource.dataset.src);
+                heroVideo.load();
+
+                const playPromise = heroVideo.play();
+                if (playPromise && typeof playPromise.catch === 'function') {
+                    playPromise.catch(() => {});
+                }
+            };
+
+            if ('requestIdleCallback' in window) {
+                window.requestIdleCallback(hydrateHeroVideo, { timeout: 2000 });
+            } else {
+                window.setTimeout(hydrateHeroVideo, 1200);
+            }
+        }
+    }
+
     // Reveal Elements on Scroll (Simple Intersection Observer)
     const observerOptions = {
         threshold: 0.1, // Trigger slightly earlier
@@ -135,6 +171,28 @@ document.addEventListener('DOMContentLoaded', () => {
         // Observer is already set up to add 'visible' class
         observer.observe(el);
     });
+
+    const parallaxBg = document.querySelector('.parallax-bg');
+    if (parallaxBg) {
+        const loadParallaxBg = () => {
+            parallaxBg.classList.add('is-loaded');
+        };
+
+        if ('IntersectionObserver' in window) {
+            const parallaxObserver = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        loadParallaxBg();
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { rootMargin: '250px 0px' });
+
+            parallaxObserver.observe(parallaxBg);
+        } else {
+            loadParallaxBg();
+        }
+    }
 
     // Contact Form Handling - Enhanced for Formspree
     const contactForms = document.querySelectorAll('.contact-form');

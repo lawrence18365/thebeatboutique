@@ -55,6 +55,7 @@
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <meta name="theme-color" content="#0a192f">
+    <link rel="preload" as="image" href="assets/images/hero_poster_optimized.webp" fetchpriority="high">
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
@@ -294,9 +295,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
+    <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
-        rel="stylesheet">
+        media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"></noscript>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -306,7 +309,7 @@
                 <nav class="navbar">
         <div class="container nav-container">
             <a href="./" class="logo">
-                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img" width="1400" height="1400">
+                <img src="assets/images/the_beat_boutique_logo_nav.webp" alt="The Beat Boutique" class="logo-img" width="280" height="280" fetchpriority="high" decoding="async">
             </a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -327,11 +330,11 @@
     <!-- Hero Section (Video) -->
     <header class="hero-wrapper">
         <video width="1920" height="1080"
-            autoplay muted loop playsinline preload="metadata"
+            autoplay muted loop playsinline preload="none"
             class="hero-video"
-            poster="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
-            <source src="assets/Beat_Boutique_Showreel_balanced.mp4" type="video/mp4">
-            <img src="assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp" alt="The Beat Boutique Dublin" width="1920" height="1080">
+            poster="assets/images/hero_poster_optimized.webp">
+            <source data-src="assets/Beat_Boutique_Showreel_balanced.mp4" type="video/mp4">
+            <img src="assets/images/hero_poster_optimized.webp" alt="The Beat Boutique Dublin" width="1920" height="1080">
         </video>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -406,7 +409,7 @@
                 </div>
                 <div class="about-img-container">
                     <img src="assets/images/the-beat-boutique-wedding-band-dublin.webp"
-                        alt="The Beat Boutique Band Members" class="about-img" width="1600" height="1067">
+                        alt="The Beat Boutique Band Members" class="about-img" width="1600" height="1067" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -457,7 +460,7 @@
                         src="https://www.youtube-nocookie.com/embed/DJ7IwlkTTfo?si=ZvJ-OqrHvtptPU88&amp;controls=0&amp;start=5"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                 </div>
             </div>
         </div>
@@ -798,7 +801,7 @@
 
                     <div style="margin-top: 2rem;">
                         <img src="assets/images/wedding-band-association-member-badge.webp"
-                            alt="Wedding Band Association Member" class="association-badge" style="margin: 0;" width="500" height="500">
+                            alt="Wedding Band Association Member" class="association-badge" style="margin: 0;" width="500" height="500" loading="lazy" decoding="async">
                     </div>
                 </div>
 
@@ -931,7 +934,7 @@
                 <div class="footer-col footer-brand">
                     <a href="./" class="footer-logo-link">
                         <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique"
-                            class="footer-logo-lg" width="1400" height="1400">
+                            class="footer-logo-lg" width="1400" height="1400" loading="lazy" decoding="async">
                     </a>
                     <p class="footer-tagline">Ireland's premier high energy wedding band.</p>
                     <div class="social-links">
@@ -1053,9 +1056,7 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/ScrollTrigger.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="js/main.js" defer></script>
 </body>
 
 </html>

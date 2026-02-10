@@ -521,11 +521,21 @@ img {
 .parallax-bg {
     position: absolute;
     top: 0; left: 0; width: 100%; height: 100%;
-    background-image: linear-gradient(rgba(0,61,77,0.9), rgba(0,61,77,0.9)), url('../assets/images/the-beat-boutique-wedding-band-dublin.webp');
+    background-image: linear-gradient(rgba(0,61,77,0.9), rgba(0,61,77,0.9));
     background-size: cover;
-    background-attachment: fixed;
+    background-attachment: scroll;
     z-index: 0;
     opacity: 0.4;
+}
+
+.parallax-bg.is-loaded {
+    background-image: linear-gradient(rgba(0,61,77,0.9), rgba(0,61,77,0.9)), url('../assets/images/the-beat-boutique-wedding-band-dublin.webp');
+}
+
+@media (min-width: 1024px) {
+    .parallax-bg {
+        background-attachment: fixed;
+    }
 }
 
 .experience-content {
