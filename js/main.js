@@ -56,8 +56,18 @@ document.addEventListener('DOMContentLoaded', () => {
         lastScrollY = currentScrollY;
     };
 
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
+    let scrollTicking = false;
+    const requestScrollCheck = () => {
+        if (scrollTicking) return;
+        scrollTicking = true;
+        window.requestAnimationFrame(() => {
+            handleScroll();
+            scrollTicking = false;
+        });
+    };
+
+    window.addEventListener('scroll', requestScrollCheck, { passive: true });
+    window.addEventListener('resize', requestScrollCheck);
     
     // Initial check
     handleScroll();
@@ -193,6 +203,32 @@ document.addEventListener('DOMContentLoaded', () => {
             loadParallaxBg();
         }
     }
+
+    const youtubeLiteButtons = document.querySelectorAll('.youtube-lite[data-youtube-id]');
+    youtubeLiteButtons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const videoId = button.dataset.youtubeId;
+            if (!videoId) return;
+
+            const startTime = parseInt(button.dataset.start || '0', 10);
+            const startParam = Number.isFinite(startTime) && startTime > 0 ? `&start=${startTime}` : '';
+            const iframe = document.createElement('iframe');
+            iframe.width = '560';
+            iframe.height = '315';
+            iframe.src = `https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&controls=1${startParam}`;
+            iframe.title = 'The Beat Boutique live performance video';
+            iframe.frameBorder = '0';
+            iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+            iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+            iframe.allowFullscreen = true;
+
+            button.replaceWith(iframe);
+
+            if (typeof window.trackEvent === 'function') {
+                window.trackEvent('video_play', { 'video_type': 'youtube_embed' });
+            }
+        }, { once: true });
+    });
 
     // Contact Form Handling - Enhanced for Formspree
     const contactForms = document.querySelectorAll('.contact-form');

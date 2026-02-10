@@ -275,9 +275,9 @@
 
         // Track video views
         document.addEventListener('DOMContentLoaded', function () {
-            const videoIframe = document.querySelector('iframe[src*="youtube"]');
-            if (videoIframe && typeof window.trackEvent === 'function') {
-                window.trackEvent('video_present', { 'video_type': 'youtube_embed' });
+            const hasVideoModule = document.querySelector('.youtube-lite[data-youtube-id], iframe[src*="youtube"]');
+            if (hasVideoModule && typeof window.trackEvent === 'function') {
+                window.trackEvent('video_present', { 'video_type': 'youtube_facade' });
             }
         });
 
@@ -309,7 +309,7 @@
                 <nav class="navbar">
         <div class="container nav-container">
             <a href="./" class="logo">
-                <img src="assets/images/the_beat_boutique_logo_nav.webp" alt="The Beat Boutique" class="logo-img" width="280" height="280" fetchpriority="high" decoding="async">
+                <img src="assets/images/the_beat_boutique_logo_nav.webp" alt="The Beat Boutique" class="logo-img" width="160" height="160" decoding="async">
             </a>
             <div class="menu-toggle" id="mobile-menu">
                 <span class="bar"></span>
@@ -408,7 +408,9 @@
                         wedding reception into an unforgettable concert.</p>
                 </div>
                 <div class="about-img-container">
-                    <img src="assets/images/the-beat-boutique-wedding-band-dublin.webp"
+                    <img src="assets/images/the-beat-boutique-wedding-band-dublin-800.webp"
+                        srcset="assets/images/the-beat-boutique-wedding-band-dublin-800.webp 800w, assets/images/the-beat-boutique-wedding-band-dublin.webp 1600w"
+                        sizes="(max-width: 900px) 100vw, 650px"
                         alt="The Beat Boutique Band Members" class="about-img" width="1600" height="1067" loading="lazy" decoding="async">
                 </div>
             </div>
@@ -456,11 +458,20 @@
             </div>
             <div style="max-width: 900px; margin: 0 auto;">
                 <div class="video-wrapper">
-                    <iframe width="560" height="315"
-                        src="https://www.youtube-nocookie.com/embed/DJ7IwlkTTfo?si=ZvJ-OqrHvtptPU88&amp;controls=0&amp;start=5"
-                        title="YouTube video player" frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <button type="button" class="youtube-lite" data-youtube-id="DJ7IwlkTTfo" data-start="5"
+                        aria-label="Play The Beat Boutique live performance video">
+                        <img src="assets/images/hero_poster_optimized.webp"
+                            alt="Play The Beat Boutique live performance video" width="1920" height="1080" loading="lazy"
+                            decoding="async">
+                        <span class="youtube-lite-play" aria-hidden="true"></span>
+                    </button>
+                    <noscript>
+                        <iframe width="560" height="315"
+                            src="https://www.youtube-nocookie.com/embed/DJ7IwlkTTfo?controls=0&amp;start=5"
+                            title="The Beat Boutique live performance video" frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </noscript>
                 </div>
             </div>
         </div>
