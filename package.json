@@ -1,6 +1,7 @@
 {
   "scripts": {
-    "audit:links": "node scripts/audit-links.js"
+    "audit:links": "node scripts/audit-links.js",
+    "generate:legacy-redirects": "node scripts/generate-legacy-redirects.js"
   },
   "devDependencies": {
     "image-size": "^2.0.2"

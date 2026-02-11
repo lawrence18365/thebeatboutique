@@ -6,10 +6,18 @@ const venues = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/venues.j
 const counties = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/counties.json'), 'utf8'));
 const validCountySlugs = new Set(counties.map((county) => county.slug));
 
+const normalizeSitePath = (urlPath) => {
+    if (!urlPath || urlPath === '/') return '/';
+    if (urlPath.endsWith('/')) return urlPath;
+    return `${urlPath}/`;
+};
+
+const toCanonicalUrl = (urlPath) => `https://thebeatboutique.ie${normalizeSitePath(urlPath)}`;
+
 const generateVenuePage = (venue) => {
     const countySlug = venue.county.toLowerCase();
     const countyGuideItem = validCountySlugs.has(countySlug)
-        ? `<li><a href="locations/wedding-band-${countySlug}">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>`
+        ? `<li><a href="locations/wedding-band-${countySlug}/">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>`
         : `<li>Wedding Band ${venue.county} — More ${venue.county} weddings</li>`;
 
     return `<!DOCTYPE html>
@@ -38,23 +46,23 @@ const generateVenuePage = (venue) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${venue.name} Wedding Band | The Beat Boutique</title>
     <meta name="description" content="Planning a wedding at ${venue.name}? The Beat Boutique has played ${venue.weddings_played} weddings here. Read our venue guide with acoustics tips and insider advice.">
-    <link rel="canonical" href="https://thebeatboutique.ie/venues/${venue.slug}">
+    <link rel="canonical" href="${toCanonicalUrl(`/venues/${venue.slug}`)}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://thebeatboutique.ie/venues/${venue.slug}">
+    <meta property="og:url" content="${toCanonicalUrl(`/venues/${venue.slug}`)}">
     <meta property="og:title" content="${venue.name} Wedding Band | The Beat Boutique">
     <meta property="og:description" content="Expert tips for wedding music at ${venue.name}. Acoustics guide, setlist ideas, and real wedding reviews.">
     <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thebeatboutique.ie/venues/${venue.slug}">
+    <meta property="twitter:url" content="${toCanonicalUrl(`/venues/${venue.slug}`)}">
     <meta property="twitter:title" content="${venue.name} Wedding Band | The Beat Boutique">
     <meta property="twitter:description" content="Expert tips for wedding music at ${venue.name}. Acoustics guide, setlist ideas, and real wedding reviews.">
     <meta property="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://thebeatboutique.ie/venues/${venue.slug}">
+    <meta name="twitter:url" content="${toCanonicalUrl(`/venues/${venue.slug}`)}">
     <meta name="twitter:title" content="${venue.name} Wedding Band | The Beat Boutique">
     <meta name="twitter:description" content="Expert tips for wedding music at ${venue.name}. Acoustics guide, setlist ideas, and real wedding reviews.">
     <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
@@ -88,8 +96,8 @@ const generateVenuePage = (venue) => {
           "@type": "BreadcrumbList",
           "itemListElement": [
             { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://thebeatboutique.ie/" },
-            { "@type": "ListItem", "position": 2, "name": "Venues", "item": "https://thebeatboutique.ie/venues" },
-            { "@type": "ListItem", "position": 3, "name": "${venue.name}", "item": "https://thebeatboutique.ie/venues/${venue.slug}" }
+            { "@type": "ListItem", "position": 2, "name": "Venues", "item": "https://thebeatboutique.ie/venues/" },
+            { "@type": "ListItem", "position": 3, "name": "${venue.name}", "item": "${toCanonicalUrl(`/venues/${venue.slug}`)}" }
           ]
         },
         {
@@ -209,12 +217,12 @@ const generateVenuePage = (venue) => {
                 <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img">
             </a>
             <ul class="nav-menu">
-                <li><a href="about" class="nav-link">About</a></li>
-                <li><a href="why-us" class="nav-link">Why Us</a></li>
-                <li><a href="showcase" class="nav-link">Showcase</a></li>
-                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
-                <li><a href="venues" class="nav-link">Venues</a></li>
-                <li><a href="wedding-band-ireland" class="nav-cta btn-primary">Ireland</a></li>
+                <li><a href="about/" class="nav-link">About</a></li>
+                <li><a href="why-us/" class="nav-link">Why Us</a></li>
+                <li><a href="showcase/" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide/" class="nav-link">Pricing</a></li>
+                <li><a href="venues/" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland/" class="nav-cta btn-primary">Ireland</a></li>
             </ul>
         </div>
     </nav>
@@ -243,7 +251,7 @@ const generateVenuePage = (venue) => {
     </header>
 
     <div class="breadcrumb">
-        <a href="./">Home</a> / <a href="venues">Venues</a> / ${venue.name}
+        <a href="./">Home</a> / <a href="venues/">Venues</a> / ${venue.name}
     </div>
 
     <article class="venue-content">
@@ -282,16 +290,16 @@ const generateVenuePage = (venue) => {
 
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 40px 0;">
             <a href="./#contact" class="btn btn-primary">Check Availability</a>
-            <a href="showcase" class="btn btn-secondary" style="border-color: var(--primary-navy); color: var(--primary-navy);">See Us Live</a>
+            <a href="showcase/" class="btn btn-secondary" style="border-color: var(--primary-navy); color: var(--primary-navy);">See Us Live</a>
         </div>
 
         <div class="venue-section">
             <h2>Related Guides</h2>
             <ul style="line-height: 2;">
-                <li><a href="guides/first-dance-songs">First Dance Songs Ireland</a> — Top 50 wedding songs</li>
-                <li><a href="guides/how-to-choose-wedding-band">How to Choose a Wedding Band</a> — Complete guide</li>
-                <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a> — 20 essential questions</li>
-                <li><a href="song-list">Our Song List</a> — 200+ songs we perform</li>
+                <li><a href="guides/first-dance-songs/">First Dance Songs Ireland</a> — Top 50 wedding songs</li>
+                <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Wedding Band</a> — Complete guide</li>
+                <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a> — 20 essential questions</li>
+                <li><a href="song-list/">Our Song List</a> — 200+ songs we perform</li>
                 ${countyGuideItem}
             </ul>
         </div>
@@ -300,11 +308,11 @@ const generateVenuePage = (venue) => {
             <h2>More Venue Guides</h2>
             <p>Explore our other venue guides for tips and insider knowledge:</p>
             <ul style="line-height: 2;">
-                <li><a href="venues/adare-manor">Adare Manor</a></li>
-                <li><a href="venues/ashford-castle">Ashford Castle</a></li>
-                <li><a href="venues/cliff-at-lyons">Cliff at Lyons</a></li>
-                <li><a href="venues/mount-juliet">Mount Juliet Estate</a></li>
-                <li><a href="venues">View All 15+ Venues →</a></li>
+                <li><a href="venues/adare-manor/">Adare Manor</a></li>
+                <li><a href="venues/ashford-castle/">Ashford Castle</a></li>
+                <li><a href="venues/cliff-at-lyons/">Cliff at Lyons</a></li>
+                <li><a href="venues/mount-juliet/">Mount Juliet Estate</a></li>
+                <li><a href="venues/">View All 15+ Venues →</a></li>
             </ul>
         </div>
 
@@ -322,19 +330,19 @@ const generateVenuePage = (venue) => {
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
-                        <li><a href="showcase">Live Showcase</a></li>
-                        <li><a href="song-list">Song List</a></li>
-                        <li><a href="venues">Venues</a></li>
-                        <li><a href="pricing-guide">Pricing</a></li>
+                        <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="song-list/">Song List</a></li>
+                        <li><a href="venues/">Venues</a></li>
+                        <li><a href="pricing-guide/">Pricing</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4 class="footer-heading">Guides</h4>
                     <ul class="footer-nav">
-                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
-                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
-                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
+                        <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -348,8 +356,8 @@ const generateVenuePage = (venue) => {
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="privacy">Privacy</a>
-                    <a href="terms">Terms</a>
+                    <a href="privacy/">Privacy</a>
+                    <a href="terms/">Terms</a>
                 </div>
             </div>
         </div>

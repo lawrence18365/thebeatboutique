@@ -5,6 +5,11 @@ const { execSync } = require('child_process');
 const SITE_URL = 'https://thebeatboutique.ie';
 const ROOT_DIR = path.join(__dirname, '..');
 
+function normalizeRoutePath(routePath) {
+    if (!routePath || routePath === '/') return '/';
+    return routePath.endsWith('/') ? routePath : `${routePath}/`;
+}
+
 // Get the last git commit date for a file (ISO 8601 format)
 function getGitLastModified(filePath) {
     try {
@@ -94,17 +99,17 @@ const EXCLUDED_PAGES = [
 // Main pages configuration
 const MAIN_PAGES = [
     { path: 'index.html', url: '/', priority: '1.0' },
-    { path: 'wedding-band-ireland/index.html', url: '/wedding-band-ireland', priority: '0.9' },
-    { path: 'showcase/index.html', url: '/showcase', priority: '0.9' },
-    { path: 'about/index.html', url: '/about', priority: '0.8' },
-    { path: 'why-us/index.html', url: '/why-us', priority: '0.8' },
-    { path: 'pricing-guide/index.html', url: '/pricing-guide', priority: '0.8' },
-    { path: 'song-list/index.html', url: '/song-list', priority: '0.8' },
-    { path: 'corporate-events/index.html', url: '/corporate-events', priority: '0.7' },
-    { path: 'party-band/index.html', url: '/party-band', priority: '0.7' },
-    { path: 'christmas-parties/index.html', url: '/christmas-parties', priority: '0.7' },
-    { path: 'privacy/index.html', url: '/privacy', priority: '0.3' },
-    { path: 'terms/index.html', url: '/terms', priority: '0.3' }
+    { path: 'wedding-band-ireland/index.html', url: '/wedding-band-ireland/', priority: '0.9' },
+    { path: 'showcase/index.html', url: '/showcase/', priority: '0.9' },
+    { path: 'about/index.html', url: '/about/', priority: '0.8' },
+    { path: 'why-us/index.html', url: '/why-us/', priority: '0.8' },
+    { path: 'pricing-guide/index.html', url: '/pricing-guide/', priority: '0.8' },
+    { path: 'song-list/index.html', url: '/song-list/', priority: '0.8' },
+    { path: 'corporate-events/index.html', url: '/corporate-events/', priority: '0.7' },
+    { path: 'party-band/index.html', url: '/party-band/', priority: '0.7' },
+    { path: 'christmas-parties/index.html', url: '/christmas-parties/', priority: '0.7' },
+    { path: 'privacy/index.html', url: '/privacy/', priority: '0.3' },
+    { path: 'terms/index.html', url: '/terms/', priority: '0.3' }
 ];
 
 // Collect all location pages
@@ -120,7 +125,7 @@ function getLocationPages() {
                 if (fs.existsSync(indexPath) && !hasNoIndex(indexPath)) {
                     pages.push({
                         path: `locations/${dir.name}/index.html`,
-                        url: `/locations/${dir.name}`,
+                        url: `/locations/${dir.name}/`,
                         priority: '0.7'
                     });
                 }
@@ -141,7 +146,7 @@ function getVenuePages() {
     if (fs.existsSync(venuesIndex) && !hasNoIndex(venuesIndex)) {
         pages.push({
             path: 'venues/index.html',
-            url: '/venues',
+            url: '/venues/',
             priority: '0.8'
         });
     }
@@ -155,7 +160,7 @@ function getVenuePages() {
                 if (fs.existsSync(indexPath) && !hasNoIndex(indexPath)) {
                     pages.push({
                         path: `venues/${dir.name}/index.html`,
-                        url: `/venues/${dir.name}`,
+                        url: `/venues/${dir.name}/`,
                         priority: '0.7'
                     });
                 }
@@ -179,7 +184,7 @@ function getGuidePages() {
                 if (fs.existsSync(indexPath) && !hasNoIndex(indexPath)) {
                     pages.push({
                         path: `guides/${dir.name}/index.html`,
-                        url: `/guides/${dir.name}`,
+                        url: `/guides/${dir.name}/`,
                         priority: '0.8'
                     });
                 }
@@ -195,7 +200,7 @@ function generateUrlEntries(pages) {
     return pages.map(page => {
         const filePath = path.join(ROOT_DIR, page.path);
         const lastmod = getGitLastModified(filePath);
-        return urlEntry(SITE_URL + page.url, lastmod, page.priority);
+        return urlEntry(SITE_URL + normalizeRoutePath(page.url), lastmod, page.priority);
     });
 }
 

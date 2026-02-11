@@ -28,11 +28,19 @@ const resolveOgImage = (url) => {
     return `https://thebeatboutique.ie${normalizeAssetPath(url)}`;
 };
 
+const normalizeSitePath = (urlPath) => {
+    if (!urlPath || urlPath === '/') return '/';
+    if (urlPath.endsWith('/')) return urlPath;
+    return `${urlPath}/`;
+};
+
+const toCanonicalUrl = (urlPath) => `https://thebeatboutique.ie${normalizeSitePath(urlPath)}`;
+
 // Generate venue pills - now with optional links
 const generateVenuePills = (venues) => {
     return venues.map(venue => {
         if (venue.slug) {
-            return `<a href="venues/${venue.slug}" class="venue-pill venue-pill-link">${venue.name}</a>`;
+            return `<a href="venues/${venue.slug}/" class="venue-pill venue-pill-link">${venue.name}</a>`;
         }
         return `<div class="venue-pill">${venue.name}</div>`;
     }).join('');
@@ -42,7 +50,7 @@ const generateVenuePills = (venues) => {
 const generateVenueDescriptions = (venues) => {
     return venues.map(venue => {
         const link = venue.slug 
-            ? `<a href="venues/${venue.slug}" style="color: var(--accent-gold);">Read our ${venue.name} guide →</a>`
+            ? `<a href="venues/${venue.slug}/" style="color: var(--accent-gold);">Read our ${venue.name} guide →</a>`
             : '';
         return `
             <div style="margin-bottom: 1.5rem;">
@@ -68,7 +76,7 @@ const generateNearbyCounties = (nearbyCounties) => {
     const validSlugs = counties.map(c => c.slug);
     return nearbyCounties
         .filter(slug => validSlugs.includes(slug))
-        .map(slug => `<a href="locations/wedding-band-${slug}" class="nearby-county-link">${countyNames[slug] || slug}</a>`)
+        .map(slug => `<a href="locations/wedding-band-${slug}/" class="nearby-county-link">${countyNames[slug] || slug}</a>`)
         .join('');
 };
 
@@ -140,23 +148,23 @@ const generateTemplate = (county) => {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wedding Band ${county.name} | The Beat Boutique</title>
     <meta name="description" content="${county.meta_description}">
-    <link rel="canonical" href="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
+    <link rel="canonical" href="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
+    <meta property="og:url" content="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
     <meta property="og:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="og:description" content="${county.meta_description}">
     <meta property="og:image" content="${ogImage}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
+    <meta property="twitter:url" content="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
     <meta property="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta property="twitter:description" content="${county.meta_description}">
     <meta property="twitter:image" content="${ogImage}">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-${county.slug}">
+    <meta name="twitter:url" content="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
     <meta name="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
     <meta name="twitter:description" content="${county.meta_description}">
     <meta name="twitter:image" content="${ogImage}">
@@ -181,7 +189,7 @@ const generateTemplate = (county) => {
           "provider": {
             "@type": "MusicGroup",
             "name": "The Beat Boutique",
-            "url": "https://thebeatboutique.ie"
+            "url": "https://thebeatboutique.ie/"
           },
           "areaServed": {
             "@type": "AdministrativeArea",
@@ -202,19 +210,19 @@ const generateTemplate = (county) => {
               "@type": "ListItem",
               "position": 1,
               "name": "Home",
-              "item": "https://thebeatboutique.ie"
+              "item": "https://thebeatboutique.ie/"
             },
             {
               "@type": "ListItem",
               "position": 2,
               "name": "Wedding Band Ireland",
-              "item": "https://thebeatboutique.ie/wedding-band-ireland"
+              "item": "https://thebeatboutique.ie/wedding-band-ireland/"
             },
             {
               "@type": "ListItem",
               "position": 3,
               "name": "Wedding Band ${county.name}",
-              "item": "https://thebeatboutique.ie/locations/wedding-band-${county.slug}"
+              "item": "${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}"
             }
           ]
         }${hasFAQs ? `,
@@ -332,9 +340,9 @@ const generateTemplate = (county) => {
             </a>
             <ul class="nav-menu">
                 <li><a href="./" class="nav-link">Home</a></li>
-                <li><a href="wedding-band-ireland" class="nav-link">Ireland</a></li>
-                <li><a href="venues" class="nav-link">Venues</a></li>
-                <li><a href="pricing-guide" class="nav-link">Pricing</a></li>
+                <li><a href="wedding-band-ireland/" class="nav-link">Ireland</a></li>
+                <li><a href="venues/" class="nav-link">Venues</a></li>
+                <li><a href="pricing-guide/" class="nav-link">Pricing</a></li>
                 <li><a href="./#contact" class="nav-cta btn-primary">Enquire Now</a></li>
             </ul>
         </div>
@@ -433,19 +441,19 @@ const generateTemplate = (county) => {
             <h2 class="section-title text-center">Wedding Planning Guides</h2>
             <p class="text-center" style="opacity: 0.8; margin-bottom: 30px;">Helpful resources for planning your wedding music.</p>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                <a href="guides/first-dance-songs" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                <a href="guides/first-dance-songs/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">First Dance Songs</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">Top 50 songs for Irish weddings</p>
                 </a>
-                <a href="guides/how-to-choose-wedding-band" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                <a href="guides/how-to-choose-wedding-band/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">How to Choose a Band</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">Complete decision guide</p>
                 </a>
-                <a href="guides/wedding-band-vs-dj" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                <a href="guides/wedding-band-vs-dj/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Band vs DJ</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">Honest comparison</p>
                 </a>
-                <a href="song-list" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                <a href="song-list/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Our Song List</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">200+ songs we perform</p>
                 </a>
@@ -474,19 +482,19 @@ const generateTemplate = (county) => {
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
-                        <li><a href="showcase">Live Showcase</a></li>
-                        <li><a href="song-list">Song List</a></li>
-                        <li><a href="venues">Venues</a></li>
-                        <li><a href="pricing-guide">Pricing</a></li>
+                        <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="song-list/">Song List</a></li>
+                        <li><a href="venues/">Venues</a></li>
+                        <li><a href="pricing-guide/">Pricing</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4 class="footer-heading">Guides</h4>
                     <ul class="footer-nav">
-                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
-                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
-                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
+                        <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -500,8 +508,8 @@ const generateTemplate = (county) => {
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="privacy">Privacy</a>
-                    <a href="terms">Terms</a>
+                    <a href="privacy/">Privacy</a>
+                    <a href="terms/">Terms</a>
                 </div>
             </div>
         </div>

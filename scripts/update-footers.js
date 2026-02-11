@@ -32,12 +32,12 @@ const STANDARD_FOOTER = `    <footer class="footer">
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
-                        <li><a href="showcase">Live Showcase</a></li>
-                        <li><a href="song-list">Song List</a></li>
-                        <li><a href="venues">Venues We Play</a></li>
-                        <li><a href="pricing-guide">Pricing Guide</a></li>
-                        <li><a href="about">About the Band</a></li>
-                        <li><a href="why-us">Why Choose Us</a></li>
+                        <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="song-list/">Song List</a></li>
+                        <li><a href="venues/">Venues We Play</a></li>
+                        <li><a href="pricing-guide/">Pricing Guide</a></li>
+                        <li><a href="about/">About the Band</a></li>
+                        <li><a href="why-us/">Why Choose Us</a></li>
                     </ul>
                 </div>
 
@@ -45,11 +45,11 @@ const STANDARD_FOOTER = `    <footer class="footer">
                 <div class="footer-col">
                     <h4 class="footer-heading">Wedding Guides</h4>
                     <ul class="footer-nav">
-                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
-                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
-                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
-                        <li><a href="wedding-band-ireland">Locations</a></li>
+                        <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
+                        <li><a href="wedding-band-ireland/">Locations</a></li>
                     </ul>
                 </div>
 
@@ -76,8 +76,8 @@ const STANDARD_FOOTER = `    <footer class="footer">
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="privacy">Privacy Policy</a>
-                    <a href="terms">Terms of Service</a>
+                    <a href="privacy/">Privacy Policy</a>
+                    <a href="terms/">Terms of Service</a>
                 </div>
             </div>
         </div>
@@ -96,19 +96,19 @@ const SIMPLE_FOOTER = `    <footer class="footer">
                 <div class="footer-col">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
-                        <li><a href="showcase">Live Showcase</a></li>
-                        <li><a href="song-list">Song List</a></li>
-                        <li><a href="venues">Venues</a></li>
-                        <li><a href="pricing-guide">Pricing</a></li>
+                        <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="song-list/">Song List</a></li>
+                        <li><a href="venues/">Venues</a></li>
+                        <li><a href="pricing-guide/">Pricing</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4 class="footer-heading">Guides</h4>
                     <ul class="footer-nav">
-                        <li><a href="guides/how-to-choose-wedding-band">How to Choose a Band</a></li>
-                        <li><a href="guides/first-dance-songs">First Dance Songs</a></li>
-                        <li><a href="guides/wedding-band-vs-dj">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band">Questions to Ask</a></li>
+                        <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -123,8 +123,8 @@ const SIMPLE_FOOTER = `    <footer class="footer">
             <div class="footer-bottom">
                 <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
                 <div class="footer-legal">
-                    <a href="privacy">Privacy</a>
-                    <a href="terms">Terms</a>
+                    <a href="privacy/">Privacy</a>
+                    <a href="terms/">Terms</a>
                 </div>
             </div>
         </div>

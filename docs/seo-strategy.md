@@ -205,7 +205,7 @@ Leitrim, Longford, Roscommon, Monaghan, Cavan, Laois, Offaly, Carlow
 - [x] Twitter cards
 - [x] Canonical URLs
 - [x] robots.txt
-- [x] sitemap.xml
+- [x] sitemap-index.xml
 - [x] Mobile responsive
 
 ### To Do
