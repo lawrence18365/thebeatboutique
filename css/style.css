@@ -410,23 +410,6 @@ img {
     text-shadow: 0 4px 16px rgba(0, 0, 0, 0.42);
 }
 
-.hero-rating-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    padding: 0.5rem 0.8rem;
-    border-radius: 999px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: #f4f1ea;
-    background: rgba(10, 25, 47, 0.52);
-    border: 1px solid rgba(244, 241, 234, 0.36);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24);
-}
-
 .hero-actions {
     display: flex;
     gap: 12px;
@@ -1943,13 +1926,6 @@ img {
         text-align: center;
         padding: 0;
     }
-    .hero-rating-pill {
-        margin-bottom: 0.85rem;
-        font-size: 0.73rem;
-        letter-spacing: 0.07em;
-        padding: 0.45rem 0.72rem;
-        background: rgba(8, 18, 33, 0.64);
-    }
     .hero-title {
         font-family: var(--font-serif);
         font-size: clamp(2.1rem, 8.4vw, 2.7rem);
@@ -2031,9 +2007,6 @@ img {
     }
     .hero-subtitle {
         font-size: 0.9rem;
-    }
-    .hero-rating-pill {
-        font-size: 0.69rem;
     }
 }
 
