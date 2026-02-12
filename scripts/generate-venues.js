@@ -5,6 +5,9 @@ const path = require('path');
 const venues = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/venues.json'), 'utf8'));
 const counties = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/counties.json'), 'utf8'));
 const validCountySlugs = new Set(counties.map((county) => county.slug));
+const VENUE_INDEX_PATH = path.join(__dirname, '../venues/index.html');
+const VENUE_DIRECTORY_START = '<!-- Auto-generated venue directory start -->';
+const VENUE_DIRECTORY_END = '<!-- Auto-generated venue directory end -->';
 
 const normalizeSitePath = (urlPath) => {
     if (!urlPath || urlPath === '/') return '/';
@@ -13,6 +16,127 @@ const normalizeSitePath = (urlPath) => {
 };
 
 const toCanonicalUrl = (urlPath) => `https://thebeatboutique.ie${normalizeSitePath(urlPath)}`;
+const sortVenuesByName = (venueList) => [...venueList].sort((a, b) => a.name.localeCompare(b.name));
+
+function escapeHtml(value) {
+    return String(value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function indentBlock(content, spaces = 4) {
+    const pad = ' '.repeat(spaces);
+    return content
+        .split('\n')
+        .map((line) => `${pad}${line}`)
+        .join('\n');
+}
+
+function buildVenueDirectorySection(venueList) {
+    const sortedVenues = sortVenuesByName(venueList);
+    const venueLinks = sortedVenues
+        .map((venue) => `                <li><a href="venues/${venue.slug}/">${escapeHtml(venue.name)}</a> <span style="opacity: 0.7;">(${escapeHtml(venue.county)})</span></li>`)
+        .join('\n');
+
+    return `    ${VENUE_DIRECTORY_START}
+    <section class="container">
+        <div style="padding: 20px 0 60px;">
+            <h2 class="section-title">All Venue Guides</h2>
+            <p style="max-width: 720px; margin: 0 auto 20px; text-align: center; opacity: 0.8;">Browse every venue guide to compare spaces, setup tips, and local expertise.</p>
+            <ul style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 8px 20px; max-width: 1100px; margin: 0 auto; padding: 0; list-style: none;">
+${venueLinks}
+            </ul>
+        </div>
+    </section>
+    ${VENUE_DIRECTORY_END}`;
+}
+
+function updateVenueIndexStructuredData(content, venueList) {
+    const structuredDataRegex = /<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/;
+    const match = content.match(structuredDataRegex);
+
+    if (!match) {
+        console.warn('Skipped structured data update for venues/index.html (JSON-LD block not found).');
+        return content;
+    }
+
+    let parsedStructuredData;
+    try {
+        parsedStructuredData = JSON.parse(match[1]);
+    } catch (error) {
+        console.warn(`Skipped structured data update for venues/index.html (invalid JSON-LD): ${error.message}`);
+        return content;
+    }
+
+    if (!Array.isArray(parsedStructuredData['@graph'])) {
+        console.warn('Skipped structured data update for venues/index.html (@graph missing).');
+        return content;
+    }
+
+    const itemList = parsedStructuredData['@graph'].find((item) => item['@type'] === 'ItemList');
+    if (!itemList) {
+        console.warn('Skipped structured data update for venues/index.html (ItemList missing).');
+        return content;
+    }
+
+    const sortedVenues = sortVenuesByName(venueList);
+    itemList.itemListElement = sortedVenues.map((venue, index) => ({
+        '@type': 'ListItem',
+        position: index + 1,
+        item: {
+            '@type': 'Place',
+            name: venue.name,
+            url: toCanonicalUrl(`/venues/${venue.slug}`),
+        },
+    }));
+
+    const updatedJsonLd = JSON.stringify(parsedStructuredData, null, 2);
+    const replacement = `<script type="application/ld+json">\n${indentBlock(updatedJsonLd, 4)}\n    </script>`;
+    return content.replace(structuredDataRegex, replacement);
+}
+
+function updateVenueIndexPage(venueList) {
+    if (!fs.existsSync(VENUE_INDEX_PATH)) {
+        console.warn('Skipped venues/index.html update (file not found).');
+        return false;
+    }
+
+    const originalContent = fs.readFileSync(VENUE_INDEX_PATH, 'utf8');
+    let updatedContent = updateVenueIndexStructuredData(originalContent, venueList);
+    const directorySection = buildVenueDirectorySection(venueList);
+
+    const existingStart = updatedContent.indexOf(VENUE_DIRECTORY_START);
+    const existingEnd = updatedContent.indexOf(VENUE_DIRECTORY_END);
+
+    if (existingStart !== -1 && existingEnd !== -1 && existingEnd > existingStart) {
+        const blockStart = updatedContent.lastIndexOf('\n', existingStart);
+        const startIndex = blockStart === -1 ? existingStart : blockStart + 1;
+        const replaceEnd = existingEnd + VENUE_DIRECTORY_END.length;
+        const blockEnd = updatedContent.indexOf('\n', replaceEnd);
+        const endIndex = blockEnd === -1 ? replaceEnd : blockEnd;
+        updatedContent = `${updatedContent.slice(0, startIndex)}${directorySection}${updatedContent.slice(endIndex)}`;
+    } else {
+        const insertionAnchor = '    <section class="internal-links">';
+        const anchorIndex = updatedContent.indexOf(insertionAnchor);
+
+        if (anchorIndex === -1) {
+            console.warn('Skipped venues/index.html venue directory insertion (anchor section not found).');
+            return false;
+        }
+
+        updatedContent = `${updatedContent.slice(0, anchorIndex)}${directorySection}\n\n${updatedContent.slice(anchorIndex)}`;
+    }
+
+    if (updatedContent === originalContent) {
+        return false;
+    }
+
+    fs.writeFileSync(VENUE_INDEX_PATH, updatedContent);
+    return true;
+}
 
 const generateVenuePage = (venue) => {
     const countySlug = venue.county.toLowerCase();
@@ -318,7 +442,7 @@ const generateVenuePage = (venue) => {
 
     </article>
 
-    <footer class="footer">
+        <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col footer-brand">
@@ -350,6 +474,7 @@ const generateVenuePage = (venue) => {
                     <ul class="footer-contact">
                         <li><a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a></li>
                         <li><a href="tel:+353872310001">+353 87 231 0001</a></li>
+                        <li><address style="font-style: normal; opacity: 0.8;">503 Griffith Ave, Glasnevin<br>Dublin 11, D11 Y977</address></li>
                     </ul>
                 </div>
             </div>
@@ -378,5 +503,12 @@ venues.forEach(venue => {
     fs.writeFileSync(filePath, html);
     console.log(`Generated: venues/${venue.slug}/index.html`);
 });
+
+const updatedVenueIndex = updateVenueIndexPage(venues);
+if (updatedVenueIndex) {
+    console.log('Updated: venues/index.html');
+} else {
+    console.log('Unchanged: venues/index.html');
+}
 
 console.log(`\nSuccessfully generated ${venues.length} venue pages!`);

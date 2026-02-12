@@ -247,6 +247,10 @@ const sitemapIndex = generateSitemapIndex([
 
 fs.writeFileSync(path.join(ROOT_DIR, 'sitemap-index.xml'), sitemapIndex);
 console.log(`\nGenerated sitemap-index.xml (master index)`);
+fs.writeFileSync(path.join(ROOT_DIR, 'sitemap.xml'), sitemapIndex);
+console.log('Generated sitemap.xml (alias of sitemap index)');
+fs.writeFileSync(path.join(ROOT_DIR, 'sitemap_index.xml'), sitemapIndex);
+console.log('Generated sitemap_index.xml (legacy alias of sitemap index)');
 
 // Summary
 const totalUrls = mainPages.length + locationPages.length + venuePages.length + guidePages.length;
