@@ -57,39 +57,11 @@
     <meta name="theme-color" content="#0a192f">
     <link rel="preload" as="image" href="assets/images/hero_poster_optimized_960.webp" media="(min-width: 769px)" fetchpriority="high">
     <link rel="preload" as="image" href="assets/images/hero_poster_mobile_640.webp" media="(max-width: 768px)" fetchpriority="high">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap">
     <link rel="stylesheet" href="css/style.css">
-    <script>
-        (function () {
-            const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-            const isMobile = window.matchMedia && window.matchMedia('(max-width: 768px)').matches;
-            const isSlowConnection = Boolean(
-                connection && (
-                    connection.saveData ||
-                    /(slow-2g|2g|3g)/.test(connection.effectiveType || '') ||
-                    (typeof connection.downlink === 'number' && connection.downlink < 2.5)
-                )
-            );
-            if (isMobile || isSlowConnection) return;
-
-            const preconnectGoogle = document.createElement('link');
-            preconnectGoogle.rel = 'preconnect';
-            preconnectGoogle.href = 'https://fonts.googleapis.com';
-            document.head.appendChild(preconnectGoogle);
-
-            const preconnectGstatic = document.createElement('link');
-            preconnectGstatic.rel = 'preconnect';
-            preconnectGstatic.href = 'https://fonts.gstatic.com';
-            preconnectGstatic.crossOrigin = 'anonymous';
-            document.head.appendChild(preconnectGstatic);
-
-            const fontStyles = document.createElement('link');
-            fontStyles.rel = 'stylesheet';
-            fontStyles.href = 'https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap';
-            document.head.appendChild(fontStyles);
-        })();
-    </script>
-    <noscript><link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"></noscript>
 
     <!-- Structured Data (Schema.org) -->
     <script type="application/ld+json">
