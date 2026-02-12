@@ -131,25 +131,6 @@ document.addEventListener('DOMContentLoaded', () => {
             )
         );
 
-        if (isMobileViewport) {
-            const mobilePoster = heroVideo.dataset.posterMobile;
-            const mobilePosterHd = heroVideo.dataset.posterMobileHd;
-            const isHighDensity = typeof window.devicePixelRatio === 'number' && window.devicePixelRatio >= 1.5;
-            const useHdPoster = isHighDensity && !hasDataSaver && !isSlowConnection;
-            const selectedPoster = useHdPoster ? (mobilePosterHd || mobilePoster) : mobilePoster;
-
-            if (selectedPoster) {
-                heroVideo.setAttribute('poster', selectedPoster);
-
-                const fallbackImage = heroVideo.querySelector('img');
-                if (fallbackImage) {
-                    fallbackImage.setAttribute('src', selectedPoster);
-                    fallbackImage.setAttribute('width', useHdPoster ? '896' : '640');
-                    fallbackImage.setAttribute('height', useHdPoster ? '1344' : '960');
-                }
-            }
-        }
-
         if (!isMobileViewport && !hasDataSaver && !isSlowConnection) {
             const hydrateHeroVideo = () => {
                 if (heroVideoSource.getAttribute('src')) return;
