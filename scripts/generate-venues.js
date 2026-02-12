@@ -143,6 +143,7 @@ const generateVenuePage = (venue) => {
     const countyGuideItem = validCountySlugs.has(countySlug)
         ? `<li><a href="locations/wedding-band-${countySlug}/">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>`
         : `<li>Wedding Band ${venue.county} — More ${venue.county} weddings</li>`;
+    const venueMetaDescription = venue.meta_description || `Planning a wedding at ${venue.name}? The Beat Boutique has played ${venue.weddings_played} weddings here. Read our venue guide with acoustics tips and insider advice.`;
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -169,7 +170,7 @@ const generateVenuePage = (venue) => {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${venue.name} Wedding Band | The Beat Boutique</title>
-    <meta name="description" content="Planning a wedding at ${venue.name}? The Beat Boutique has played ${venue.weddings_played} weddings here. Read our venue guide with acoustics tips and insider advice.">
+    <meta name="description" content="${venueMetaDescription}">
     <link rel="canonical" href="${toCanonicalUrl(`/venues/${venue.slug}`)}">
 
     <!-- Open Graph -->
