@@ -35,6 +35,12 @@ function indentBlock(content, spaces = 4) {
         .join('\n');
 }
 
+function isPlaceholder(value) {
+    if (!value) return true;
+    const v = String(value).toLowerCase();
+    return v.includes('placeholder') || v.includes('needs real');
+}
+
 function buildVenueDirectorySection(venueList) {
     const sortedVenues = sortVenuesByName(venueList);
     const venueLinks = sortedVenues
@@ -143,7 +149,50 @@ const generateVenuePage = (venue) => {
     const countyGuideItem = validCountySlugs.has(countySlug)
         ? `<li><a href="locations/wedding-band-${countySlug}/">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>`
         : `<li>Wedding Band ${venue.county} — More ${venue.county} weddings</li>`;
-    const venueMetaDescription = venue.meta_description || `Planning a wedding at ${venue.name}? The Beat Boutique has played ${venue.weddings_played} weddings here. Read our venue guide with acoustics tips and insider advice.`;
+    const venueMetaDescription = venue.meta_description || `${venue.name} wedding band guide — acoustics tips, setup advice, and real couple reviews from ${venue.weddings_played} weddings we've played there.`;
+
+    const hasAcoustics = !isPlaceholder(venue.acoustics);
+    const hasSetup = !isPlaceholder(venue.setup_notes);
+    const hasTip = !isPlaceholder(venue.insider_tip);
+    const hasBestFor = !isPlaceholder(venue.best_for);
+    const hasTestimonial = !isPlaceholder(venue.testimonial) && !isPlaceholder(venue.testimonial_author);
+
+    const aboutText = hasBestFor
+        ? `${venue.setting}. With capacity for ${venue.capacity} guests, ${venue.name} is ${venue.best_for.toLowerCase()}`
+        : `${venue.setting}. With capacity for ${venue.capacity} guests, ${venue.name} is a stunning setting for your wedding day.`;
+
+    const acousticsSection = hasAcoustics ? `
+        <div class="venue-section">
+            <h2>Acoustics &amp; Sound</h2>
+            <p>${venue.acoustics}</p>
+        </div>` : '';
+
+    const setupSection = hasSetup ? `
+        <div class="venue-section">
+            <h2>Band Setup</h2>
+            <p>${venue.setup_notes}</p>
+        </div>` : '';
+
+    const tipSection = hasTip ? `
+        <div class="insider-tip">
+            <h4>Insider Tip</h4>
+            <p>${venue.insider_tip}</p>
+        </div>` : '';
+
+    const reviewSection = hasTestimonial ? `
+        <div class="venue-review">
+            <div style="color: var(--accent-gold); margin-bottom: 15px;">★★★★★</div>
+            <blockquote>"${venue.testimonial}"</blockquote>
+            <p style="opacity: 0.8;">— ${venue.testimonial_author}</p>
+        </div>` : '';
+
+    const reviewSchema = hasTestimonial ? `,
+        {
+          "@type": "Review",
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "author": { "@type": "Person", "name": "${venue.testimonial_author}" },
+          "reviewBody": "${venue.testimonial}"
+        }` : '';
 
     return `<!DOCTYPE html>
 <html lang="en">
@@ -224,13 +273,7 @@ const generateVenuePage = (venue) => {
             { "@type": "ListItem", "position": 2, "name": "Venues", "item": "https://thebeatboutique.ie/venues/" },
             { "@type": "ListItem", "position": 3, "name": "${venue.name}", "item": "${toCanonicalUrl(`/venues/${venue.slug}`)}" }
           ]
-        },
-        {
-          "@type": "Review",
-          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-          "author": { "@type": "Person", "name": "${venue.testimonial_author}" },
-          "reviewBody": "${venue.testimonial}"
-        }
+        }${reviewSchema}
       ]
     }
     </script>
@@ -383,29 +426,12 @@ const generateVenuePage = (venue) => {
 
         <div class="venue-section">
             <h2>About ${venue.name}</h2>
-            <p>${venue.setting}. With capacity for ${venue.capacity} guests, ${venue.name} is ${venue.best_for.toLowerCase()}</p>
+            <p>${aboutText}</p>
         </div>
-
-        <div class="venue-section">
-            <h2>Acoustics & Sound</h2>
-            <p>${venue.acoustics}</p>
-        </div>
-
-        <div class="venue-section">
-            <h2>Band Setup</h2>
-            <p>${venue.setup_notes}</p>
-        </div>
-
-        <div class="insider-tip">
-            <h4>Insider Tip</h4>
-            <p>${venue.insider_tip}</p>
-        </div>
-
-        <div class="venue-review">
-            <div style="color: var(--accent-gold); margin-bottom: 15px;">★★★★★</div>
-            <blockquote>"${venue.testimonial}"</blockquote>
-            <p style="opacity: 0.8;">— ${venue.testimonial_author}</p>
-        </div>
+${acousticsSection}
+${setupSection}
+${tipSection}
+${reviewSection}
 
         <div class="venue-section">
             <h2>Planning Your ${venue.name} Wedding?</h2>
@@ -437,7 +463,7 @@ const generateVenuePage = (venue) => {
                 <li><a href="venues/ashford-castle/">Ashford Castle</a></li>
                 <li><a href="venues/cliff-at-lyons/">Cliff at Lyons</a></li>
                 <li><a href="venues/mount-juliet/">Mount Juliet Estate</a></li>
-                <li><a href="venues/">View All 15+ Venues →</a></li>
+                <li><a href="venues/">View All ${venues.length}+ Venues →</a></li>
             </ul>
         </div>
 

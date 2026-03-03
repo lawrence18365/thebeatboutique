@@ -18,6 +18,8 @@
   {
     "slug": "ballybeg-house",
     "name": "Ballybeg House",
+    "title": "Ballybeg House Wedding Band | Real Wedding & Venue Guide",
+    "meta_description": "See real weddings at Ballybeg House and how we set up band + DJ for the venue. Photos, videos, timings, and planning tips for couples in Ireland.",
     "location": "Wicklow",
     "county": "Wicklow",
     "capacity": "160",
@@ -66,6 +68,7 @@
   {
     "slug": "kilshane-house",
     "name": "Kilshane House",
+    "meta_description": "Kilshane House wedding band guide — sound tips for the Orangery, real couple reviews, and what to know before booking. From 18+ weddings at Kilshane House.",
     "location": "Tipperary",
     "county": "Tipperary",
     "capacity": "200",
@@ -210,6 +213,7 @@
   {
     "slug": "luttrellstown-castle",
     "name": "Luttrellstown Castle",
+    "meta_description": "Luttrellstown Castle wedding music guide — acoustics tips, best setup spots, and real reviews from 25+ weddings we've played there.",
     "location": "Castleknock, County Dublin",
     "county": "Dublin",
     "capacity": "200",
@@ -579,6 +583,7 @@
   {
     "slug": "mount-druid",
     "name": "Mount Druid",
+    "meta_description": "Mount Druid wedding band guide — outdoor acoustics tips, setup logistics for the barn, and real reviews. Everything for Mount Druid music planning.",
     "location": "Castletown Geoghegan, County Westmeath",
     "county": "Westmeath",
     "capacity": "180",
