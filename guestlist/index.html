@@ -53,141 +53,244 @@
     <link rel="stylesheet" href="css/style.css">
 
     <style>
-        .guestlist-page {
+        /* ---- FULL-SCREEN ATMOSPHERIC BACKGROUND ---- */
+        .gl-page {
             min-height: 100vh;
-            background: linear-gradient(165deg, var(--primary-navy) 0%, var(--primary-teal) 100%);
+            position: relative;
+            overflow: hidden;
+            background: var(--primary-navy);
+        }
+
+        .gl-page::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background:
+                linear-gradient(180deg,
+                    rgba(10, 25, 47, 0.55) 0%,
+                    rgba(10, 25, 47, 0.40) 30%,
+                    rgba(0, 61, 77, 0.65) 70%,
+                    rgba(10, 25, 47, 0.92) 100%),
+                url('../assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp');
+            background-size: cover;
+            background-position: center 30%;
+            z-index: 0;
+        }
+
+        .gl-page::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(212, 175, 55, 0.06) 0%, transparent 60%);
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .gl-content {
+            position: relative;
+            z-index: 1;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 40px 20px 60px;
+            min-height: 100vh;
+            padding: 48px 20px 80px;
         }
 
-        .guestlist-logo {
-            width: 80px;
-            height: 80px;
+        /* ---- HEADER / BRAND ---- */
+        .gl-brand {
+            text-align: center;
+            margin-bottom: 36px;
+            opacity: 0;
+            animation: glFadeUp 0.8s ease-out 0.1s forwards;
+        }
+
+        .gl-brand-logo {
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
             object-fit: cover;
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
             margin-bottom: 20px;
-            border: 2px solid rgba(212, 175, 55, 0.4);
         }
 
-        .guestlist-header {
-            text-align: center;
-            margin-bottom: 30px;
-            max-width: 400px;
-        }
-
-        .guestlist-header h1 {
+        .gl-brand h1 {
             font-family: var(--font-serif);
-            font-size: 2rem;
+            font-size: clamp(2.2rem, 5vw, 3rem);
             color: var(--text-cream);
-            margin-bottom: 8px;
-            line-height: 1.2;
+            margin-bottom: 6px;
+            line-height: 1.15;
+            letter-spacing: -0.01em;
         }
 
-        .guestlist-header p {
+        .gl-brand-line {
+            width: 40px;
+            height: 2px;
+            background: var(--accent-gold);
+            margin: 14px auto 16px;
+            opacity: 0.7;
+        }
+
+        .gl-brand p {
             color: var(--text-muted);
             font-size: 0.95rem;
-            line-height: 1.5;
+            line-height: 1.55;
+            max-width: 340px;
+            margin: 0 auto;
         }
 
-        .guestlist-card {
-            background: white;
+        /* ---- GLASS FORM CARD ---- */
+        .gl-card {
             width: 100%;
-            max-width: 420px;
-            border-radius: 12px;
-            padding: 32px 28px;
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            max-width: 440px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            backdrop-filter: saturate(140%) blur(16px);
+            -webkit-backdrop-filter: saturate(140%) blur(16px);
+            padding: 36px 30px 32px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+            opacity: 0;
+            animation: glFadeUp 0.8s ease-out 0.25s forwards;
         }
 
-        .guestlist-card h2 {
-            color: var(--primary-navy);
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            margin-bottom: 4px;
-            text-align: center;
-        }
-
-        .guestlist-card .subtitle {
-            text-align: center;
-            color: #888;
-            font-size: 0.85rem;
-            margin-bottom: 24px;
-        }
-
-        .gl-form-group {
-            margin-bottom: 16px;
-        }
-
-        .gl-form-group label {
+        .gl-card-eyebrow {
             display: block;
-            color: var(--primary-navy);
-            font-size: 0.85rem;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.72rem;
+            color: var(--accent-gold);
+            margin-bottom: 8px;
             font-weight: 600;
-            margin-bottom: 6px;
+        }
+
+        .gl-card h2 {
+            color: var(--text-cream);
+            font-family: var(--font-serif);
+            font-size: 1.6rem;
+            text-align: center;
+            margin-bottom: 4px;
+            line-height: 1.25;
+        }
+
+        .gl-card-sub {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 28px;
+        }
+
+        /* ---- FORM FIELDS ---- */
+        .gl-field {
+            margin-bottom: 18px;
+        }
+
+        .gl-field label {
+            display: block;
+            color: var(--accent-gold);
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 7px;
         }
 
         .gl-input {
             width: 100%;
             padding: 14px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-cream);
+            font-size: 0.95rem;
             font-family: var(--font-sans);
-            color: var(--primary-navy);
-            background: #fafafa;
-            transition: border-color 0.2s;
+            transition: border-color 0.3s ease, background 0.3s ease;
+            border-radius: 0;
         }
 
         .gl-input:focus {
             outline: none;
             border-color: var(--accent-gold);
-            background: white;
+            background: rgba(255, 255, 255, 0.09);
         }
 
         .gl-input::placeholder {
-            color: #aaa;
+            color: rgba(244, 241, 234, 0.3);
         }
 
         .gl-select {
             width: 100%;
             padding: 14px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-cream);
+            font-size: 0.95rem;
             font-family: var(--font-sans);
-            color: var(--primary-navy);
-            background: #fafafa;
             appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23666' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+            border-radius: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23d4af37' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 16px center;
             cursor: pointer;
+            transition: border-color 0.3s ease, background 0.3s ease;
         }
 
         .gl-select:focus {
             outline: none;
             border-color: var(--accent-gold);
-            background-color: white;
+            background-color: rgba(255, 255, 255, 0.09);
         }
 
-        .gl-submit {
-            width: 100%;
-            padding: 16px;
+        .gl-select option {
             background: var(--primary-navy);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
+            color: var(--text-cream);
+        }
+
+        .gl-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        /* ---- SUBMIT BUTTON (matches site's btn-primary hover-fill) ---- */
+        .gl-submit {
+            display: block;
+            width: 100%;
+            padding: 16px 40px;
+            margin-top: 24px;
+            background: transparent;
+            color: var(--accent-gold);
+            border: 1px solid var(--accent-gold);
+            font-size: 0.85rem;
             font-weight: 600;
             font-family: var(--font-sans);
+            text-transform: uppercase;
+            letter-spacing: 2px;
             cursor: pointer;
-            transition: background 0.2s;
-            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: color 0.4s ease;
+            border-radius: 2px;
+        }
+
+        .gl-submit::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 100%;
+            background-color: var(--accent-gold);
+            transition: width 0.4s ease;
+            z-index: -1;
         }
 
         .gl-submit:hover {
-            background: var(--primary-teal);
+            color: var(--primary-navy);
+        }
+
+        .gl-submit:hover::before {
+            width: 100%;
         }
 
         .gl-submit:active {
@@ -196,167 +299,359 @@
 
         .gl-note {
             text-align: center;
-            color: #999;
-            font-size: 0.8rem;
-            margin-top: 12px;
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            margin-top: 14px;
+            opacity: 0.7;
         }
 
-        .showcase-banner {
+        /* ---- TESTIMONIAL TICKER ---- */
+        .gl-testimonial {
             width: 100%;
-            max-width: 420px;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.25);
-            border-radius: 12px;
-            padding: 20px 24px;
-            margin-top: 24px;
+            max-width: 440px;
+            margin-top: 28px;
             text-align: center;
+            opacity: 0;
+            animation: glFadeUp 0.8s ease-out 0.45s forwards;
         }
 
-        .showcase-banner .date {
+        .gl-quote {
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 0.95rem;
+            color: var(--text-cream);
+            line-height: 1.6;
+            opacity: 0.85;
+            min-height: 3.2em;
+            transition: opacity 0.5s ease;
+        }
+
+        .gl-quote-author {
+            display: block;
             color: var(--accent-gold);
-            font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.78rem;
+            font-family: var(--font-sans);
+            font-style: normal;
+            margin-top: 8px;
+            letter-spacing: 1px;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* ---- SHOWCASE EVENT CARD ---- */
+        .gl-event {
+            width: 100%;
+            max-width: 440px;
+            margin-top: 32px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 24px 28px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            opacity: 0;
+            animation: glFadeUp 0.8s ease-out 0.6s forwards;
+        }
+
+        .gl-event-label {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.68rem;
+            color: var(--accent-gold);
+            opacity: 0.7;
             margin-bottom: 6px;
         }
 
-        .showcase-banner h3 {
-            color: var(--text-cream);
+        .gl-event h3 {
             font-family: var(--font-serif);
-            font-size: 1.15rem;
+            color: var(--accent-gold);
+            font-size: 1.35rem;
             margin-bottom: 4px;
         }
 
-        .showcase-banner p {
+        .gl-event p {
             color: var(--text-muted);
             font-size: 0.85rem;
-            line-height: 1.4;
         }
 
-        .trust-row {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 24px;
-            flex-wrap: wrap;
+        .gl-event-divider {
+            width: 30px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.15);
+            margin: 10px auto;
         }
 
-        .trust-item {
-            color: var(--text-muted);
+        .gl-event-cta {
+            display: inline-block;
+            margin-top: 14px;
+            color: var(--text-cream);
             font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .trust-item .gold {
-            color: var(--accent-gold);
-        }
-
-        .guestlist-links {
-            margin-top: 30px;
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-
-        .guestlist-links a {
-            color: var(--text-muted);
-            font-size: 0.85rem;
+            font-weight: 500;
             text-decoration: underline;
             text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: rgba(244, 241, 234, 0.3);
+            transition: color 0.3s, text-decoration-color 0.3s;
         }
 
-        .guestlist-links a:hover {
+        .gl-event-cta:hover {
             color: var(--accent-gold);
+            text-decoration-color: var(--accent-gold);
+        }
+
+        /* ---- TRUST ROW ---- */
+        .gl-trust {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: glFadeUp 0.8s ease-out 0.75s forwards;
+        }
+
+        .gl-trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .gl-trust-value {
+            font-family: var(--font-serif);
+            font-size: 1.4rem;
+            color: var(--accent-gold);
+            line-height: 1;
+        }
+
+        .gl-trust-label {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 500;
+        }
+
+        /* ---- FOOTER LINKS ---- */
+        .gl-links {
+            margin-top: 36px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            opacity: 0;
+            animation: glFadeUp 0.8s ease-out 0.85s forwards;
+        }
+
+        .gl-links a {
+            color: var(--text-muted);
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 6px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: border-color 0.3s, color 0.3s;
+        }
+
+        .gl-links a:hover {
+            color: var(--accent-gold);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        /* ---- ANIMATIONS ---- */
+        @keyframes glFadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ---- RESPONSIVE ---- */
+        @media (max-width: 480px) {
+            .gl-content {
+                padding: 36px 16px 60px;
+            }
+
+            .gl-card {
+                padding: 28px 22px 26px;
+            }
+
+            .gl-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+
+            .gl-brand h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .gl-content {
+                padding: 80px 20px 100px;
+                justify-content: center;
+            }
+
+            .gl-card {
+                max-width: 480px;
+                padding: 44px 40px 38px;
+            }
+
+            .gl-event,
+            .gl-testimonial {
+                max-width: 480px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <div class="guestlist-page">
-        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="guestlist-logo" width="80" height="80">
+    <div class="gl-page">
+        <div class="gl-content">
 
-        <div class="guestlist-header">
-            <h1>The Beat Boutique</h1>
-            <p>Ireland's premier wedding band. Tell us about your day and we'll be in touch within 24 hours.</p>
-        </div>
+            <!-- Brand -->
+            <div class="gl-brand">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="gl-brand-logo" width="72" height="72">
+                <h1>The Beat Boutique</h1>
+                <div class="gl-brand-line"></div>
+                <p>Ireland's premier wedding band. Tell us about your day and we'll be in touch within 24 hours.</p>
+            </div>
 
-        <div class="guestlist-card">
-            <h2>Check Availability</h2>
-            <p class="subtitle">No obligation, just a quick chat about your date</p>
+            <!-- Form Card -->
+            <div class="gl-card">
+                <span class="gl-card-eyebrow">Check Availability</span>
+                <h2>Is Your Date Free?</h2>
+                <p class="gl-card-sub">No obligation &mdash; just honest chat about your wedding</p>
 
-            <form action="https://submit-form.com/Iha0EYBCZ" method="POST">
-                <input type="hidden" name="subject" value="New Enquiry from Instagram">
-                <input type="hidden" name="redirect" value="https://thebeatboutique.ie/thank-you/">
-                <input type="hidden" name="form_source" value="Instagram Guestlist">
-                <input type="hidden" name="page_url" value="https://thebeatboutique.ie/guestlist/">
-                <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px;">
+                <form action="https://submit-form.com/Iha0EYBCZ" method="POST">
+                    <input type="hidden" name="subject" value="New Enquiry from Instagram">
+                    <input type="hidden" name="redirect" value="https://thebeatboutique.ie/thank-you/">
+                    <input type="hidden" name="form_source" value="Instagram Guestlist">
+                    <input type="hidden" name="page_url" value="https://thebeatboutique.ie/guestlist/">
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px;">
 
-                <div class="gl-form-group">
-                    <label for="gl-names">Your Names *</label>
-                    <input type="text" id="gl-names" name="names" class="gl-input" placeholder="e.g. Sarah & Tom" required>
+                    <div class="gl-field">
+                        <label for="gl-names">Your Names</label>
+                        <input type="text" id="gl-names" name="names" class="gl-input" placeholder="e.g. Sarah & Tom" required>
+                    </div>
+
+                    <div class="gl-row">
+                        <div class="gl-field">
+                            <label for="gl-email">Email</label>
+                            <input type="email" id="gl-email" name="email" class="gl-input" placeholder="hello@example.com" required>
+                        </div>
+                        <div class="gl-field">
+                            <label for="gl-phone">Phone</label>
+                            <input type="tel" id="gl-phone" name="phone" class="gl-input" placeholder="087 123 4567">
+                        </div>
+                    </div>
+
+                    <div class="gl-row">
+                        <div class="gl-field">
+                            <label for="gl-date">Wedding Date</label>
+                            <input type="text" id="gl-date" name="wedding_date" class="gl-input" placeholder="e.g. 9 May 2026" required>
+                        </div>
+                        <div class="gl-field">
+                            <label for="gl-venue">Venue / County</label>
+                            <input type="text" id="gl-venue" name="venue" class="gl-input" placeholder="e.g. Adare Manor">
+                        </div>
+                    </div>
+
+                    <div class="gl-field">
+                        <label for="gl-interest">I'm interested in</label>
+                        <select id="gl-interest" name="interest" class="gl-select">
+                            <option value="Wedding Band">Wedding Band</option>
+                            <option value="Live Showcase">Attending the Live Showcase</option>
+                            <option value="Corporate Event">Corporate / Private Event</option>
+                            <option value="Just Browsing">Just Browsing</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="gl-submit">Get On The Guestlist</button>
+                    <p class="gl-note">We reply within 24 hours (usually much faster)</p>
+                </form>
+            </div>
+
+            <!-- Rotating Testimonial -->
+            <div class="gl-testimonial">
+                <p class="gl-quote" id="gl-quote-text">"The dance floor was full all night and we are getting so many positive comments."</p>
+                <span class="gl-quote-author" id="gl-quote-author">Kevin</span>
+            </div>
+
+            <!-- Showcase Event -->
+            <div class="gl-event">
+                <p class="gl-event-label">Next Live Showcase</p>
+                <h3>Sunday 19th April 2026</h3>
+                <div class="gl-event-divider"></div>
+                <p>Clonsilla Inn, Dublin 15 &middot; 7pm&ndash;9pm</p>
+                <a href="showcase/" class="gl-event-cta">Reserve a free seat &rarr;</a>
+            </div>
+
+            <!-- Trust -->
+            <div class="gl-trust">
+                <div class="gl-trust-item">
+                    <span class="gl-trust-value">180+</span>
+                    <span class="gl-trust-label">5-Star Reviews</span>
                 </div>
-
-                <div class="gl-form-group">
-                    <label for="gl-email">Email *</label>
-                    <input type="email" id="gl-email" name="email" class="gl-input" placeholder="hello@example.com" required>
+                <div class="gl-trust-item">
+                    <span class="gl-trust-value">500+</span>
+                    <span class="gl-trust-label">Weddings</span>
                 </div>
-
-                <div class="gl-form-group">
-                    <label for="gl-phone">Phone</label>
-                    <input type="tel" id="gl-phone" name="phone" class="gl-input" placeholder="087 123 4567">
+                <div class="gl-trust-item">
+                    <span class="gl-trust-value">32</span>
+                    <span class="gl-trust-label">Counties</span>
                 </div>
+            </div>
 
-                <div class="gl-form-group">
-                    <label for="gl-date">Wedding Date *</label>
-                    <input type="text" id="gl-date" name="wedding_date" class="gl-input" placeholder="e.g. 9 May 2026" required>
-                </div>
+            <!-- Links -->
+            <div class="gl-links">
+                <a href="showcase/">Showcase</a>
+                <a href="song-list/">Songs</a>
+                <a href="pricing-guide/">Pricing</a>
+                <a href="about/">About</a>
+                <a href="./">Website</a>
+            </div>
 
-                <div class="gl-form-group">
-                    <label for="gl-venue">Venue / County</label>
-                    <input type="text" id="gl-venue" name="venue" class="gl-input" placeholder="e.g. Adare Manor, Limerick">
-                </div>
-
-                <div class="gl-form-group">
-                    <label for="gl-interest">What are you interested in?</label>
-                    <select id="gl-interest" name="interest" class="gl-select">
-                        <option value="Wedding Band">Wedding Band</option>
-                        <option value="Live Showcase">Attending the Live Showcase</option>
-                        <option value="Corporate Event">Corporate / Private Event</option>
-                        <option value="Just Browsing">Just Browsing</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="gl-submit">Get On The Guestlist</button>
-                <p class="gl-note">We reply within 24 hours (usually much faster)</p>
-            </form>
-        </div>
-
-        <div class="showcase-banner">
-            <p class="date">Next Live Date</p>
-            <h3>Sunday 19th April 2026</h3>
-            <p>Clonsilla Inn, Dublin 15 &middot; 7pm&ndash;9pm &middot; Free entry</p>
-        </div>
-
-        <div class="trust-row">
-            <span class="trust-item"><span class="gold">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 180+ Reviews</span>
-            <span class="trust-item">500+ Weddings</span>
-            <span class="trust-item">Nationwide</span>
-        </div>
-
-        <div class="guestlist-links">
-            <a href="showcase/">Live Showcase</a>
-            <a href="song-list/">Song List</a>
-            <a href="pricing-guide/">Pricing</a>
-            <a href="./">Website</a>
         </div>
     </div>
 
     <script>
+        // Rotating testimonials
+        (function() {
+            var quotes = [
+                { text: '"The dance floor was full all night and we are getting so many positive comments."', author: 'Kevin' },
+                { text: '"The best wedding band they\'d ever heard \u2014 practically every guest said it!"', author: 'Suzy' },
+                { text: '"We saw them at the showcase and booked on the spot. Seeing them live removed all doubt."', author: 'Laura & John' },
+                { text: '"They had the dance floor full at all times!"', author: 'Stephen' },
+                { text: '"Absolutely phenomenal! So many guests said they were the best wedding band they had ever seen."', author: 'Naomi' },
+                { text: '"What an amazing band. People are still raving about them."', author: 'Deborah' },
+                { text: '"5 months later our guests are still raving about them."', author: 'Sarah' },
+                { text: '"An exceptionally smooth process from start to finish."', author: 'Morgan' }
+            ];
+            var i = 0;
+            var textEl = document.getElementById('gl-quote-text');
+            var authorEl = document.getElementById('gl-quote-author');
+            if (!textEl || !authorEl) return;
+
+            setInterval(function() {
+                textEl.style.opacity = '0';
+                authorEl.style.opacity = '0';
+                setTimeout(function() {
+                    i = (i + 1) % quotes.length;
+                    textEl.textContent = quotes[i].text;
+                    authorEl.textContent = quotes[i].author;
+                    textEl.style.opacity = '0.85';
+                    authorEl.style.opacity = '1';
+                }, 500);
+            }, 5000);
+        })();
+
+        // Form submission tracking
         document.querySelectorAll('form').forEach(function(form) {
             form.addEventListener('submit', function() {
                 if (typeof window.trackEvent === 'function') {
