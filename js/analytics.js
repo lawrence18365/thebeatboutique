@@ -18,6 +18,58 @@
         queuedEvents.push([name, params]);
     };
 
+    function normalizeUrlPath(href) {
+        if (!href) {
+            return '';
+        }
+
+        try {
+            const parsed = new URL(href, window.location.href);
+            return parsed.pathname + parsed.search;
+        } catch (error) {
+            return href;
+        }
+    }
+
+    function initEventTracking() {
+        document.addEventListener('submit', (event) => {
+            const form = event.target instanceof HTMLFormElement ? event.target : null;
+            if (!form) {
+                return;
+            }
+
+            window.trackEvent('form_submit', {
+                form_id: form.id || '(none)',
+                form_name: form.getAttribute('name') || '(none)',
+                form_action: normalizeUrlPath(form.getAttribute('action') || ''),
+            });
+        });
+
+        document.addEventListener('click', (event) => {
+            const link = event.target instanceof Element ? event.target.closest('a') : null;
+            if (!link) {
+                return;
+            }
+
+            const href = link.getAttribute('href') || '';
+
+            if (href.startsWith('mailto:')) {
+                window.trackEvent('contact_click', {
+                    contact_type: 'email',
+                    target: href.replace(/^mailto:/, ''),
+                });
+                return;
+            }
+
+            if (href.startsWith('tel:')) {
+                window.trackEvent('contact_click', {
+                    contact_type: 'phone',
+                    target: href.replace(/^tel:/, ''),
+                });
+            }
+        });
+    }
+
     function loadAnalytics() {
         if (!hasValidId || window.__gaLoaded) {
             return;
@@ -125,8 +177,12 @@
     }
 
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initConsent);
+        document.addEventListener('DOMContentLoaded', () => {
+            initConsent();
+            initEventTracking();
+        });
     } else {
         initConsent();
+        initEventTracking();
     }
 })();

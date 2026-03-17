@@ -30,19 +30,19 @@
     <meta property="og:url" content="https://thebeatboutique.ie/locations/wedding-band-cork/">
     <meta property="og:title" content="Wedding Band Cork | The Beat Boutique">
     <meta property="og:description" content="Wedding Band Cork - The Beat Boutique perform at venues across the Rebel County. Premium live music for Cork weddings.">
-    <meta property="og:image" content="https://images.unsplash.com/photo-1533939015789-0b8a0f29ea2a?q=80&w=2070&auto=format&fit=crop">
+    <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-cork/">
     <meta property="twitter:title" content="Wedding Band Cork | The Beat Boutique">
     <meta property="twitter:description" content="Wedding Band Cork - The Beat Boutique perform at venues across the Rebel County. Premium live music for Cork weddings.">
-    <meta property="twitter:image" content="https://images.unsplash.com/photo-1533939015789-0b8a0f29ea2a?q=80&w=2070&auto=format&fit=crop">
+    <meta property="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://thebeatboutique.ie/locations/wedding-band-cork/">
     <meta name="twitter:title" content="Wedding Band Cork | The Beat Boutique">
     <meta name="twitter:description" content="Wedding Band Cork - The Beat Boutique perform at venues across the Rebel County. Premium live music for Cork weddings.">
-    <meta name="twitter:image" content="https://images.unsplash.com/photo-1533939015789-0b8a0f29ea2a?q=80&w=2070&auto=format&fit=crop">
+    <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,14 +57,44 @@
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": ["Organization", "MusicGroup", "LocalBusiness"],
+          "@id": "https://thebeatboutique.ie/#organization",
+          "name": "The Beat Boutique",
+          "url": "https://thebeatboutique.ie/",
+          "image": "https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp",
+          "sameAs": [
+            "https://www.facebook.com/thebeatboutiqueband",
+            "https://www.instagram.com/thebeatboutiqueweddingband/"
+          ],
+          "telephone": "+353872310001",
+          "email": "justask@thebeatboutique.ie",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "503 Griffith Ave, Glasnevin",
+            "addressLocality": "Dublin",
+            "postalCode": "D11 Y977",
+            "addressRegion": "County Dublin",
+            "addressCountry": "IE"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Ireland"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1",
+            "reviewCount": "180"
+          }
+        },
+        {
           "@type": "Service",
           "name": "Wedding Band Cork",
           "serviceType": "Wedding Entertainment",
           "description": "Wedding Band Cork - The Beat Boutique perform at venues across the Rebel County. Premium live music for Cork weddings.",
           "provider": {
-            "@type": "MusicGroup",
-            "name": "The Beat Boutique",
-            "url": "https://thebeatboutique.ie/"
+            "@id": "https://thebeatboutique.ie/#organization"
           },
           "areaServed": {
             "@type": "AdministrativeArea",
@@ -241,7 +271,7 @@
             </a>
             <ul class="nav-menu">
                 <li><a href="./" class="nav-link">Home</a></li>
-                <li><a href="wedding-band-ireland/" class="nav-link">Ireland</a></li>
+                <li><a href="wedding-band-ireland/" class="nav-link">Wedding Band Ireland</a></li>
                 <li><a href="venues/" class="nav-link">Venues</a></li>
                 <li><a href="pricing-guide/" class="nav-link">Pricing</a></li>
                 <li><a href="./#contact" class="nav-cta btn-primary">Enquire Now</a></li>
@@ -285,7 +315,7 @@
                 <p class="text-center" style="opacity: 0.8;">Venues we know and love - click any with a guide available for detailed tips.</p>
                 
                 <div class="venue-list">
-                    <div class="venue-pill">Hayfield Manor</div><div class="venue-pill">Inchydoney Island Lodge</div><div class="venue-pill">Ballymaloe House</div><div class="venue-pill">Castlemartyr Resort</div>
+                    <div class="venue-pill">Hayfield Manor</div><div class="venue-pill">Inchydoney Island Lodge</div><div class="venue-pill">Ballymaloe House</div><a href="venues/castlemartyr-resort/" class="venue-pill venue-pill-link">Castlemartyr Resort</a>
                 </div>
 
                 
@@ -306,7 +336,7 @@
             </div>
             <div style="margin-bottom: 1.5rem;">
                 <h4 style="margin: 0 0 0.5rem; color: var(--primary-navy);">Castlemartyr Resort</h4>
-                <p style="margin: 0; opacity: 0.8; font-size: 0.95rem;">800-year-old castle with modern luxury near Midleton. </p>
+                <p style="margin: 0; opacity: 0.8; font-size: 0.95rem;">800-year-old castle with modern luxury near Midleton. <a href="venues/castlemartyr-resort/" style="color: var(--accent-gold);">Read our Castlemartyr Resort guide →</a></p>
             </div>
                 </div>
                 
@@ -388,6 +418,18 @@
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Band vs DJ</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">Honest comparison</p>
                 </a>
+                <a href="guides/when-to-book-wedding-band/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">When to Book</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Secure your band at the right time</p>
+                </a>
+                <a href="reviews/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Wedding Band Reviews</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Real feedback from Irish couples</p>
+                </a>
+                <a href="wedding-band-ireland/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Wedding Band Ireland</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Nationwide coverage and county guides</p>
+                </a>
                 <a href="song-list/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Our Song List</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">200+ songs we perform</p>
@@ -418,6 +460,7 @@
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
                         <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="reviews/">Reviews</a></li>
                         <li><a href="song-list/">Song List</a></li>
                         <li><a href="venues/">Venues</a></li>
                         <li><a href="pricing-guide/">Pricing</a></li>
@@ -429,7 +472,7 @@
                         <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
                         <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
                         <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
+                        <li><a href="wedding-band-ireland/">Wedding Band Ireland</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -451,5 +494,7 @@
         </div>
     </footer>
 
+    <script src="js/site-config.js"></script>
+    <script defer src="js/analytics.js"></script>
 </body>
 </html>

@@ -103,6 +103,7 @@ const MAIN_PAGES = [
     { path: 'showcase/index.html', url: '/showcase/', priority: '0.9' },
     { path: 'about/index.html', url: '/about/', priority: '0.8' },
     { path: 'why-us/index.html', url: '/why-us/', priority: '0.8' },
+    { path: 'reviews/index.html', url: '/reviews/', priority: '0.8' },
     { path: 'pricing-guide/index.html', url: '/pricing-guide/', priority: '0.8' },
     { path: 'song-list/index.html', url: '/song-list/', priority: '0.8' },
     { path: 'corporate-events/index.html', url: '/corporate-events/', priority: '0.7' },

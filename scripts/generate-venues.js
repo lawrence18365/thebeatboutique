@@ -5,9 +5,20 @@ const path = require('path');
 const venues = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/venues.json'), 'utf8'));
 const counties = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/counties.json'), 'utf8'));
 const validCountySlugs = new Set(counties.map((county) => county.slug));
+const countySlugByName = new Map(counties.map((county) => [county.name.toLowerCase(), county.slug]));
 const VENUE_INDEX_PATH = path.join(__dirname, '../venues/index.html');
 const VENUE_DIRECTORY_START = '<!-- Auto-generated venue directory start -->';
 const VENUE_DIRECTORY_END = '<!-- Auto-generated venue directory end -->';
+const FEATURED_VENUE_SLUGS = [
+    'kilshane-house',
+    'mount-druid',
+    'ballybeg-house',
+    'cliff-at-lyons',
+    'poulaphouca-house-and-falls',
+    'powerscourt-hotel',
+    'tankardstown-house',
+    'ashford-castle',
+];
 
 const normalizeSitePath = (urlPath) => {
     if (!urlPath || urlPath === '/') return '/';
@@ -39,6 +50,50 @@ function isPlaceholder(value) {
     if (!value) return true;
     const v = String(value).toLowerCase();
     return v.includes('placeholder') || v.includes('needs real');
+}
+
+function formatNaturalList(items) {
+    if (items.length === 0) return '';
+    if (items.length === 1) return items[0];
+    if (items.length === 2) return `${items[0]} and ${items[1]}`;
+    return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+}
+
+function getRelatedVenues(currentVenue) {
+    const sameCountyVenues = sortVenuesByName(
+        venues.filter((candidate) => candidate.slug !== currentVenue.slug && candidate.county === currentVenue.county)
+    ).slice(0, 3);
+
+    const sortedVenueList = sortVenuesByName(venues);
+    const currentVenueIndex = sortedVenueList.findIndex((candidate) => candidate.slug === currentVenue.slug);
+    const nearbyVenueOffsets = [1, -1, 2, -2, 3, -3];
+    const nearbyVenues = nearbyVenueOffsets
+        .map((offset) => sortedVenueList[currentVenueIndex + offset])
+        .filter(Boolean)
+        .filter((candidate) => candidate.slug !== currentVenue.slug)
+        .filter((candidate) => !sameCountyVenues.some((sameCountyVenue) => sameCountyVenue.slug === candidate.slug))
+        .slice(0, 3);
+
+    const fallbackVenues = FEATURED_VENUE_SLUGS
+        .map((slug) => venues.find((candidate) => candidate.slug === slug))
+        .filter(Boolean)
+        .filter((candidate) => candidate.slug !== currentVenue.slug)
+        .filter((candidate) => !sameCountyVenues.some((sameCountyVenue) => sameCountyVenue.slug === candidate.slug))
+        .filter((candidate) => !nearbyVenues.some((nearbyVenue) => nearbyVenue.slug === candidate.slug))
+        .slice(0, 2);
+
+    return [...sameCountyVenues, ...nearbyVenues, ...fallbackVenues].slice(0, 5);
+}
+
+function renderRelatedVenueLinks(currentVenue) {
+    return getRelatedVenues(currentVenue)
+        .map((relatedVenue) => {
+            const description = relatedVenue.county === currentVenue.county
+                ? `Another ${currentVenue.county} venue guide`
+                : `${relatedVenue.county} wedding venue guide`;
+            return `                <li><a href="venues/${relatedVenue.slug}/">${escapeHtml(relatedVenue.name)}</a> — ${escapeHtml(description)}</li>`;
+        })
+        .join('\n');
 }
 
 function buildVenueDirectorySection(venueList) {
@@ -145,17 +200,33 @@ function updateVenueIndexPage(venueList) {
 }
 
 const generateVenuePage = (venue) => {
-    const countySlug = venue.county.toLowerCase();
+    const countySlug = countySlugByName.get(venue.county.toLowerCase()) || venue.county.toLowerCase();
     const countyGuideItem = validCountySlugs.has(countySlug)
         ? `<li><a href="locations/wedding-band-${countySlug}/">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>`
         : `<li>Wedding Band ${venue.county} — More ${venue.county} weddings</li>`;
-    const venueMetaDescription = venue.meta_description || `${venue.name} wedding band guide — acoustics tips, setup advice, and real couple reviews from ${venue.weddings_played} weddings we've played there.`;
-
     const hasAcoustics = !isPlaceholder(venue.acoustics);
     const hasSetup = !isPlaceholder(venue.setup_notes);
     const hasTip = !isPlaceholder(venue.insider_tip);
     const hasBestFor = !isPlaceholder(venue.best_for);
     const hasTestimonial = !isPlaceholder(venue.testimonial) && !isPlaceholder(venue.testimonial_author);
+    const metaSignals = [];
+    if (hasAcoustics) metaSignals.push('acoustics tips');
+    if (hasSetup) metaSignals.push('setup advice');
+    if (hasTestimonial) metaSignals.push('real couple feedback');
+
+    const defaultMetaDescription = metaSignals.length > 0
+        ? `${venue.name} wedding band guide — ${formatNaturalList(metaSignals)} from ${venue.weddings_played} weddings we've played there.`
+        : `${venue.name} wedding band guide — venue notes, setup guidance, and practical planning tips from ${venue.weddings_played} weddings we've played there.`;
+    const venueMetaDescription = venue.meta_description || defaultMetaDescription;
+    const metaTitle = venue.title || `${venue.name} Wedding Band | The Beat Boutique`;
+    const socialDescription = venue.og_description || venueMetaDescription;
+    const articleHeadline = venue.article_headline || `${venue.name} Wedding Band Guide`;
+    const relatedVenueLinks = renderRelatedVenueLinks(venue);
+    const hasSameCountyVenueLinks = venues.some((candidate) => candidate.slug !== venue.slug && candidate.county === venue.county);
+    const moreVenueGuidesHeading = hasSameCountyVenueLinks ? `More ${venue.county} Venue Guides` : 'More Venue Guides';
+    const moreVenueGuidesIntro = hasSameCountyVenueLinks
+        ? `Compare more venues we play regularly in ${venue.county}, plus a few of our busiest wedding venues around Ireland:`
+        : 'Explore more venue guides for tips and insider knowledge:';
 
     const aboutText = hasBestFor
         ? `${venue.setting}. With capacity for ${venue.capacity} guests, ${venue.name} is ${venue.best_for.toLowerCase()}`
@@ -218,27 +289,27 @@ const generateVenuePage = (venue) => {
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${venue.name} Wedding Band | The Beat Boutique</title>
+    <title>${metaTitle}</title>
     <meta name="description" content="${venueMetaDescription}">
     <link rel="canonical" href="${toCanonicalUrl(`/venues/${venue.slug}`)}">
 
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="${toCanonicalUrl(`/venues/${venue.slug}`)}">
-    <meta property="og:title" content="${venue.name} Wedding Band | The Beat Boutique">
-    <meta property="og:description" content="Expert tips for wedding music at ${venue.name}. Acoustics guide, setlist ideas, and real wedding reviews.">
+    <meta property="og:title" content="${metaTitle}">
+    <meta property="og:description" content="${socialDescription}">
     <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="${toCanonicalUrl(`/venues/${venue.slug}`)}">
-    <meta property="twitter:title" content="${venue.name} Wedding Band | The Beat Boutique">
-    <meta property="twitter:description" content="Expert tips for wedding music at ${venue.name}. Acoustics guide, setlist ideas, and real wedding reviews.">
+    <meta property="twitter:title" content="${metaTitle}">
+    <meta property="twitter:description" content="${socialDescription}">
     <meta property="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="${toCanonicalUrl(`/venues/${venue.slug}`)}">
-    <meta name="twitter:title" content="${venue.name} Wedding Band | The Beat Boutique">
-    <meta name="twitter:description" content="Expert tips for wedding music at ${venue.name}. Acoustics guide, setlist ideas, and real wedding reviews.">
+    <meta name="twitter:title" content="${metaTitle}">
+    <meta name="twitter:description" content="${socialDescription}">
     <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
 
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
@@ -254,14 +325,40 @@ const generateVenuePage = (venue) => {
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": ["Organization", "MusicGroup", "LocalBusiness"],
+          "@id": "https://thebeatboutique.ie/#organization",
+          "name": "The Beat Boutique",
+          "url": "https://thebeatboutique.ie/",
+          "image": "https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp",
+          "sameAs": [
+            "https://www.facebook.com/thebeatboutiqueband",
+            "https://www.instagram.com/thebeatboutiqueweddingband/"
+          ],
+          "telephone": "+353872310001",
+          "email": "justask@thebeatboutique.ie",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "503 Griffith Ave, Glasnevin",
+            "addressLocality": "Dublin",
+            "postalCode": "D11 Y977",
+            "addressRegion": "County Dublin",
+            "addressCountry": "IE"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1",
+            "reviewCount": "180"
+          }
+        },
+        {
           "@type": "Article",
-          "headline": "${venue.name} Wedding Band Guide",
-          "description": "Expert tips for wedding music at ${venue.name} from The Beat Boutique.",
-          "author": { "@type": "Organization", "name": "The Beat Boutique" },
+          "headline": "${articleHeadline}",
+          "description": "${venueMetaDescription}",
+          "author": { "@id": "https://thebeatboutique.ie/#organization" },
           "publisher": {
-            "@type": "Organization",
-            "name": "The Beat Boutique",
-            "logo": { "@type": "ImageObject", "url": "https://thebeatboutique.ie/assets/images/the_beat_boutique_logo.webp" }
+            "@id": "https://thebeatboutique.ie/#organization"
           },
           "datePublished": "2025-01-01",
           "dateModified": "2026-02-01"
@@ -436,7 +533,7 @@ ${reviewSection}
         <div class="venue-section">
             <h2>Planning Your ${venue.name} Wedding?</h2>
             <p>We've played ${venue.weddings_played} weddings at ${venue.name} and know the venue inside out. From setup logistics to the perfect setlist for the space, we handle everything so you can enjoy your day.</p>
-            <p>Check our availability for your date, or come see us live at our Dublin showcase first.</p>
+            <p>Check our availability for your date, read what couples say on our <a href="reviews/">reviews page</a>, or come see us live at our Dublin showcase first.</p>
         </div>
 
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 40px 0;">
@@ -447,6 +544,8 @@ ${reviewSection}
         <div class="venue-section">
             <h2>Related Guides</h2>
             <ul style="line-height: 2;">
+                <li><a href="reviews/">Wedding Band Reviews</a> — Real feedback from Irish couples</li>
+                <li><a href="wedding-band-ireland/">Wedding Band Ireland</a> — County guides and nationwide coverage</li>
                 <li><a href="guides/first-dance-songs/">First Dance Songs Ireland</a> — Top 50 wedding songs</li>
                 <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Wedding Band</a> — Complete guide</li>
                 <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a> — 20 essential questions</li>
@@ -456,13 +555,10 @@ ${reviewSection}
         </div>
 
         <div class="venue-section">
-            <h2>More Venue Guides</h2>
-            <p>Explore our other venue guides for tips and insider knowledge:</p>
+            <h2>${moreVenueGuidesHeading}</h2>
+            <p>${moreVenueGuidesIntro}</p>
             <ul style="line-height: 2;">
-                <li><a href="venues/adare-manor/">Adare Manor</a></li>
-                <li><a href="venues/ashford-castle/">Ashford Castle</a></li>
-                <li><a href="venues/cliff-at-lyons/">Cliff at Lyons</a></li>
-                <li><a href="venues/mount-juliet/">Mount Juliet Estate</a></li>
+${relatedVenueLinks}
                 <li><a href="venues/">View All ${venues.length}+ Venues →</a></li>
             </ul>
         </div>
@@ -482,6 +578,7 @@ ${reviewSection}
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
                         <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="reviews/">Reviews</a></li>
                         <li><a href="song-list/">Song List</a></li>
                         <li><a href="venues/">Venues</a></li>
                         <li><a href="pricing-guide/">Pricing</a></li>
@@ -493,7 +590,7 @@ ${reviewSection}
                         <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
                         <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
                         <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
+                        <li><a href="wedding-band-ireland/">Wedding Band Ireland</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

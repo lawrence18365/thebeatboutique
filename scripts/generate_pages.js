@@ -21,9 +21,11 @@ const normalizeAssetPath = (url) => {
 };
 
 const resolveOgImage = (url) => {
+    const defaultOgImage = 'https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp';
     if (!url) {
-        return 'https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp';
+        return defaultOgImage;
     }
+    if (url.includes('images.unsplash.com')) return defaultOgImage;
     if (url.startsWith('http')) return url;
     return `https://thebeatboutique.ie${normalizeAssetPath(url)}`;
 };
@@ -122,6 +124,7 @@ const generateTemplate = (county) => {
         county.hero_image || '/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp'
     );
     const ogImage = resolveOgImage(county.hero_image);
+    const metaTitle = county.meta_title || `Wedding Band ${county.name} | The Beat Boutique`;
     
     return `<!DOCTYPE html>
 <html lang="en">
@@ -146,26 +149,26 @@ const generateTemplate = (county) => {
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wedding Band ${county.name} | The Beat Boutique</title>
+    <title>${metaTitle}</title>
     <meta name="description" content="${county.meta_description}">
     <link rel="canonical" href="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
     
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
-    <meta property="og:title" content="Wedding Band ${county.name} | The Beat Boutique">
+    <meta property="og:title" content="${metaTitle}">
     <meta property="og:description" content="${county.meta_description}">
     <meta property="og:image" content="${ogImage}">
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
-    <meta property="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
+    <meta property="twitter:title" content="${metaTitle}">
     <meta property="twitter:description" content="${county.meta_description}">
     <meta property="twitter:image" content="${ogImage}">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="${toCanonicalUrl(`/locations/wedding-band-${county.slug}`)}">
-    <meta name="twitter:title" content="Wedding Band ${county.name} | The Beat Boutique">
+    <meta name="twitter:title" content="${metaTitle}">
     <meta name="twitter:description" content="${county.meta_description}">
     <meta name="twitter:image" content="${ogImage}">
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
@@ -182,14 +185,44 @@ const generateTemplate = (county) => {
       "@context": "https://schema.org",
       "@graph": [
         {
+          "@type": ["Organization", "MusicGroup", "LocalBusiness"],
+          "@id": "https://thebeatboutique.ie/#organization",
+          "name": "The Beat Boutique",
+          "url": "https://thebeatboutique.ie/",
+          "image": "https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp",
+          "sameAs": [
+            "https://www.facebook.com/thebeatboutiqueband",
+            "https://www.instagram.com/thebeatboutiqueweddingband/"
+          ],
+          "telephone": "+353872310001",
+          "email": "justask@thebeatboutique.ie",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "503 Griffith Ave, Glasnevin",
+            "addressLocality": "Dublin",
+            "postalCode": "D11 Y977",
+            "addressRegion": "County Dublin",
+            "addressCountry": "IE"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Ireland"
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "5",
+            "bestRating": "5",
+            "worstRating": "1",
+            "reviewCount": "180"
+          }
+        },
+        {
           "@type": "Service",
           "name": "Wedding Band ${county.name}",
           "serviceType": "Wedding Entertainment",
           "description": "${county.meta_description.replace(/"/g, '\\"')}",
           "provider": {
-            "@type": "MusicGroup",
-            "name": "The Beat Boutique",
-            "url": "https://thebeatboutique.ie/"
+            "@id": "https://thebeatboutique.ie/#organization"
           },
           "areaServed": {
             "@type": "AdministrativeArea",
@@ -340,7 +373,7 @@ const generateTemplate = (county) => {
             </a>
             <ul class="nav-menu">
                 <li><a href="./" class="nav-link">Home</a></li>
-                <li><a href="wedding-band-ireland/" class="nav-link">Ireland</a></li>
+                <li><a href="wedding-band-ireland/" class="nav-link">Wedding Band Ireland</a></li>
                 <li><a href="venues/" class="nav-link">Venues</a></li>
                 <li><a href="pricing-guide/" class="nav-link">Pricing</a></li>
                 <li><a href="./#contact" class="nav-cta btn-primary">Enquire Now</a></li>
@@ -453,6 +486,18 @@ const generateTemplate = (county) => {
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Band vs DJ</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">Honest comparison</p>
                 </a>
+                <a href="guides/when-to-book-wedding-band/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">When to Book</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Secure your band at the right time</p>
+                </a>
+                <a href="reviews/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Wedding Band Reviews</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Real feedback from Irish couples</p>
+                </a>
+                <a href="wedding-band-ireland/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Wedding Band Ireland</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Nationwide coverage and county guides</p>
+                </a>
                 <a href="song-list/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Our Song List</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">200+ songs we perform</p>
@@ -483,6 +528,7 @@ const generateTemplate = (county) => {
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
                         <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="reviews/">Reviews</a></li>
                         <li><a href="song-list/">Song List</a></li>
                         <li><a href="venues/">Venues</a></li>
                         <li><a href="pricing-guide/">Pricing</a></li>
@@ -494,7 +540,7 @@ const generateTemplate = (county) => {
                         <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
                         <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
                         <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
+                        <li><a href="wedding-band-ireland/">Wedding Band Ireland</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">

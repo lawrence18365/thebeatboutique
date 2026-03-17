@@ -1,6 +1,6 @@
 [
     { "from": "/playlist/", "to": "/song-list/" },
-    { "from": "/our-fans/", "to": "/why-us/" },
+    { "from": "/our-fans/", "to": "/reviews/" },
     { "from": "/contact/", "to": "/showcase/" },
     { "from": "/contact-us/", "to": "/showcase/" },
     { "from": "/book/", "to": "/showcase/" },
@@ -13,6 +13,5 @@
     { "from": "/pricing/", "to": "/pricing-guide/" },
     { "from": "/prices/", "to": "/pricing-guide/" },
     { "from": "/wedding-band-prices/", "to": "/pricing-guide/" },
-    { "from": "/reviews/", "to": "/why-us/" },
-    { "from": "/testimonials/", "to": "/why-us/" }
+    { "from": "/testimonials/", "to": "/reviews/" }
 ]

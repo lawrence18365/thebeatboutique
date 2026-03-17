@@ -3,6 +3,8 @@ const path = require('path');
 const { execSync } = require('child_process');
 
 const ROOT_DIR = path.join(__dirname, '..');
+const ANALYTICS_SNIPPET = `    <script src="js/site-config.js"></script>
+    <script defer src="js/analytics.js"></script>`;
 
 // Standard footer HTML (comprehensive internal linking)
 const STANDARD_FOOTER = `    <footer class="footer">
@@ -33,6 +35,7 @@ const STANDARD_FOOTER = `    <footer class="footer">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
                         <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="reviews/">Reviews</a></li>
                         <li><a href="song-list/">Song List</a></li>
                         <li><a href="venues/">Venues We Play</a></li>
                         <li><a href="pricing-guide/">Pricing Guide</a></li>
@@ -49,7 +52,7 @@ const STANDARD_FOOTER = `    <footer class="footer">
                         <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
                         <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
                         <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
-                        <li><a href="wedding-band-ireland/">Locations</a></li>
+                        <li><a href="wedding-band-ireland/">Wedding Band Ireland</a></li>
                     </ul>
                 </div>
 
@@ -97,6 +100,7 @@ const SIMPLE_FOOTER = `    <footer class="footer">
                     <h4 class="footer-heading">Explore</h4>
                     <ul class="footer-nav">
                         <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="reviews/">Reviews</a></li>
                         <li><a href="song-list/">Song List</a></li>
                         <li><a href="venues/">Venues</a></li>
                         <li><a href="pricing-guide/">Pricing</a></li>
@@ -108,7 +112,7 @@ const SIMPLE_FOOTER = `    <footer class="footer">
                         <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
                         <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
                         <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
-                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
+                        <li><a href="wedding-band-ireland/">Wedding Band Ireland</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -142,35 +146,45 @@ let skipped = 0;
 htmlFiles.forEach(file => {
     const filePath = path.join(ROOT_DIR, file);
     let content = fs.readFileSync(filePath, 'utf8');
+    let newContent = content;
+    let fileChanged = false;
+    const isLegacyRedirect = content.includes('<!-- Legacy redirect generated');
 
-    // Skip index.html (already updated manually)
-    if (file === './index.html') {
-        console.log(`Skipped: ${file} (already updated)`);
-        skipped++;
-        return;
+    const footerMatch = newContent.match(/<footer[\s\S]*?<\/footer>/);
+    if (footerMatch) {
+        const useSimpleFooter = file.includes('/locations/') || file.includes('/venues/');
+        const newFooter = useSimpleFooter ? SIMPLE_FOOTER : STANDARD_FOOTER;
+        const footerUpdatedContent = newContent.replace(/<footer[\s\S]*?<\/footer>/, newFooter);
+
+        if (footerUpdatedContent !== newContent) {
+            newContent = footerUpdatedContent;
+            fileChanged = true;
+        }
     }
 
-    // Check if file has a footer
-    const footerMatch = content.match(/<footer[\s\S]*?<\/footer>/);
-    if (!footerMatch) {
-        console.log(`Skipped: ${file} (no footer found)`);
-        skipped++;
-        return;
+    if (!isLegacyRedirect && newContent.includes('</body>')) {
+        const analyticsCleanedContent = newContent
+            .replace(/\s*<script\s+src="js\/site-config\.js"><\/script>\s*/g, '\n')
+            .replace(/\s*<script\s+defer\s+src="js\/analytics\.js"><\/script>\s*/g, '\n')
+            .replace(/\n{3,}/g, '\n\n');
+        const analyticsUpdatedContent = analyticsCleanedContent.replace('</body>', `${ANALYTICS_SNIPPET}\n</body>`);
+
+        if (analyticsUpdatedContent !== newContent) {
+            newContent = analyticsUpdatedContent;
+            fileChanged = true;
+        }
     }
 
-    // Determine which footer to use based on file location
-    const useSimpleFooter = file.includes('/locations/') || file.includes('/venues/');
-    const newFooter = useSimpleFooter ? SIMPLE_FOOTER : STANDARD_FOOTER;
-
-    // Replace footer
-    const newContent = content.replace(/<footer[\s\S]*?<\/footer>/, newFooter);
-
-    if (newContent !== content) {
+    if (fileChanged) {
         fs.writeFileSync(filePath, newContent);
         console.log(`Updated: ${file}`);
         updated++;
     } else {
-        console.log(`Unchanged: ${file}`);
+        if (!newContent.match(/<footer[\s\S]*?<\/footer>/) && !newContent.includes('</body>')) {
+            console.log(`Skipped: ${file} (no footer or body tag found)`);
+        } else {
+            console.log(`Unchanged: ${file}`);
+        }
         skipped++;
     }
 });

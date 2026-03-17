@@ -11,7 +11,7 @@
       {"name": "The Shelbourne Hotel", "slug": null, "description": "Iconic St. Stephen's Green location with the elegant Great Room for receptions up to 200 guests."},
       {"name": "Clontarf Castle", "slug": null, "description": "Historic castle combining medieval charm with modern facilities, perfect for 150+ guests."},
       {"name": "Luttrellstown Castle", "slug": "luttrellstown-castle", "description": "Ultra-exclusive 600-acre estate made famous by the Beckham wedding. Pure fairytale."},
-      {"name": "Portmarnock Hotel", "slug": null, "description": "Coastal elegance with stunning sea views, ideal for relaxed celebrations."}
+      {"name": "Portmarnock Hotel", "slug": "portmarnock-resort", "description": "Coastal elegance with stunning sea views, ideal for relaxed celebrations."}
     ],
     "testimonials": [
       {"text": "We saw them at a showcase in Dublin city and knew immediately. They had the dancefloor in The Shelbourne bouncing all night!", "author": "Sarah & Mark, Dublin City"},
@@ -34,8 +34,8 @@
     "travel_fee": "Standard Travel Fee",
     "wedding_culture": "Known as the Garden County, Wicklow weddings often embrace the natural beauty with outdoor ceremonies and country house receptions. Weddings here tend to be slightly larger, averaging 130-160 guests, with couples seeking an elegant yet relaxed atmosphere that matches the mountainous backdrop.",
     "venues": [
-      {"name": "Powerscourt Hotel", "slug": null, "description": "Five-star luxury at the foot of the Sugar Loaf mountain with the stunning Sugar Loaf Lounge."},
-      {"name": "Tinakilly House", "slug": null, "description": "Victorian mansion with gorgeous gardens and an intimate ballroom for up to 140 guests."},
+      {"name": "Powerscourt Hotel", "slug": "powerscourt-hotel", "description": "Five-star luxury at the foot of the Sugar Loaf mountain with the stunning Sugar Loaf Lounge."},
+      {"name": "Tinakilly House", "slug": "tinakilly-house", "description": "Victorian mansion with gorgeous gardens and an intimate ballroom for up to 140 guests."},
       {"name": "Rathsallagh House", "slug": null, "description": "Country house charm with award-winning food and a relaxed, welcoming atmosphere."},
       {"name": "Druids Glen", "slug": null, "description": "Golf resort venue offering flexible spaces and beautiful woodland surroundings."}
     ],
@@ -59,9 +59,9 @@
     "wedding_culture": "Meath has become Ireland's most popular wedding destination thanks to its concentration of stunning manor houses and country estates. Weddings typically run 140-180 guests with a focus on fine dining and dancing. The county's rich heritage adds a sense of occasion that couples love.",
     "venues": [
       {"name": "Tankardstown House", "slug": "tankardstown-house", "description": "Award-winning Georgian estate with The Orangery - one of Ireland's best wedding venues."},
-      {"name": "Clonabreany House", "slug": null, "description": "Romantic country house with fairy-lit courtyard and barn, perfect for 180+ guests."},
+      {"name": "Clonabreany House", "slug": "clonabreany-house", "description": "Romantic country house with fairy-lit courtyard and barn, perfect for 180+ guests."},
       {"name": "Boyne Hill House", "slug": null, "description": "Elegant manor overlooking the Boyne Valley with exclusive-use packages."},
-      {"name": "Ballymagarvey Village", "slug": null, "description": "Boutique venue with converted stone barn and outstanding catering."}
+      {"name": "Ballymagarvey Village", "slug": "ballymagarvey-village", "description": "Boutique venue with converted stone barn and outstanding catering."}
     ],
     "testimonials": [
       {"text": "The best decision we made for our Ballymagarvey wedding. They read the crowd perfectly and the energy was insane!", "author": "Ciara & Tom, Ballymagarvey"},
@@ -107,7 +107,7 @@
     "travel_fee": "Standard Travel Fee",
     "wedding_culture": "Louth weddings often blend Irish and Northern Irish traditions, with many cross-border couples choosing this central location. The county offers excellent value compared to Dublin venues while maintaining high standards. Typical weddings run 120-150 guests.",
     "venues": [
-      {"name": "Bellingham Castle", "slug": null, "description": "12th-century castle offering exclusive use and romantic medieval atmosphere."},
+      {"name": "Bellingham Castle", "slug": "bellingham-castle", "description": "12th-century castle offering exclusive use and romantic medieval atmosphere."},
       {"name": "Ballymascanlon House", "slug": null, "description": "Victorian mansion with beautiful gardens and excellent wedding coordination."},
       {"name": "Four Seasons Carlingford", "slug": null, "description": "Waterfront venue with stunning Carlingford Lough views."},
       {"name": "D Hotel", "slug": null, "description": "Modern Drogheda hotel with flexible event spaces."}
@@ -155,7 +155,7 @@
     "travel_fee": "Standard Travel Fee",
     "wedding_culture": "Wexford weddings embrace the county's sunny disposition with many couples opting for outdoor ceremonies and relaxed receptions. The mix of coastal and country venues suits different styles, with wedding sizes typically ranging from 100-150 guests.",
     "venues": [
-      {"name": "Marlfield House", "slug": null, "description": "Regency-era mansion with award-winning gardens and exceptional dining."},
+      {"name": "Marlfield House", "slug": "marlfield-house", "description": "Regency-era mansion with award-winning gardens and exceptional dining."},
       {"name": "Wells House", "slug": null, "description": "Victorian Gothic house with quirky charm and beautiful woodland walks."},
       {"name": "Ashdown Park", "slug": null, "description": "Contemporary hotel with flexible spaces near Gorey."},
       {"name": "Whitford House", "slug": null, "description": "Boutique venue near the coast with intimate atmosphere."}
@@ -179,7 +179,7 @@
     "travel_fee": "Standard Travel Fee",
     "wedding_culture": "Kilkenny weddings often incorporate the county's rich medieval heritage, with couples drawn to historic venues and the vibrant city atmosphere. Guest numbers typically range from 120-160, with many couples extending celebrations to explore the city's famous pubs and restaurants.",
     "venues": [
-      {"name": "Mount Juliet", "slug": null, "description": "Five-star estate with championship golf and the stunning Lady Helen Restaurant."},
+      {"name": "Mount Juliet", "slug": "mount-juliet", "description": "Five-star estate with championship golf and the stunning Lady Helen Restaurant."},
       {"name": "Langton House", "slug": null, "description": "City-center venue with multiple spaces and award-winning hospitality."},
       {"name": "Lyrath Estate", "slug": null, "description": "Luxury hotel and spa with beautiful grounds just outside the city."},
       {"name": "Butler House", "slug": null, "description": "Georgian townhouse with intimate garden setting in the city center."}
@@ -203,9 +203,9 @@
     "travel_fee": "Standard Travel Fee",
     "wedding_culture": "Waterford weddings often combine city heritage with coastal beauty. The county's excellent venues offer great value compared to Dublin, with weddings typically running 100-140 guests in an atmosphere that's both elegant and unpretentious.",
     "venues": [
-      {"name": "Waterford Castle", "slug": null, "description": "Island castle reached by ferry, offering exclusive fairy-tale weddings."},
-      {"name": "Faithlegg House", "slug": null, "description": "Georgian mansion with golf course and stunning Suir estuary views."},
-      {"name": "Dunmore House", "slug": null, "description": "Beachfront venue in the charming fishing village of Dunmore East."},
+      {"name": "Waterford Castle", "slug": "waterford-castle-resort", "description": "Island castle reached by ferry, offering exclusive fairy-tale weddings."},
+      {"name": "Faithlegg House", "slug": "faithlegg-hotel", "description": "Georgian mansion with golf course and stunning Suir estuary views."},
+      {"name": "Dunmore House", "slug": "dunmore-house-hotel", "description": "Beachfront venue in the charming fishing village of Dunmore East."},
       {"name": "Tower Hotel", "slug": null, "description": "City-center riverside hotel with modern facilities."}
     ],
     "testimonials": [
@@ -230,7 +230,7 @@
       {"name": "Hayfield Manor", "slug": null, "description": "Five-star luxury in the heart of Cork city with impeccable service."},
       {"name": "Inchydoney Island Lodge", "slug": null, "description": "Beachfront venue with stunning Atlantic views in Clonakilty."},
       {"name": "Ballymaloe House", "slug": null, "description": "Famous country house with legendary food in Shanagarry."},
-      {"name": "Castlemartyr Resort", "slug": null, "description": "800-year-old castle with modern luxury near Midleton."}
+      {"name": "Castlemartyr Resort", "slug": "castlemartyr-resort", "description": "800-year-old castle with modern luxury near Midleton."}
     ],
     "testimonials": [
       {"text": "You were so easy to communicate with and everything worked out perfectly. We all had an absolute ball!", "author": "Aisling & Ronan, Cork"},
@@ -246,10 +246,11 @@
     "slug": "kerry",
     "name": "Kerry",
     "hero_image": "https://images.unsplash.com/photo-1590089415225-401ed6f9db8e?q=80&w=2070&auto=format&fit=crop",
-    "meta_description": "Wedding Band Kerry - The Beat Boutique bring high-energy live music to the Kingdom. Killarney, Kenmare, and the Wild Atlantic Way.",
-    "intro_text": "The Kingdom offers some of Ireland's most dramatic wedding backdrops. From the lakes of Killarney to the charm of Kenmare, Kerry weddings are truly special - and we love bringing the party to this stunning corner of Ireland.",
+    "meta_title": "Wedding Band Kerry | Live Band + DJ for Destination Weddings",
+    "meta_description": "Wedding band Kerry for Killarney, Kenmare, and destination weddings across the Kingdom. Live band + DJ packages for hotels, castles, and day-two parties.",
+    "intro_text": "The Kingdom offers some of Ireland's most dramatic wedding backdrops. From the lakes of Killarney to the charm of Kenmare, Kerry weddings are truly special, and we love bringing a full live band + DJ experience to this stunning corner of Ireland.",
     "travel_fee": "Standard Travel Fee",
-    "wedding_culture": "Kerry weddings embrace the Wild Atlantic Way spirit with many couples choosing outdoor elements and scenic venues. The county attracts destination weddings from overseas and offers incredible photography opportunities. Weddings range from intimate 80-guest affairs to larger 150+ celebrations.",
+    "wedding_culture": "Kerry weddings embrace the Wild Atlantic Way spirit with many couples choosing outdoor elements, scenic venues, and longer destination-style weekends. The county attracts weddings from overseas and from couples planning day-two celebrations, with guest numbers ranging from intimate 80-guest affairs to larger 150+ celebrations.",
     "venues": [
       {"name": "Muckross Park Hotel", "slug": null, "description": "Five-star Killarney hotel overlooking Muckross Abbey and the Lakes of Killarney."},
       {"name": "The Europe Hotel", "slug": null, "description": "Lakeside luxury with spectacular views of the McGillycuddy Reeks."},
@@ -262,8 +263,8 @@
     ],
     "nearby_counties": ["cork", "limerick", "clare"],
     "faqs": [
-      {"question": "Do you travel to Kerry?", "answer": "Absolutely! Kerry is one of our favorite counties. We usually stay overnight and arrive the day before."},
-      {"question": "What about equipment for Kerry venues?", "answer": "We bring everything we need and are experienced with Kerry venues' power requirements and access."}
+      {"question": "Do you travel to Kerry and stay overnight?", "answer": "Absolutely. Kerry is one of our favorite counties and we usually stay overnight so we can arrive relaxed, sound-check properly, and be ready for the full wedding day."},
+      {"question": "Do you offer band + DJ or day-two music in Kerry?", "answer": "Yes. Kerry is a strong fit for full evening band + DJ packages, and we can also chat through drinks reception or day-two music if you're planning a destination wedding weekend."}
     ]
   },
   {
@@ -342,8 +343,9 @@
     "slug": "galway",
     "name": "Galway",
     "hero_image": "https://images.unsplash.com/photo-1526399892286-4c9c0e5dde40?q=80&w=2070&auto=format&fit=crop",
-    "meta_description": "Wedding Band Galway - The Beat Boutique bring the party to the City of Tribes. Book Ireland's premier wedding band for your Galway wedding.",
-    "intro_text": "The City of Tribes offers everything from bohemian city weddings to wild Atlantic romance. Galway's legendary love of music and craic makes it one of our favorite places to perform.",
+    "meta_title": "Wedding Band Galway | Live Band + DJ for Galway Weddings",
+    "meta_description": "Wedding band Galway for city, Connemara, and castle weddings. We've played Glenlo Abbey, Ballynahinch Castle, and Galway Bay venues. Live band + DJ available.",
+    "intro_text": "Galway offers everything from bohemian city weddings to wild Atlantic romance. Between the city, Salthill, and Connemara, it's one of our favorite counties to bring a live band + DJ package that keeps the craic going all night.",
     "travel_fee": "Standard Travel Fee",
     "wedding_culture": "Galway weddings are known for their music and craic. The county's strong traditional music culture means couples often have excellent musical taste. From city hotels to Connemara castles, venues range widely in style. Weddings typically run 120-160 guests with dancing a high priority.",
     "venues": [
@@ -359,7 +361,8 @@
     "nearby_counties": ["mayo", "clare", "roscommon", "limerick"],
     "faqs": [
       {"question": "How far is Galway from Dublin?", "answer": "About 2.5 hours via motorway. We usually arrive the day before for Galway and Connemara weddings."},
-      {"question": "Do you perform at Connemara venues?", "answer": "Yes! We love Connemara and regularly perform at Ballynahinch Castle and other remote venues."}
+      {"question": "Do you perform at Connemara venues?", "answer": "Yes. We love Connemara and regularly perform at Ballynahinch Castle and other remote venues where couples want a big live band feel without losing the local atmosphere."},
+      {"question": "Do you offer band + DJ for Galway weddings?", "answer": "Yes. A lot of Galway couples book the full evening package so the live band handles the peak dancefloor and the DJ keeps things moving before and after the sets."}
     ]
   },
   {
@@ -396,7 +399,7 @@
     "wedding_culture": "Donegal weddings are known for their warmth, community spirit, and marathon dancing sessions! The county's remote location means couples often host weekend-long celebrations. Weddings typically run 120-180 guests with plenty of extended family and friends joining the celebration.",
     "venues": [
       {"name": "Harvey's Point", "slug": null, "description": "Ireland's most romantic hotel, beautifully situated on Lough Eske."},
-      {"name": "Solis Lough Eske Castle", "slug": null, "description": "Five-star castle hotel with Tudor-style architecture and spa."},
+      {"name": "Solis Lough Eske Castle", "slug": "lough-eske-castle", "description": "Five-star castle hotel with Tudor-style architecture and spa."},
       {"name": "The Mill Park Hotel", "slug": null, "description": "Excellent Donegal Town hotel with flexible wedding spaces."},
       {"name": "Arnolds Hotel", "slug": null, "description": "Dunfanaghy hotel with stunning views of Horn Head."}
     ],
