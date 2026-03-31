@@ -20,20 +20,78 @@
   {
     "slug": "ballybeg-house",
     "name": "Ballybeg House",
-    "title": "Ballybeg House Wedding Band | Real Wedding & Venue Guide",
-    "meta_description": "Ballybeg House wedding band guide — real setup tips for the Barn, band + DJ timings, and planning notes from 15+ Ballybeg weddings.",
-    "location": "Wicklow",
+    "title": "Ballybeg House Wedding Guide | Accommodation, Marquee & Music",
+    "meta_description": "Planning a Ballybeg House wedding in Wicklow? Our guide covers the Ayers Ceremony Room, Victorian marquee, onsite accommodation, the Shebeen, and live music setup.",
+    "article_headline": "Ballybeg House Wedding Guide",
+    "location": "Ballinglen, County Wicklow",
     "county": "Wicklow",
     "capacity": "160",
-    "setting": "Georgian country house with walled gardens",
-    "ballroom": "The Barn",
-    "acoustics": "The converted barn has high ceilings and exposed beams. Sound carries well but needs management to avoid echo.",
-    "setup_notes": "Good vehicle access. The barn has ample space for full band setup plus dance floor.",
-    "best_for": "Garden parties with a country house feel. The walled garden ceremonies are beautiful.",
-    "insider_tip": "The barn can get warm in summer with a full crowd dancing - the venue has fans but we adjust our breaks accordingly.",
+    "setting": "Private Wicklow estate with a Georgian country house, walled gardens, the Ayers Ceremony Room, and a Victorian-style marquee",
+    "ballroom": "Victorian Marquee",
+    "acoustics": "The Victorian marquee gives you plenty of room for a full live band, DJ, and packed dance floor. It feels open and energetic, but we still manage the mix carefully so speeches, the first dance, and the late party all stay clear.",
+    "setup_notes": "Access is straightforward and the marquee layout leaves enough room for a full band setup without squeezing the floor. When couples use multiple spaces across the estate, we plan load-in and room transitions carefully so the party starts without a lull.",
+    "best_for": "Ideal for couples who want a private, multi-day wedding with accommodation on site, a relaxed country-house atmosphere, and distinct spaces for the ceremony, drinks, dinner, and dancing.",
+    "insider_tip": "One of Ballybeg's biggest strengths is how many different spaces it gives you. The best nights usually keep drinks and early-evening mingling moving through the house, gardens, or Shebeen, then bring everyone into the marquee with a clear first-dance start.",
     "weddings_played": "15+",
-    "testimonial": "The band filled Ballybeg's barn with amazing energy. Our guests are still talking about the music months later.",
-    "testimonial_author": "Sarah & Mark"
+    "testimonial": "The band filled Ballybeg's marquee with amazing energy. Our guests are still talking about the music months later.",
+    "testimonial_author": "Sarah & Mark",
+    "additional_sections": [
+      {
+        "heading": "Why Couples Choose Ballybeg House",
+        "paragraphs": [
+          "Ballybeg does not feel like a standard hotel wedding venue. Couples get a private Wicklow estate, several distinct spaces to use across the day, and the kind of relaxed house-party atmosphere that makes a weekend wedding feel personal rather than over-programmed.",
+          "That mix of exclusivity and flexibility is a big reason Ballybeg shows up so often in real wedding coverage. The venue is built for multi-day celebrations, so guests are not just arriving for dinner and leaving as soon as the dancing ends."
+        ]
+      },
+      {
+        "heading": "How a Ballybeg House Wedding Day Flows",
+        "paragraphs": [
+          "A typical Ballybeg day starts with the ceremony in the Ayers Ceremony Room or outside in the gardens, moves into drinks around the house and courtyard, then brings everyone into the Victorian marquee for dinner, speeches, first dance, and the main party.",
+          "That flow matters for music planning. When each part of the day has its own natural space, the celebration feels like it is moving forward rather than stalling between rooms."
+        ]
+      },
+      {
+        "heading": "Staying Onsite at Ballybeg House",
+        "paragraphs": [
+          "One of Ballybeg's biggest advantages is that a large part of the guest list can stay within Ballybeg's own accommodation across the house, Cedar Rooms, Shebeen Rooms, pods, and Luke's Cottage, with more options only a short drive away.",
+          "That changes the feel of the whole wedding weekend. Ballybeg is stronger than many one-night venues if you want dinner and dancing in the marquee, then a genuinely relaxed next-day catch-up instead of everyone heading straight home."
+        ]
+      },
+      {
+        "heading": "Music, Drinks Reception, and Dancing at Ballybeg House",
+        "paragraphs": [
+          "From a band point of view, the Victorian marquee is the key room. Ballybeg already uses it as the dinner and party space, and the venue provides heating, bar service, toilets, and a PA for speeches, so the evening can build naturally from meal to first dance to full dance floor.",
+          "The house, gardens, and courtyard work well for drinks reception music, while the Shebeen makes more sense as a trad session or next-day social space than the main late-party room. If you want live band plus DJ, Ballybeg is easiest when the marquee stays the main party base all night."
+        ]
+      }
+    ],
+    "faq_heading": "Ballybeg House Wedding FAQ",
+    "faq_items": [
+      {
+        "question": "How many guests can Ballybeg House accommodate?",
+        "answer": "Ballybeg is usually positioned as a venue for weddings of up to 160 guests, with the Victorian marquee acting as the main dinner and dancing space."
+      },
+      {
+        "question": "Can you have your ceremony at Ballybeg House?",
+        "answer": "Yes. Ballybeg has the Ayers Ceremony Room for onsite ceremonies, and the gardens also shape the flow of outdoor drinks and photos."
+      },
+      {
+        "question": "How many guests can stay at Ballybeg House?",
+        "answer": "Ballybeg's own accommodation typically covers around 50 guests between the house, rooms, pods, and cottage options, with more stays available nearby."
+      },
+      {
+        "question": "Is Ballybeg House good for winter weddings?",
+        "answer": "Yes. The marquee is heated, and Ballybeg's indoor ceremony and social spaces make it more flexible than venues that depend heavily on outdoor areas."
+      },
+      {
+        "question": "What works best after the band at Ballybeg House?",
+        "answer": "For most weddings, the cleanest option is to keep the DJ in the marquee so the late party stays in one room. The Shebeen is better used as a separate social space or a next-day session."
+      },
+      {
+        "question": "Do guests need transport at Ballybeg House?",
+        "answer": "Some guests can stay within Ballybeg's own rooms, while others will need nearby accommodation and transport. Ballybeg publishes recommended local stays and a hackney option, which helps if part of the guest list is staying off the estate."
+      }
+    ]
   },
   {
     "slug": "mount-juliet",

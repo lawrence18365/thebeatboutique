@@ -38,6 +38,10 @@ function escapeHtml(value) {
         .replace(/'/g, '&#39;');
 }
 
+function toJsonString(value) {
+    return JSON.stringify(String(value));
+}
+
 function indentBlock(content, spaces = 4) {
     const pad = ' '.repeat(spaces);
     return content
@@ -57,6 +61,67 @@ function formatNaturalList(items) {
     if (items.length === 1) return items[0];
     if (items.length === 2) return `${items[0]} and ${items[1]}`;
     return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
+}
+
+function renderExtraVenueSections(venue) {
+    if (!Array.isArray(venue.additional_sections)) {
+        return '';
+    }
+
+    return venue.additional_sections
+        .map((section) => {
+            if (!section || !section.heading || !Array.isArray(section.paragraphs) || section.paragraphs.length === 0) {
+                return '';
+            }
+
+            const paragraphs = section.paragraphs
+                .filter(Boolean)
+                .map((paragraph) => `            <p>${escapeHtml(paragraph)}</p>`)
+                .join('\n');
+
+            if (!paragraphs) {
+                return '';
+            }
+
+            return `
+        <div class="venue-section">
+            <h2>${escapeHtml(section.heading)}</h2>
+${paragraphs}
+        </div>`;
+        })
+        .filter(Boolean)
+        .join('\n');
+}
+
+function renderVenueFaqSection(venue) {
+    if (!Array.isArray(venue.faq_items) || venue.faq_items.length === 0) {
+        return '';
+    }
+
+    const faqItems = venue.faq_items
+        .map((item) => {
+            if (!item || !item.question || !item.answer) {
+                return '';
+            }
+
+            return `
+            <div class="venue-faq-item">
+                <h3>${escapeHtml(item.question)}</h3>
+                <p>${escapeHtml(item.answer)}</p>
+            </div>`;
+        })
+        .filter(Boolean)
+        .join('\n');
+
+    if (!faqItems) {
+        return '';
+    }
+
+    return `
+        <div class="venue-section venue-faq">
+            <h2>${escapeHtml(venue.faq_heading || `${venue.name} Wedding FAQ`)}</h2>
+${faqItems}
+        </div>`;
 }
 
 function getRelatedVenues(currentVenue) {
@@ -227,6 +292,8 @@ const generateVenuePage = (venue) => {
     const moreVenueGuidesIntro = hasSameCountyVenueLinks
         ? `Compare more venues we play regularly in ${venue.county}, plus a few of our busiest wedding venues around Ireland:`
         : 'Explore more venue guides for tips and insider knowledge:';
+    const extraSections = renderExtraVenueSections(venue);
+    const faqSection = renderVenueFaqSection(venue);
 
     const aboutText = hasBestFor
         ? `${venue.setting}. With capacity for ${venue.capacity} guests, ${venue.name} is ${venue.best_for.toLowerCase()}`
@@ -263,6 +330,26 @@ const generateVenuePage = (venue) => {
           "reviewRating": { "@type": "Rating", "ratingValue": "5" },
           "author": { "@type": "Person", "name": "${venue.testimonial_author}" },
           "reviewBody": "${venue.testimonial}"
+        }` : '';
+    const faqSchemaItems = Array.isArray(venue.faq_items)
+        ? venue.faq_items
+            .filter((item) => item && item.question && item.answer)
+            .map((item) => `            {
+              "@type": "Question",
+              "name": ${toJsonString(item.question)},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": ${toJsonString(item.answer)}
+              }
+            }`)
+            .join(',\n')
+        : '';
+    const faqSchema = faqSchemaItems ? `,
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+${faqSchemaItems}
+          ]
         }` : '';
 
     return `<!DOCTYPE html>
@@ -370,7 +457,7 @@ const generateVenuePage = (venue) => {
             { "@type": "ListItem", "position": 2, "name": "Venues", "item": "https://thebeatboutique.ie/venues/" },
             { "@type": "ListItem", "position": 3, "name": "${venue.name}", "item": "${toCanonicalUrl(`/venues/${venue.slug}`)}" }
           ]
-        }${reviewSchema}
+        }${reviewSchema}${faqSchema}
       ]
     }
     </script>
@@ -460,6 +547,16 @@ const generateVenuePage = (venue) => {
             line-height: 1.6;
         }
 
+        .venue-faq-item {
+            margin: 25px 0;
+        }
+
+        .venue-faq-item h3 {
+            color: var(--primary-navy);
+            margin: 0 0 10px;
+            font-family: var(--font-serif);
+        }
+
         .breadcrumb {
             padding: 20px;
             font-size: 0.9rem;
@@ -525,10 +622,7 @@ const generateVenuePage = (venue) => {
             <h2>About ${venue.name}</h2>
             <p>${aboutText}</p>
         </div>
-${acousticsSection}
-${setupSection}
-${tipSection}
-${reviewSection}
+${acousticsSection}${setupSection}${tipSection}${extraSections}${reviewSection}${faqSection}
 
         <div class="venue-section">
             <h2>Planning Your ${venue.name} Wedding?</h2>
@@ -565,7 +659,7 @@ ${relatedVenueLinks}
 
     </article>
 
-        <footer class="footer">
+            <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-col footer-brand">
@@ -613,6 +707,8 @@ ${relatedVenueLinks}
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/site-config.js"></script>
+    <script defer src="js/analytics.js"></script>
 </body>
 </html>`;
 };
