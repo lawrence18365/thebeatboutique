@@ -385,6 +385,11 @@ const generateTemplate = (county) => {
         <div class="container">
             <h1 class="hero-title">Wedding Band ${county.name}</h1>
             <p class="hero-subtitle" style="max-width: 700px; margin: 0 auto;">${county.intro_text}</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
+                <a href="./#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Check ${county.name} Availability</a>
+                <a href="pricing-guide/" class="btn" style="color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.35);">See Pricing Guide</a>
+                <a href="showcase/" class="btn" style="color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.35);">See Dublin Showcase</a>
+            </div>
         </div>
     </header>
 
@@ -403,6 +408,11 @@ const generateTemplate = (county) => {
                     <li><strong>Local Knowledge:</strong> We know ${county.name} venues, their requirements, and their staff</li>
                     <li><strong>Full Coordination:</strong> We liaise directly with venue coordinators and wedding planners</li>
                 </ul>
+
+                <div class="theme-light" style="background: #f9f9f9; padding: 30px; border-radius: 4px; margin: 40px 0;">
+                    <h3 style="margin: 0 0 1rem; color: var(--primary-navy);">Compare Before You Book</h3>
+                    <p style="margin: 0; opacity: 0.8; line-height: 1.8;">If you are shortlisting wedding bands in ${county.name}, use our <a href="pricing-guide/" style="color: var(--primary-navy); text-decoration: underline;">pricing guide</a> for real Irish cost ranges, or come to the Dublin <a href="showcase/" style="color: var(--primary-navy); text-decoration: underline;">live showcase</a> before you commit.</p>
+                </div>
 
                 <!-- Wedding Culture Section -->
                 ${county.wedding_culture ? `
