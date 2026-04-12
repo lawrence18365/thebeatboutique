@@ -541,36 +541,56 @@
 
         .venue-card {
             position: relative;
+            display: block;
             border-radius: 4px;
             overflow: hidden;
             aspect-ratio: 4/3;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             box-shadow: var(--box-shadow);
+            border: 1px solid rgba(196, 167, 108, 0.18);
+            background:
+                radial-gradient(circle at top right, rgba(196, 167, 108, 0.28), transparent 34%),
+                radial-gradient(circle at bottom left, rgba(42, 122, 148, 0.24), transparent 40%),
+                linear-gradient(145deg, #07162b 0%, #0d2945 58%, #154457 100%);
         }
 
         .venue-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 24px 60px rgba(10, 25, 47, 0.28);
         }
 
-        .venue-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
+        .venue-card::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 2px;
+            pointer-events: none;
         }
 
-        .venue-card:hover img {
-            transform: scale(1.1);
+        .venue-card-label {
+            display: inline-flex;
+            align-items: center;
+            width: fit-content;
+            padding: 8px 12px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
         }
 
         .venue-overlay {
             position: absolute;
             inset: 0;
-            background: linear-gradient(to bottom, transparent 40%, rgba(10, 25, 47, 0.9));
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
-            padding: 30px;
+            justify-content: space-between;
+            padding: 28px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03) 0%, rgba(10, 25, 47, 0.12) 38%, rgba(10, 25, 47, 0.88) 100%);
             color: white;
         }
 
@@ -680,141 +700,155 @@
 
             <!-- Venue 1: Adare Manor -->
             <a href="venues/adare-manor/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
-                    alt="Adare Manor Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Adare Manor</h3>
-                    <span class="venue-loc">Limerick</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Adare Manor</h3>
+                        <span class="venue-loc">Limerick</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 2: Dromoland Castle -->
             <a href="venues/dromoland-castle/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Dromoland Castle Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Dromoland Castle</h3>
-                    <span class="venue-loc">Clare</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Dromoland Castle</h3>
+                        <span class="venue-loc">Clare</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 3: Luttrellstown Castle -->
             <a href="venues/luttrellstown-castle/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
-                    alt="Luttrellstown Castle Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Luttrellstown Castle</h3>
-                    <span class="venue-loc">Dublin</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Luttrellstown Castle</h3>
+                        <span class="venue-loc">Dublin</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 5: Tankardstown House -->
             <a href="venues/tankardstown-house/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
-                    alt="Tankardstown House Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Tankardstown House</h3>
-                    <span class="venue-loc">Meath</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Tankardstown House</h3>
+                        <span class="venue-loc">Meath</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 6: Cliff at Lyons -->
             <a href="venues/cliff-at-lyons/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
-                    alt="Cliff at Lyons Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Cliff at Lyons</h3>
-                    <span class="venue-loc">Kildare</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Cliff at Lyons</h3>
+                        <span class="venue-loc">Kildare</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 7: Mount Juliet -->
             <a href="venues/mount-juliet/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Mount Juliet Estate Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Mount Juliet Estate</h3>
-                    <span class="venue-loc">Kilkenny</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Mount Juliet Estate</h3>
+                        <span class="venue-loc">Kilkenny</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 8: Powerscourt Hotel -->
             <a href="venues/powerscourt-hotel/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
-                    alt="Powerscourt Hotel Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Powerscourt Hotel</h3>
-                    <span class="venue-loc">Wicklow</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Powerscourt Hotel</h3>
+                        <span class="venue-loc">Wicklow</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 9: Ballybeg House -->
             <a href="venues/ballybeg-house/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
-                    alt="Ballybeg House Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Ballybeg House</h3>
-                    <span class="venue-loc">Wicklow</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Ballybeg House</h3>
+                        <span class="venue-loc">Wicklow</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 10: Kilshane House -->
             <a href="venues/kilshane-house/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
-                    alt="Kilshane House Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Kilshane House</h3>
-                    <span class="venue-loc">Tipperary</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Kilshane House</h3>
+                        <span class="venue-loc">Tipperary</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 11: Ballymagarvey Village -->
             <a href="venues/ballymagarvey-village/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop"
-                    alt="Ballymagarvey Village Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Ballymagarvey Village</h3>
-                    <span class="venue-loc">Meath</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Ballymagarvey Village</h3>
+                        <span class="venue-loc">Meath</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 12: Bellingham Castle -->
             <a href="venues/bellingham-castle/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1533154683836-84ea7a0bc310?q=80&w=2070&auto=format&fit=crop"
-                    alt="Bellingham Castle Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Bellingham Castle</h3>
-                    <span class="venue-loc">Louth</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Bellingham Castle</h3>
+                        <span class="venue-loc">Louth</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 13: Tinakilly House -->
             <a href="venues/tinakilly-house/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1464366400600-7168b8af0bc3?q=80&w=2069&auto=format&fit=crop"
-                    alt="Tinakilly House Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Tinakilly House</h3>
-                    <span class="venue-loc">Wicklow</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Tinakilly House</h3>
+                        <span class="venue-loc">Wicklow</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 14: Virginia Park Lodge -->
             <a href="venues/virginia-park-lodge/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop"
-                    alt="Virginia Park Lodge Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Virginia Park Lodge</h3>
-                    <span class="venue-loc">Cavan</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Virginia Park Lodge</h3>
+                        <span class="venue-loc">Cavan</span>
+                    </div>
                 </div>
             </a>
 
             <!-- Venue 15: Trudder Lodge -->
             <a href="venues/trudder-lodge/" class="venue-card">
-                <img loading="lazy" src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop"
-                    alt="Trudder Lodge Wedding">
                 <div class="venue-overlay">
-                    <h3 class="venue-name">Trudder Lodge</h3>
-                    <span class="venue-loc">Wicklow</span>
+                    <span class="venue-card-label">Venue Guide</span>
+                    <div>
+                        <h3 class="venue-name">Trudder Lodge</h3>
+                        <span class="venue-loc">Wicklow</span>
+                    </div>
                 </div>
             </a>
 
