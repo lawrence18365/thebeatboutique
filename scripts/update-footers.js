@@ -40,7 +40,6 @@ const STANDARD_FOOTER = `    <footer class="footer">
                         <li><a href="venues/">Venues We Play</a></li>
                         <li><a href="pricing-guide/">Pricing Guide</a></li>
                         <li><a href="about/">About the Band</a></li>
-                        <li><a href="why-us/">Why Choose Us</a></li>
                     </ul>
                 </div>
 

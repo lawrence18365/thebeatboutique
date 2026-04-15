@@ -16,7 +16,6 @@ const HTML_FILES = [
     'showcase/index.html',
     'pricing-guide/index.html',
     'song-list/index.html',
-    'why-us/index.html',
     'venues/index.html',
     'wedding-band-ireland/index.html',
     'party-band/index.html',
