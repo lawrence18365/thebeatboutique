@@ -82,7 +82,6 @@
             if (href.startsWith('mailto:')) {
                 window.trackEvent('contact_click', {
                     contact_type: 'email',
-                    target: href.replace(/^mailto:/, ''),
                 });
                 return;
             }
@@ -90,7 +89,6 @@
             if (href.startsWith('tel:')) {
                 window.trackEvent('contact_click', {
                     contact_type: 'phone',
-                    target: href.replace(/^tel:/, ''),
                 });
             }
         });

@@ -1,5 +1,5 @@
 // Set your GA4 measurement ID here, for example: G-XXXXXXXXXX
-window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || '';
+window.GA_MEASUREMENT_ID = window.GA_MEASUREMENT_ID || 'G-L9TMLJYWKG';
 
 // Set your PostHog project API key here.
 window.POSTHOG_API_KEY = window.POSTHOG_API_KEY || 'phc_8e0oSYWxRaJ2YdfdmS4ZRvpC88FlM8PhNxgBNeNXa9a';

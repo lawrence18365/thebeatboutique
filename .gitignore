@@ -2,3 +2,9 @@
 **/.DS_Store
 .claude/
 .codex/
+node_modules/
+.gsc-token.json
+.google-ads-token.json
+.ga4-admin-token
+.ga4-admin-token.json
+.google-acquisition-token.json
