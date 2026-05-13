@@ -57,6 +57,11 @@
         }
     }
 
+    function getFormFieldValue(form, name) {
+        const field = form.querySelector(`[name="${name}"]`);
+        return field && typeof field.value === 'string' ? field.value.trim() : '';
+    }
+
     function initEventTracking() {
         document.addEventListener('submit', (event) => {
             const form = event.target instanceof HTMLFormElement ? event.target : null;
@@ -68,6 +73,10 @@
                 form_id: form.id || '(none)',
                 form_name: form.getAttribute('name') || '(none)',
                 form_action: normalizeUrlPath(form.getAttribute('action') || ''),
+                form_source: getFormFieldValue(form, 'form_source') || '(none)',
+                lead_type: getFormFieldValue(form, 'lead_type') || '(unknown)',
+                page_category: getFormFieldValue(form, 'page_category') || '(unknown)',
+                page_focus: getFormFieldValue(form, 'page_focus') || '(unknown)',
             });
         });
 

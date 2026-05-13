@@ -744,13 +744,19 @@
         updateCountdown();
         setInterval(updateCountdown, 60000);
 
-        // Form submission tracking
+        // Showcase RSVP tracking
         document.querySelectorAll('form').forEach(form => {
             form.addEventListener('submit', function () {
+                const source = this.querySelector('[name="form_source"]')?.value || 'unknown';
+                if (!source.includes('Showcase')) {
+                    return;
+                }
+
                 if (typeof window.trackEvent === 'function') {
                     window.trackEvent('showcase_signup', {
-                        'event_category': 'conversion',
-                        'event_label': this.querySelector('[name="form_source"]')?.value || 'unknown'
+                        form_source: source,
+                        lead_type: this.querySelector('[name="lead_type"]')?.value || 'showcase_rsvp',
+                        page_category: this.querySelector('[name="page_category"]')?.value || 'showcase'
                     });
                 }
             });

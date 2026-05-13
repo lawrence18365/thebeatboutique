@@ -274,30 +274,158 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { once: true });
     });
 
-    // Contact Form Handling - Enhanced for Formspree
+    // Lead attribution for all website forms.
+    const attributionParamNames = [
+        'utm_source',
+        'utm_medium',
+        'utm_campaign',
+        'utm_content',
+        'utm_term',
+        'gclid',
+        'fbclid'
+    ];
+    const currentUrl = new URL(window.location.href);
+    const attributionKey = 'tbbLeadAttribution';
+
+    const cleanSubjectValue = (value, fallback) => {
+        const cleaned = String(value || '').replace(/\s+/g, ' ').trim();
+        return (cleaned || fallback).slice(0, 80);
+    };
+
+    const setHiddenField = (form, name, value) => {
+        let field = form.querySelector(`[name="${name}"]`);
+        if (!field) {
+            field = document.createElement('input');
+            field.type = 'hidden';
+            field.name = name;
+            form.appendChild(field);
+        }
+        field.value = value || '';
+    };
+
+    const getFieldValue = (form, name) => {
+        const field = form.querySelector(`[name="${name}"]`);
+        return field ? field.value.trim() : '';
+    };
+
+    const getStoredAttribution = () => {
+        const currentAttribution = {
+            first_landing_page: window.location.href,
+            first_referrer: document.referrer || '',
+            first_seen_at: new Date().toISOString()
+        };
+
+        attributionParamNames.forEach(name => {
+            currentAttribution[`first_${name}`] = currentUrl.searchParams.get(name) || '';
+        });
+
+        try {
+            const stored = JSON.parse(localStorage.getItem(attributionKey) || 'null');
+            if (stored && stored.first_landing_page) {
+                return stored;
+            }
+
+            localStorage.setItem(attributionKey, JSON.stringify(currentAttribution));
+        } catch (error) {
+            return currentAttribution;
+        }
+
+        return currentAttribution;
+    };
+
+    const inferPageCategory = () => {
+        const path = window.location.pathname;
+        if (path === '/' || path === '/index.html') return 'homepage';
+        if (path.startsWith('/pricing-guide/')) return 'pricing';
+        if (path.startsWith('/showcase')) return 'showcase';
+        if (path.startsWith('/venues/') && path !== '/venues/') return 'venue';
+        if (path === '/venues/') return 'venues_index';
+        if (path.startsWith('/locations/')) return 'location';
+        if (path.startsWith('/guides/')) return 'guide';
+        if (path.startsWith('/reviews/')) return 'reviews';
+        if (path.startsWith('/song-list/')) return 'song_list';
+        if (path.startsWith('/corporate-events/')) return 'corporate';
+        if (path.startsWith('/christmas-parties/')) return 'christmas';
+        if (path.startsWith('/guestlist/')) return 'guestlist';
+        return 'site_page';
+    };
+
+    const inferPageFocus = () => {
+        const parts = window.location.pathname.split('/').filter(Boolean);
+        return parts.length ? parts[parts.length - 1] : 'home';
+    };
+
+    const inferLeadType = (form) => {
+        const formSource = getFieldValue(form, 'form_source').toLowerCase();
+        if (formSource.includes('showcase')) return 'showcase_rsvp';
+        if (formSource.includes('guestlist')) return 'guestlist';
+        if (form.classList.contains('quick-availability-form')) return 'availability_check';
+        if (form.id === 'main-enquiry-form') return 'homepage_enquiry';
+        return 'website_enquiry';
+    };
+
+    const updateLeadSubject = (form) => {
+        const leadType = getFieldValue(form, 'lead_type') || inferLeadType(form);
+        const formSource = cleanSubjectValue(getFieldValue(form, 'form_source'), 'Website Form');
+        const weddingDate = cleanSubjectValue(getFieldValue(form, 'wedding_date'), 'date TBC');
+        const venue = cleanSubjectValue(getFieldValue(form, 'venue') || getFieldValue(form, 'location'), 'venue TBC');
+
+        if (leadType === 'showcase_rsvp') {
+            setHiddenField(form, 'subject', `[TBB Showcase RSVP] ${weddingDate} - ${formSource}`);
+            return;
+        }
+
+        if (leadType === 'guestlist') {
+            setHiddenField(form, 'subject', `[TBB Guestlist] ${formSource}`);
+            return;
+        }
+
+        setHiddenField(form, 'subject', `[TBB Lead] ${weddingDate} - ${venue} - ${formSource}`);
+    };
+
+    const prepareLeadForm = (form) => {
+        const storedAttribution = getStoredAttribution();
+        const pageCategory = inferPageCategory();
+        const pageFocus = inferPageFocus();
+        const leadType = inferLeadType(form);
+
+        setHiddenField(form, 'form_id', form.id || '(none)');
+        setHiddenField(form, 'lead_type', leadType);
+        setHiddenField(form, 'page_url', window.location.href);
+        setHiddenField(form, 'page_path', window.location.pathname);
+        setHiddenField(form, 'page_category', pageCategory);
+        setHiddenField(form, 'page_focus', pageFocus);
+        setHiddenField(form, 'landing_page', storedAttribution.first_landing_page || window.location.href);
+        setHiddenField(form, 'referrer', document.referrer || '');
+        setHiddenField(form, 'first_referrer', storedAttribution.first_referrer || '');
+        setHiddenField(form, 'first_seen_at', storedAttribution.first_seen_at || '');
+
+        attributionParamNames.forEach(name => {
+            setHiddenField(form, name, currentUrl.searchParams.get(name) || '');
+            setHiddenField(form, `first_${name}`, storedAttribution[`first_${name}`] || '');
+        });
+
+        updateLeadSubject(form);
+
+        form.addEventListener('submit', () => {
+            setHiddenField(form, 'lead_created_at', new Date().toISOString());
+            updateLeadSubject(form);
+        });
+    };
+
+    document.querySelectorAll('form').forEach(prepareLeadForm);
+
+    // Contact Form Handling
     const contactForms = document.querySelectorAll('.contact-form');
     contactForms.forEach(contactForm => {
-        // Only add loading state, let Formspree handle submission
+        // Only add loading state, let the form provider handle submission.
         contactForm.addEventListener('submit', (e) => {
             const btn = contactForm.querySelector('button[type="submit"]');
             if (btn) {
                 btn.innerHTML = '<span>Sending...</span>';
                 btn.disabled = true;
             }
-
-            // Track form submission in analytics
-            if (typeof window.trackEvent === 'function') {
-                window.trackEvent('form_submit', {
-                    'event_category': 'engagement',
-                    'event_label': contactForm.id || 'contact_form'
-                });
-            }
         });
-    });
-
-    // Capture page URL for form attribution
-    document.querySelectorAll('.page-url-field').forEach(field => {
-        field.value = window.location.href;
     });
 
     // Showcase/Guestlist Form - Enhanced with local storage for abandoned form recovery
