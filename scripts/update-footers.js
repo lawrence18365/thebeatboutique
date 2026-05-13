@@ -4,7 +4,7 @@ const { execSync } = require('child_process');
 
 const ROOT_DIR = path.join(__dirname, '..');
 const ANALYTICS_SNIPPET = `    <script src="js/site-config.js"></script>
-    <script defer src="js/analytics.js"></script>`;
+    <script defer src="js/analytics.js?v=20260513-leads"></script>`;
 
 // Standard footer HTML (comprehensive internal linking)
 const STANDARD_FOOTER = `    <footer class="footer">
