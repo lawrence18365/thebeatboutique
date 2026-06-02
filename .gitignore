@@ -8,3 +8,7 @@ node_modules/
 .ga4-admin-token
 .ga4-admin-token.json
 .google-acquisition-token.json
+
+# Raw GSC CSV exports (the derived index-status.json / fix plans are kept)
+data/audit/gsc-exports/*.csv
+data/legacy-redirects.json.bak

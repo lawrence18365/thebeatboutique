@@ -1,7 +1,14 @@
 {
   "scripts": {
     "audit:links": "node scripts/audit-links.js",
-    "generate:legacy-redirects": "node scripts/generate-legacy-redirects.js"
+    "audit:acquisition": "node scripts/acquisition-api-audit.js",
+    "generate:legacy-redirects": "node scripts/generate-legacy-redirects.js",
+    "setup:ga4": "node scripts/setup-ga4.js",
+    "index:inspect": "node scripts/index-inspect.js",
+    "index:plan": "node scripts/index-classify.js",
+    "index:fix-safe": "node scripts/index-fix-safe.js",
+    "index:cni": "node scripts/index-cni-analyze.js",
+    "index:report": "node scripts/index-inspect.js --no-inspect && node scripts/index-classify.js && node scripts/index-cni-analyze.js"
   },
   "devDependencies": {
     "image-size": "^2.0.2"
