@@ -13,5 +13,15 @@
     { "from": "/pricing/", "to": "/pricing-guide/" },
     { "from": "/prices/", "to": "/pricing-guide/" },
     { "from": "/wedding-band-prices/", "to": "/pricing-guide/" },
-    { "from": "/testimonials/", "to": "/reviews/" }
+    { "from": "/testimonials/", "to": "/reviews/" },
+    { "from": "/why-us/", "to": "/about/" },
+    { "from": "/about1/", "to": "/about/" },
+    { "from": "/our-privacy-policy/", "to": "/privacy/" },
+    { "from": "/home/", "to": "/" },
+    { "from": "/get-in-touch/", "to": "/showcase/" },
+    { "from": "/watch-us-play/", "to": "/showcase/" },
+    { "from": "/evening-band/", "to": "/party-band/" },
+    { "from": "/whats-on-offer/", "to": "/pricing-guide/" },
+    { "from": "/the-seal-of-approval/", "to": "/reviews/" },
+    { "from": "/ceremony-music/", "to": "/song-list/" }
 ]
