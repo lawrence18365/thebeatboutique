@@ -90,5 +90,25 @@ for (const p of listPageDirs('venues')) {
 }
 if (titleBad === 0) ok('all venue titles are "Wedding Band for [Venue] | Beat Boutique"');
 
+// 7. Venue "About" copy is grammatically safe (no "[Venue] is couples ..." etc.)
+console.log('\n[7] Venue About copy grammar');
+const BAD_GRAMMAR = [
+  /\bis couples\b/i,
+  /\bis couples who\b/i,
+  /\bis couples looking\b/i,
+  /\bis couples wanting\b/i,
+  /\bis (?:[a-z-]+\s+){0,2}weddings\b/i, // "is larger weddings", "is fairytale weddings"
+];
+let grammarBad = 0;
+for (const p of listPageDirs('venues')) {
+  const m = read(p.file).match(/<h2>About[^<]*<\/h2>\s*<p>([\s\S]*?)<\/p>/);
+  if (!m) continue;
+  const text = m[1].replace(/<[^>]*>/g, '');
+  for (const rx of BAD_GRAMMAR) {
+    if (rx.test(text)) { fail(`${p.slug}: awkward About copy matched ${rx} — "${text.slice(0, 90)}..."`); grammarBad++; break; }
+  }
+}
+if (grammarBad === 0) ok('all venue About copy is grammatically safe');
+
 console.log(`\n${failures === 0 ? 'PASS' : 'FAIL'}: ${failures} problem(s)\n`);
 process.exit(failures === 0 ? 0 : 1);

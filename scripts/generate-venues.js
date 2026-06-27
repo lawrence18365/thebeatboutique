@@ -56,6 +56,41 @@ function isPlaceholder(value) {
     return v.includes('placeholder') || v.includes('needs real');
 }
 
+// Lowercase only the first character (preserves proper nouns like "Blessington Lakes").
+function lowerFirst(text) {
+    return text ? text.charAt(0).toLowerCase() + text.slice(1) : text;
+}
+
+function splitFirstSentence(text) {
+    const s = String(text).trim();
+    const m = s.match(/^(.*?[.!?])\s+(.*)$/s);
+    if (m) return { first: m[1].trim(), rest: m[2].trim() };
+    return { first: s, rest: '' };
+}
+
+// Build a grammatically safe "best for" clause from free-form data.
+// Returns null when the phrase cannot be joined cleanly, so the caller can
+// fall back to neutral copy rather than publish awkward text.
+function describeBestFor(name, bestFor) {
+    if (isPlaceholder(bestFor)) return null;
+    const { first, rest } = splitFirstSentence(bestFor);
+    const core = first.replace(/[.!?]+$/, '').trim();
+    if (!core) return null;
+    const lower = core.toLowerCase();
+
+    let clause = null;
+    if (/^couples\s+(who|looking|wanting|seeking|that|after|searching|hoping|keen)\b/.test(lower)) {
+        clause = `${name} suits ${lowerFirst(core)}.`;
+    } else if (/^(ideal|perfect|great|best)\s+for\b/.test(lower)) {
+        clause = `${name} is ${lowerFirst(core)}.`;
+    } else if (/^[a-z][a-z-]*(\s+[a-z][a-z-]*){0,2}\s+weddings\b/.test(lower)) {
+        clause = `${name} suits ${lowerFirst(core)}.`;
+    } else {
+        return null; // cannot join safely
+    }
+    return rest ? `${clause} ${rest}` : clause;
+}
+
 function renderExtraVenueSections(venue) {
     if (!Array.isArray(venue.additional_sections)) {
         return '';
@@ -285,8 +320,9 @@ const generateVenuePage = (venue) => {
     const extraSections = renderExtraVenueSections(venue);
     const faqSection = renderVenueFaqSection(venue);
 
-    const aboutText = hasBestFor
-        ? `${venue.setting}. With capacity for ${venue.capacity} guests, ${venue.name} is ${venue.best_for.toLowerCase()}`
+    const bestForSentence = describeBestFor(venue.name, venue.best_for);
+    const aboutText = bestForSentence
+        ? `${venue.setting}. With capacity for ${venue.capacity} guests, ${bestForSentence}`
         : `${venue.setting}. With capacity for ${venue.capacity} guests, ${venue.name} is a stunning setting for your wedding day.`;
 
     const acousticsSection = hasAcoustics ? `
