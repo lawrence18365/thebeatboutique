@@ -27,7 +27,7 @@ const resolveOgImage = (url) => {
     }
     if (url.includes('images.unsplash.com')) return defaultOgImage;
     if (url.startsWith('http')) return url;
-    return `https://thebeatboutique.ie${normalizeAssetPath(url)}`;
+    return `https://thebeatboutique.ie/${normalizeAssetPath(url)}`;
 };
 
 const normalizeSitePath = (urlPath) => {

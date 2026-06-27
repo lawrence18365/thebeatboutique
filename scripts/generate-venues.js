@@ -269,6 +269,9 @@ const generateVenuePage = (venue) => {
     const countyGuideItem = validCountySlugs.has(countySlug)
         ? `<li><a href="locations/wedding-band-${countySlug}/">Wedding Band ${venue.county}</a> — More ${venue.county} weddings</li>`
         : `<li>Wedding Band ${venue.county} — More ${venue.county} weddings</li>`;
+    const countyAnchor = validCountySlugs.has(countySlug)
+        ? `<a href="locations/wedding-band-${countySlug}/">wedding band in ${venue.county}</a>`
+        : `wedding band in ${venue.county}`;
     const hasAcoustics = !isPlaceholder(venue.acoustics);
     const hasSetup = !isPlaceholder(venue.setup_notes);
     const hasTip = !isPlaceholder(venue.insider_tip);
@@ -590,9 +593,14 @@ ${faqSchemaItems}
 
     <header class="venue-hero">
         <div class="container">
-            <p style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Venue Guide</p>
-            <h1 class="hero-title">${venue.name}</h1>
+            <p style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 15px;">Wedding Band</p>
+            <h1 class="hero-title">${venue.name} Wedding Band</h1>
             <p class="hero-subtitle">${venue.location}</p>
+
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 25px 0 5px;">
+                <a href="./#contact" class="btn btn-primary" style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold);">Check Your Date</a>
+                <a href="pricing-guide/" class="btn" style="color: rgba(255,255,255,0.9); border: 1px solid rgba(255,255,255,0.35);">See Pricing</a>
+            </div>
 
             <div class="venue-meta">
                 <div class="venue-meta-item">
@@ -617,6 +625,10 @@ ${faqSchemaItems}
 
     <article class="venue-content">
 
+        <div class="venue-section venue-lead">
+            <p style="font-size: 1.15rem; line-height: 1.8; color: #333;">Planning a wedding at ${venue.name}? Here's how a live band fills ${venue.ballroom}, the questions ${venue.county} couples ask us most, and how to check if your date is free. We've played ${venue.weddings_played} weddings here — see our ${countyAnchor} page or <a href="pricing-guide/">view wedding band prices in Ireland</a>.</p>
+        </div>
+
         <div class="venue-section">
             <h2>About ${venue.name}</h2>
             <p>${aboutText}</p>
@@ -626,11 +638,12 @@ ${acousticsSection}${setupSection}${tipSection}${extraSections}${reviewSection}$
         <div class="venue-section">
             <h2>Planning Your ${venue.name} Wedding?</h2>
             <p>We've played ${venue.weddings_played} weddings at ${venue.name} and know the venue inside out. From setup logistics to the perfect setlist for the space, we handle everything so you can enjoy your day.</p>
-            <p>Check our availability for your date, read what couples say on our <a href="reviews/">reviews page</a>, or come see us live at our Dublin showcase first.</p>
+            <p>Check our availability for your date, <a href="pricing-guide/">compare wedding band packages and prices</a>, read what couples say on our <a href="reviews/">reviews page</a>, or come see us live at our Dublin showcase first.</p>
         </div>
 
         <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin: 40px 0;">
             <a href="./#contact" class="btn btn-primary">Check Availability</a>
+            <a href="pricing-guide/" class="btn btn-secondary" style="border-color: var(--primary-navy); color: var(--primary-navy);">See Pricing</a>
             <a href="showcase/" class="btn btn-secondary" style="border-color: var(--primary-navy); color: var(--primary-navy);">See Us Live</a>
         </div>
 
