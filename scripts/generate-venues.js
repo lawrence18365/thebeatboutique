@@ -56,13 +56,6 @@ function isPlaceholder(value) {
     return v.includes('placeholder') || v.includes('needs real');
 }
 
-function formatNaturalList(items) {
-    if (items.length === 0) return '';
-    if (items.length === 1) return items[0];
-    if (items.length === 2) return `${items[0]} and ${items[1]}`;
-    return `${items.slice(0, -1).join(', ')}, and ${items[items.length - 1]}`;
-}
-
 function renderExtraVenueSections(venue) {
     if (!Array.isArray(venue.additional_sections)) {
         return '';
@@ -277,18 +270,12 @@ const generateVenuePage = (venue) => {
     const hasTip = !isPlaceholder(venue.insider_tip);
     const hasBestFor = !isPlaceholder(venue.best_for);
     const hasTestimonial = !isPlaceholder(venue.testimonial) && !isPlaceholder(venue.testimonial_author);
-    const metaSignals = [];
-    if (hasAcoustics) metaSignals.push('acoustics tips');
-    if (hasSetup) metaSignals.push('setup advice');
-    if (hasTestimonial) metaSignals.push('real couple feedback');
 
-    const defaultMetaDescription = metaSignals.length > 0
-        ? `${venue.name} wedding band guide — ${formatNaturalList(metaSignals)} from ${venue.weddings_played} weddings we've played there.`
-        : `${venue.name} wedding band guide — venue notes, setup guidance, and practical planning tips from ${venue.weddings_played} weddings we've played there.`;
+    const defaultMetaDescription = `Planning a wedding at ${venue.name}? See how Beat Boutique handles live music, dancefloor flow, setup, pricing and availability.`;
     const venueMetaDescription = venue.meta_description || defaultMetaDescription;
-    const metaTitle = venue.title || `${venue.name} Wedding Band | The Beat Boutique`;
+    const metaTitle = venue.title || `Wedding Band for ${venue.name} | Beat Boutique`;
     const socialDescription = venue.og_description || venueMetaDescription;
-    const articleHeadline = venue.article_headline || `${venue.name} Wedding Band Guide`;
+    const articleHeadline = venue.article_headline || `Wedding Band for ${venue.name}`;
     const relatedVenueLinks = renderRelatedVenueLinks(venue);
     const hasSameCountyVenueLinks = venues.some((candidate) => candidate.slug !== venue.slug && candidate.county === venue.county);
     const moreVenueGuidesHeading = hasSameCountyVenueLinks ? `More ${venue.county} Venue Guides` : 'More Venue Guides';

@@ -79,5 +79,16 @@ for (const p of listPageDirs('venues')) {
 }
 if (brokenLinks === 0) ok('all venue->county links resolve');
 
+// 6. Venue titles use booking intent (no "Guide" framing)
+console.log('\n[6] Venue titles use booking intent');
+let titleBad = 0;
+for (const p of listPageDirs('venues')) {
+  const m = read(p.file).match(/<title>([^<]*)<\/title>/);
+  if (!m) { fail(`${p.slug}: no <title>`); titleBad++; continue; }
+  if (/\bGuide\b/.test(m[1])) { fail(`${p.slug}: title still says "Guide" (${m[1]})`); titleBad++; }
+  if (!/^Wedding Band for /.test(m[1])) { fail(`${p.slug}: title not booking-intent (${m[1]})`); titleBad++; }
+}
+if (titleBad === 0) ok('all venue titles are "Wedding Band for [Venue] | Beat Boutique"');
+
 console.log(`\n${failures === 0 ? 'PASS' : 'FAIL'}: ${failures} problem(s)\n`);
 process.exit(failures === 0 ? 0 : 1);
