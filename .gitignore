@@ -12,3 +12,11 @@ node_modules/
 # Raw GSC CSV exports (the derived index-status.json / fix plans are kept)
 data/audit/gsc-exports/*.csv
 data/legacy-redirects.json.bak
+
+# OAuth client secrets (desktop Google clients) — never commit
+.gsc-oauth.json
+scripts/pull-search-console.js
+scripts/audit-search-console.js
+scripts/list-gsc-sites.js
+scripts/google-ads.js
+scripts/google-ads-login.js
