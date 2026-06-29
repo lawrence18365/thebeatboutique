@@ -2,7 +2,7 @@
   "scripts": {
     "audit:links": "node scripts/audit-links.js",
     "audit:acquisition": "node scripts/acquisition-api-audit.js",
-    "generate:legacy-redirects": "node scripts/generate-legacy-redirects.js",
+    "generate:redirects": "node scripts/generate-cloudflare-redirects.js",
     "setup:ga4": "node scripts/setup-ga4.js",
     "index:inspect": "node scripts/index-inspect.js",
     "index:plan": "node scripts/index-classify.js",
