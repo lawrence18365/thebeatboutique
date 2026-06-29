@@ -110,5 +110,22 @@ for (const p of listPageDirs('venues')) {
 }
 if (grammarBad === 0) ok('all venue About copy is grammatically safe');
 
+// 8. Money page (/pricing-guide/) carries price + FAQ structured data
+console.log('\n[8] /pricing-guide/ has price + FAQ schema');
+const pgPath = path.join(ROOT, 'pricing-guide', 'index.html');
+if (!exists(pgPath)) {
+  fail('/pricing-guide/ missing');
+} else {
+  const m = read(pgPath).match(/<script type="application\/ld\+json">\s*([\s\S]*?)\s*<\/script>/);
+  let graph = [];
+  try { graph = (JSON.parse(m[1])['@graph']) || []; } catch (e) { fail(`/pricing-guide/ JSON-LD does not parse: ${e.message}`); }
+  const offer = graph.find((n) => n['@type'] === 'Service' && n.offers && /Offer/.test(n.offers['@type']));
+  const faq = graph.some((n) => n['@type'] === 'FAQPage');
+  if (!offer) fail('/pricing-guide/ missing Service/AggregateOffer price schema');
+  else if (!(offer.offers.lowPrice && offer.offers.priceCurrency)) fail('/pricing-guide/ offer missing lowPrice/priceCurrency');
+  if (!faq) fail('/pricing-guide/ missing FAQPage schema');
+  if (offer && faq) ok('/pricing-guide/ has AggregateOffer (price) + FAQPage');
+}
+
 console.log(`\n${failures === 0 ? 'PASS' : 'FAIL'}: ${failures} problem(s)\n`);
 process.exit(failures === 0 ? 0 : 1);
