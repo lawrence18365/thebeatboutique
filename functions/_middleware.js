@@ -5,6 +5,7 @@
 // Pages deployment (works on the *.pages.dev preview). Exact-match, then falls
 // through to assets.
 const HOST = "https://thebeatboutique.ie";
+const WWW_HOST = "www.thebeatboutique.ie";
 const REDIRECTS = {
   "/playlist": "/song-list/",
   "/our-fans": "/reviews/",
@@ -55,8 +56,13 @@ export async function onRequest(context) {
   let p = url.pathname;
   if (p.length > 1 && p.endsWith('/')) p = p.slice(0, -1);
   const target = REDIRECTS[p];
+  // Legacy/county path redirect (single hop, always to apex) — covers apex AND www.
   if (target) {
     return new Response(null, { status: 301, headers: { Location: HOST + target + url.search } });
+  }
+  // www -> apex for everything else (canonical host), preserving path + query.
+  if (url.hostname === WWW_HOST) {
+    return new Response(null, { status: 301, headers: { Location: HOST + url.pathname + url.search } });
   }
   return context.next();
 }
