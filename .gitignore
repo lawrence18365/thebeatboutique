@@ -20,3 +20,9 @@ scripts/audit-search-console.js
 scripts/list-gsc-sites.js
 scripts/google-ads.js
 scripts/google-ads-login.js
+
+# Generated audit data, scraped content and build/output artefacts
+data/audit/
+data/scraped_venues/
+output/
+docs/CLIENT-ACQUISITION-REPORT-*.md
