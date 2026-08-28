@@ -69,7 +69,7 @@ const STANDARD_FOOTER = `    <footer class="footer">
                         </li>
                         <li>
                             <span class="contact-label">Address</span>
-                            <address style="font-style: normal; opacity: 0.8;">503 Griffith Ave, Glasnevin<br>Dublin 11, D11 Y977</address>
+                            <address style="font-style: normal; opacity: 0.8;">Dublin, Ireland</address>
                         </li>
                     </ul>
                 </div>
@@ -119,7 +119,7 @@ const SIMPLE_FOOTER = `    <footer class="footer">
                     <ul class="footer-contact">
                         <li><a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a></li>
                         <li><a href="tel:+353872310001">+353 87 231 0001</a></li>
-                        <li><address style="font-style: normal; opacity: 0.8;">503 Griffith Ave, Glasnevin<br>Dublin 11, D11 Y977</address></li>
+                        <li><address style="font-style: normal; opacity: 0.8;">Dublin, Ireland</address></li>
                     </ul>
                 </div>
             </div>

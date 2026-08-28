@@ -198,9 +198,7 @@ const generateTemplate = (county) => {
           "email": "justask@thebeatboutique.ie",
           "address": {
             "@type": "PostalAddress",
-            "streetAddress": "503 Griffith Ave, Glasnevin",
             "addressLocality": "Dublin",
-            "postalCode": "D11 Y977",
             "addressRegion": "County Dublin",
             "addressCountry": "IE"
           },
