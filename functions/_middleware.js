@@ -61,8 +61,13 @@ export async function onRequest(context) {
     return new Response(null, { status: 301, headers: { Location: HOST + target + url.search } });
   }
   // www -> apex for everything else (canonical host), preserving path + query.
+  // Non-GET/HEAD requests (e.g. a POSTed form submission from the www hostname)
+  // must keep their method and body: a 301 would be converted to GET by the
+  // browser and silently destroy the submission, so use 308 for those.
   if (url.hostname === WWW_HOST) {
-    return new Response(null, { status: 301, headers: { Location: HOST + url.pathname + url.search } });
+    const method = context.request.method;
+    const status = method === "GET" || method === "HEAD" ? 301 : 308;
+    return new Response(null, { status, headers: { Location: HOST + url.pathname + url.search } });
   }
   return context.next();
 }
