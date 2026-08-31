@@ -32,17 +32,35 @@ const LEAD_COLUMNS = [
     "lead_created_at",
 ];
 
-// Fields shown in the notification email, grouped "Enquiry" then "Attribution".
-const ENQUIRY_FIELDS = [
-    "names", "email", "phone", "wedding_date", "venue", "message", "how_found",
-];
+// Fields consumed by the HERO block (names, phone/email action row, and the
+// date/venue facts) — these are rendered by their own dedicated layout, never
+// as plain rows in the details table.
+const HERO_FIELDS = new Set([
+    "names", "phone", "email", "wedding_date", "event_date", "venue",
+]);
+
+// Fields shown in the DETAILS table, before any extra non-internal field.
+const DETAIL_FIELDS = ["message", "how_found", "interest", "event_date"];
+
+// Fields shown in the demoted "Where this lead came from" block.
 const ATTRIBUTION_FIELDS = [
     "form_source", "page_path",
     "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term",
-    "gclid", "fbclid", "referrer", "landing_page",
+    "gclid", "fbclid", "referrer", "landing_page", "country",
 ];
-// Plumbing fields that never appear in the email.
-const INTERNAL_FIELDS = new Set(["_gotcha", "redirect", "raw_json"]);
+// Plumbing / bookkeeping fields that never appear in the email body.
+const INTERNAL_FIELDS = new Set([
+    "_gotcha", "redirect", "raw_json",
+    "subject", "form_id", "page_url", "page_category", "page_focus",
+    "lead_created_at", "first_seen_at", "created_at",
+    "first_referrer", "first_utm_source", "first_utm_medium", "first_utm_campaign",
+    "first_utm_content", "first_utm_term", "first_gclid", "first_fbclid",
+]);
+
+// Font stacks that match the site's Playfair Display / Montserrat pairing but
+// degrade gracefully in email clients (web fonts are unreliable/blocked).
+const FONT_SERIF = "Georgia,'Times New Roman',serif";
+const FONT_SANS = "'Segoe UI',Helvetica,Arial,sans-serif";
 
 const LABELS = {
     names: "Names", email: "Email", phone: "Phone", wedding_date: "Wedding date",
@@ -149,7 +167,12 @@ export async function onRequestPost(context) {
                     console.error("[lead] LEAD_NOTIFY_TO is not set — notification email skipped (" + (storedOk ? "lead stored" : "lead NOT stored") + ").");
                     return;
                 }
-                const sent = await sendNotificationEmail(env, fields, notificationPrefix, warningNotice);
+                const sent = await sendNotificationEmail(
+                    env,
+                    { ...fields, created_at: nowIso },
+                    notificationPrefix,
+                    warningNotice
+                );
                 if (sent && leadId !== null && storedOk) {
                     await env.DB.prepare("UPDATE leads SET notified = 1 WHERE id = ?").bind(leadId).run();
                 }
@@ -303,45 +326,155 @@ function buildSubject(fields) {
 }
 
 function buildEmailContent(fields, warningNotice) {
-    // "Enquiry" group: the listed fields plus any other submitted field that
-    // isn't attribution or plumbing, so every non-empty field is shown.
-    const enquiryKeys = [
-        ...ENQUIRY_FIELDS,
+    // Pull out the values the hero, actions and footer need.
+    const names = nonEmptyStr(fields.names);
+    const phone = nonEmptyStr(fields.phone);
+    const email = nonEmptyStr(fields.email);
+    const dateVal = nonEmptyStr(fields.event_date) || nonEmptyStr(fields.wedding_date);
+    const venue = nonEmptyStr(fields.venue);
+    const message = nonEmptyStr(fields.message);
+    const received = formatReceived(fields);
+
+    // Details = the fixed detail fields plus any other submitted field that
+    // isn't already rendered (hero / action row), attribution, or internals.
+    const detailsKeys = [
+        "phone", "email",
+        ...DETAIL_FIELDS,
         ...Object.keys(fields).filter(
             (key) =>
-                !ENQUIRY_FIELDS.includes(key) &&
+                !DETAIL_FIELDS.includes(key) &&
+                !HERO_FIELDS.has(key) &&
                 !ATTRIBUTION_FIELDS.includes(key) &&
                 !INTERNAL_FIELDS.has(key) &&
                 isNonEmpty(fields[key])
         ),
     ];
-    const enquiryHtml = emailRows(fields, enquiryKeys);
-    const attributionHtml = emailRows(fields, ATTRIBUTION_FIELDS);
-
-    const warningHtml = warningNotice
-        ? "<div style=\"margin:0 0 20px;padding:12px 16px;background:#fff3cd;border:1px solid #d8c24a;border-radius:8px;color:#7a5c00;font-weight:700;\">" + escapeHtml(warningNotice.replace(/\n/g, " ")) + "</div>"
+    const detailsHtml = detailsKeys.some((k) => isNonEmpty(fields[k]))
+        ? detailsBlock(fields, detailsKeys)
         : "";
+    const attributionHtml = attributionRows(fields);
+    const warningHtml = warningNotice ? warningBand(warningNotice) : "";
 
-    const html =
-        "<!DOCTYPE html><html><body style=\"margin:0;padding:0;background:#f4f6f8;font-family:Arial,Helvetica,sans-serif;color:#1a2332;\">" +
-        "<div style=\"max-width:640px;margin:0 auto;padding:24px;\">" +
-        warningHtml +
-        "<h2 style=\"color:#0d1b2a;margin:0 0 4px;\">New lead — The Beat Boutique</h2>" +
-        "<p style=\"margin:0 0 20px;color:#5a6b7d;font-size:13px;\">Received " + escapeHtml(fields.lead_created_at || "") + "</p>" +
-        "<h3 style=\"margin:20px 0 8px;color:#0d1b2a;\">Enquiry</h3>" +
-        "<table style=\"border-collapse:collapse;width:100%;background:#ffffff;border:1px solid #dfe5ec;border-radius:8px;\">" + enquiryHtml + "</table>" +
-        "<h3 style=\"margin:20px 0 8px;color:#0d1b2a;\">Attribution</h3>" +
-        "<table style=\"border-collapse:collapse;width:100%;background:#ffffff;border:1px solid #dfe5ec;border-radius:8px;\">" + attributionHtml + "</table>" +
-        "</div></body></html>";
+    const html = emailHtml({
+        names, phone, email, dateVal, venue, received,
+        detailsHtml, attributionHtml, warningHtml,
+    });
 
-    const textLines = warningNotice ? [warningNotice.trim()] : [];
-    textLines.push("New lead — The Beat Boutique", "", "ENQUIRY");
-    enquiryKeys.filter((k) => isNonEmpty(fields[k])).forEach((k) => textLines.push(fieldLabel(k) + ": " + fields[k]));
-    textLines.push("", "ATTRIBUTION");
-    ATTRIBUTION_FIELDS.filter((k) => isNonEmpty(fields[k])).forEach((k) => textLines.push(fieldLabel(k) + ": " + fields[k]));
+    const text = emailText({
+        fields, warningNotice, names, phone, email, dateVal, venue, message, received,
+    });
 
-    return { html, text: textLines.join("\n") };
+    return { html, text };
 }
+
+// --- HTML builders ---------------------------------------------------------
+
+function emailHtml(o) {
+    return "<!DOCTYPE html><html>" +
+        "<head><meta charset=\"utf-8\">" +
+        "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">" +
+        "<meta name=\"color-scheme\" content=\"light\">" +
+        "<meta name=\"supported-color-schemes\" content=\"light\">" +
+        "<title>New enquiry — The Beat Boutique</title></head>" +
+        "<body style=\"margin:0;padding:0;background:#f4f1ea;\">" +
+        "<center>" +
+        "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"background:#f4f1ea;\">" +
+        "<tr><td align=\"center\" style=\"padding:24px 12px;\">" +
+        // White card (the only bordered column) holds header, warning, hero,
+        // actions and details.
+        "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"max-width:600px;background:#ffffff;\">" +
+        headerBand() +
+        (o.warningHtml || "") +
+        heroBlock(o) +
+        actionRowHtml(o.phone, o.email) +
+        (o.detailsHtml || "") +
+        "</table>" +
+        attributionBlock(o.attributionHtml) +
+        footerBlock(o.received) +
+        "</td></tr></table>" +
+        "</center></body></html>";
+}
+
+function headerBand() {
+    return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"background:#0a192f;\">" +
+        "<tr><td height=\"3\" style=\"background:#d4af37;height:3px;font-size:0;line-height:0;\">&nbsp;</td></tr>" +
+        "<tr><td style=\"background:#0a192f;padding:26px 32px 22px;\">" +
+        "<div style=\"font-family:" + FONT_SANS + ";font-size:11px;line-height:1.3;letter-spacing:2px;text-transform:uppercase;color:#d4af37;\">The Beat Boutique</div>" +
+        "<div style=\"font-family:" + FONT_SERIF + ";font-size:26px;line-height:1.2;color:#f4f1ea;margin-top:6px;\">New enquiry</div>" +
+        "</td></tr></table>";
+}
+
+function warningBand(message) {
+    const text = escapeHtml(String(message || "").trim());
+    return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"background:#ffffff;\">" +
+        "<tr><td style=\"background:#b3261e;padding:16px 32px;text-align:left;font-family:" + FONT_SANS + ";font-size:14px;line-height:1.4;font-weight:700;color:#ffffff;white-space:normal;word-break:break-word;\">" + text + "</td></tr></table>";
+}
+
+function heroBlock(o) {
+    const dateLine = o.dateVal
+        ? "<div style=\"margin-top:20px;\">" +
+          "<div style=\"font-family:" + FONT_SANS + ";font-size:11px;line-height:1.3;letter-spacing:1px;text-transform:uppercase;color:#b5952f;font-weight:600;\">Date</div>" +
+          "<div style=\"font-family:" + FONT_SANS + ";font-size:15px;line-height:1.4;color:#2f3f50;margin-top:2px;\">" + escapeHtml(o.dateVal) + "</div></div>"
+        : "";
+    const venueLine = o.venue
+        ? "<div style=\"margin-top:12px;\">" +
+          "<div style=\"font-family:" + FONT_SANS + ";font-size:11px;line-height:1.3;letter-spacing:1px;text-transform:uppercase;color:#b5952f;font-weight:600;\">Venue</div>" +
+          "<div style=\"font-family:" + FONT_SANS + ";font-size:15px;line-height:1.4;color:#2f3f50;margin-top:2px;\">" + escapeHtml(o.venue) + "</div></div>"
+        : "";
+    return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\"><tr>" +
+        "<td style=\"background:#ffffff;padding:36px 32px 10px;\">" +
+        "<div style=\"font-family:" + FONT_SERIF + ";font-size:30px;line-height:1.2;color:#0a192f;\">" + escapeHtml(o.names || "New enquiry") + "</div>" +
+        dateLine + venueLine +
+        "</td></tr></table>";
+}
+
+// Buttons as table cells (not CSS buttons) so they render in Outlook. Render
+// the Call button only when a phone number was supplied; otherwise the email
+// button spans the full width.
+function actionRowHtml(phone, email) {
+    const tel = telHref(phone);
+    const mail = mailtoHref(email);
+    const callBtnHtml = tel
+        ? "<td align=\"center\" width=\"50%\" style=\"padding:6px;\">" +
+          "<a href=\"tel:" + tel + "\" style=\"display:block;padding:16px 12px;background:#d4af37;color:#0a192f;font-family:" + FONT_SANS + ";font-size:15px;line-height:1.2;font-weight:700;text-align:center;text-decoration:none;border-radius:6px;white-space:nowrap;\">Call</a></td>"
+        : "";
+    const emailBtnHtml = mail
+        ? "<td align=\"center\" width=\"" + (tel ? "50%" : "100%") + "\" style=\"padding:6px;\">" +
+          "<a href=\"mailto:" + mail + "?subject=" + encodeURIComponent("Re: your enquiry — The Beat Boutique") + "\" style=\"display:block;padding:16px 12px;background:#0a192f;color:#f4f1ea;font-family:" + FONT_SANS + ";font-size:15px;line-height:1.2;font-weight:700;text-align:center;text-decoration:none;border-radius:6px;\">Reply by email</a></td>"
+        : "";
+    return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\"><tr>" +
+        "<td style=\"background:#ffffff;padding:16px 26px 4px;\">" +
+        "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\"><tr>" +
+        callBtnHtml + emailBtnHtml +
+        "</tr></table></td></tr></table>";
+}
+
+function detailsBlock(fields, keys) {
+    return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\"><tr>" +
+        "<td style=\"background:#ffffff;padding:8px 32px 28px;\">" +
+        "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"border-collapse:collapse;border-top:1px solid #e8e2d5;\">" +
+        emailRows(fields, keys) +
+        "</table></td></tr></table>";
+}
+
+function attributionBlock(rows) {
+    if (!rows) return "";
+    return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"max-width:600px;background:#f4f1ea;\">" +
+        "<tr><td style=\"padding:24px 32px 8px;\">" +
+        "<div style=\"font-family:" + FONT_SANS + ";font-size:11px;line-height:1.3;letter-spacing:1px;text-transform:uppercase;color:#8b6b1b;\">Where this lead came from</div>" +
+        rows +
+        "</td></tr></table>";
+}
+
+function footerBlock(received) {
+    return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"max-width:600px;background:#f4f1ea;\">" +
+        "<tr><td align=\"center\" style=\"padding:16px 32px 8px;font-family:" + FONT_SANS + ";font-size:11px;line-height:1.6;color:#8a97a4;\">" +
+        (received ? "Received " + received + "<br>" : "") +
+        "Stored in your <a href=\"https://thebeatboutique.ie/leads/\" style=\"color:#8a97a4;text-decoration:underline;\">lead dashboard</a>" +
+        "</td></tr></table>";
+}
+
+// --- Row builders ----------------------------------------------------------
 
 function emailRows(fields, keys) {
     return keys
@@ -349,12 +482,95 @@ function emailRows(fields, keys) {
         .map(
             (key) =>
                 "<tr>" +
-                "<td style=\"padding:8px 12px;border-bottom:1px solid #eef1f5;font-weight:600;white-space:nowrap;vertical-align:top;color:#33414f;font-size:13px;\">" +
+                "<td style=\"padding:10px 12px;border-bottom:1px solid #e8e2d5;font-family:" + FONT_SANS + ";font-size:11px;line-height:1.3;letter-spacing:1px;text-transform:uppercase;color:#8b6b1b;font-weight:600;white-space:nowrap;vertical-align:top;\">" +
                 escapeHtml(fieldLabel(key)) + "</td>" +
-                "<td style=\"padding:8px 12px;border-bottom:1px solid #eef1f5;vertical-align:top;color:#1a2332;font-size:13px;word-break:break-word;\">" +
-                escapeHtml(fields[key]) + "</td></tr>"
+                "<td style=\"padding:10px 12px;border-bottom:1px solid #e8e2d5;font-family:" + FONT_SANS + ";font-size:14px;line-height:1.45;color:#2f3f50;vertical-align:top;word-break:break-word;\">" +
+                formatValue(key, fields[key]) + "</td></tr>"
         )
         .join("");
+}
+
+function attributionRows(fields) {
+    return ATTRIBUTION_FIELDS
+        .filter((k) => isNonEmpty(fields[k]))
+        .map(
+            (k) =>
+                "<p style=\"margin:10px 0 0;font-family:" + FONT_SANS + ";font-size:12px;line-height:1.5;color:#5a6b7d;word-break:break-word;\">" +
+                "<strong style=\"font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#8b6b1b;\">" +
+                escapeHtml(fieldLabel(k)) + "</strong>: " +
+                escapeHtml(fields[k]) + "</p>"
+        )
+        .join("");
+}
+
+// --- Plain-text version ----------------------------------------------------
+
+function emailText(o) {
+    const lines = [];
+    if (o.warningNotice) lines.push(o.warningNotice.trim());
+    lines.push("THE BEAT BOUTIQUE — new enquiry", "");
+    if (o.names) lines.push("Names: " + o.names);
+    if (o.dateVal) lines.push("Wedding/event date: " + o.dateVal);
+    if (o.venue) lines.push("Venue: " + o.venue);
+    if (o.phone) lines.push("Phone: " + o.phone);
+    if (o.email) lines.push("Email: " + o.email);
+    if (o.message) lines.push("Message: " + o.message);
+    const attribution = ATTRIBUTION_FIELDS.filter((k) => isNonEmpty(o.fields[k]));
+    if (attribution.length) {
+        lines.push("", "WHERE THIS LEAD CAME FROM");
+        attribution.forEach((k) => lines.push(fieldLabel(k) + ": " + o.fields[k]));
+    }
+    if (o.received) {
+        lines.push("", "Received " + o.received);
+        lines.push("Stored in your lead dashboard: https://thebeatboutique.ie/leads/");
+    }
+    return lines.join("\n");
+}
+
+// --- Value helpers ---------------------------------------------------------
+
+// Escape first, then (for message only) turn newlines into <br> so escaping is
+// never bypassed.
+function formatValue(key, value) {
+    const escaped = escapeHtml(value);
+    if (key === "phone") {
+        const tel = telHref(value);
+        return tel
+            ? "<a href=\"tel:" + tel + "\" style=\"color:#0a192f;text-decoration:underline;\">" + escaped + "</a>"
+            : escaped;
+    }
+    if (key === "email") {
+        const mail = mailtoHref(value);
+        return mail
+            ? "<a href=\"mailto:" + mail + "\" style=\"color:#0a192f;text-decoration:underline;\">" + escaped + "</a>"
+            : escaped;
+    }
+    if (key === "message") return escaped.replace(/\r?\n/g, "\n").replace(/\n/g, "<br>");
+    return escaped;
+}
+
+// Human-readable Irish-local timestamp. Falls back to the server-generated
+// created_at when the submitted lead_created_at is missing/unparsable.
+function formatReceived(fields) {
+    const raw = isNonEmpty(fields.lead_created_at)
+        ? fields.lead_created_at
+        : (isNonEmpty(fields.created_at) ? fields.created_at : null);
+    if (!raw) return "";
+    const d = new Date(raw);
+    if (isNaN(d.getTime())) return "";
+    const datePart = d.toLocaleString("en-IE", {
+        timeZone: "Europe/Dublin",
+        weekday: "long", day: "numeric", month: "long", year: "numeric",
+    });
+    const timePart = d.toLocaleString("en-IE", {
+        timeZone: "Europe/Dublin",
+        hour: "2-digit", minute: "2-digit", hour12: false,
+    });
+    return (datePart + ", " + timePart).trim();
+}
+
+function nonEmptyStr(value) {
+    return isNonEmpty(value) ? String(value).trim() : "";
 }
 
 function isNonEmpty(value) {
@@ -372,4 +588,14 @@ function escapeHtml(value) {
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#39;");
+}
+
+function telHref(raw) {
+    const cleaned = String(raw || "").replace(/[^0-9+()\-]/g, "");
+    return escapeHtml(cleaned);
+}
+
+function mailtoHref(raw) {
+    const cleaned = String(raw || "").replace(/[^A-Za-z0-9._%+\-@]/g, "");
+    return escapeHtml(cleaned);
 }
