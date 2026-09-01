@@ -46,6 +46,7 @@ CREATE TABLE IF NOT EXISTS leads (
     country              TEXT,
     user_agent           TEXT,
     notified             INTEGER NOT NULL DEFAULT 0,     -- 1 once the notification email succeeded
+    rate_limited         INTEGER NOT NULL DEFAULT 0,     -- 1 if stored but deliberately not emailed (per-IP limit exceeded)
     raw_json             TEXT    NOT NULL                -- full JSON of every submitted field
 );
 

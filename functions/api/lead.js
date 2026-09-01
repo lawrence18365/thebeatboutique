@@ -15,7 +15,7 @@ const APEX_HOST = "thebeatboutique.ie";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FIELD_CHARS = 5000;                 // cap on every individual value
 const MAX_RAW_JSON_BYTES = 64 * 1024;         // cap on the whole raw_json payload
-const RATE_LIMIT_MAX = 8;                     // max submissions per IP per window
+const RATE_LIMIT_MAX = 20;  // per IP per window; over this the lead is still stored, just not emailed
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;  // 60 minutes
 
 // All writable lead columns, in schema order. Values are always passed as bound
@@ -87,7 +87,18 @@ export async function onRequestPost(context) {
     const { request, env } = context;
     try {
         // a. Read the submission. Every field becomes a key on a plain object.
+        // Guard the body size BEFORE parsing so an oversized or malformed body
+        // never reaches the success redirect (FIX 3).
+        const contentLengthHeader = request.headers.get("content-length");
+        if (contentLengthHeader !== null && Number(contentLengthHeader) > 512000) {
+            console.error("[lead] body too large (content-length " + contentLengthHeader + ") — rejecting.");
+            return errorRedirect(request);
+        }
         const fields = await readFields(request);
+        if (fields === null) {
+            // request.formData() failed to parse — never show success (FIX 3).
+            return errorRedirect(request);
+        }
 
         // b. Honeypot: a filled `_gotcha` means a bot. No store, no email — but
         // return the normal success redirect so bots see success and don't retry.
@@ -111,9 +122,12 @@ export async function onRequestPost(context) {
             }
         }
 
-        // d+e. Rate limit + INSERT — both isolated in their own try/catch. If the
-        // rate-limit COUNT query or the INSERT fails, log it and keep going so no
-        // genuine enquiry is ever dropped (the email may still fire).
+        // d+e. Rate limit + INSERT — each in its own try/catch. If the rate-limit
+        // COUNT query fails we fail OPEN (treat as not rate limited) and still
+        // attempt the INSERT, so a genuine enquiry is never dropped. Only a
+        // failing INSERT may set storedOk = false. A rate-limited submission is
+        // ALWAYS still written to the database (storing rate_limited = 1) and is
+        // simply not emailed (FIX 1, FIX 2).
         const ip = request.headers.get("CF-Connecting-IP") || "";
         const since = new Date(Date.now() - RATE_LIMIT_WINDOW_MS).toISOString();
         const nowIso = new Date().toISOString();
@@ -124,30 +138,39 @@ export async function onRequestPost(context) {
             ip,
             country: (request.cf && request.cf.country) || "",
             user_agent: request.headers.get("User-Agent") || "",
+            rate_limited: 0,
             raw_json: capRawJson(fields),
         };
-        const allColumns = ["created_at", ...LEAD_COLUMNS, "ip", "country", "user_agent", "raw_json"];
+        const allColumns = ["created_at", ...LEAD_COLUMNS, "ip", "country", "user_agent", "rate_limited", "raw_json"];
         const sql = `INSERT INTO leads (${allColumns.join(", ")}) VALUES (${allColumns.map(() => "?").join(", ")})`;
-        const values = allColumns.map((col) => {
-            const v = row[col];
-            return v === undefined || v === null ? null : String(v);
-        });
         let leadId = null;
         let storedOk = false;
+        let rateLimited = false;
+        let rateLimitCount = 0;
         try {
             const countRow = await env.DB.prepare(
                 "SELECT COUNT(*) AS c FROM leads WHERE ip = ? AND created_at >= ?"
             ).bind(ip, since).first();
             if ((countRow && countRow.c) >= RATE_LIMIT_MAX) {
-                return successRedirect(request, fields);
+                rateLimited = true;
+                rateLimitCount = countRow ? countRow.c : RATE_LIMIT_MAX;
+                row.rate_limited = 1;
             }
+        } catch (err) {
+            console.error("[lead] rate-limit COUNT query failed (fail open):", err);
+        }
+        const values = allColumns.map((col) => {
+            const v = row[col];
+            return v === undefined || v === null ? null : String(v);
+        });
+        try {
             const insert = await env.DB.prepare(sql).bind(...values).run();
             if (insert.meta && insert.meta.last_row_id !== undefined) {
                 leadId = insert.meta.last_row_id;
             }
             storedOk = true;
         } catch (err) {
-            console.error("[lead] rate-limit/insert failed:", err);
+            console.error("[lead] INSERT failed:", err);
             storedOk = false;
         }
         const notificationPrefix = storedOk ? "" : "[NOT SAVED] ";
@@ -159,6 +182,12 @@ export async function onRequestPost(context) {
         // never delays the redirect and never fails the request.
         context.waitUntil((async () => {
             try {
+                if (rateLimited) {
+                    // Still stored, but deliberately not emailed (per-IP limit
+                    // exceeded) so the owner's inbox isn't flooded (FIX 1).
+                    console.warn("[lead] rate-limited submission stored but NOT emailed — IP " + ip + ", " + rateLimitCount + " submissions in window.");
+                    return;
+                }
                 if (!env.RESEND_API_KEY) {
                     console.error("[lead] RESEND_API_KEY is not set — notification email skipped (" + (storedOk ? "lead stored" : "lead NOT stored") + ").");
                     return;
@@ -169,7 +198,7 @@ export async function onRequestPost(context) {
                 }
                 const sent = await sendNotificationEmail(
                     env,
-                    { ...fields, created_at: nowIso },
+                    row, // server-derived row — email always agrees with the DB (FIX 4)
                     notificationPrefix,
                     warningNotice
                 );
@@ -196,7 +225,13 @@ export async function onRequestPost(context) {
 
 async function readFields(request) {
     const fields = {};
-    const formData = await request.formData();
+    let formData;
+    try {
+        formData = await request.formData();
+    } catch (err) {
+        console.error("[lead] formData parse failed:", err);
+        return null;
+    }
     for (const [key, value] of formData.entries()) {
         if (typeof value === "string") {
             fields[key] = value;
@@ -549,12 +584,14 @@ function formatValue(key, value) {
     return escaped;
 }
 
-// Human-readable Irish-local timestamp. Falls back to the server-generated
-// created_at when the submitted lead_created_at is missing/unparsable.
+// Human-readable Irish-local timestamp. Prefers the server-generated created_at
+// (so a visitor's mis-set clock can't show a lead as days old or in the future),
+// falling back to the submitted lead_created_at only when created_at is missing
+// or unparseable (FIX 5).
 function formatReceived(fields) {
-    const raw = isNonEmpty(fields.lead_created_at)
-        ? fields.lead_created_at
-        : (isNonEmpty(fields.created_at) ? fields.created_at : null);
+    const raw = isNonEmpty(fields.created_at)
+        ? fields.created_at
+        : (isNonEmpty(fields.lead_created_at) ? fields.lead_created_at : null);
     if (!raw) return "";
     const d = new Date(raw);
     if (isNaN(d.getTime())) return "";

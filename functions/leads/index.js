@@ -85,7 +85,9 @@ function renderDashboard({ total, last30, leads }) {
         .map(
             (lead) =>
                 "<tr>" +
-                "<td class=\"mono\" title=\"" + escapeHtml(lead.created_at || "") + "\">" + escapeHtml(formatWhen(lead.created_at)) + "</td>" +
+                (Number(lead.rate_limited)
+                    ? "<td class=\"mono\" title=\"Stored but not emailed (per-IP limit exceeded).\"><span class=\"rl\">LIMIT</span>" + escapeHtml(formatWhen(lead.created_at)) + "</td>"
+                    : "<td class=\"mono\" title=\"" + escapeHtml(lead.created_at || "") + "\">" + escapeHtml(formatWhen(lead.created_at)) + "</td>") +
                 "<td>" + escapeHtml(lead.names) + "</td>" +
                 "<td>" + escapeHtml(lead.email) + "</td>" +
                 "<td>" + escapeHtml(lead.phone) + "</td>" +
@@ -131,13 +133,15 @@ function renderDashboard({ total, last30, leads }) {
         "th{background:#f0f3f7;font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:#4a5a6c}" +
         "tr:hover td{background:#f8fafc}" +
         "td.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;white-space:nowrap}" +
+        ".rl{display:inline-block;background:#b3261e;color:#fff;font-size:10px;font-weight:700;line-height:1;padding:3px 5px;border-radius:4px;margin-right:6px;vertical-align:1px}" +
         "details{margin-top:2px}summary{cursor:pointer;color:#0d6efd;font-size:12px;user-select:none}" +
         ".msg{white-space:pre-wrap;background:#f7f9fb;border:1px solid #e2e8ef;border-radius:8px;padding:10px 12px;margin-top:6px}" +
         ".empty{padding:40px;text-align:center;color:#5a6b7d}" +
         "</style></head><body>" +
         "<header><h1>The Beat Boutique — Leads</h1>" +
         "<p>" + total + " total &middot; " + last30 + " in the last 30 days &middot; " +
-        '<a href="/leads/export">Export all as CSV</a> &middot; times shown in UTC</p></header>' +
+        '<a href="/leads/export">Export all as CSV</a> &middot; times shown in UTC &middot; ' +
+        '<span class="rl">LIMIT</span> = stored but not emailed (per-IP limit exceeded)</p></header>' +
         '<main><div class="stats">' +
         '<div class="stat"><b>' + total + "</b><span>Total leads</span></div>" +
         '<div class="stat"><b>' + last30 + "</b><span>Last 30 days</span></div>" +
