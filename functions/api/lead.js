@@ -15,6 +15,7 @@ const APEX_HOST = "thebeatboutique.ie";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const MAX_FIELD_CHARS = 5000;                 // cap on every individual value
 const MAX_RAW_JSON_BYTES = 64 * 1024;         // cap on the whole raw_json payload
+const MAX_BODY_BYTES = 512000;                // cap on the whole request body
 const RATE_LIMIT_MAX = 20;  // per IP per window; over this the lead is still stored, just not emailed
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000;  // 60 minutes
 
@@ -52,6 +53,7 @@ const ATTRIBUTION_FIELDS = [
 const INTERNAL_FIELDS = new Set([
     "_gotcha", "redirect", "raw_json",
     "subject", "form_id", "page_url", "page_category", "page_focus",
+    "ip", "user_agent", "rate_limited",
     "lead_created_at", "first_seen_at", "created_at",
     "first_referrer", "first_utm_source", "first_utm_medium", "first_utm_campaign",
     "first_utm_content", "first_utm_term", "first_gclid", "first_fbclid",
@@ -88,13 +90,25 @@ export async function onRequestPost(context) {
     try {
         // a. Read the submission. Every field becomes a key on a plain object.
         // Guard the body size BEFORE parsing so an oversized or malformed body
-        // never reaches the success redirect (FIX 3).
+        // never reaches the success redirect. The Content-Length check is a cheap
+        // fast-path early rejection; the real cap is enforced on the body stream
+        // itself so chunked/headerless bodies can't bypass it (FIX E).
         const contentLengthHeader = request.headers.get("content-length");
         if (contentLengthHeader !== null && Number(contentLengthHeader) > 512000) {
             console.error("[lead] body too large (content-length " + contentLengthHeader + ") — rejecting.");
             return errorRedirect(request);
         }
-        const fields = await readFields(request);
+        const collectedBytes = await collectBody(request.body);
+        if (collectedBytes === null) {
+            console.error("[lead] body too large (> " + MAX_BODY_BYTES + " bytes) or streaming failed — rejecting.");
+            return errorRedirect(request);
+        }
+        const rebuilt = new Request(request.url, {
+            method: "POST",
+            headers: request.headers,
+            body: collectedBytes,
+        });
+        const fields = await readFields(rebuilt);
         if (fields === null) {
             // request.formData() failed to parse — never show success (FIX 3).
             return errorRedirect(request);
@@ -182,7 +196,11 @@ export async function onRequestPost(context) {
         // never delays the redirect and never fails the request.
         context.waitUntil((async () => {
             try {
-                if (rateLimited) {
+                if (!storedOk) {
+                    // Write failed — this email is the only surviving copy, so it must
+                    // ALWAYS be sent, regardless of rate-limit state (FIX A). The
+                    // warning band and [NOT SAVED] prefix communicate the failure.
+                } else if (rateLimited) {
                     // Still stored, but deliberately not emailed (per-IP limit
                     // exceeded) so the owner's inbox isn't flooded (FIX 1).
                     console.warn("[lead] rate-limited submission stored but NOT emailed — IP " + ip + ", " + rateLimitCount + " submissions in window.");
@@ -213,15 +231,58 @@ export async function onRequestPost(context) {
         // g. Redirect — only ever to a same-origin or apex URL (open-redirect safe).
         return successRedirect(request, fields);
     } catch (err) {
-        // h. Never show the customer a 500 after they filled in a form.
+        // h. Never show the customer a thank-you page after a total failure —
+        // if nothing was stored or emailed they must not be told the enquiry
+        // arrived. Send them back with ?error=1 so they can retry or phone (FIX D).
         console.error("[lead] unexpected error:", err);
-        return new Response(null, { status: 303, headers: { Location: SUCCESS_FALLBACK } });
+        return errorRedirect(request);
     }
 }
 
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+async function collectBody(stream) {
+    // Read the request body in chunks, counting bytes, and abort (return null)
+    // as soon as the running total exceeds MAX_BODY_BYTES. This enforces the cap
+    // on the body stream itself, so a chunked request with no Content-Length
+    // header can't bypass it (FIX E).
+    if (!stream) return null;
+    const reader = stream.getReader();
+    const chunks = [];
+    let total = 0;
+    while (true) {
+        let chunk;
+        try {
+            chunk = await reader.read();
+        } catch (err) {
+            console.error("[lead] body read failed:", err);
+            return null;
+        }
+        if (chunk.done) break;
+        const bytes = chunk.value;
+        total += bytes ? bytes.byteLength : 0;
+        if (total > MAX_BODY_BYTES) {
+            console.error("[lead] body exceeded " + MAX_BODY_BYTES + " bytes during stream read — aborting.");
+            try { await reader.cancel(); } catch (_) {}
+            return null;
+        }
+        chunks.push(bytes);
+    }
+    return concatChunks(chunks);
+}
+
+function concatChunks(chunks) {
+    const total = chunks.reduce((n, c) => n + c.byteLength, 0);
+    let result = new Uint8Array(total);
+    let offset = 0;
+    for (const c of chunks) {
+        result.set(c, offset);
+        offset += c.byteLength;
+    }
+    return result.buffer;
+}
 
 async function readFields(request) {
     const fields = {};

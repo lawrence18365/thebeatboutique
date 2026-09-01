@@ -39,7 +39,7 @@ export async function onRequestGet(context) {
                     const batch = results || [];
                     if (!wroteHeader) {
                         controller.enqueue(
-                            encoder.encode(EXPORT_COLUMNS.map(csvCell).join(",") + "\r\n")
+                            encoder.encode(EXPORT_COLUMNS.map((col) => csvCell(col, null)).join(",") + "\r\n")
                         );
                         wroteHeader = true;
                     }
@@ -49,7 +49,7 @@ export async function onRequestGet(context) {
                     }
                     let chunk = "";
                     for (const row of batch) {
-                        chunk += EXPORT_COLUMNS.map((col) => csvCell(row[col])).join(",") + "\r\n";
+                        chunk += EXPORT_COLUMNS.map((col) => csvCell(col, row[col])).join(",") + "\r\n";
                     }
                     controller.enqueue(encoder.encode(chunk));
                     lastId = batch[batch.length - 1].id;
@@ -77,12 +77,22 @@ export async function onRequestGet(context) {
 // Neutralise CSV formula injection (FIX 6): when a value starts with '=', '+',
 // '-', '@', TAB (0x09) or CR (0x0D), prefix it with a single apostrophe inside
 // the quoted cell so Excel/LibreOffice/Sheets treat it as text, not a formula.
-// Existing quote-doubling is preserved.
+// The apostrophe is a real byte, so it is only applied to columns that carry
+// attacker-supplied free text where formula injection actually matters —
+// structured/operational columns (ids, timestamps, phone, email, IPs, flags,
+// etc.) are written verbatim so real data like "+353 86 ..." or "@handle" is
+// never mangled (FIX C). Existing quote-doubling is preserved for every column.
 const CSV_FORMULA_PREFIX = /^[=+\-@\t\r]/;
-function csvCell(value) {
+const CSV_FORMULA_COLUMNS = new Set([
+    "names", "message", "venue", "how_found", "interest", "subject",
+    "form_source", "page_path", "page_url", "landing_page", "referrer",
+    "first_referrer", "utm_source", "utm_medium", "utm_campaign",
+    "utm_content", "utm_term", "raw_json",
+]);
+function csvCell(key, value) {
     if (value === null || value === undefined) return '""';
     let str = String(value);
-    if (CSV_FORMULA_PREFIX.test(str)) str = "'" + str;
+    if (CSV_FORMULA_COLUMNS.has(key) && CSV_FORMULA_PREFIX.test(str)) str = "'" + str;
     return '"' + str.replace(/"/g, '""') + '"';
 }
 
