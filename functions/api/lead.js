@@ -218,7 +218,8 @@ export async function onRequestPost(context) {
                     env,
                     row, // server-derived row — email always agrees with the DB (FIX 4)
                     notificationPrefix,
-                    warningNotice
+                    warningNotice,
+                    storedOk
                 );
                 if (sent && leadId !== null && storedOk) {
                     await env.DB.prepare("UPDATE leads SET notified = 1 WHERE id = ?").bind(leadId).run();
@@ -229,6 +230,10 @@ export async function onRequestPost(context) {
         })());
 
         // g. Redirect — only ever to a same-origin or apex URL (open-redirect safe).
+        // If the lead could not be written, never show the thank-you page: the
+        // visitor must be told it failed so they can retry. (The honeypot path
+        // above returns the success redirect deliberately for bots — FIX D.)
+        if (!storedOk) return errorRedirect(request);
         return successRedirect(request, fields);
     } catch (err) {
         // h. Never show the customer a thank-you page after a total failure —
@@ -386,8 +391,8 @@ function byteLength(str) {
 // Notification email (Resend REST API)
 // ---------------------------------------------------------------------------
 
-async function sendNotificationEmail(env, fields, notificationPrefix, warningNotice) {
-    const { html, text } = buildEmailContent(fields, warningNotice);
+async function sendNotificationEmail(env, fields, notificationPrefix, warningNotice, stored) {
+    const { html, text } = buildEmailContent(fields, warningNotice, stored);
     const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -421,7 +426,7 @@ function buildSubject(fields) {
     return parts.length ? "[TBB Lead] " + parts.join(" - ") : "[TBB Lead] New enquiry";
 }
 
-function buildEmailContent(fields, warningNotice) {
+function buildEmailContent(fields, warningNotice, stored) {
     // Pull out the values the hero, actions and footer need.
     const names = nonEmptyStr(fields.names);
     const phone = nonEmptyStr(fields.phone);
@@ -453,11 +458,11 @@ function buildEmailContent(fields, warningNotice) {
 
     const html = emailHtml({
         names, phone, email, dateVal, venue, received,
-        detailsHtml, attributionHtml, warningHtml,
+        detailsHtml, attributionHtml, warningHtml, stored,
     });
 
     const text = emailText({
-        fields, warningNotice, names, phone, email, dateVal, venue, message, received,
+        fields, warningNotice, names, phone, email, dateVal, venue, message, received, stored,
     });
 
     return { html, text };
@@ -486,7 +491,7 @@ function emailHtml(o) {
         (o.detailsHtml || "") +
         "</table>" +
         attributionBlock(o.attributionHtml) +
-        footerBlock(o.received) +
+        footerBlock(o.received, o.stored) +
         "</td></tr></table>" +
         "</center></body></html>";
 }
@@ -562,11 +567,17 @@ function attributionBlock(rows) {
         "</td></tr></table>";
 }
 
-function footerBlock(received) {
+function footerBlock(received, stored) {
+    // When the lead was NOT stored, this email is the only surviving copy — we
+    // tell the owner to save it manually instead of linking the (possibly empty)
+    // dashboard. When it WAS stored, keep the normal dashboard link.
+    const storedLine = stored
+        ? "Stored in your <a href=\"https://thebeatboutique.ie/leads/\" style=\"color:#8a97a4;text-decoration:underline;\">lead dashboard</a>"
+        : "This lead was NOT stored automatically. This email is the only copy — please save it manually (open the enquiry below and keep it somewhere safe).";
     return "<table role=\"presentation\" cellpadding=\"0\" cellspacing=\"0\" border=\"0\" width=\"100%\" style=\"max-width:600px;background:#f4f1ea;\">" +
         "<tr><td align=\"center\" style=\"padding:16px 32px 8px;font-family:" + FONT_SANS + ";font-size:11px;line-height:1.6;color:#8a97a4;\">" +
         (received ? "Received " + received + "<br>" : "") +
-        "Stored in your <a href=\"https://thebeatboutique.ie/leads/\" style=\"color:#8a97a4;text-decoration:underline;\">lead dashboard</a>" +
+        storedLine +
         "</td></tr></table>";
 }
 
@@ -618,7 +629,13 @@ function emailText(o) {
     }
     if (o.received) {
         lines.push("", "Received " + o.received);
+    }
+    // When the lead was NOT stored, this email is the only copy — say so instead
+    // of pointing at the dashboard. When it WAS stored, keep the normal link.
+    if (o.stored) {
         lines.push("Stored in your lead dashboard: https://thebeatboutique.ie/leads/");
+    } else {
+        lines.push("This lead was NOT stored automatically. This email is the only copy — please save it manually and keep it somewhere safe.");
     }
     return lines.join("\n");
 }

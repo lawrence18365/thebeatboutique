@@ -39,7 +39,7 @@ export async function onRequestGet(context) {
                     const batch = results || [];
                     if (!wroteHeader) {
                         controller.enqueue(
-                            encoder.encode(EXPORT_COLUMNS.map((col) => csvCell(col, null)).join(",") + "\r\n")
+                            encoder.encode(EXPORT_COLUMNS.map((col) => csvCell(col, col)).join(",") + "\r\n")
                         );
                         wroteHeader = true;
                     }
@@ -77,22 +77,24 @@ export async function onRequestGet(context) {
 // Neutralise CSV formula injection (FIX 6): when a value starts with '=', '+',
 // '-', '@', TAB (0x09) or CR (0x0D), prefix it with a single apostrophe inside
 // the quoted cell so Excel/LibreOffice/Sheets treat it as text, not a formula.
-// The apostrophe is a real byte, so it is only applied to columns that carry
-// attacker-supplied free text where formula injection actually matters —
-// structured/operational columns (ids, timestamps, phone, email, IPs, flags,
-// etc.) are written verbatim so real data like "+353 86 ..." or "@handle" is
-// never mangled (FIX C). Existing quote-doubling is preserved for every column.
+// The apostrophe is a real byte. These leading characters are never legitimate
+// in this dataset, so the decision is made from the VALUE rather than a column
+// allow-list — every column gets the same treatment, so attacker-controlled
+// free text like phone, email, user_agent and the dates can't smuggle a live
+// formula out (FIX C). The one exception is a phone-like '+/-' value (e.g.
+// "+353 86 123 4567"), which is written verbatim so real numbers are never
+// mangled. Existing quote-doubling is preserved for every value.
 const CSV_FORMULA_PREFIX = /^[=+\-@\t\r]/;
-const CSV_FORMULA_COLUMNS = new Set([
-    "names", "message", "venue", "how_found", "interest", "subject",
-    "form_source", "page_path", "page_url", "landing_page", "referrer",
-    "first_referrer", "utm_source", "utm_medium", "utm_campaign",
-    "utm_content", "utm_term", "raw_json",
-]);
+const CSV_PHONE_LIKE = /^[+-][0-9\s().\-]*$/;
 function csvCell(key, value) {
     if (value === null || value === undefined) return '""';
     let str = String(value);
-    if (CSV_FORMULA_COLUMNS.has(key) && CSV_FORMULA_PREFIX.test(str)) str = "'" + str;
+    if (CSV_FORMULA_PREFIX.test(str)) {
+        // A phone-like "+/-" value is left verbatim; everything else starting
+        // with a formula-prefix character is neutralised with an apostrophe.
+        const startsPlusMinus = str[0] === "+" || str[0] === "-";
+        if (!startsPlusMinus || !CSV_PHONE_LIKE.test(str)) str = "'" + str;
+    }
     return '"' + str.replace(/"/g, '""') + '"';
 }
 
