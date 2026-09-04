@@ -1,7 +1,8 @@
 // POST /api/lead — self-hosted lead intake for The Beat Boutique.
 // Replaces the dead Formspark endpoint. Order of operations matters: the lead is
 // written to D1 BEFORE anything that can fail (notification email, etc.) so no
-// submission is ever lost.
+// submission is ever lost. Spam-flagged submissions (detectSpam heuristics) are
+// stored but not emailed.
 //
 // Bindings (configured via the Cloudflare API, not wrangler.toml):
 //   env.DB              — D1 database (bound as `DB`)
@@ -136,6 +137,11 @@ export async function onRequestPost(context) {
             }
         }
 
+        // Spam heuristics: bots POSTing the raw form directly never carry the
+        // JS-injected fields (page_path / first_seen_at / lead_created_at).
+        const spamCheck = detectSpam(fields);
+        const isSpam = spamCheck.score >= 2;
+
         // d+e. Rate limit + INSERT — each in its own try/catch. If the rate-limit
         // COUNT query fails we fail OPEN (treat as not rate limited) and still
         // attempt the INSERT, so a genuine enquiry is never dropped. Only a
@@ -153,9 +159,11 @@ export async function onRequestPost(context) {
             country: (request.cf && request.cf.country) || "",
             user_agent: request.headers.get("User-Agent") || "",
             rate_limited: 0,
+            spam: isSpam ? 1 : 0,
+            spam_reason: spamCheck.reasons.join(","),
             raw_json: capRawJson(fields),
         };
-        const allColumns = ["created_at", ...LEAD_COLUMNS, "ip", "country", "user_agent", "rate_limited", "raw_json"];
+        const allColumns = ["created_at", ...LEAD_COLUMNS, "ip", "country", "user_agent", "rate_limited", "spam", "spam_reason", "raw_json"];
         const sql = `INSERT INTO leads (${allColumns.join(", ")}) VALUES (${allColumns.map(() => "?").join(", ")})`;
         let leadId = null;
         let storedOk = false;
@@ -205,6 +213,9 @@ export async function onRequestPost(context) {
                     // exceeded) so the owner's inbox isn't flooded (FIX 1).
                     console.warn("[lead] rate-limited submission stored but NOT emailed — IP " + ip + ", " + rateLimitCount + " submissions in window.");
                     return;
+                } else if (isSpam) {
+                    console.warn("[lead] spam-flagged submission stored but NOT emailed — reasons: " + spamCheck.reasons.join(",") + ", IP " + ip);
+                    return;
                 }
                 if (!env.RESEND_API_KEY) {
                     console.error("[lead] RESEND_API_KEY is not set — notification email skipped (" + (storedOk ? "lead stored" : "lead NOT stored") + ").");
@@ -247,6 +258,38 @@ export async function onRequestPost(context) {
 // ---------------------------------------------------------------------------
 // Helpers
 // ---------------------------------------------------------------------------
+
+// Score a submission against simple bot heuristics. Genuine browser
+// submissions always carry the fields js/main.js injects (page_path,
+// first_seen_at, lead_created_at); bots POSTing the raw form never do.
+// Returns { score, reasons } — spam when score >= 2.
+function detectSpam(fields) {
+    let score = 0;
+    const reasons = [];
+    const blank = (key) =>
+        fields[key] === undefined || fields[key] === null || String(fields[key]).trim() === "";
+
+    if (blank("page_path") && blank("first_seen_at") && blank("lead_created_at")) {
+        score += 2;
+        reasons.push("no-js");
+    }
+    if (/https?:\/\/|www\./i.test(String(fields.message || ""))) {
+        score += 1;
+        reasons.push("url-in-message");
+    }
+    if (String(fields.email || "").toLowerCase().endsWith("@thebeatboutique.ie")) {
+        score += 2;
+        reasons.push("own-domain-email");
+    }
+    const currentYear = new Date().getUTCFullYear();
+    const dateYearMatch = String(fields.wedding_date || "") + " " + String(fields.event_date || "");
+    const yearMatch = /\b(19|20)\d{2}\b/.exec(dateYearMatch);
+    if (yearMatch && Number(yearMatch[0]) < currentYear) {
+        score += 1;
+        reasons.push("past-date");
+    }
+    return { score, reasons };
+}
 
 async function collectBody(stream) {
     // Read the request body in chunks, counting bytes, and abort (return null)

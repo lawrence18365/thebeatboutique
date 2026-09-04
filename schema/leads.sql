@@ -47,9 +47,13 @@ CREATE TABLE IF NOT EXISTS leads (
     user_agent           TEXT,
     notified             INTEGER NOT NULL DEFAULT 0,     -- 1 once the notification email succeeded
     rate_limited         INTEGER NOT NULL DEFAULT 0,     -- 1 if stored but deliberately not emailed (per-IP limit exceeded)
+    spam                 INTEGER NOT NULL DEFAULT 0,     -- 1 if stored but not emailed (spam heuristics, see spam_reason)
+    spam_reason          TEXT,                           -- comma-separated reasons from detectSpam()
     raw_json             TEXT    NOT NULL                -- full JSON of every submitted field
 );
 
 CREATE INDEX IF NOT EXISTS idx_leads_created_at ON leads (created_at DESC);
 CREATE INDEX IF NOT EXISTS idx_leads_email      ON leads (email);
 CREATE INDEX IF NOT EXISTS idx_leads_lead_type  ON leads (lead_type);
+
+-- Migration applied to the live DB 2026-09-04: ALTER TABLE leads ADD COLUMN spam INTEGER NOT NULL DEFAULT 0; ALTER TABLE leads ADD COLUMN spam_reason TEXT;

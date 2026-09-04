@@ -17,7 +17,7 @@ const EXPORT_COLUMNS = [
     "first_utm_source", "first_utm_medium", "first_utm_campaign",
     "first_utm_content", "first_utm_term", "first_gclid", "first_fbclid",
     "lead_created_at",
-    "ip", "country", "user_agent", "notified", "rate_limited", "raw_json",
+    "ip", "country", "user_agent", "notified", "rate_limited", "spam", "spam_reason", "raw_json",
 ];
 
 const EXPORT_BATCH_SIZE = 500;

@@ -15,18 +15,22 @@ export async function onRequestGet(context) {
     if (!checkAuth(request, env)) return unauthorized();
 
     try {
-        const totalRow = await env.DB.prepare("SELECT COUNT(*) AS c FROM leads").first();
+        const showSpam = new URL(request.url).searchParams.get("spam") === "1";
+        const totalRow = await env.DB.prepare("SELECT COUNT(*) AS c FROM leads WHERE spam = 0").first();
         const thirtyDaysAgo = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
         const recentRow = await env.DB.prepare(
-            "SELECT COUNT(*) AS c FROM leads WHERE created_at >= ?"
+            "SELECT COUNT(*) AS c FROM leads WHERE spam = 0 AND created_at >= ?"
         ).bind(thirtyDaysAgo).first();
+        const spamRow = await env.DB.prepare("SELECT COUNT(*) AS c FROM leads WHERE spam = 1").first();
         const { results } = await env.DB.prepare(
-            "SELECT * FROM leads ORDER BY created_at DESC LIMIT 200"
+            "SELECT * FROM leads" + (showSpam ? "" : " WHERE spam = 0") + " ORDER BY created_at DESC LIMIT 200"
         ).all();
 
         const page = renderDashboard({
             total: totalRow ? totalRow.c : 0,
             last30: recentRow ? recentRow.c : 0,
+            spamCount: spamRow ? spamRow.c : 0,
+            showSpam,
             leads: results || [],
         });
         return new Response(page, { headers: { "Content-Type": "text/html; charset=utf-8" } });
@@ -80,12 +84,16 @@ function timingSafeEqual(a, b) {
 // Rendering (self-contained HTML, inline CSS only, no external assets)
 // ---------------------------------------------------------------------------
 
-function renderDashboard({ total, last30, leads }) {
+function renderDashboard({ total, last30, spamCount, showSpam, leads }) {
     const rows = leads
         .map(
             (lead) =>
                 "<tr>" +
-                (Number(lead.rate_limited)
+                (Number(lead.spam)
+                    ? "<td class=\"mono\" title=\"Stored but not emailed (spam): " + escapeHtml(lead.spam_reason || "") + "\">" +
+                      (Number(lead.rate_limited) ? "<span class=\"rl\">LIMIT</span>" : "") +
+                      "<span class=\"spam\">SPAM</span>" + escapeHtml(formatWhen(lead.created_at)) + "</td>"
+                    : Number(lead.rate_limited)
                     ? "<td class=\"mono\" title=\"Stored but not emailed (per-IP limit exceeded).\"><span class=\"rl\">LIMIT</span>" + escapeHtml(formatWhen(lead.created_at)) + "</td>"
                     : "<td class=\"mono\" title=\"" + escapeHtml(lead.created_at || "") + "\">" + escapeHtml(formatWhen(lead.created_at)) + "</td>") +
                 "<td>" + escapeHtml(lead.names) + "</td>" +
@@ -134,17 +142,23 @@ function renderDashboard({ total, last30, leads }) {
         "tr:hover td{background:#f8fafc}" +
         "td.mono{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;white-space:nowrap}" +
         ".rl{display:inline-block;background:#b3261e;color:#fff;font-size:10px;font-weight:700;line-height:1;padding:3px 5px;border-radius:4px;margin-right:6px;vertical-align:1px}" +
+        ".spam{display:inline-block;background:#8a6d00;color:#fff;font-size:10px;font-weight:700;line-height:1;padding:3px 5px;border-radius:4px;margin-right:6px;vertical-align:1px}" +
         "details{margin-top:2px}summary{cursor:pointer;color:#0d6efd;font-size:12px;user-select:none}" +
         ".msg{white-space:pre-wrap;background:#f7f9fb;border:1px solid #e2e8ef;border-radius:8px;padding:10px 12px;margin-top:6px}" +
         ".empty{padding:40px;text-align:center;color:#5a6b7d}" +
         "</style></head><body>" +
         "<header><h1>The Beat Boutique — Leads</h1>" +
         "<p>" + total + " total &middot; " + last30 + " in the last 30 days &middot; " +
+        (showSpam
+            ? '<a href="/leads/">Hide spam</a>'
+            : '<a href="/leads/?spam=1">Show spam</a>') + " &middot; " +
         '<a href="/leads/export">Export all as CSV</a> &middot; times shown in UTC &middot; ' +
-        '<span class="rl">LIMIT</span> = stored but not emailed (per-IP limit exceeded)</p></header>' +
+        '<span class="rl">LIMIT</span> = stored but not emailed (per-IP limit exceeded) &middot; ' +
+        '<span class="spam">SPAM</span> = stored but not emailed (bot heuristics)</p></header>' +
         '<main><div class="stats">' +
         '<div class="stat"><b>' + total + "</b><span>Total leads</span></div>" +
         '<div class="stat"><b>' + last30 + "</b><span>Last 30 days</span></div>" +
+        '<div class="stat"><b>' + spamCount + "</b><span>Spam (hidden)</span></div>" +
         "</div>" +
         '<div class="table-wrap"><table><thead><tr>' +
         "<th>Date</th><th>Names</th><th>Email</th><th>Phone</th><th>Wedding date</th>" +
