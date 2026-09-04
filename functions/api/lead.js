@@ -6,7 +6,7 @@
 // Bindings (configured via the Cloudflare API, not wrangler.toml):
 //   env.DB              — D1 database (bound as `DB`)
 //   env.RESEND_API_KEY  — Resend API key (optional: email is skipped without it)
-//   env.LEAD_NOTIFY_TO  — notification recipient address
+//   env.LEAD_NOTIFY_TO  — notification recipient address(es), comma-separated
 //   env.LEAD_NOTIFY_FROM — notification sender address (optional, sensible default)
 //   env.LEADS_PASSWORD  — used by the /leads dashboard, not here
 
@@ -210,7 +210,7 @@ export async function onRequestPost(context) {
                     console.error("[lead] RESEND_API_KEY is not set — notification email skipped (" + (storedOk ? "lead stored" : "lead NOT stored") + ").");
                     return;
                 }
-                if (!env.LEAD_NOTIFY_TO) {
+                if (parseRecipients(env.LEAD_NOTIFY_TO).length === 0) {
                     console.error("[lead] LEAD_NOTIFY_TO is not set — notification email skipped (" + (storedOk ? "lead stored" : "lead NOT stored") + ").");
                     return;
                 }
@@ -387,12 +387,17 @@ function byteLength(str) {
     return new TextEncoder().encode(str).length;
 }
 
+function parseRecipients(value) {
+    return String(value || "").split(",").map(s => s.trim()).filter(Boolean);
+}
+
 // ---------------------------------------------------------------------------
 // Notification email (Resend REST API)
 // ---------------------------------------------------------------------------
 
 async function sendNotificationEmail(env, fields, notificationPrefix, warningNotice, stored) {
     const { html, text } = buildEmailContent(fields, warningNotice, stored);
+    const recipients = parseRecipients(env.LEAD_NOTIFY_TO);
     const res = await fetch("https://api.resend.com/emails", {
         method: "POST",
         headers: {
@@ -401,7 +406,7 @@ async function sendNotificationEmail(env, fields, notificationPrefix, warningNot
         },
         body: JSON.stringify({
             from: env.LEAD_NOTIFY_FROM || "The Beat Boutique <leads@send.thebeatboutique.ie>",
-            to: env.LEAD_NOTIFY_TO,
+            to: recipients,
             reply_to: fields.email, // a reply goes straight to the customer
             subject: notificationPrefix + buildSubject(fields),
             html,
