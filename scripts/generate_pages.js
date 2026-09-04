@@ -361,6 +361,8 @@ const generateTemplate = (county) => {
             box-shadow: 0 3px 10px rgba(0,0,0,0.05);
         }
     </style>
+    <script defer src="https://a.178-105-145-93.sslip.io/g.js" data-website-id="d172556a-c873-4919-bd48-e21880bffa37"></script>
+    <script defer src="https://a.178-105-145-93.sslip.io/c.js"></script>
 </head>
 <body>
 
@@ -486,6 +488,10 @@ const generateTemplate = (county) => {
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">First Dance Songs</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">Top 50 songs for Irish weddings</p>
                 </a>
+                <a href="guides/wedding-entrance-songs/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
+                    <h4 style="color: var(--primary-navy); margin: 0 0 8px;">Wedding Entrance Songs</h4>
+                    <p style="color: #666; margin: 0; font-size: 0.9rem;">Songs that start the celebration</p>
+                </a>
                 <a href="guides/how-to-choose-wedding-band/" style="background: white; padding: 25px; text-decoration: none; border-bottom: 3px solid var(--accent-gold);">
                     <h4 style="color: var(--primary-navy); margin: 0 0 8px;">How to Choose a Band</h4>
                     <p style="color: #666; margin: 0; font-size: 0.9rem;">Complete decision guide</p>
@@ -547,6 +553,7 @@ const generateTemplate = (county) => {
                     <ul class="footer-nav">
                         <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
                         <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-entrance-songs/">Entrance Songs</a></li>
                         <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
                         <li><a href="wedding-band-ireland/">Wedding Band Ireland</a></li>
                     </ul>

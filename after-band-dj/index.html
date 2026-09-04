@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\/[\/]*[^\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            var baseEl = document.querySelector('base');
+            if (baseEl) {
+                baseEl.setAttribute('href', base);
+            }
+        })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>After-Band DJ Ireland | Keep the Dance Floor Full | The Beat Boutique</title>
+    <meta name="description"
+        content="After-band DJ service in Ireland with a seamless live-band handover, song requests, and music through your venue's permitted finish time.">
+    <link rel="canonical" href="https://thebeatboutique.ie/after-band-dj/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thebeatboutique.ie/after-band-dj/">
+    <meta property="og:title" content="After-Band DJ Ireland | Keep the Dance Floor Full | The Beat Boutique">
+    <meta property="og:description"
+        content="After-band DJ service in Ireland with a seamless live-band handover, song requests, and music through your venue's permitted finish time.">
+    <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://thebeatboutique.ie/after-band-dj/">
+    <meta name="twitter:title" content="After-Band DJ Ireland | Keep the Dance Floor Full | The Beat Boutique">
+    <meta name="twitter:description" content="After-band DJ service in Ireland with a seamless live-band handover, song requests, and music through your venue's permitted finish time.">
+    <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
+
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
+    <meta name="theme-color" content="#0a192f">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"></noscript>
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Service",
+          "name": "After-Band DJ Ireland",
+          "serviceType": "Wedding DJ Service",
+          "description": "After-band DJ service in Ireland with a seamless live-band handover, song requests, and music through your venue's permitted finish time.",
+          "url": "https://thebeatboutique.ie/after-band-dj/",
+          "provider": {
+            "@type": "MusicGroup",
+            "name": "The Beat Boutique",
+            "url": "https://thebeatboutique.ie/"
+          },
+          "areaServed": {
+            "@type": "Country",
+            "name": "Ireland"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is an after-band DJ set?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "An after-band DJ set begins as soon as the live performance ends and carries the celebration through the venue's permitted music finish time. It keeps the same dance floor moving with recorded tracks, requests, and a wider mix of styles."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will there be a gap between the band and DJ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. When you book our band and DJ package, the live set is followed immediately by the professional DJ service. The handover is planned in advance so there is no dead air and guests have no reason to leave the dance floor."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How late does the after-band DJ play?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The DJ continues until the venue's permitted music finish time. That varies by venue and date, so we confirm the running order with you and the venue instead of promising a universal curfew."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we request songs for the DJ set?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Share your favourites, any must-plays, and any songs you do not want. Requests from guests can also be considered on the night when they fit the mood and your preferences."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can we book the DJ with The Beat Boutique wedding band?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Most couples choose the full evening package, which combines the live band performance with the after-band DJ service. Your quote will reflect your date, venue, travel, finish time, and the package you choose."
+              }
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        .service-hero {
+            background-color: var(--primary-navy);
+            padding: 180px 0 80px;
+            text-align: center;
+        }
+
+        .service-content {
+            padding: 60px 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 24px;
+            margin-top: 30px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 24px;
+            border-left: 4px solid var(--accent-gold);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .service-card h3 {
+            color: var(--primary-navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-card p {
+            color: #555;
+            margin: 0;
+        }
+
+        .service-cta {
+            background: var(--primary-navy);
+            color: var(--text-cream);
+            padding: 70px 0;
+            text-align: center;
+        }
+
+        .service-cta p {
+            opacity: 0.9;
+            max-width: 640px;
+            margin: 0 auto 30px;
+        }
+    </style>
+    <script defer src="https://a.178-105-145-93.sslip.io/g.js" data-website-id="d172556a-c873-4919-bd48-e21880bffa37"></script>
+    <script defer src="https://a.178-105-145-93.sslip.io/c.js"></script>
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="./" class="logo">
+                <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="logo-img" width="1400" height="1400">
+            </a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="about/" class="nav-link">About</a></li>
+                <li><a href="showcase/" class="nav-link">Showcase</a></li>
+                <li><a href="pricing-guide/" class="nav-link">Pricing</a></li>
+                <li><a href="venues/" class="nav-link">Venues</a></li>
+                <li><a href="wedding-band-ireland/" class="nav-cta btn-primary">Ireland</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="service-hero">
+        <div class="container">
+            <h1 class="hero-title" style="font-size: 3.2rem;">After-Band DJ</h1>
+            <p class="hero-subtitle" style="max-width: 720px; margin: 0 auto; font-size: 1.1rem;">The live set ends.
+                The music does not. Keep your dance floor full with a seamless DJ finish.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; margin-top: 25px;">
+                <a href="#contact" class="btn btn-primary"
+                    style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold); padding: 14px 28px;">Check
+                    Availability</a>
+                <a href="showcase/" class="btn"
+                    style="color: rgba(255,255,255,0.85); border: 1px solid rgba(255,255,255,0.4); padding: 14px 28px;">See
+                    Us Live</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="contact" class="quick-availability-section fade-up">
+        <div class="container">
+            <div class="quick-availability-card">
+                <div class="quick-availability-content">
+                    <span class="quick-eyebrow">Check Availability</span>
+                    <h2>Is Your Date Free?</h2>
+                    <p>Tell us your date and venue and we’ll confirm within 24 hours.</p>
+                    <ul class="quick-trust">
+                        <li>Same four musicians, every night</li>
+                        <li>180+ five-star reviews</li>
+                        <li>Nationwide Ireland bookings</li>
+                    </ul>
+                </div>
+                <form class="contact-form quick-availability-form" id="quick-availability-form" action="/api/lead" method="POST">
+                    <input type="hidden" name="subject" value="New Wedding Enquiry from Website">
+                    <input type="hidden" name="redirect" value="https://thebeatboutique.ie/thank-you/">
+                    <input type="hidden" name="form_source" value="Quick Availability Form">
+                    <input type="hidden" name="page_url" class="page-url-field" value="">
+                    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" style="position: absolute; left: -9999px;">
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="qa-names">Your Names *</label>
+                            <input type="text" id="qa-names" name="names" class="form-input" placeholder="e.g. Sarah & Tom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="qa-email">Email *</label>
+                            <input type="email" id="qa-email" name="email" class="form-input" placeholder="hello@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="qa-date">Wedding Date *</label>
+                            <input type="text" id="qa-date" name="wedding_date" class="form-input"
+                                placeholder="e.g. 9 May 2026"
+                                pattern="(0?[1-9]|[12][0-9]|3[01])[\/\-\s](0?[1-9]|1[012])[\/\-\s]\d{4}|\d{1,2}\s+[A-Za-z]+\s+\d{4}"
+                                title="Enter date as: 9 May 2026, 09/05/2026, or 09-05-2026"
+                                required>
+                            <small style="color: #666; font-size: 0.75rem; display: block; margin-top: 4px;">DD/MM/YYYY or 9 May 2026</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="qa-venue">Venue / County *</label>
+                            <input type="text" id="qa-venue" name="venue" class="form-input" placeholder="e.g. Adare Manor, Limerick" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit"><span>Check Availability</span></button>
+                    <p class="quick-availability-note">We reply within 24 hours (usually faster).</p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-content theme-light">
+        <div class="container" style="max-width: 900px;">
+            <p style="font-size: 1.1rem; margin-bottom: 2rem;">An <strong>after-band DJ</strong> keeps your wedding
+                moving when the live set finishes. There is no awkward pause, no change of room, and no moment when
+                guests wonder whether the night is over. The final live song lands, the DJ takes over, and the same
+                dance floor carries on through the late-night part of the celebration.</p>
+
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem;">What Is an After-Band DJ Set?</h2>
+            <p>The after-band set is the recorded-music part of your evening, beginning immediately after the live
+                band. It gives you the impact of live musicians for the main reception and the range of a DJ for the
+                finish. That means club favourites, current tracks, throwbacks, singalongs, and songs that would not
+                naturally sit in a live band's repertoire can all become part of the same night.</p>
+            <p>It is not a separate event bolted onto the end. We treat the band and DJ as one continuous piece of
+                entertainment. The running order, sound, and handover are planned together, with one clear goal: keep
+                the room feeling full and the celebration moving.</p>
+
+            <div class="service-grid">
+                <div class="service-card">
+                    <h3>No Gap</h3>
+                    <p>The DJ starts as the live set ends, so there is no dead air while guests are ready to dance.</p>
+                </div>
+                <div class="service-card">
+                    <h3>A Wider Mix</h3>
+                    <p>The DJ can move across styles and decades while responding to the people in front of them.</p>
+                </div>
+                <div class="service-card">
+                    <h3>One Evening Plan</h3>
+                    <p>Book the band and DJ together, then plan the music and timings through one team.</p>
+                </div>
+            </div>
+
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem; margin-top: 3rem;">The Handover: Live Band to DJ</h2>
+            <p>The handover is where a combined package earns its keep. Because the DJ service is part of the same
+                evening plan, the music can begin immediately after the band's final number. There is no second
+                supplier arriving late, no unfamiliar setup being assembled in front of your guests, and no silence
+                while people drift away from the dance floor.</p>
+            <p>We agree the running order with you and coordinate the practical details with your venue. On the night,
+                the live set builds towards its finish and the DJ picks up the energy that is already in the room. The
+                change feels natural because it has been considered before the first guest arrives.</p>
+
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem; margin-top: 3rem;">Typical Wedding Timings</h2>
+            <p>Most evenings follow a simple shape: your first dance opens the live portion, the band plays the main
+                sets, and the DJ takes over after the final live song. From there, the DJ continues until the venue's
+                permitted music finish time. We do not quote one universal curfew because each venue and date can be
+                different.</p>
+            <p>Your final schedule depends on when dinner and speeches finish, how the venue runs the room, and the
+                permitted finish time. If earlier parts of the day run late, the available entertainment window can
+                become tighter. Our <a href="guides/wedding-music-timeline/">wedding music timeline</a> shows how those
+                parts fit together and where delays tend to affect the band and DJ.</p>
+            <p>Before the wedding, we confirm the plan with you and work with the venue on access, setup, and timing.
+                You know when the live set is expected to finish, when the DJ begins, and what the venue allows at the
+                end of the night.</p>
+
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem; margin-top: 3rem;">Requests, Must-Plays, and Do-Not-Plays</h2>
+            <p>Your preferences give the DJ a useful starting point. Send us the songs and artists you love, a small
+                number of must-plays, and anything you definitely do not want. You do not need to build every minute
+                of the set. A clear steer is usually more helpful than a rigid playlist because it leaves room to read
+                the dance floor.</p>
+            <p>Guest requests can be considered on the night when they suit your brief and the mood in the room. The DJ
+                balances those requests with what is working, changes direction when the crowd needs it, and avoids
+                forcing a track simply because it appeared on a long list. The result still feels personal, but it can
+                breathe like a real party.</p>
+
+            <h2 class="section-title" style="color: var(--primary-navy); font-size: 2rem; margin-top: 3rem;">Book the Band and DJ as One Package</h2>
+            <p>Most couples who want both choose our full evening package: the live band performance followed
+                immediately by our professional DJ service. It is the straightforward way to get the live peak and the
+                late-night range without asking two suppliers to coordinate the crucial handover.</p>
+            <p>Your quote reflects the package, date, venue, travel, finish time, and any logistics that change the
+                plan. We do not publish a made-up flat price for every wedding. See the <a href="pricing-guide/">Wedding
+                Band Pricing Guide</a> for the ranges and inclusions we already use, or read our
+                <a href="guides/wedding-band-vs-dj/">band vs DJ guide</a> if you are still deciding which format suits
+                your reception.</p>
+        </div>
+    </section>
+
+    <section class="experience-section faq-section">
+        <div class="container experience-content fade-up" style="max-width: 900px;">
+            <div class="faq-header">
+                <h2 class="section-title">After-Band DJ FAQ</h2>
+                <p class="faq-subtitle">Straight answers about the handover, timings, requests, and package.</p>
+            </div>
+
+            <div class="faq-accordion">
+                <details class="faq-item" open>
+                    <summary>What is an after-band DJ set?</summary>
+                    <p>An after-band DJ set begins as soon as the live performance ends and carries the celebration
+                        through the venue's permitted music finish time. It keeps the same dance floor moving with
+                        recorded tracks, requests, and a wider mix of styles.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Will there be a gap between the band and DJ?</summary>
+                    <p>No. When you book our band and DJ package, the live set is followed immediately by the
+                        professional DJ service. The handover is planned in advance so there is no dead air and guests
+                        have no reason to leave the dance floor.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>How late does the after-band DJ play?</summary>
+                    <p>The DJ continues until the venue's permitted music finish time. That varies by venue and date,
+                        so we confirm the running order with you and the venue instead of promising a universal curfew.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can we request songs for the DJ set?</summary>
+                    <p>Yes. Share your favourites, any must-plays, and any songs you do not want. Requests from guests
+                        can also be considered on the night when they fit the mood and your preferences.</p>
+                </details>
+                <details class="faq-item">
+                    <summary>Can we book the DJ with The Beat Boutique wedding band?</summary>
+                    <p>Yes. Most couples choose the full evening package, which combines the live band performance with
+                        the after-band DJ service. Your quote will reflect your date, venue, travel, finish time, and the
+                        package you choose.</p>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-cta">
+        <div class="container">
+            <h2 class="section-title" style="color: var(--text-cream);">Book Your Band and DJ</h2>
+            <p>Share your date and venue and we will confirm availability for the complete evening package.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="#contact" class="btn btn-primary"
+                    style="background: var(--accent-gold); color: var(--primary-navy); border-color: var(--accent-gold); padding: 16px 32px;">Enquire
+                    Now</a>
+                <a href="tel:+353872310001" class="btn"
+                    style="color: white; border: 1px solid rgba(255,255,255,0.3); padding: 16px 32px;">Call: 087 231
+                    0001</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="internal-links">
+        <div class="container">
+            <div class="internal-links-header">
+                <h2 class="section-title">Continue Planning</h2>
+                <p>Compare your options, understand the package, and plan the evening timeline.</p>
+            </div>
+            <div class="internal-links-grid">
+                <a href="guides/wedding-band-vs-dj/" class="internal-link-card">
+                    <h3>Band vs DJ</h3>
+                    <span>Choose the right format for your reception</span>
+                </a>
+                <a href="pricing-guide/" class="internal-link-card">
+                    <h3>Pricing Guide</h3>
+                    <span>Real ranges and what is included</span>
+                </a>
+                <a href="guides/wedding-music-timeline/" class="internal-link-card">
+                    <h3>Music Timeline</h3>
+                    <span>Plan every part of the wedding soundtrack</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <!-- Column 1: Brand -->
+                <div class="footer-col footer-brand">
+                    <a href="./" class="footer-logo-link">
+                        <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" class="footer-logo-lg">
+                    </a>
+                    <p class="footer-tagline">Ireland's premier wedding band.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/thebeatboutiqueweddingband/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="https://www.facebook.com/thebeatboutiqueband" target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="social-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Explore -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Explore</h4>
+                    <ul class="footer-nav">
+                        <li><a href="showcase/">Live Showcase</a></li>
+                        <li><a href="reviews/">Reviews</a></li>
+                        <li><a href="song-list/">Song List</a></li>
+                        <li><a href="venues/">Venues We Play</a></li>
+                        <li><a href="pricing-guide/">Pricing Guide</a></li>
+                        <li><a href="about/">About the Band</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: Guides -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Wedding Guides</h4>
+                    <ul class="footer-nav">
+                        <li><a href="guides/how-to-choose-wedding-band/">How to Choose a Band</a></li>
+                        <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-band-vs-dj/">Band vs DJ</a></li>
+                        <li><a href="guides/questions-to-ask-wedding-band/">Questions to Ask</a></li>
+                        <li><a href="wedding-band-ireland/">Wedding Band Ireland</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Contact -->
+                <div class="footer-col">
+                    <h4 class="footer-heading">Get in Touch</h4>
+                    <ul class="footer-contact">
+                        <li>
+                            <span class="contact-label">Email</span>
+                            <a href="mailto:justask@thebeatboutique.ie">justask@thebeatboutique.ie</a>
+                        </li>
+                        <li>
+                            <span class="contact-label">Phone</span>
+                            <a href="tel:+353872310001">+353 87 231 0001</a>
+                        </li>
+                        <li>
+                            <span class="contact-label">Address</span>
+                            <address style="font-style: normal; opacity: 0.8;">Dublin, Ireland</address>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2018-2026 The Beat Boutique. All rights reserved.</p>
+                <div class="footer-legal">
+                    <a href="privacy/">Privacy Policy</a>
+                    <a href="terms/">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js?v=20260513-leads"></script>
+    <script src="js/site-config.js"></script>
+    <script defer src="js/analytics.js?v=20260513-leads"></script>
+</body>
+
+</html>

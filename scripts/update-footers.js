@@ -133,6 +133,12 @@ const SIMPLE_FOOTER = `    <footer class="footer">
         </div>
     </footer>`;
 
+const LOCATION_FOOTER = SIMPLE_FOOTER.replace(
+    '                        <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>',
+    `                        <li><a href="guides/first-dance-songs/">First Dance Songs</a></li>
+                        <li><a href="guides/wedding-entrance-songs/">Entrance Songs</a></li>`
+);
+
 // Find all HTML files
 const htmlFiles = execSync('find . -name "*.html" -type f', { cwd: ROOT_DIR, encoding: 'utf8' })
     .trim()
@@ -151,9 +157,10 @@ htmlFiles.forEach(file => {
 
     const footerMatch = newContent.match(/<footer[\s\S]*?<\/footer>/);
     if (footerMatch) {
-        const useSimpleFooter = file.includes('/locations/') || file.includes('/venues/');
-        const newFooter = useSimpleFooter ? SIMPLE_FOOTER : STANDARD_FOOTER;
-        const footerUpdatedContent = newContent.replace(/<footer[\s\S]*?<\/footer>/, newFooter);
+        const isLocationPage = file.includes('/locations/');
+        const isVenuePage = file.includes('/venues/');
+        const newFooter = isLocationPage ? LOCATION_FOOTER : (isVenuePage ? SIMPLE_FOOTER : STANDARD_FOOTER);
+        const footerUpdatedContent = newContent.replace(/<footer[\s\S]*?<\/footer>/, newFooter.trimStart());
 
         if (footerUpdatedContent !== newContent) {
             newContent = footerUpdatedContent;
@@ -164,8 +171,7 @@ htmlFiles.forEach(file => {
     if (!isLegacyRedirect && newContent.includes('</body>')) {
         const analyticsCleanedContent = newContent
             .replace(/\s*<script\s+src="js\/site-config\.js"><\/script>\s*/g, '\n')
-            .replace(/\s*<script\s+defer\s+src="js\/analytics\.js"><\/script>\s*/g, '\n')
-            .replace(/\n{3,}/g, '\n\n');
+            .replace(/\s*<script\s+defer\s+src="js\/analytics\.js(?:\?[^\"]*)?"><\/script>\s*/g, '\n');
         const analyticsUpdatedContent = analyticsCleanedContent.replace('</body>', `${ANALYTICS_SNIPPET}\n</body>`);
 
         if (analyticsUpdatedContent !== newContent) {

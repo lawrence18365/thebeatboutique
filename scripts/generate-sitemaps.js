@@ -107,6 +107,7 @@ const MAIN_PAGES = [
     { path: 'song-list/index.html', url: '/song-list/', priority: '0.8' },
     { path: 'corporate-events/index.html', url: '/corporate-events/', priority: '0.7' },
     { path: 'party-band/index.html', url: '/party-band/', priority: '0.7' },
+    { path: 'after-band-dj/index.html', url: '/after-band-dj/', priority: '0.7' },
     { path: 'christmas-parties/index.html', url: '/christmas-parties/', priority: '0.7' },
     { path: 'privacy/index.html', url: '/privacy/', priority: '0.3' },
     { path: 'terms/index.html', url: '/terms/', priority: '0.3' }
