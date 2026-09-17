@@ -25,7 +25,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vote for The Beat Boutique | weddingsonline Awards 2027</title>
     <meta name="description"
-        content="Vote for The Beat Boutique for Band of the Year in the weddingsonline Awards 2027. Takes about 30 seconds — no account needed.">
+        content="Vote for The Beat Boutique for Band of the Year in the weddingsonline Awards 2027. Takes about 20 seconds — we are already selected on the ballot, no account needed.">
     <meta name="robots" content="noindex, follow">
     <link rel="canonical" href="https://thebeatboutique.ie/vote/">
 
@@ -33,13 +33,13 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://thebeatboutique.ie/vote/">
     <meta property="og:title" content="Vote for The Beat Boutique — weddingsonline Awards 2027">
-    <meta property="og:description" content="Band of the Year. It takes about 30 seconds and it would mean the world to us.">
+    <meta property="og:description" content="Band of the Year. About 20 seconds — we are already selected on the ballot.">
     <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Vote for The Beat Boutique — weddingsonline Awards 2027">
-    <meta name="twitter:description" content="Band of the Year. It takes about 30 seconds and it would mean the world to us.">
+    <meta name="twitter:description" content="Band of the Year. About 20 seconds — we are already selected on the ballot.">
     <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
 
     <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
@@ -351,13 +351,13 @@
         <div class="hero">
             <span class="eyebrow">weddingsonline Awards 2027</span>
             <h1>Vote for <em>The Beat Boutique</em></h1>
-            <p class="lede">We're up for Band of the Year. It takes about 30 seconds — no account, no newsletter, just
+            <p class="lede">We're up for Band of the Year. It takes about 20 seconds — no account, no newsletter, just
                 your name and email.</p>
 
-            <!-- Official ballot, opened straight on the Band of the Year category.
-                 Swap this one URL if weddingsonline issue a personal entrant link. -->
-            <a class="cta" id="vote-cta"
-                href="https://www.weddingsonline.ie/awards/vote?c=band-of-the-year-non-agency-"
+            <!-- Our entrant link from weddingsonline. It opens the ballot on Band of
+                 the Year with The Beat Boutique already selected, so the voter only
+                 fills in name and email. Resolves to /awards/vote?c=cg93bb. -->
+            <a class="cta" id="vote-cta" href="https://www.weddingsonline.ie/v/cg93bb"
                 rel="noopener">Vote for us &rarr;</a>
             <span class="cta-note">Opens the official weddingsonline ballot</span>
 
@@ -367,11 +367,12 @@
         <ol class="steps">
             <li>
                 <h2>Tap the button</h2>
-                <p>It opens the official ballot on the Band of the Year category.</p>
+                <p>It opens the official ballot with <span class="pick">The Beat Boutique</span> already picked for you
+                    under Band of the Year.</p>
             </li>
             <li>
-                <h2>Choose <span class="pick">The Beat Boutique</span></h2>
-                <p>Pick us from the dropdown, then add your name and email.</p>
+                <h2>Name and email, then Cast My Vote</h2>
+                <p>That's the whole form. Nothing else to fill in.</p>
             </li>
             <li class="key">
                 <h2>Confirm the email</h2>
@@ -382,7 +383,7 @@
         </ol>
 
         <a class="cta"
-            href="https://www.weddingsonline.ie/awards/vote?c=band-of-the-year-non-agency-"
+            href="https://www.weddingsonline.ie/v/cg93bb"
             rel="noopener">Vote for The Beat Boutique</a>
 
         <p class="thanks">Thank you — it genuinely means the world to the four of us.</p>
@@ -407,7 +408,7 @@
                 }
             }
 
-            document.querySelectorAll('a[href*="weddingsonline.ie/awards/vote"]').forEach(function (link) {
+            document.querySelectorAll('a[href*="weddingsonline.ie/"]').forEach(function (link) {
                 link.addEventListener('click', function () {
                     if (typeof window.trackEvent === 'function') {
                         window.trackEvent('vote_click', { destination: 'weddingsonline_awards_2027' });
