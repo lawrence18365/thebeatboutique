@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <base href="/">
+    <script>
+        (function() {
+            var base = '/';
+            if (location.protocol === 'file:') {
+                var path = location.pathname;
+                var marker = '/thebeatboutique/';
+                var idx = path.lastIndexOf(marker);
+                base = idx !== -1 ? path.slice(0, idx + marker.length) : path.replace(/\/[\/]*[^\/]*$/, '/');
+            } else if (location.hostname.endsWith('github.io')) {
+                base = '/thebeatboutique/';
+            }
+            var baseEl = document.querySelector('base');
+            if (baseEl) {
+                baseEl.setAttribute('href', base);
+            }
+        })();
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote for The Beat Boutique | weddingsonline Awards 2027</title>
+    <meta name="description"
+        content="Vote for The Beat Boutique for Band of the Year in the weddingsonline Awards 2027. Takes about 30 seconds — no account needed.">
+    <meta name="robots" content="noindex, follow">
+    <link rel="canonical" href="https://thebeatboutique.ie/vote/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://thebeatboutique.ie/vote/">
+    <meta property="og:title" content="Vote for The Beat Boutique — weddingsonline Awards 2027">
+    <meta property="og:description" content="Band of the Year. It takes about 30 seconds and it would mean the world to us.">
+    <meta property="og:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vote for The Beat Boutique — weddingsonline Awards 2027">
+    <meta name="twitter:description" content="Band of the Year. It takes about 30 seconds and it would mean the world to us.">
+    <meta name="twitter:image" content="https://thebeatboutique.ie/assets/images/the_beat_boutique_wedding_band_dublin_ireland.webp">
+
+    <link rel="icon" type="image/webp" sizes="32x32" href="assets/images/the_beat_boutique_logo.webp">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/images/the_beat_boutique_logo.webp">
+    <meta name="theme-color" content="#0a192f">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+    <link rel="preconnect" href="https://www.weddingsonline.ie">
+
+    <style>
+        :root {
+            --primary-navy: #0a192f;
+            --accent-gold: #d4af37;
+            --text-cream: #f4f1ea;
+            --text-muted: rgba(244, 241, 234, 0.72);
+            --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+            --font-sans: 'Montserrat', 'Avenir Next', 'Segoe UI', Arial, sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: radial-gradient(120% 90% at 50% 0%, #11294a 0%, var(--primary-navy) 55%, #060f1d 100%);
+            color: var(--text-cream);
+            line-height: 1.7;
+            min-height: 100vh;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .wrap {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 28px 22px 80px;
+        }
+
+        .brand {
+            display: block;
+            width: 78px;
+            margin: 0 auto 34px;
+        }
+
+        .brand img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 50%;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            font-size: 0.72rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 999px;
+            padding: 7px 16px;
+            margin-bottom: 22px;
+        }
+
+        h1 {
+            font-family: var(--font-serif);
+            font-weight: 700;
+            line-height: 1.12;
+            font-size: clamp(2.3rem, 8vw, 3.4rem);
+            margin-bottom: 18px;
+        }
+
+        h1 em {
+            font-style: normal;
+            color: var(--accent-gold);
+        }
+
+        .lede {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            max-width: 32em;
+            margin: 0 auto 30px;
+        }
+
+        .hero {
+            text-align: center;
+        }
+
+        .cta {
+            display: block;
+            width: 100%;
+            background: var(--accent-gold);
+            color: var(--primary-navy);
+            font-weight: 600;
+            font-size: 1.15rem;
+            letter-spacing: 0.02em;
+            text-align: center;
+            text-decoration: none;
+            padding: 20px 24px;
+            border-radius: 6px;
+            box-shadow: 0 14px 34px rgba(212, 175, 55, 0.22);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .cta:hover,
+        .cta:focus-visible {
+            transform: translateY(-2px);
+            box-shadow: 0 18px 40px rgba(212, 175, 55, 0.3);
+        }
+
+        .cta-note {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 12px;
+        }
+
+        .deadline {
+            font-size: 0.86rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 26px;
+        }
+
+        .deadline strong {
+            color: var(--text-cream);
+            font-weight: 600;
+        }
+
+        .steps {
+            margin: 52px 0 40px;
+            padding: 0;
+            list-style: none;
+            counter-reset: step;
+        }
+
+        .steps li {
+            position: relative;
+            padding: 0 0 26px 58px;
+            counter-increment: step;
+        }
+
+        .steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 2px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 50%;
+            font-family: var(--font-serif);
+            font-size: 1.05rem;
+            color: var(--accent-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .steps h2 {
+            font-family: var(--font-sans);
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            margin-bottom: 2px;
+        }
+
+        .steps p {
+            font-size: 0.94rem;
+            color: var(--text-muted);
+        }
+
+        .steps .pick {
+            color: var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .steps li.key p {
+            color: var(--text-cream);
+        }
+
+        .heads-up {
+            border-left: 2px solid var(--accent-gold);
+            background: rgba(212, 175, 55, 0.07);
+            border-radius: 0 6px 6px 0;
+            padding: 14px 18px;
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .thanks {
+            text-align: center;
+            font-family: var(--font-serif);
+            font-style: italic;
+            font-size: 1.08rem;
+            color: var(--text-muted);
+            margin-top: 44px;
+        }
+
+        .home {
+            display: block;
+            text-align: center;
+            margin-top: 26px;
+            font-size: 0.82rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .home:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Cookie banner is injected by js/analytics.js; this page carries its own
+           trimmed copy of the sitewide styles because it does not load style.css. */
+        .cookie-banner {
+            position: fixed;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            max-width: 560px;
+            margin: 0 auto;
+            background-color: var(--primary-navy);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 8px;
+            padding: 16px 18px;
+            z-index: 2000;
+            transform: translateY(calc(100% + 28px));
+            transition: transform 0.35s ease-in-out;
+            box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .cookie-banner.visible {
+            transform: translateY(0);
+        }
+
+        .cookie-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+
+        .cookie-content p {
+            font-size: 0.82rem;
+            line-height: 1.5;
+            opacity: 0.9;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-cookie-accept,
+        .btn-cookie-decline {
+            font-family: var(--font-sans);
+            font-size: 0.78rem;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            padding: 9px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .btn-cookie-accept {
+            background: var(--accent-gold);
+            color: var(--primary-navy);
+            border: 1px solid var(--accent-gold);
+            font-weight: 600;
+        }
+
+        .btn-cookie-decline {
+            background: transparent;
+            color: var(--text-muted);
+            border: 1px solid rgba(244, 241, 234, 0.3);
+        }
+
+        @media (max-width: 560px) {
+            .cookie-content {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .cta {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrap">
+        <a class="brand" href="./" aria-label="The Beat Boutique home">
+            <img src="assets/images/the_beat_boutique_logo.webp" alt="The Beat Boutique" width="1400" height="1400">
+        </a>
+
+        <div class="hero">
+            <span class="eyebrow">weddingsonline Awards 2027</span>
+            <h1>Vote for <em>The Beat Boutique</em></h1>
+            <p class="lede">We're up for Band of the Year. It takes about 30 seconds — no account, no newsletter, just
+                your name and email.</p>
+
+            <!-- Official ballot, opened straight on the Band of the Year category.
+                 Swap this one URL if weddingsonline issue a personal entrant link. -->
+            <a class="cta" id="vote-cta"
+                href="https://www.weddingsonline.ie/awards/vote?c=band-of-the-year-non-agency-"
+                rel="noopener">Vote for us &rarr;</a>
+            <span class="cta-note">Opens the official weddingsonline ballot</span>
+
+            <p class="deadline" id="deadline">Voting closes <strong>Monday 5 October, 9am</strong></p>
+        </div>
+
+        <ol class="steps">
+            <li>
+                <h2>Tap the button</h2>
+                <p>It opens the official ballot on the Band of the Year category.</p>
+            </li>
+            <li>
+                <h2>Choose <span class="pick">The Beat Boutique</span></h2>
+                <p>Pick us from the dropdown, then add your name and email.</p>
+            </li>
+            <li class="key">
+                <h2>Confirm the email</h2>
+                <p>weddingsonline send a one-click link to verify your vote.</p>
+                <p class="heads-up">This is the bit people miss — your vote only counts once you click that link. Give
+                    it a minute, and check your spam folder if it hasn't landed.</p>
+            </li>
+        </ol>
+
+        <a class="cta"
+            href="https://www.weddingsonline.ie/awards/vote?c=band-of-the-year-non-agency-"
+            rel="noopener">Vote for The Beat Boutique</a>
+
+        <p class="thanks">Thank you — it genuinely means the world to the four of us.</p>
+        <a class="home" href="./">thebeatboutique.ie</a>
+    </main>
+
+    <script src="js/site-config.js"></script>
+    <script defer src="js/analytics.js?v=20260513-leads"></script>
+    <script>
+        (function () {
+            // Voting closes Monday 5 October 2026, 9.00am Irish time (UTC+1).
+            var CLOSES = new Date('2026-10-05T09:00:00+01:00');
+            var el = document.getElementById('deadline');
+            if (el) {
+                var msLeft = CLOSES.getTime() - Date.now();
+                if (msLeft <= 0) {
+                    el.innerHTML = '<strong>Voting has now closed.</strong> Thank you to everyone who voted.';
+                } else {
+                    var days = Math.ceil(msLeft / 86400000);
+                    el.innerHTML = 'Voting closes <strong>Monday 5 October, 9am</strong> &middot; ' +
+                        (days === 1 ? 'last day' : days + ' days left');
+                }
+            }
+
+            document.querySelectorAll('a[href*="weddingsonline.ie/awards/vote"]').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    if (typeof window.trackEvent === 'function') {
+                        window.trackEvent('vote_click', { destination: 'weddingsonline_awards_2027' });
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+
+</html>
